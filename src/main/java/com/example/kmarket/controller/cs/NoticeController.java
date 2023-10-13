@@ -1,2 +1,4 @@
-package com.example.kmarket.controller.cs;public class NoticeController {
+package com.example.kmarket.controller.cs;
+
+public class NoticeController {
 }

@@ -1,13 +1,11 @@
-package com.example.crud_project.mapper;
+package com.example.kmarket.repository;
 
-import com.example.crud_project.dto.ArticleDTO;
-import com.example.crud_project.entity.ArticleEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
-public interface ArticleMapper {
-    public ArticleDTO toDTO(ArticleEntity articleEntity);
-    public ArticleEntity toEntity(ArticleDTO articleDTO);
+import com.example.kmarket.entity.KmCsCate1Entity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface KmCsCate1Repository extends JpaRepository<KmCsCate1Entity, Integer> {
 }
 
