@@ -6,7 +6,7 @@ import com.example.kmarket.entity.KmCsNoticeEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface KmCsNoticeRepository {
+public interface KmCsNoticeMapper {
     public KmCsNoticeDTO toDTO(KmCsNoticeEntity articleEntity);
     public KmCsNoticeEntity toEntity(KmCsNoticeDTO articleDTO);
 }

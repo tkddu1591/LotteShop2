@@ -1,5 +1,8 @@
 package com.example.kmarket.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Data
@@ -7,9 +10,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class KmProductCate1DTO {
+@Entity
+@Table(name = "km_cs_cate1")
+public class KmProductCate1Entity {
 
-    private int cate1 =0;
+    @Id
+    private int cate1;
     private String c1Name;
 
 

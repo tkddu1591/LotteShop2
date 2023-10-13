@@ -1,13 +1,11 @@
 package com.example.kmarket.repository;
 
 
-import com.example.kmarket.dto.KmCsFaqDTO;
-import com.example.kmarket.entity.KmCsFaqEntity;
-import org.mapstruct.Mapper;
+import com.example.kmarket.entity.KmCsFaqRateEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Mapper(componentModel = "spring")
-public interface KmCsFaqRepository {
-    public KmCsFaqDTO toDTO(KmCsFaqEntity articleEntity);
-    public KmCsFaqEntity toEntity(KmCsFaqDTO articleDTO);
+@Repository
+public interface KmCsFaqRateRepository extends JpaRepository<KmCsFaqRateEntity, Integer> {
 }
 

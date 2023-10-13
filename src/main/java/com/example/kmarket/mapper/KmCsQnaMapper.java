@@ -6,7 +6,7 @@ import com.example.kmarket.entity.KmCsQnaEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface KmCsQnaRepository {
+public interface KmCsQnaMapper {
     public KmCsQnaDTO toDTO(KmCsQnaEntity articleEntity);
     public KmCsQnaEntity toEntity(KmCsQnaDTO articleDTO);
 }

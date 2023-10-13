@@ -1,5 +1,6 @@
 package com.example.kmarket.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
@@ -7,7 +8,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class KmMemberPointDTO {
+@Entity
+@Table(name = "km_member_point")
+public class KmMemberPointEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pointNo;
     private String uid;
     private int orderNo;

@@ -1,5 +1,9 @@
 package com.example.kmarket.entity;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -11,7 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class KmProductDTO {
+@Table(name = "km_product")
+public class KmProductEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int prodNo;
     private int prodCate1;
     private int prodCate2;

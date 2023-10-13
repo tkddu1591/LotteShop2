@@ -6,7 +6,7 @@ import com.example.kmarket.entity.KmProductReviewEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface KmProductReviewRepository {
+public interface KmProductReviewMapper {
     public KmProductReviewDTO toDTO(KmProductReviewEntity articleEntity);
     public KmProductReviewEntity toEntity(KmProductReviewDTO articleDTO);
 }

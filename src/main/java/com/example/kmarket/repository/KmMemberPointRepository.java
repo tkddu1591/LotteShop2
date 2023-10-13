@@ -1,13 +1,10 @@
 package com.example.kmarket.repository;
 
+import com.example.kmarket.entity.KmMemberPointEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.example.kmarket.dto.KmCsNoticeDTO;
-import com.example.kmarket.entity.KmCsNoticeEntity;
-import org.mapstruct.Mapper;
-
-@Mapper(componentModel = "spring")
-public interface KmCsNoticeRepository {
-    public KmCsNoticeDTO toDTO(KmCsNoticeEntity articleEntity);
-    public KmCsNoticeEntity toEntity(KmCsNoticeDTO articleDTO);
+@Repository
+public interface KmMemberPointRepository extends JpaRepository<KmMemberPointEntity, Integer> {
 }
 
