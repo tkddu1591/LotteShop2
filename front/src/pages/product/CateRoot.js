@@ -70,11 +70,6 @@ function CateRoot({thisCate, type}) {
             <h1>상품목록</h1>
             <p>HOME {getCateName()}</p>
         </nav>
-        <Outlet></Outlet>
-        <Outlet></Outlet>
-        <Outlet></Outlet>
-        <Outlet></Outlet>
-        <Outlet></Outlet>
     </>
 }
 

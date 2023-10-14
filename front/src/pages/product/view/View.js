@@ -53,7 +53,7 @@ function View() {
         pg: 1, size: 5,  prodNo: prodNo
     })
     let [pageResponseDTO, setPageResponseDTO] = useState({
-        prodNo: parseInt(prodNo), dtoList: [], end: 10, start: 1, next: true, prev: true, total: 10, size: 10, pg:1
+        prodNo: parseInt(prodNo), reviewDtoList: [], end: 10, start: 1, next: true, prev: true, total: 10, size: 5, pg:1
     });
 
     //prodDTO, reviewList 가져옴
@@ -67,18 +67,18 @@ function View() {
                 }).catch(error => {
                 console.log(error);
             })
-            axios.get("/product/list/review", {
-                params: pageRequestDTO
-            })
-                .then(res => {
-                    setPageResponseDTO(res.data)
-                }).catch(error => {
-                console.log(error);
-            })
-
         }
 
-    }, []);
+        axios.get("/product/view/review", {
+            params: pageRequestDTO
+        })
+            .then(res => {
+                setPageResponseDTO(res.data)
+            }).catch(error => {
+            console.log(error);
+        })
+
+    }, [pageRequestDTO]);
     const changeProdDTO = (key, value) => {
         setProdDTO((ProdDTO) => {
             let newProdDTO = {...prodDTO};
@@ -107,7 +107,6 @@ function View() {
         }
     }, []);
 
-    console.log(pageResponseDTO)
 
 
     return <>
@@ -123,7 +122,7 @@ function View() {
                 <h1 ref={divRef}>상품리뷰</h1>
             </nav>
 
-            <Review></Review>
+            <Review pageResponseDTO={pageResponseDTO}></Review>
 
             <PageNavigation pageResponseDTO={pageResponseDTO} changePageRequest={changePageRequest}>
 

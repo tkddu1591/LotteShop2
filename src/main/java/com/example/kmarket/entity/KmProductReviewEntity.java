@@ -14,7 +14,7 @@ public class KmProductReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int revNo;
-    private int ProdNo;
+    private int prodNo;
 
     private String content;
     private String uid;

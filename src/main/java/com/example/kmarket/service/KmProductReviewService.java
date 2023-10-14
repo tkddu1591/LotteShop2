@@ -24,6 +24,9 @@ public class KmProductReviewService {
     private KmProductReviewMapper kmProductReviewMapper;
 
 
+    public int countProdNo(int prodNo) {
+        return kmProductReviewRepository.countByProdNo(prodNo);
+    }
     public PageResponseDTO findByProducts(PageRequestDTO pageRequestDTO) {
 
 

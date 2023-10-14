@@ -34,7 +34,12 @@ public class ProductController {
     }
     @GetMapping("/view/review")
     public PageResponseDTO viewReview(PageRequestDTO pageResponseDTO){
-        log.info(pageResponseDTO.toString());
+        log.info(String.valueOf(pageResponseDTO.getProdNo()));
+        log.info(String.valueOf(kmProductReviewService.countProdNo(pageResponseDTO.getProdNo())));
+        if(kmProductReviewService.countProdNo(pageResponseDTO.getProdNo())==0){
+            log.info("no review");
+            return null;
+        }
         return kmProductReviewService.findByProducts(pageResponseDTO);
     }
 }
