@@ -17,6 +17,12 @@ function Review({pageResponseDTO}) {
             return <h5 className="rating star1">상품평</h5>
         }
     }
+
+    if (reviewDtoList == undefined) {
+        return <div className="empty">
+            <div>상품 리뷰가 없습니다.</div>
+        </div>
+    }
     return <ul>
 
         {Array.isArray(reviewDtoList) && reviewDtoList.map((item, index) => {
@@ -34,7 +40,8 @@ function Review({pageResponseDTO}) {
 
     </ul>
 }
-function MaskedText({ text, preserveCount }) {
+
+function MaskedText({text, preserveCount}) {
     if (!text) {
         return null; // 또는 다른 처리 방법 선택
     }

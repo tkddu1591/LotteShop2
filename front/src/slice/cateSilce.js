@@ -26,7 +26,6 @@ let cateNames = createSlice({
     initialState : {},
     reducers : {
         changeCateNames(state,cateNamesData){
-            console.log(cateNamesData.payload)
             return  cateNamesData.payload
         }
     }
