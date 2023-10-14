@@ -3,11 +3,13 @@ package com.example.kmarket.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class PageResponseDTO {
     private List<KmProductDTO> dtoList;
+    private List<KmProductReviewDTO> reviewDtoList;
     private int cate;
     private int pg;
     private int size;
@@ -17,12 +19,13 @@ public class PageResponseDTO {
     private boolean prev, next;
 
     @Builder
-    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<KmProductDTO> dtoList, int total){
+    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<KmProductDTO> dtoList, List<KmProductReviewDTO> reviewDtoList, int total) {
         this.cate = pageRequestDTO.getCate();
         this.pg = pageRequestDTO.getPg();
         this.size = pageRequestDTO.getSize();
         this.total = total;
         this.dtoList = dtoList;
+        this.reviewDtoList = reviewDtoList;
 
         this.end = (int) (Math.ceil(this.pg / 10.0)) * 10;
         this.start = this.end - 9;

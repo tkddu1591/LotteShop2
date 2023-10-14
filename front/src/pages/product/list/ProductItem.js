@@ -1,3 +1,5 @@
+import {useNavigate} from "react-router-dom";
+
 function ProductItem({pageResponseDTO}) {
     let dtoList = pageResponseDTO.dtoList
 
@@ -21,6 +23,7 @@ function ProductItem({pageResponseDTO}) {
         }
     }
 
+    let navigate = useNavigate();
     return (
         <table border="0">
 
@@ -31,35 +34,43 @@ function ProductItem({pageResponseDTO}) {
                     </tr>
                     :
                     (dtoList.map((item, index) => {
-                            return <tr key={item.prodNo}>
-                                <td><a href="#" className="thumb"><img src="https://via.placeholder.com/120x120"
-                                                                       alt="상품이미지"/></a>
-                                </td>
-                                <td>
-                                    <h3 className="name">{item.prodName}</h3>
-                                    <a href="#" className="desc">{item.descipt}</a>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            <ins className="dis-price">{changeDiscountPrice(item.price, item.discount)}</ins>
-                                        </li>
-                                        <li>
-                                            <del className="org-price">{item.price.toLocaleString()}</del>
-                                            <span className="discount"> {item.discount}%</span>
-                                        </li>
-                                        <li><span
-                                            className={item.delivery === 0 ? 'free-delivery' : ''}>배송비 {item.delivery.toLocaleString()}</span>
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <h4 className="seller"><i className="fas fa-home"></i>&nbsp;판매자명</h4>
-                                    <h5 className="badge power">판매자등급</h5>
-                                    {checkScore(item.score)}
-                                </td>
-                            </tr>
-                        }))}
+                        return <tr key={item.prodNo}>
+                            <td><a onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}
+                                   style={{cursor:'pointer', userSelect: 'none'}}
+                                   className="thumb"><img src="https://via.placeholder.com/120x120"
+                                                          alt="상품이미지"/></a>
+                            </td>
+                            <td>
+                                <h3 className="name"
+                                    onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}
+                                    style={{cursor:'pointer', userSelect: 'none'}}
+                                >{item.prodName}</h3>
+                                <a onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}
+                                   style={{cursor:'pointer', userSelect: 'none'}}
+                                   className="desc">{item.descript}</a>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <ins
+                                            className="dis-price">{changeDiscountPrice(item.price, item.discount)}</ins>
+                                    </li>
+                                    <li>
+                                        <del className="org-price">{item.price.toLocaleString()}</del>
+                                        <span className="discount"> {item.discount}%</span>
+                                    </li>
+                                    <li><span
+                                        className={item.delivery === 0 ? 'free-delivery' : ''}>배송비 {item.delivery.toLocaleString()}</span>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <h4 className="seller"><i className="fas fa-home"></i>&nbsp;판매자명</h4>
+                                <h5 className="badge power">판매자등급</h5>
+                                {checkScore(item.score)}
+                            </td>
+                        </tr>
+                    }))}
 
 
             </tbody>

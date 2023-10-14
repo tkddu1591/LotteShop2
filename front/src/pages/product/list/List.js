@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import ProductItem from "./ProductItem"
 import PageNavigation from "./PageNavigation";
-import {useSelector} from "react-redux";
 import CateRoot from "../CateRoot";
+import ListSort from "./ListSort";
+
 function List() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -44,11 +45,9 @@ function List() {
 
     if (newCate !== cate
         && newCate !== null) {
-        console.log(newCate)
         setCate(newCate);
         resetPageRequest()
         changePageRequest('cate', newCate)
-        console.log('cate')
     }
     if (newSearch !== search
         && newSearch !== null
@@ -56,13 +55,11 @@ function List() {
         setSearch(newSearch);
         resetPageRequest()
         changePageRequest('search', newSearch);
-        console.log('search')
     }
     if (newType !== type) {
         setType(newType);
         resetPageRequest()
         changePageRequest('type', newType);
-        console.log('type')
     }
 
     function resetPageRequest() {
@@ -70,57 +67,22 @@ function List() {
         changePageRequest('type', 'sold')
     }
 
-    return (<section className="list">
+    return (
+        <>
+            <CateRoot thisCate={cate}></CateRoot>
 
-        <CateRoot thisCate={cate}></CateRoot>
+            <ListSort changePageRequest={changePageRequest}
+                      pageRequestDTO={pageRequestDTO}
+            ></ListSort>
 
-        <ListSort changePageRequest={changePageRequest}
-                  pageRequestDTO={pageRequestDTO}
-        ></ListSort>
+            <ProductItem pageResponseDTO={pageResponseDTO}></ProductItem>
 
-        <ProductItem pageResponseDTO={pageResponseDTO}></ProductItem>
+            <PageNavigation pageResponseDTO={pageResponseDTO} changePageRequest={changePageRequest}>
 
-        <PageNavigation pageResponseDTO={pageResponseDTO} changePageRequest={changePageRequest}>
-
-        </PageNavigation>
-
-
-    </section>)
+            </PageNavigation>
+        </>
+    )
 }
-
-function ListSort({changePageRequest, pageRequestDTO}) {
-
-
-    return <>
-        <ul className="sort">
-            <li>
-                <a onClick={() => changePageRequest('type', 'sold')}
-                   style={{cursor: 'pointer', userSelect: 'none'}}
-                   className={pageRequestDTO.type === 'sold' ? 'on' : ''}>판매많은순</a></li>
-            <li>
-                <a onClick={() => changePageRequest('type', 'price')}
-                   style={{cursor: 'pointer', userSelect: 'none'}}
-                   className={pageRequestDTO.type === 'price' ? 'on' : ''}>낮은가격순</a></li>
-            <li>
-                <a onClick={() => changePageRequest('type', 'priceAsc')}
-                   style={{cursor: 'pointer', userSelect: 'none'}}
-                   className={pageRequestDTO.type === 'priceAsc' ? 'on' : ''}>높은가격순</a></li>
-            <li>
-                <a onClick={() => changePageRequest('type', 'score')}
-                   style={{cursor: 'pointer', userSelect: 'none'}}
-                   className={pageRequestDTO.type === 'score' ? 'on' : ''}>평점높은순</a></li>
-            <li>
-                <a onClick={() => changePageRequest('type', 'review')}
-                   style={{cursor: 'pointer', userSelect: 'none'}}
-                   className={pageRequestDTO.type === 'review' ? 'on' : ''}>후기많은순</a></li>
-            <li>
-                <a onClick={() => changePageRequest('type', 'rdate')}
-                   style={{cursor: 'pointer', userSelect: 'none'}}
-                   className={pageRequestDTO.type === 'rdate' ? 'on' : ''}>최근등록순</a></li>
-        </ul>
-    </>
-}
-
 
 
 export default List;

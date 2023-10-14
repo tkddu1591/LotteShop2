@@ -5,12 +5,15 @@ import axios from "axios";
 import {changeCate1, changeCate2} from "./slice/cateSilce";
 import {useDispatch, useSelector} from "react-redux";
 import './pages/home/slider.css';
+import CateRoot from "./pages/product/CateRoot";
 
 const Aside = lazy(() => import('./pages/home/Aside.js'))
 const Footer = lazy(() => import('./pages/home/Footer.js'))
 const Header = lazy(() => import('./pages/home/Header.js'))
 const MainPage = lazy(() => import('./pages/home/MainPage.js'))
 const List = lazy(() => import('./pages/product/list/List.js'))
+const View = lazy(() => import('./pages/product/view/View.js'))
+
 
 function App() {
 
@@ -35,6 +38,7 @@ function App() {
         }
     }, []);
 
+    const cateNames = useSelector((state) => state.cateNames);
 
     let BannerTopMemo = memo(function () {
         return <BannerTop></BannerTop>
@@ -64,7 +68,14 @@ function App() {
                     </Suspense>
                 }>
                     <Route path="product">
-                        <Route path="list" element={<List></List>}/>
+                        <Route path="list" element={<section className="list"><List></List></section>}/>
+                        <Route path="view" element={<Suspense fallback={fallbackData()}>
+                            <section className="view">
+                                <CateRoot></CateRoot>
+                                <View></View>
+                            </section>
+                        </Suspense>}/>
+
                     </Route>
 
                     <Route path="" element={<MainPage></MainPage>}/>

@@ -20,6 +20,19 @@ let cate2 = createSlice({
         }
     }
 })
+
+let cateNames = createSlice({
+    name : 'cateNames',
+    initialState : {},
+    reducers : {
+        changeCateNames(state,cateNamesData){
+            console.log(cateNamesData.payload)
+            return  cateNamesData.payload
+        }
+    }
+
+})
 export const {changeCate1} = cate1.actions;
 export const {changeCate2} = cate2.actions;
-export {cate1,cate2}
+export const {changeCateNames} = cateNames.actions;
+export {cate1,cate2, cateNames}
