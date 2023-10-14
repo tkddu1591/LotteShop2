@@ -14,10 +14,9 @@ import lombok.*;
 @Table(name = "km_product_cate2")
 public class KmProductCate2Entity {
     @Id
-    private int cate1=0;
-    private int cate2=0;
+    private int cate2;
+    private int cate1;
     private String c2Name;
-    private String c1Name;
 
 
 }

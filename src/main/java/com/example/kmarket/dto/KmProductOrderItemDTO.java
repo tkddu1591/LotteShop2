@@ -2,15 +2,12 @@ package com.example.kmarket.dto;
 
 import lombok.*;
 
-import java.text.DecimalFormat;
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class KmProductOrderItemDTO {
-    private String descript;
-    private String ProdName;
     private int ordNo;
     private int prodNo;
     private int count;

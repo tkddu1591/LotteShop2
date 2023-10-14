@@ -18,24 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class MyUserDetails implements UserDetails {
-/*
-    private String username;
-    private String password;
-    private boolean enabled;
-    private boolean accountNonExpired;
-    private boolean credentialsNonExpired;
-    private boolean accountNonLocked;
-    private Collection<? extends GrantedAuthority> authorities;
-    public MyUserDetails(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.accountNonExpired = accountNonExpired;
-        this.credentialsNonExpired = credentialsNonExpired;
-        this.accountNonLocked = accountNonLocked;
-        this.authorities = authorities;
-    }
-*/
+
 
     private KmMemberEntity userEntity;
 

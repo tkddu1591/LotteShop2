@@ -1,20 +1,14 @@
 package com.example.kmarket.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
 @Table(name = "km_product")
 public class KmProductEntity {
     @Id
@@ -26,14 +20,23 @@ public class KmProductEntity {
     private String descript;
     private String company;
     private String seller;
+    @Column(nullable = true)
     private int price;
+    @Column(nullable = true)
     private int discount;
+    @Column(nullable = true)
     private int point;
+    @Column(nullable = true)
     private int stock;
+    @Column(nullable = true)
     private int sold;
+    @Column(nullable = true)
     private int delivery;
+    @Column(nullable = true)
     private int hit;
+    @Column(nullable = true)
     private int score;
+    @Column(nullable = true)
     private int review;
     private String thumb1;
     private String thumb2;
@@ -45,23 +48,14 @@ public class KmProductEntity {
     private String bizType;
     private String origin;
     private String ip;
-    private String rDate;
+    private String rdate;
+    @Column(nullable = true)
     private int etc1;
+    @Column(nullable = true)
     private int etc2;
     private String etc3;
     private String etc4;
     private String etc5;
-
-    private String wDate;
-    private int total;
-    private int rating;
-
-    private int discountPrice;
-
-    private String path;
-    private int level;
-    private List<String> file = new ArrayList<>();
-	
 
 }
 

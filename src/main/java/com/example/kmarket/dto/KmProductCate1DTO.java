@@ -11,6 +11,7 @@ public class KmProductCate1DTO {
 
     private int cate1 =0;
     private String c1Name;
+    private String icon;
 
 
 }

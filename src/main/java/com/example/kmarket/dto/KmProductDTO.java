@@ -2,8 +2,6 @@ package com.example.kmarket.dto;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Data
@@ -38,22 +36,13 @@ public class KmProductDTO {
     private String bizType;
     private String origin;
     private String ip;
-    private String rDate;
+    private String rdate;
     private int etc1;
     private int etc2;
     private String etc3;
     private String etc4;
     private String etc5;
 
-    private String wDate;
-    private int total;
-    private int rating;
-
-    private int discountPrice;
-
-    private String path;
-    private int level;
-    private List<String> file = new ArrayList<>();
 	
 
 }
