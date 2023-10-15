@@ -89,8 +89,8 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
             let newCartDTO = {...cartDTO};
             newCartDTO[key] = parseInt(value);
             console.log(key)
-            if(key==='count'){
-                newCartDTO.total = (value*changeDiscountPrice(prodDTO.price, prodDTO.discount))
+            if (key === 'count') {
+                newCartDTO.total = (value * changeDiscountPrice(prodDTO.price, prodDTO.discount))
             }
             return newCartDTO;
         });
@@ -167,7 +167,7 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
                     />
                     <button className="increase" onClick={() => {
                         if (cartDTO.count >= prodDTO.stock) {
-                            changeCartData('count',prodDTO.stock);
+                            changeCartData('count', prodDTO.stock);
                         } else {
                             changeCartData('count', cartDTO.count + 1);
                         }
@@ -185,13 +185,17 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
 
                 <div className="button">
                     <input type="button" className="cart"
-                           onClick={()=>{
-                               axios.post('/product/cart',  cartDTO,
-                                   {header:{
-                                       'Content-Type': 'application/json',
-                                       }}).then(
-                                   alert('상품이 장바구니에 담겼습니다.')
-                               ).catch((error) => {
+                           onClick={() => {
+                               axios.post('/product/cart', cartDTO,
+                                   {
+                                       headers: {
+                                           'Content-Type': 'application/json',
+                                       }
+                                   })
+                                   .then(() => {
+                                           alert('선택하신 상품이 장바구니에 담겼습니다.')
+                                       }
+                                   ).catch((error) => {
                                    console.error(error)
                                })
                            }}

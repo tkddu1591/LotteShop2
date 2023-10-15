@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import CartList from "./CartList";
 import Total from "./Total";
+import qs from "qs";
+
 function Cart() {
 
     let [cartDataList, setCartDataList] = useState([]);
@@ -14,11 +16,11 @@ function Cart() {
             }
         }).then(res => {
             setCartDataList(res.data)
+            setSelectedCartList(res.data)
+        }).catch(err => {
+            console.log(err)
         })
     }, []);
-    useEffect(() => {
-        setSelectedCartList(cartDataList)
-    }, [cartDataList]);
 
     let [total, setTotal] = useState({
         totalCount: 10,
@@ -62,10 +64,6 @@ function Cart() {
         }
     }, [selectedCartList])
 
-
-    console.log(total)
-    console.log(selectedCartList)
-
     return <>
 
         <CartList cartDataList={cartDataList}
@@ -73,9 +71,37 @@ function Cart() {
                   selectedCartList={selectedCartList}
         />
 
-        <input type="button" name="del" value="선택삭제"/>
+        <input type="button" name="del" value="선택삭제"
+               onClick={async () => {
+                   //get 배열 보내는 방법
+                   let selectCartsNo = [];
+                   selectedCartList.map(item => item.cartNo).forEach(cartNo => {
+                       selectCartsNo.push(cartNo);
+                   })
+                   console.log(selectCartsNo)
+                   await axios.delete('/product/cart', {
+                       headers: {'Content-Type': 'application/json'},
+                       data: selectCartsNo
+                   })
+                       .then(() => {
+                           alert('선택하신 상품이 삭제되었습니다.');
+                       })
+                       .catch((error) => {
+                           console.error(error);
+                       });
+                   axios.get('/product/cart', {
+                       params: {
+                           uid: 'user'
+                       }
+                   }).then(res => {
+                       setCartDataList(res.data)
+                   }).catch(error => {
+                       console.error(error)
+                   })
+               }}
+        />
 
-        <Total total={total}/>
+        <Total total={total} selectedCartList={selectedCartList}/>
 
     </>
 

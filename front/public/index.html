@@ -25,6 +25,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
     <script src="/js/index.js"></script>
     <style>
       #bannerTop {
@@ -63,32 +65,28 @@
 
     </style>
     <script>
-      $(function(){
-        $('#bannerTop .btnClose').click(function(){
-          $(this).closest('#bannerTop').removeClass('on');
-        });
+        /*
+                const sliders = $('.slider>ul>li');
+                let i = 0;
 
 
-        const sliders = $('.slider>ul>li');
-        let i = 0;
-
-        $(function () {
-          setInterval(function () {
-            $(sliders.eq(i)).animate({
-              'left': '-100%'
-            }, 500)
-            i++
-            if (i === 3)
-              i = 0;
-            $(sliders.eq(i)).css('left', '100%').animate({
-              'left': '0%'
-            }, 490)
-          }, 1000)
-        })
+                $(function () {
+                  setInterval(function () {
+                    $(sliders.eq(i)).animate({
+                      'left': '-100%'
+                    }, 500)
+                    i++
+                    if (i === 3)
+                      i = 0;
+                    $(sliders.eq(i)).css('left', '100%').animate({
+                      'left': '0%'
+                    }, 490)
+                  }, 1000)
+                })
 
 
-      });
 
+      });*/
     </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.

@@ -22,5 +22,10 @@ public class KmProductCartDTO {
     private int total;
     private LocalDateTime rdate;
 
+    // 추가 데이터
+    private String thumb1;
+    private String prodName;
+    private String descript;
+
 
 }

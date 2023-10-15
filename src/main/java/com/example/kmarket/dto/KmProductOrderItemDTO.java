@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class KmProductOrderItemDTO {
+    private int orderItemId;
     private int ordNo;
     private int prodNo;
     private int count;
@@ -16,7 +17,4 @@ public class KmProductOrderItemDTO {
     private int point;
     private int delivery;
     private int total;
-
-
-
 }

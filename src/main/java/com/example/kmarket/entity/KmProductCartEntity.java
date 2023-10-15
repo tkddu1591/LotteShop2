@@ -7,7 +7,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Data
-@ToString(exclude = "kmMemberEntity")
+@ToString(exclude = {"kmMemberEntity", "kmProductEntity"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,7 +20,11 @@ public class KmProductCartEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
     private KmMemberEntity kmMemberEntity;
-    private int prodNo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prodNo")
+    private KmProductEntity kmProductEntity;
+
     private int count;
     private int price;
     private int discount;

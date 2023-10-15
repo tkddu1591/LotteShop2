@@ -22,7 +22,7 @@ public class MyUserDetails implements UserDetails {
 
     private KmMemberEntity userEntity;
 
-    public MyUserDetails(String uid, String pass, String name, int gender, String hp, String email, String type
+    public MyUserDetails(String uid, String pass, String name, int gender, String hp, String email, int type
             , int point, int level, String zip, String addr1, String addr2, String company,
                          String ceo, String bizRegNum, String comRegNum, String tel, String manager,
                          String managerHp, String fax, String regIp, String wDate, String rDate,

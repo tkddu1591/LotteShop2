@@ -563,3 +563,10 @@ footer p > strong {
   font-size: 0;
   cursor: pointer;
 }
+/*마우스 커서 깜빡임 삭제*/
+* {
+  caret-color: transparent;
+}
+input {
+  caret-color: black;
+}
