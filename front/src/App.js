@@ -13,7 +13,7 @@ const Header = lazy(() => import('./pages/home/Header.js'))
 const MainPage = lazy(() => import('./pages/home/MainPage.js'))
 const List = lazy(() => import('./pages/product/list/List.js'))
 const View = lazy(() => import('./pages/product/view/View.js'))
-
+const Cart= lazy(() => import('./pages/product/cart/Cart.js'))
 
 function App() {
 
@@ -73,6 +73,12 @@ function App() {
                             <section className="view">
                                 <CateRoot></CateRoot>
                                 <View></View>
+                            </section>
+                        </Suspense>}/>
+                        <Route path="cart" element={<Suspense fallback={fallbackData()}>
+                            <section className="cart">
+                                <CateRoot type={'cart'}></CateRoot>
+                                <Cart></Cart>
                             </section>
                         </Suspense>}/>
 

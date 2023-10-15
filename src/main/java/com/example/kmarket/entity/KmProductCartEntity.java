@@ -1,10 +1,13 @@
 package com.example.kmarket.entity;
 
+import com.example.kmarket.dto.KmProductDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
-@ToString
+@ToString(exclude = "kmMemberEntity")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -14,7 +17,9 @@ public class KmProductCartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartNo;
-    private String  uid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uid")
+    private KmMemberEntity kmMemberEntity;
     private int prodNo;
     private int count;
     private int price;
@@ -22,7 +27,7 @@ public class KmProductCartEntity {
     private int point;
     private int delivery;
     private int total;
-    private String rDate;
+    private LocalDateTime rdate;
 
 
 }

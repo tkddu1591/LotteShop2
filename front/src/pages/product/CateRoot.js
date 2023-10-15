@@ -1,22 +1,21 @@
-import {useSelector} from "react-redux";
-import {useDispatch} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {changeCateNames} from "../../slice/cateSilce";
-import {useState} from "react";
-import {Outlet, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 function CateRoot({thisCate, type}) {
+
     let cate1DTO = useSelector((state) => state.cate1);
     let cate2DTO = useSelector((state) => state.cate2);
     let dispatch = useDispatch()
     let newCategory = {}
 
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const newCate = searchParams.get('cate');
-    const [cate, setCate] = useState(newCate);
-    const cateNames = useSelector((state) => state.cateNames);
-    if (thisCate >= 1000) {
 
+    const cateNames = useSelector((state) => state.cateNames);
+    const categoryNo = useSelector((state) => state.categoryNo);
+    if (thisCate === undefined) {
+        thisCate = categoryNo
+    }
+    else if(thisCate >= 1000) {
         Array.isArray(cate2DTO) && cate2DTO.forEach(function (item, index) {
                 if (item.cate2 === parseInt(thisCate)) {
                     newCategory.c2Name = item.c2Name;
@@ -65,12 +64,21 @@ function CateRoot({thisCate, type}) {
         return null;
     }
 
-    return <>
-        <nav>
-            <h1>상품목록</h1>
-            <p>HOME {getCateName()}</p>
-        </nav>
-    </>
+    if (type === "cart")
+        return <>
+            <nav>
+                <h1>장바구니</h1>
+                <p>HOME > 장바구니</p>
+            </nav>
+        </>
+    else {
+        return <>
+            <nav>
+                <h1>상품목록</h1>
+                <p>HOME {getCateName()}</p>
+            </nav>
+        </>
+    }
 }
 
 

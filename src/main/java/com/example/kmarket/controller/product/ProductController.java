@@ -1,18 +1,17 @@
 package com.example.kmarket.controller.product;
 
+import com.example.kmarket.dto.KmProductCartDTO;
 import com.example.kmarket.dto.KmProductDTO;
 import com.example.kmarket.dto.PageRequestDTO;
 import com.example.kmarket.dto.PageResponseDTO;
 import com.example.kmarket.entity.KmProductReviewEntity;
 import com.example.kmarket.repository.KmProductReviewRepository;
+import com.example.kmarket.service.KmProductCartService;
 import com.example.kmarket.service.KmProductReviewService;
 import com.example.kmarket.service.KmProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +23,8 @@ public class ProductController {
     KmProductService kmProductService;
     @Autowired
     KmProductReviewService kmProductReviewService;
+    @Autowired
+    KmProductCartService kmProductCartService;
     @GetMapping("/list")
     public PageResponseDTO list(PageRequestDTO pageRequestDTO){
         return kmProductService.findByProducts(pageRequestDTO);
@@ -42,4 +43,15 @@ public class ProductController {
         }
         return kmProductReviewService.findByProducts(pageResponseDTO);
     }
+    @PostMapping("/cart")
+    public void saveCart(@RequestBody KmProductCartDTO kmProductCartDTO){
+        log.info(kmProductCartDTO.toString());
+        kmProductCartService.save(kmProductCartDTO);
+    }
+    @GetMapping("/cart")
+    public List<KmProductCartDTO> listCart(String uid){
+        return kmProductCartService.findByUid(uid);
+    }
+
+
 }

@@ -65,6 +65,8 @@ function List() {
     function resetPageRequest() {
         changePageRequest('pg', 1)
         changePageRequest('type', 'sold')
+        changePageRequest('search', '')
+        changePageRequest('cate', '0')
     }
 
     return (

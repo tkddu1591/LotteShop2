@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-let cartProduct = createSlice({
-    name : 'cartProduct',
+let orderProducts = createSlice({
+    name : 'orderProduct',
     initialState : [],
     reducers : {
         insertFromCart(state,action){
@@ -16,5 +16,5 @@ let cartProduct = createSlice({
         }
     }
 })
-export const {insertFromCart, deleteFromCart, deleteAllFromCart} = cartProduct.actions;
-export {cartProduct}
+export const {insertFromCart, deleteFromCart, deleteAllFromCart} = orderProducts.actions;
+export {orderProducts}

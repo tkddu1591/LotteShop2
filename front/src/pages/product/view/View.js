@@ -1,11 +1,13 @@
 import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {useLocation} from "react-router-dom";
-import {retry} from "@reduxjs/toolkit/query";
 import Review from "./Review";
 import Info from "./Info";
 import Notice from "./Notice";
 import PageNavigation from "../list/PageNavigation";
+import {useDispatch, useSelector} from "react-redux";
+import {categoryNo, changeCategoryNo, changeCateNames} from "../../../slice/cateSilce";
+
 function View() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -50,10 +52,18 @@ function View() {
     //페이징 변수 선언
 
     let [pageRequestDTO, setPageRequestDTO] = useState({
-        pg: 1, size: 5,  prodNo: prodNo
+        pg: 1, size: 5, prodNo: prodNo
     })
     let [pageResponseDTO, setPageResponseDTO] = useState({
-        prodNo: parseInt(prodNo), reviewDtoList: [], end: 10, start: 1, next: true, prev: true, total: 10, size: 5, pg:1
+        prodNo: parseInt(prodNo),
+        reviewDtoList: [],
+        end: 10,
+        start: 1,
+        next: true,
+        prev: true,
+        total: 10,
+        size: 5,
+        pg: 1
     });
 
     //prodDTO, reviewList 가져옴
@@ -107,11 +117,19 @@ function View() {
         }
     }, []);
 
+    let categoryNo = useSelector((state) => state.categoryNo);
+    let dispatch = useDispatch();
+
+    useEffect(() => {
+        if (prodDTO !== null) {
+            dispatch(changeCategoryNo(prodDTO.prodCate2))
+            console.log(prodDTO)
+        }
+    }, [prodDTO]);
 
 
     return <>
         <Info prodDTO={prodDTO} scrollY={divYPosition} changeProdDTO={changeProdDTO}></Info>
-
 
 
         <Detail></Detail>
@@ -134,8 +152,9 @@ function View() {
 
 
 }
+
 function Detail() {
-    return<article className="detail">
+    return <article className="detail">
         <nav>
             <h1>상품정보</h1>
         </nav>

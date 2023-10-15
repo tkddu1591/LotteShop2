@@ -35,18 +35,24 @@ function ProductItem({pageResponseDTO}) {
                     :
                     (dtoList.map((item, index) => {
                         return <tr key={item.prodNo}>
-                            <td><a onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}
-                                   style={{cursor:'pointer', userSelect: 'none'}}
+                            <td><a onClick={() => {
+                                navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                            }}
+                                   style={{cursor: 'pointer', userSelect: 'none'}}
                                    className="thumb"><img src="https://via.placeholder.com/120x120"
                                                           alt="상품이미지"/></a>
                             </td>
                             <td>
                                 <h3 className="name"
-                                    onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}
-                                    style={{cursor:'pointer', userSelect: 'none'}}
+                                    onClick={() => {
+                                        navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                    }}
+                                    style={{cursor: 'pointer', userSelect: 'none'}}
                                 >{item.prodName}</h3>
-                                <a onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}
-                                   style={{cursor:'pointer', userSelect: 'none'}}
+                                <a onClick={() => {
+                                    navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                }}
+                                   style={{cursor: 'pointer', userSelect: 'none'}}
                                    className="desc">{item.descript}</a>
                             </td>
                             <td>
@@ -55,9 +61,12 @@ function ProductItem({pageResponseDTO}) {
                                         <ins
                                             className="dis-price">{changeDiscountPrice(item.price, item.discount)}</ins>
                                     </li>
-                                    <li>
-                                        <del className="org-price">{item.price.toLocaleString()}</del>
-                                        <span className="discount"> {item.discount}%</span>
+                                    <li>{item.discount !== 0 ? <>
+                                            <del className="org-price">{item.price.toLocaleString()}</del>
+                                            <span className="discount"> {item.discount}%</span>
+                                        </>
+                                        : null
+                                    }
                                     </li>
                                     <li><span
                                         className={item.delivery === 0 ? 'free-delivery' : ''}>배송비 {item.delivery.toLocaleString()}</span>
