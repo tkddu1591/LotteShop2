@@ -25,7 +25,6 @@ public class CartController {
     }
     @GetMapping("/cart")
     public List<KmProductCartDTO> listCart(String uid){
-        log.info(uid);
         return kmProductCartService.findByUid(uid);
     }
     @DeleteMapping("/cart/all")

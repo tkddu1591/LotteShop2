@@ -23,9 +23,6 @@ public class KmProductOrderService {
         kmProductOrderDTO.setOrdDate(LocalDateTime.now());
         kmProductOrderRepository.save(kmProductOrderMapper.toEntity(kmProductOrderDTO));
     }
-    public int listByUidOrderNo(String ordUid){
-        return kmProductOrderRepository.findTopByOrdUidOrderByOrdNoDesc(ordUid);
-    }
     public int listOrderNo(){
         return kmProductOrderRepository.findFirstByOrderByOrdNoDesc().getOrdNo();
     }
@@ -35,4 +32,7 @@ public class KmProductOrderService {
         return kmProductOrderMapper.toDTO(kmProductOrderRepository.findFirstByOrderByOrdNoDesc());
     }
 
+    public KmProductOrderDTO findByOrdNo(String uid) {
+        return kmProductOrderMapper.toDTO(kmProductOrderRepository.findTopByOrdUidOrderByOrdNoDesc(uid));
+    }
 }

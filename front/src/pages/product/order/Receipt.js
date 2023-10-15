@@ -57,22 +57,22 @@ function Receipt({orderEnd, usePoint, orderProducts}) {
                            alert('결제방식을 선택해주세요')
                        } else {
                            console.log(orderProducts)
-/*                           await axios.post('/product/order/total', orderEnd,
+                           await axios.post('/product/order/total', orderEnd,
                                {
                                    headers: {
                                        'Content-Type': 'application/json',
                                    }
                                }).catch((error) => {
                                console.error(error)
-                           })*/
-      /*                     await axios.post('/product/order/products', orderProducts,
+                           })
+                           await axios.post('/product/order/products', orderProducts,
                                {
                                    headers: {
                                        'Content-Type': 'application/json',
                                    }
                                }).catch((error) => {
                                console.error(error)
-                           })*/
+                           })
                            await axios.delete('/product/cart/all?uid='+orderEnd.ordUid, {
                                headers: {'Content-Type': 'application/json'}
                            })

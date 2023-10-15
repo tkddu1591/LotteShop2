@@ -28,4 +28,8 @@ public class KmProductOrderItemService {
             kmProductOrderItemRepository.save(kmProdcutOrderItemMapper.toEntity(order));
         }
     }
+
+    public List<KmProductOrderItemDTO> findByUidByOrdNo(int ordNo, String ordUid) {
+        return kmProductOrderItemRepository.findByKmProductOrderEntity_OrdNoAndKmProductOrderEntity_OrdUid(ordNo, ordUid).stream().map(kmProdcutOrderItemMapper::toDTO).toList();
+    }
 }
