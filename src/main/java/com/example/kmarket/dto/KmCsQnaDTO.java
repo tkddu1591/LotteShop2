@@ -2,8 +2,6 @@ package com.example.kmarket.dto;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @ToString

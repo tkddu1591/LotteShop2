@@ -11,12 +11,13 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "km_cs_cate1")
+@Table(name = "km_product_cate1")
 public class KmProductCate1Entity {
 
     @Id
     private int cate1;
     private String c1Name;
+    private String icon;
 
 
 }

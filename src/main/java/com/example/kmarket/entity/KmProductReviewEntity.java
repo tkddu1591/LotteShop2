@@ -1,8 +1,6 @@
 package com.example.kmarket.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
@@ -14,8 +12,10 @@ import lombok.*;
 @Table(name = "km_product_review")
 public class KmProductReviewEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int revNo;
     private int prodNo;
+
     private String content;
     private String uid;
     private int rating;
