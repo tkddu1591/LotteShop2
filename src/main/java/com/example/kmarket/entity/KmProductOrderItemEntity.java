@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
-@ToString
+@ToString(exclude = {"kmProductOrderEntity"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -13,7 +13,10 @@ import lombok.*;
 public class KmProductOrderItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ordNo;
+    private int orderItemId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ordNo")
+    private KmProductOrderEntity kmProductOrderEntity;
     private int prodNo;
     private int count;
     private int price;

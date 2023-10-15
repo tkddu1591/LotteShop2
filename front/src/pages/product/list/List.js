@@ -65,6 +65,8 @@ function List() {
     function resetPageRequest() {
         changePageRequest('pg', 1)
         changePageRequest('type', 'sold')
+        changePageRequest('search', '')
+        changePageRequest('cate', '0')
     }
 
     return (
@@ -73,6 +75,8 @@ function List() {
 
             <ListSort changePageRequest={changePageRequest}
                       pageRequestDTO={pageRequestDTO}
+                      cate={newCate}
+                      search={newSearch}
             ></ListSort>
 
             <ProductItem pageResponseDTO={pageResponseDTO}></ProductItem>

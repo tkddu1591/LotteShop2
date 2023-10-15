@@ -1,4 +1,6 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import header from "../../home/Header";
 
 function Info({prodDTO, scrollY, changeProdDTO}) {
 
@@ -52,20 +54,63 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
         ;
     }
 
-    let [count, setCount] = useState(1)
+    let [count, changeCartDTO] = useState(1)
     const handleInputChange = (event) => {
         const updateCount = event.target.value
-        if (isNaN (Number(updateCount))) {
-            setCount(1);
-        }else{
-            setCount(updateCount);
+        if (isNaN(Number(updateCount))) {
+            changeCartData('count', 1);
+        } else {
+            changeCartData('count', updateCount);
         }
         if (updateCount > prodDTO.stock) {
-            setCount(prodDTO.stock);
+            changeCartData('count', prodDTO.stock);
         } else if (updateCount < 1) {
-            setCount(1);
+            changeCartData('count', 1);
         }
     };
+
+
+    //*****************user 추가하고 uid 수정필요*****************
+
+    let [cartDTO, setCartDTO] = useState({
+        count: 1,
+        uid: 'user',
+        price: prodDTO.price,
+        discount: prodDTO.discount,
+        delivery: prodDTO.delivery,
+        point: prodDTO.point,
+        prodNo: prodDTO.prodNo,
+        total: changeDiscountPrice(prodDTO.price, prodDTO.discount)
+    })
+
+
+    const changeCartData = (key, value) => {
+        setCartDTO((cartDTO) => {
+            let newCartDTO = {...cartDTO};
+            newCartDTO[key] = parseInt(value);
+            console.log(key)
+            if (key === 'count') {
+                newCartDTO.total = (value * changeDiscountPrice(prodDTO.price, prodDTO.discount))
+            }
+            return newCartDTO;
+        });
+    };
+    useEffect(() => {
+        if (cartDTO.price == 0) {
+            setCartDTO({
+                count: 1,
+                uid: 'user',
+                price: prodDTO.price,
+                discount: prodDTO.discount,
+                delivery: prodDTO.delivery,
+                point: prodDTO.point,
+                prodNo: prodDTO.prodNo,
+                total: changeDiscountPrice(prodDTO.price, prodDTO.discount)
+            })
+        }
+    }, [prodDTO]);
+
+
     return <>
         <article className="info">
             <div className="image">
@@ -106,25 +151,25 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
                 <img src="../images/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립!" className="banner"/>
 
                 <div className="count">
-                    {count !== 1 ? <button className="decrease" onClick={() => {
-                        if (count <= 1) {
-                            setCount(1);
+                    {cartDTO.count !== 1 ? <button className="decrease" onClick={() => {
+                        if (cartDTO.count <= 1) {
+                            changeCartData('count', 1);
                         } else {
-                            setCount(count - 1);
+                            changeCartData('count', cartDTO.count - 1);
                         }
                     }}
-                                           style={{cursor: 'pointer', userSelect: 'none'}}
+                                                   style={{cursor: 'pointer', userSelect: 'none'}}
                     >-</button> : ''}
 
                     <input type="text" name="num"
-                           value={count}
+                           value={cartDTO.count}
                            onChange={handleInputChange}
                     />
                     <button className="increase" onClick={() => {
-                        if (count >= prodDTO.stock) {
-                            setCount(prodDTO.stock);
+                        if (cartDTO.count >= prodDTO.stock) {
+                            changeCartData('count', prodDTO.stock);
                         } else {
-                            setCount(count + 1);
+                            changeCartData('count', cartDTO.count + 1);
                         }
 
                     }}
@@ -134,12 +179,27 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
                 </div>
 
                 <div className="total">
-                    <span>{(count * changeDiscountPrice(prodDTO.price, prodDTO.discount)).toLocaleString()}</span>
+                    <span>{cartDTO.total.toLocaleString()}</span>
                     <em>총 상품금액</em>
                 </div>
 
                 <div className="button">
-                    <input type="button" className="cart" value="장바구니"/>
+                    <input type="button" className="cart"
+                           onClick={() => {
+                               axios.post('/product/cart', cartDTO,
+                                   {
+                                       headers: {
+                                           'Content-Type': 'application/json',
+                                       }
+                                   })
+                                   .then(() => {
+                                           alert('선택하신 상품이 장바구니에 담겼습니다.')
+                                       }
+                                   ).catch((error) => {
+                                   console.error(error)
+                               })
+                           }}
+                           value="장바구니"/>
                     <input type="button" className="order" value="구매하기"/>
                 </div>
             </div>

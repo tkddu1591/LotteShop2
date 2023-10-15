@@ -1,5 +1,6 @@
 package com.example.kmarket.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -20,9 +21,9 @@ public class KmMemberEntity {
     private int gender;
     private String hp;
     private String email;
-    private String type;
-    private int point;
-    private int level;
+    private int type = 1;
+    private int point =0;
+    private int level =1;
     private String zip;
     private String addr1;
     private String addr2;
@@ -37,8 +38,8 @@ public class KmMemberEntity {
     private String regIp;
     private String wDate;
     private String rDate;
-    private int etc1;
-    private int etc2;
+    private int etc1 =0;
+    private int etc2 =0;
     private String etc3;
     private String etc4;
     private String etc5;

@@ -2,6 +2,8 @@ package com.example.kmarket.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString
 @AllArgsConstructor
@@ -10,7 +12,7 @@ import lombok.*;
 public class KmProductCartDTO {
 
     private int cartNo;
-    private String  uid;
+    private String uid;
     private int prodNo;
     private int count;
     private int price;
@@ -18,7 +20,12 @@ public class KmProductCartDTO {
     private int point;
     private int delivery;
     private int total;
-    private String rDate;
+    private LocalDateTime rdate;
+
+    // 추가 데이터
+    private String thumb1;
+    private String prodName;
+    private String descript;
 
 
 }
