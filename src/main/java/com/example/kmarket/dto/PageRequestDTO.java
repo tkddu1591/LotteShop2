@@ -18,13 +18,10 @@ public class PageRequestDTO {
 
     @Builder.Default
     private int cate = 0;
-
     @Builder.Default
     private String search ="";
-
     @Builder.Default
     private String type ="sold";
-
     @Builder.Default
     private int prodNo =0;
 

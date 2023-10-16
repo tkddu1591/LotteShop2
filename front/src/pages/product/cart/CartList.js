@@ -51,7 +51,6 @@ function CartList({cartDataList, setSelectedCartList, selectedCartList}) {
             </thead>
 
             <tbody>
-                {console.log(cartDataList.length)}
                 {cartDataList.length===0? <tr>
                     <td colSpan="7" style={{height:'150px', color:'black'}}>장바구니에 상품이 없습니다.</td>
                 </tr>:null}

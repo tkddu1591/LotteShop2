@@ -14,6 +14,7 @@ public interface KmProductCartRepository extends JpaRepository<KmProductCartEnti
     KmProductCartEntity findKmProductCartEntityByKmProductEntity_ProdNo(int prodNo);
 
     void deleteKmProductCartEntitiesByKmMemberEntity_Uid(String uid);
+
     @Query("SELECT pc, p.thumb1, p.prodName, p.descript FROM KmProductCartEntity pc " +
             "JOIN pc.kmMemberEntity m " +
             "JOIN pc.kmProductEntity p " +

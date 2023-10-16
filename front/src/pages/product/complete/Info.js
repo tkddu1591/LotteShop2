@@ -33,7 +33,7 @@ function Info({completeList, completeTotal}) {
                                     </article>
                                 </td>
                                 <td>{item.price.toLocaleString()}원</td>
-                                <td>{item.discount !== 0 ? item.discount.toLocaleString() : '-'}</td>
+                                <td>{item.price !== item.total ? (item.total-item.price).toLocaleString() : '-'}</td>
                                 <td>{item.count}</td>
                                 <td>{item.total.toLocaleString()}</td>
                             </tr>
@@ -46,7 +46,7 @@ function Info({completeList, completeTotal}) {
                                 <tbody>
                                     <tr>
                                         <td>총 상품금액</td>
-                                        <td><span>{completeTotal.price}</span>원</td>
+                                        <td><span>{completeTotal.ordPrice.toLocaleString()}</span>원</td>
                                     </tr>
                                     {completeTotal.ordDiscount + completeTotal.usedPoint !== 0 ?
                                         <tr>
@@ -58,11 +58,11 @@ function Info({completeList, completeTotal}) {
                                     {completeTotal.ordDelivery !== 0 ?
                                         <tr>
                                             <td>배송비</td>
-                                            <td><span>{completeTotal.ordDelivery}</span>원</td>
+                                            <td><span>{completeTotal.ordDelivery.toLocaleString()}</span>원</td>
                                         </tr> : null}
                                     <tr>
                                         <td>총 결제금액</td>
-                                        <td><span>{completeTotal.ordTotPrice}</span>원</td>
+                                        <td><span>{completeTotal.ordTotPrice.toLocaleString()}</span>원</td>
                                     </tr>
                                 </tbody>
                             </table>

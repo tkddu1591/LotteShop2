@@ -10,7 +10,7 @@ function Order({completeTotal, member}) {
                         <td>주문번호</td>
                         <td>{completeTotal.ordNo}</td>
                         <td rowSpan="3">총 결제금액</td>
-                        <td rowSpan="3"><span>{completeTotal.ordTotPrice}</span>원</td>
+                        <td rowSpan="3"><span>{completeTotal.ordTotPrice.toLocaleString()}</span>원</td>
                     </tr>
                     <tr>
                         <td>결제방법</td>

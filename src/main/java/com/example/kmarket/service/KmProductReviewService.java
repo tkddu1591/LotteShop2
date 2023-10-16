@@ -33,7 +33,7 @@ public class KmProductReviewService {
         //카테고리 10~ 1000까지 cate1, 카테고리 1000~ cate2 10 이하는 존재하지 않음
         //tpye값으로 정렬 처리
         Pageable pageable = null;
-        pageable = pageRequestDTO.getPageableAsc("prodNo");
+        pageable = pageRequestDTO.getPageableDesc("revNo");
 
 
         Page<KmProductReviewEntity> result = null;

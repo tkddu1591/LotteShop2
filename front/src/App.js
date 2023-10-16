@@ -34,9 +34,15 @@ function App() {
     useEffect(() => {
         axios.get('/product/cate1').then(res => {
             dispatch(changeCate1(res.data))
+            console.log(res.data);
+        }).catch(error => {
+            console.log(error);
         })
         axios.get('/product/cate2').then(res => {
             dispatch(changeCate2(res.data))
+            console.log(res.data);
+        }).catch(error => {
+            console.log(error);
         })
         //user 데이터 받아오기 나중에는 로그인 페이지로 처리
         axios.post('/member/login',member, {

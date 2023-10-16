@@ -13,6 +13,9 @@ function PageNavigation({pageResponseDTO, changePageRequest}) {
         no.push(i)
     }
 
+    for(let i = start; i <= end; i++) {
+        <div>{i}</div>
+    }
     return <div className="paging">
 
         {prev && <span className="prev">
