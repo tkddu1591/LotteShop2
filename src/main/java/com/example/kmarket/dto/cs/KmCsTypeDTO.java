@@ -7,11 +7,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class KmCsCate2DTO {
+public class KmCsTypeDTO {
 
-	private int cate1;
-	private int cate2;
-	private String c2Name;
+	private int typeNo;
+	private String cate;
+	private int type;
+	private String typeName;
 	
 
 }

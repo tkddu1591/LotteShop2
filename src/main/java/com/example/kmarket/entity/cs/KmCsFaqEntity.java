@@ -17,8 +17,8 @@ public class KmCsFaqEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int faqNo;
-	private int cate1;
-	private int cate2;
+	private String cate;
+	private int type;
 	private String title;
 	private String content;
 	private int relatedFaq;

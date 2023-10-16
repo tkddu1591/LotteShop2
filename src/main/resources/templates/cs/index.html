@@ -1,10 +1,10 @@
-<th:block th:insert="~{@{/cs/inc/header.html}}"/>
+<th:block th:insert="~{/cs/inc/header.html}"/>
     <section id="cs">
         <div class="main">
             <h1 class="title"><strong>롯데ON</strong>이 도와드릴게요!</h1>
             <section class="notice">
                 <h1>공지사항
-                    <a th:href="@{/cs/notice/list}">전체보기</a>
+                    <a th:href="@{/cs/notice/list(cate=all)}">전체보기</a>
                 </h1>
                 <ul>
                     <li>
@@ -119,4 +119,4 @@
             </section>
         </div>
     </section>
-<th:block th:insert="~{@{/cs/inc/footer.html}}"/>
+<th:block th:insert="~{/cs/inc/footer.html}"/>

@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @Builder
 public class KmCsFaqDTO {
 	private int faqNo;
-	private int cate1;
-	private int cate2;
+	private String cate;
+	private int type;
 	private String title;
 	private String content;
 	private int relatedFaq;

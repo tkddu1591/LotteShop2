@@ -1,11 +1,8 @@
 package com.example.kmarket.dto.cs;
 
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @ToString
@@ -15,8 +12,8 @@ import java.util.List;
 public class KmCsQnaDTO {
 	
 	private int qnaNo;
-	private int cate1;
-	private int cate2;
+	private String cate;
+	private int type;
 	private String title;
 	private String content;
 	private String file1;
@@ -33,8 +30,8 @@ public class KmCsQnaDTO {
 	
 	//추가 필드
 	private String writerName;
-	private String c1Name;
-	private String c2Name;
+	private String cateName;
+	private String typeName;
 	private String writerMarking;
 	private LocalDateTime rdateSub;
 
