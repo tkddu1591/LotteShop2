@@ -1,6 +1,9 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import header from "../../home/Header";
+import {useDispatch, useSelector} from "react-redux";
+import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
+import {useNavigate} from "react-router-dom";
 
 function Info({prodDTO, scrollY, changeProdDTO}) {
 
@@ -10,8 +13,6 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
         });
         console.log(scrollY);
     }
-
-    let score = prodDTO.score;
 
     function changeDiscountPrice(price, discount) {
         return (price - (discount * price / 100))
@@ -110,6 +111,8 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
         }
     }, [prodDTO]);
 
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
 
     return <>
         <article className="info">
@@ -200,7 +203,27 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
                                })
                            }}
                            value="장바구니"/>
-                    <input type="button" className="order" value="구매하기"/>
+                    <input type="button" className="order"
+                           onClick={async () => {
+
+                               console.log(cartDTO)
+                               await dispatch(insertOrderProduct([cartDTO]))
+                               await dispatch(insertOrderTotal({
+                                   totalCount : 1,
+                                   totalDelivery : cartDTO.delivery,
+                                   totalDiscount : cartDTO.discount,
+                                   totalOrderPrice : cartDTO.total,
+                                   totalProductPrice : cartDTO.price*cartDTO.count,
+                                   totalPoint : cartDTO.point,
+                                   totalDiscountPrice : (cartDTO.price*cartDTO.discount)/100
+                               }))
+
+                               navigate(process.env.PUBLIC_URL + "/product/order")
+
+                           }}
+
+
+                           value="구매하기"/>
                 </div>
             </div>
         </article>

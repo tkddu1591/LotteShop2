@@ -3,6 +3,7 @@ import axios from "axios";
 import CartList from "./CartList";
 import Total from "./Total";
 import qs from "qs";
+import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
 
 function Cart() {
 
@@ -22,6 +23,7 @@ function Cart() {
         })
     }, []);
 
+
     let [total, setTotal] = useState({
         totalCount: 10,
         totalProductPrice: 10,
@@ -30,6 +32,7 @@ function Cart() {
         totalPoint: 10,
         totalOrderPrice: 10,
     })
+
     useEffect(() => {
 
         if (selectedCartList.length !== 0) {

@@ -48,7 +48,6 @@ function Total({total, selectedCartList}) {
                     if (selectedCartList.length === 0) {
                         alert("상품을 담아주세요")
                     } else {
-                        await dispatch(insertOrderProduct(selectedCartList));
                         await dispatch(insertOrderTotal(total))
                         await navigator(process.env.PUBLIC_URL + "/product/order")
                     }

@@ -25,9 +25,7 @@ function CateRoot({thisCate, type}) {
                         // 액션 디스패치
                         dispatch(changeCateNames({ c2Name: item.c2Name, c1Name: matchedCate1.c1Name }));
                     }
-                    return false;
                 }
-                return true;
             });
         } else {
             Array.isArray(cate1DTO) && cate1DTO.some(function (item) {
@@ -37,9 +35,7 @@ function CateRoot({thisCate, type}) {
                         // 액션 디스패치
                         dispatch(changeCateNames({ c1Name: item.c1Name }));
                     }
-                    return false;
                 }
-                return true;
             });
         }
 

@@ -22,7 +22,7 @@ function Order() {
         ordDiscount: newOrderTotal.totalDiscountPrice,
         ordDelivery: newOrderTotal.totalDelivery,
         savePoint: newOrderTotal.totalPoint,
-        ordTotTotal: newOrderTotal.totalOrderPrice,
+        ordTotPrice: newOrderTotal.totalOrderPrice,
         ordComplete: 1,
         ordPayment: 0,
         usedPoint: 0,
@@ -36,6 +36,7 @@ function Order() {
     const [formattedPhoneNumber, setFormattedPhoneNumber] = useState(
         orderEnd.recipHp
     );
+    console.log(newOrderTotal)
 
     const changeOrderEnd = (key, value) => {
         setOrderEnd((orderTotal) => {

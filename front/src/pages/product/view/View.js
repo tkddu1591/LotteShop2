@@ -123,7 +123,6 @@ function View() {
     useEffect(() => {
         if (prodDTO !== null) {
             dispatch(changeCategoryNo(prodDTO.prodCate2))
-            console.log(prodDTO)
         }
     }, [prodDTO]);
 

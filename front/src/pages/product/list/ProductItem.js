@@ -80,8 +80,6 @@ function ProductItem({pageResponseDTO}) {
                             </td>
                         </tr>
                     }))}
-
-
             </tbody>
         </table>
     )

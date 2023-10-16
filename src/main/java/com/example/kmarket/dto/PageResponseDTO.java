@@ -1,5 +1,6 @@
 package com.example.kmarket.dto;
 
+import com.example.kmarket.dto.cs.KmCsNoticeDTO;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,7 +20,10 @@ public class PageResponseDTO {
     private boolean prev, next;
 
     @Builder
-    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<KmProductDTO> dtoList, List<KmProductReviewDTO> reviewDtoList, int total) {
+    public PageResponseDTO(PageRequestDTO pageRequestDTO,
+                           List<KmProductDTO> dtoList,
+                           List<KmProductReviewDTO> reviewDtoList,
+                           int total) {
         this.cate = pageRequestDTO.getCate();
         this.pg = pageRequestDTO.getPg();
         this.size = pageRequestDTO.getSize();
