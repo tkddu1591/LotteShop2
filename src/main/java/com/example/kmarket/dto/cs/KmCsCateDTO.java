@@ -7,9 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class KmCsCate1DTO {
+public class KmCsCateDTO {
 	
-	private int cate1;
-	private String c1Name;
+	private String cate;
+	private String cateName;
 
 }

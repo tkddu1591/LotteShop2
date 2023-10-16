@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface KmCsCate1Repository extends JpaRepository<KmCsCateEntity, Integer> {
+public interface KmCsCateRepository extends JpaRepository<KmCsCateEntity, Integer> {
+
+    KmCsCateEntity findByCate(String cate);
 }
 

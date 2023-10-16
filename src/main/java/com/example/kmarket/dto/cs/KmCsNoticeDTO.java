@@ -11,11 +11,16 @@ import java.time.LocalDateTime;
 @Builder
 public class KmCsNoticeDTO {
 	private int noticeNo;
-	private int cate1;
-	private int cate2;
+	private String cate;
+	private int type;
 	private String title;
 	private String content;
 	private String writer;
 	private String regip;
 	private LocalDateTime rdate;
+
+
+	//추가 필드
+	private String cateName;
+	private String typeName;
 }

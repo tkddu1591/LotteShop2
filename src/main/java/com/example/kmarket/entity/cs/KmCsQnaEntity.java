@@ -19,8 +19,8 @@ public class KmCsQnaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int qnaNo;
-	private int cate1;
-	private int cate2;
+	private String cate;
+	private int type;
 	private String title;
 	private String content;
 	private String file1;
@@ -39,8 +39,8 @@ public class KmCsQnaEntity {
 	
 	//추가 필드
 	private String writerName;
-	private String c1Name;
-	private String c2Name;
+	private String cateName;
+	private String typeName;
 	private String writerMarking;
 	private LocalDateTime rdateSub;
 

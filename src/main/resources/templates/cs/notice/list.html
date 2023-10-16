@@ -14,42 +14,42 @@
                     <h2>공지사항</h2>
                     <ul>
                         <li class="${cate eq 'All' ? 'on' : '' }">
-                            <a th:href="@{/cs/notice/list/all}">전체</a>
+                            <a th:href="@{/cs/notice/list(cate=all)}">전체</a>
                         </li>
                         <li class="${cate eq 'cs' ? 'on' : '' }">
-                            <a th:href="@{/cs/notice/list/cs}">고객서비스</a>
+                            <a th:href="@{/cs/notice/list(cate=cs)}">고객서비스</a>
                         </li>
                         <li class="${cate eq 'safe' ? 'on' : '' }">
-                            <a th:href="@{/cs/notice/list/safe}">안전거래</a>
+                            <a th:href="@{/cs/notice/list(cate=safe)}">안전거래</a>
                         </li>
                         <li class="${cate eq 'dangerProd' ? 'on' : '' }">
-                            <a th:href="@{/cs/notice/list/dangerProd}">위해상품</a>
+                            <a th:href="@{/cs/notice/list(cate=dangerProd)}">위해상품</a>
                         </li>
                         <li class="${cate eq 'event' ? 'on' : '' }">
-                            <a th:href="@{/cs/notice/list/event}">이벤트당첨</a>
+                            <a th:href="@{/cs/notice/list(cate=event)}">이벤트당첨</a>
                         </li>
                     </ul>
                 </aside>
 
                 <article>
                     <nav>
-                        <h1>전체 c1Name</h1>
-                        <h2>공지사항 c1Name 내용입니다.</h2>
+                        <h1>[[${cateDto.cateName}]]</h1>
+                        <h2>공지사항 [[${cateDto.cateName}]] 내용입니다.</h2>
                     </nav>
 
                     <table>
+                        <th:block th:each="notice : ${noticeDto}">
                         <tr>
                             <td>
+                                <!--(cate=notice.cate, bno=notice.noticeNo) -->
                                 <a th:href="@{cs/notice/view}">
-                                    [안내 c2Name] 해외결제 사칭 문자 주의
+                                    [<span th:text="${notice.typeName}"></span>]
+                                    [[${notice.title}]]
                                 </a>
                             </td>
-                            <td>rdate</td>
+                            <td>[[${notice.rdate}]]</td>
                         </tr>
-
-                        <tr>
-                            <td colspan="2">등록된 게시물이 없습니다.</td>
-                        </tr>
+                        </th:block>
                     </table>
 
                     <div class="page">

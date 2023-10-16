@@ -11,10 +11,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "km_cs_cate1")
-public class KmCsCate1Entity {
+@Table(name = "km_cs_cate")
+public class KmCsCateEntity {
 	@Id
-	private int cate1;
-	private String c1Name;
+	private String cate;
+	private String cateName;
 
 }
