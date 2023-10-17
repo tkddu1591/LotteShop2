@@ -5,7 +5,8 @@ import ProductItem from "./ProductItem"
 import PageNavigation from "./PageNavigation";
 import CateRoot from "../CateRoot";
 import ListSort from "./ListSort";
-
+export const API_BASE_URL = process.env.REACT_APP_API_ROOT;
+export const HOME_URL = process.env.REACT_APP_HOME_URL;
 function List() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);

@@ -32,7 +32,7 @@ function App() {
         pass:'user',
     }
     useEffect(() => {
-        axios.get('/product/cate1').then(res => {
+        axios.get('http://localhost:8080/product/cate1').then(res => {
             dispatch(changeCate1(res.data))
             console.log(res.data);
         }).catch(error => {
