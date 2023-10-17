@@ -25,13 +25,9 @@ public class NoticeController {
 
     @GetMapping("/list")
     public String list(Model model, PageRequestDTO pageRequestDTO) {
+
         PageResponseDTO pageResponseDTO = ns.findByCate(pageRequestDTO);
         model.addAttribute("pageResponseDTO", pageResponseDTO);
-        log.info("PageResponseDTO List controller : " + pageRequestDTO);
-
-        List<KmCsNoticeDTO> noticeDTO = ns.find(pageResponseDTO.getCate());
-        model.addAttribute("noticeDto", noticeDTO);
-        log.info("noticeDTO List controller : " + noticeDTO);
 
         KmCsCateDTO cateDTO = ns.findByCate(pageResponseDTO.getCate());
         model.addAttribute("cateDto", cateDTO);

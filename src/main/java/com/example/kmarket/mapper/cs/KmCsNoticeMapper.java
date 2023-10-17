@@ -10,9 +10,11 @@ import org.mapstruct.Mapping;
 public interface KmCsNoticeMapper {
 
     @Mapping(source = "kmCsCateEntity.cateName", target = "cateName")
+    @Mapping(source = "kmCsTypeEntity.typeName", target = "typeName")
     public KmCsNoticeDTO toDTO(KmCsNoticeEntity articleEntity);
 
     @Mapping(source = "cateName", target = "kmCsCateEntity.cateName")
+    @Mapping(source = "typeName", target = "kmCsTypeEntity.typeName")
     public KmCsNoticeEntity toEntity(KmCsNoticeDTO articleDTO);
 
 }
