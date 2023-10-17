@@ -4,7 +4,7 @@ import './index.css';
 import App, {HOME_URL} from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./store";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import ScrollTop from "./components/ScrollToTop";
 
@@ -13,10 +13,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <BrowserRouter basename="/">
+            {/*<BrowserRouter basename="/"> route 페이지 설정*/}
+            <HashRouter>
                 <ScrollTop/>
                 <App/>
-            </BrowserRouter>
+            </HashRouter>
         </Provider>
     </React.StrictMode>
 );

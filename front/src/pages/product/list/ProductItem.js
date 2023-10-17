@@ -39,23 +39,22 @@ function ProductItem({pageResponseDTO}) {
                     (dtoList.map((item, index) => {
                         return <tr key={item.prodNo}>
                             <td><a onClick={() => {
-                                navigate(`${HOME_URL}/product/view?prodNo=${item.prodNo}`)
+                                navigate("/product/view?prodNo="+item.prodNo)
                             }}
                                    style={{cursor: 'pointer', userSelect: 'none'}}
                                    className="thumb"><img src="https://via.placeholder.com/120x120"
                                                           alt="상품이미지"/></a>
-                                <Link to={productPage}>dd</Link>
                             </td>
 
                             <td>
                                 <h3 className="name"
                                     onClick={() => {
-                                        navigate( process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                        navigate("/product/view?prodNo=" + item.prodNo)
                                     }}
                                     style={{cursor: 'pointer', userSelect: 'none'}}
                                 >{item.prodName}</h3>
                                 <a onClick={() => {
-                                    navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                    navigate("/product/view?prodNo=" + item.prodNo)
                                 }}
                                    style={{cursor: 'pointer', userSelect: 'none'}}
                                    className="desc">{item.descript}</a>
