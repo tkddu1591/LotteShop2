@@ -66,7 +66,7 @@ function CartList({cartDataList, setSelectedCartList, selectedCartList}) {
                         <td>
                             <article>
                                 <a onClick={() => {
-                                    navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                    navigate(process.env.PUBLIC_URL+"/product/view?prodNo=" + item.prodNo)
                                 }}
                                    style={{cursor: 'pointer'}}><img src="https://via.placeholder.com/80x80" alt=""/></a>
                                 <div>

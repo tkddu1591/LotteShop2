@@ -7,6 +7,7 @@ import Notice from "./Notice";
 import PageNavigation from "../list/PageNavigation";
 import {useDispatch, useSelector} from "react-redux";
 import {categoryNo, changeCategoryNo, changeCateNames} from "../../../slice/cateSilce";
+import {API_BASE_URL} from "../../../App";
 
 function View() {
     const location = useLocation();
@@ -69,7 +70,7 @@ function View() {
     //prodDTO, reviewList 가져옴
     useEffect(() => {
         if (prodDTO.company === '') {
-            axios.get("/product/view", {
+            axios.get(`${API_BASE_URL}/product/view`, {
                 params: {prodNo}
             })
                 .then(res => {
@@ -79,7 +80,7 @@ function View() {
             })
         }
 
-        axios.get("/product/view/review", {
+        axios.get(`${API_BASE_URL}/product/view/review`, {
             params: pageRequestDTO
         })
             .then(res => {

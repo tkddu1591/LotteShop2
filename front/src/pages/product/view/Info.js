@@ -4,6 +4,7 @@ import header from "../../home/Header";
 import {useDispatch, useSelector} from "react-redux";
 import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
 import {useNavigate} from "react-router-dom";
+import {API_BASE_URL} from "../../../App";
 
 function Info({prodDTO, scrollY, changeProdDTO}) {
 
@@ -189,7 +190,7 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
                 <div className="button">
                     <input type="button" className="cart"
                            onClick={() => {
-                               axios.post('/product/cart', cartDTO,
+                               axios.post(`${API_BASE_URL}/product/cart`, cartDTO,
                                    {
                                        headers: {
                                            'Content-Type': 'application/json',

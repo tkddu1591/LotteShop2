@@ -5,7 +5,7 @@ import ProductItem from "./ProductItem"
 import PageNavigation from "./PageNavigation";
 import CateRoot from "../CateRoot";
 import ListSort from "./ListSort";
-
+import {API_BASE_URL} from "../../../App";
 function List() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -24,7 +24,7 @@ function List() {
     });
 
     useEffect(() => {
-        axios.get("/product/list", {
+        axios.get(`${API_BASE_URL}/product/list`, {
             params: pageRequestDTO
         })
             .then(res => {
