@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
-@ToString
+@ToString(exclude = {"kmCsCateEntity", "kmCsTypeEntity"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -24,7 +24,11 @@ public class KmCsNoticeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cate")
 	private KmCsCateEntity kmCsCateEntity;
-	private int type;
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "type")
+	private KmCsTypeEntity kmCsTypeEntity;
 	private String title;
 	private String content;
 	private String writer;

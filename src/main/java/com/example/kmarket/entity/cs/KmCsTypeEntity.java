@@ -11,13 +11,10 @@ import lombok.*;
 @Entity
 @Table(name = "km_cs_type")
 public class KmCsTypeEntity {
+    @Id
+    private int type;
+    private String cate;
+    private String typeName;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int typeNo;
-	private String cate;
-	private int type;
-	private String typeName;
-	
 
 }

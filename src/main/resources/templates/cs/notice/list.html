@@ -13,19 +13,19 @@
                 <aside>
                     <h2>공지사항</h2>
                     <ul>
-                        <li class="${cate eq 'All' ? 'on' : '' }">
+                        <li th:class="${(cate eq 'All') ? 'on' : '' }">
                             <a th:href="@{/cs/notice/list(cate=all)}">전체</a>
                         </li>
-                        <li class="${cate eq 'cs' ? 'on' : '' }">
+                        <li th:class="${(cate eq 'cs') ? 'on' : '' }">
                             <a th:href="@{/cs/notice/list(cate=cs)}">고객서비스</a>
                         </li>
-                        <li class="${cate eq 'safe' ? 'on' : '' }">
+                        <li th:class="${(cate eq 'safe') ? 'on' : '' }">
                             <a th:href="@{/cs/notice/list(cate=safe)}">안전거래</a>
                         </li>
-                        <li class="${cate eq 'dangerProd' ? 'on' : '' }">
+                        <li th:class="${(cate eq 'dangerProd') ? 'on' : '' }">
                             <a th:href="@{/cs/notice/list(cate=dangerProd)}">위해상품</a>
                         </li>
-                        <li class="${cate eq 'event' ? 'on' : '' }">
+                        <li th:class="${(cate eq 'event') ? 'on' : '' }">
                             <a th:href="@{/cs/notice/list(cate=event)}">이벤트당첨</a>
                         </li>
                     </ul>
@@ -36,9 +36,8 @@
                         <h1>[[${cateDto.cateName}]]</h1>
                         <h2>공지사항 [[${cateDto.cateName}]] 내용입니다.</h2>
                     </nav>
-
                     <table>
-                        <th:block th:each="notice : ${noticeDto}">
+                        <th:block th:each="notice : ${pageResponseDTO.dtoList}">
                         <tr>
                             <td>
                                 <!--(cate=notice.cate, bno=notice.noticeNo) -->
