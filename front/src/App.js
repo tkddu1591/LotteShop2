@@ -131,7 +131,7 @@ function BannerTop() {
         return (
             <div id="bannerTop" className="on" style={{background: '#e4dfdf'}}>
                 <article>
-                    <a href="#"><img src={'/images/topBanner1.png'}/></a>
+                    <a href="#"><img src={'./images/topBanner1.png'}/></a>
                     <button className="btnClose" onClick={() => {
                         dispatch(deleteBanner())
                     }}>close
