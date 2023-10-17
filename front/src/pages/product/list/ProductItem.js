@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../../App";
 
 function ProductItem({pageResponseDTO}) {
@@ -24,8 +24,9 @@ function ProductItem({pageResponseDTO}) {
         }
     }
 
-
+    const productPage = `${HOME_URL}/product/list`;
     let navigate = useNavigate();
+    console.log(HOME_URL + "/product/view?prodNo=")
     return (
         <table border="0">
 
@@ -43,7 +44,9 @@ function ProductItem({pageResponseDTO}) {
                                    style={{cursor: 'pointer', userSelect: 'none'}}
                                    className="thumb"><img src="https://via.placeholder.com/120x120"
                                                           alt="상품이미지"/></a>
+                                <Link to={productPage}>dd</Link>
                             </td>
+
                             <td>
                                 <h3 className="name"
                                     onClick={() => {
