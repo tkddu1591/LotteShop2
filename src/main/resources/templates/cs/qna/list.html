@@ -1,0 +1,82 @@
+<th:block th:insert="~{@{/cs/inc/header.html}}"/>
+    <section id="cs">
+        <div class="qna">
+            <nav>
+                <div>
+                    <p>
+                        <a th:href="@{/cs/index}">홈</a><span>&gt;</span>
+                        <a th:href="@{/cs/qna/list}">문의하기</a>
+                    </p>
+                </div>
+            </nav>
+
+            <section id="pageCss" class="list">
+                <aside>
+                    <h2>문의하기</h2>
+                    <ul>
+                        <li class="${cate eq 'member' ? 'on' : '' }">
+                            <a th:href="@{/cs/qna/list/member}">회원</a>
+                        </li>
+                        <li class="${cate eq 'coupon' ? 'on' : '' }">
+                            <a th:href="@{/cs/qna/list/coupon}">쿠폰/이벤트</a>
+                        </li>
+                        <li class="${cate eq 'order' ? 'on' : '' }">
+                            <a th:href="@{/cs/qna/list/order}">주문/결제</a>
+                        </li>
+                        <li class="${cate eq 'delivery' ? 'on' : '' }">
+                            <a th:href="@{/cs/qna/list/delivery}">배송</a>
+                        </li>
+                        <li class="${cate eq 'cancle' ? 'on' : '' }">
+                            <a th:href="@{/cs/qna/list/cancle}">취소/반품/교환</a>
+                        </li>
+                        <li class="${cate eq 'travel' ? 'on' : '' }">
+                            <a th:href="@{cs/qna/list/travel}">여행/숙박/항공</a>
+                        </li>
+                        <li class="${cate eq 'safe' ? 'on' : '' }">
+                            <a th:href="@{cs/qna/list/safe}">안전거래</a>
+                        </li>
+                    </ul>
+                </aside>
+
+                <article>
+                    <nav>
+                        <h1>회원 c1Name</h1>
+                        <h2>회원 c1Name 관련 문의 내용입니다.</h2>
+                    </nav>
+                    <table>
+                        <tr>
+                            <td>
+                                <a th:href="@{/cs/qna/view}">
+                                    [가입 typeName] 가입 문의내용
+                                </a>
+                            </td>
+                            <td>
+                                마스킹 or 마*킹
+                            </td>
+                            <td>rdate</td>
+                        </tr>
+                    </table>
+
+                    <div class="page">
+                        <a href="#"
+                           class="prev">&laquo;</a>
+                        <a href="#"
+                           class="prev">이전</a>
+                        <a href="#"
+                           class="num on">1</a>
+                        <a href="#"
+                           class="next">다음</a>
+                        <a href="#"
+                           class="next">&raquo;</a>
+                    </div>
+
+                    <!-- 일반 유저가 로그인 할 시 show-->
+                    <a th:href="@{/cs/qna/write}"
+                       class="btnWrite">문의하기
+                    </a>
+
+                </article>
+            </section>
+        </div>
+    </section>
+<th:block th:insert="~{@{/cs/inc/footer.html}}"/>

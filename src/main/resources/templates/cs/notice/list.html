@@ -1,0 +1,71 @@
+<th:block th:insert="~{@{/cs/inc/header.html}}"/>
+    <section id="cs">
+        <div class="notice">
+            <nav>
+                <div>
+                    <p>
+                        <a th:href="@{/cs/index}">홈</a><span>&gt;</span>
+                        <a th:href="@{/cs/notice/list}">공지사항</a>
+                    </p>
+                </div>
+            </nav>
+            <section id="pageCss" class="list">
+                <aside>
+                    <h2>공지사항</h2>
+                    <ul>
+                        <li th:class="${(cate eq 'All') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=all)}">전체</a>
+                        </li>
+                        <li th:class="${(cate eq 'cs') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=cs)}">고객서비스</a>
+                        </li>
+                        <li th:class="${(cate eq 'safe') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=safe)}">안전거래</a>
+                        </li>
+                        <li th:class="${(cate eq 'dangerProd') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=dangerProd)}">위해상품</a>
+                        </li>
+                        <li th:class="${(cate eq 'event') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=event)}">이벤트당첨</a>
+                        </li>
+                    </ul>
+                </aside>
+
+                <article>
+                    <nav>
+                        <h1>[[${cateDto.cateName}]]</h1>
+                        <h2>공지사항 [[${cateDto.cateName}]] 내용입니다.</h2>
+                    </nav>
+                    <table>
+                        <th:block th:each="notice : ${pageResponseDTO.dtoList}">
+                        <tr>
+                            <td>
+                                <!--(cate=notice.cate, bno=notice.noticeNo) -->
+                                <a th:href="@{cs/notice/view}">
+                                    [<span th:text="${notice.typeName}"></span>]
+                                    [[${notice.title}]]
+                                </a>
+                            </td>
+                            <td>[[${notice.rdate}]]</td>
+                        </tr>
+                        </th:block>
+                    </table>
+
+                    <div class="page">
+                        <a href="#"
+                           class="prev">&laquo;</a>
+                        <a href="#"
+                           class="prev">이전</a>
+                        <a href="#"
+                           class="num on">1</a>
+                        <a href="#"
+                           class="next">다음</a>
+                        <a href="#"
+                           class="next">&raquo;</a>
+                    </div>
+
+                </article>
+            </section>
+        </div>
+    </section>
+<th:block th:insert="~{@{/cs/inc/footer.html}}"/>
