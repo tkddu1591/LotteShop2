@@ -7,13 +7,14 @@ import Alert from "./Alert";
 import Message from "./Message";
 import Order from "./Order";
 import Delivery from "./Delivery";
+import {API_BASE_URL} from "../../../App";
 
 function Complete() {
     let [completeList, setCompleteList] = useState([]);
     let [completeTotal, setCompleteTotal] = useState([]);
     let member = useSelector((state) => state.member);
     useEffect(() => {
-        axios.get('/product/complete/list', {
+        axios.get(`${API_BASE_URL}/product/complete/list`, {
             params: {
                 uid: 'user'
             }
@@ -22,7 +23,7 @@ function Complete() {
         }).catch(err => {
             console.log(err)
         })
-        axios.get('/product/complete/total', {
+        axios.get(`${API_BASE_URL}/product/complete/total`, {
             params: {
                 uid: 'user'
             }
@@ -34,8 +35,7 @@ function Complete() {
     }, []);
 
     let navigate = useNavigate();
-    console.log(completeList)
-    console.log(completeTotal)
+    if(completeList.length>0){
     return <>
 
         <Message></Message>
@@ -45,6 +45,7 @@ function Complete() {
         <Alert></Alert>
 
     </>
+    }
 }
 
 export default Complete

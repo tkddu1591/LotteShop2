@@ -4,6 +4,7 @@ import CartList from "./CartList";
 import Total from "./Total";
 import qs from "qs";
 import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
+import {API_BASE_URL} from "../../../App";
 
 function Cart() {
 
@@ -11,7 +12,7 @@ function Cart() {
     let [selectedCartList, setSelectedCartList] = useState([]);
 
     useEffect(() => {
-        axios.get('/product/cart', {
+        axios.get(`${API_BASE_URL}/product/cart`, {
             params: {
                 uid: 'user'
             }
@@ -82,7 +83,7 @@ function Cart() {
                        selectCartsNo.push(cartNo);
                    })
                    console.log(selectCartsNo)
-                   await axios.delete('/product/cart', {
+                   await axios.delete(`${API_BASE_URL}/product/cart`, {
                        headers: {'Content-Type': 'application/json'},
                        data: selectCartsNo
                    })
@@ -92,7 +93,7 @@ function Cart() {
                        .catch((error) => {
                            console.error(error);
                        });
-                   axios.get('/product/cart', {
+                   axios.get(`${API_BASE_URL}/product/cart`, {
                        params: {
                            uid: 'user'
                        }
