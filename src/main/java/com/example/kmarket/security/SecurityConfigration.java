@@ -39,9 +39,6 @@ public class SecurityConfigration {
                         .logoutSuccessUrl("/user/login?success=200"))
                 //인가권한설정 (back에서는 DB에 접속하는 기능을 제한함)
                 .authorizeHttpRequests(authorizeHttpRequest -> authorizeHttpRequest
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/manager/**").hasAnyRole("ADMIN","MANAGER")
-                        .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/").permitAll()//인가설정
                         .requestMatchers("/**").permitAll());//인가설정
 

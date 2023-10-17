@@ -10,6 +10,8 @@ import {deleteBanner} from "./slice/bannerSilce";
 import Order from "./pages/product/order/Order";
 import {insertMember} from "./slice/memberSlice";
 
+export const API_BASE_URL = process.env.REACT_APP_API_ROOT;
+export const HOME_URL = process.env.REACT_APP_HOME_URL;
 const Aside = lazy(() => import('./pages/home/Aside.js'))
 const Footer = lazy(() => import('./pages/home/Footer.js'))
 const Header = lazy(() => import('./pages/home/Header.js'))
@@ -32,7 +34,7 @@ function App() {
         pass:'user',
     }
     useEffect(() => {
-        axios.get('/product/cate1').then(res => {
+        axios.get('http://localhost:8080/product/cate1').then(res => {
             dispatch(changeCate1(res.data))
             console.log(res.data);
         }).catch(error => {

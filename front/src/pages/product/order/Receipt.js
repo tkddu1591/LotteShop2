@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {API_BASE_URL} from "../../../App";
 
 function Receipt({orderEnd, usePoint, orderProducts}) {
     let navigate = useNavigate();
@@ -59,7 +60,7 @@ function Receipt({orderEnd, usePoint, orderProducts}) {
                            alert('결제방식을 선택해주세요')
                        } else {
                            console.log(orderProducts)
-                           await axios.post('/product/order/total', orderEnd,
+                           await axios.post(`${API_BASE_URL}/product/order/total`, orderEnd,
                                {
                                    headers: {
                                        'Content-Type': 'application/json',
@@ -67,7 +68,7 @@ function Receipt({orderEnd, usePoint, orderProducts}) {
                                }).catch((error) => {
                                console.error(error)
                            })
-                           await axios.post('/product/order/products', orderProducts,
+                           await axios.post(`${API_BASE_URL}/product/order/products`, orderProducts,
                                {
                                    headers: {
                                        'Content-Type': 'application/json',
@@ -75,7 +76,7 @@ function Receipt({orderEnd, usePoint, orderProducts}) {
                                }).catch((error) => {
                                console.error(error)
                            })
-                           await axios.delete('/product/cart/all?uid='+orderEnd.ordUid, {
+                           await axios.delete(`${API_BASE_URL}/product/cart/all?uid=`+orderEnd.ordUid, {
                                headers: {'Content-Type': 'application/json'}
                            })
                                .catch((error) => {
