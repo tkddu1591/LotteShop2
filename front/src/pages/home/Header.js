@@ -38,7 +38,7 @@ function Header() {
             </div>
             <div className="logo">
                 <div>
-                    <Link to={process.env.PUBLIC_URL + "/"}><img src="./images/header_logo.png" alt="로고"/></Link>
+                    <Link to={process.env.PUBLIC_URL + "/"}><img src="/images/header_logo.png" alt="로고"/></Link>
                     <div>
                         <input
                             onChange={(e) => {

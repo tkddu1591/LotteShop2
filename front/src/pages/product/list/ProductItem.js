@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {HOME_URL} from "../../../App";
 
 function ProductItem({pageResponseDTO}) {
     let dtoList = pageResponseDTO.dtoList
@@ -23,6 +24,7 @@ function ProductItem({pageResponseDTO}) {
         }
     }
 
+
     let navigate = useNavigate();
     return (
         <table border="0">
@@ -36,7 +38,7 @@ function ProductItem({pageResponseDTO}) {
                     (dtoList.map((item, index) => {
                         return <tr key={item.prodNo}>
                             <td><a onClick={() => {
-                                navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                navigate(`${HOME_URL}/product/view?prodNo=${item.prodNo}`)
                             }}
                                    style={{cursor: 'pointer', userSelect: 'none'}}
                                    className="thumb"><img src="https://via.placeholder.com/120x120"
@@ -45,7 +47,7 @@ function ProductItem({pageResponseDTO}) {
                             <td>
                                 <h3 className="name"
                                     onClick={() => {
-                                        navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                        navigate( process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
                                     }}
                                     style={{cursor: 'pointer', userSelect: 'none'}}
                                 >{item.prodName}</h3>
