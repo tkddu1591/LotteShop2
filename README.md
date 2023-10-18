@@ -14,7 +14,7 @@ Lotte 쇼핑몰 프로젝트 구조
 - redux : npm install @reduxjs/toolkit react-redux
 - jquery: npm install jquery
 - 기본 모듈 : npm install
-- cross-env : npm install cross-env
+- cross-env : npm install cross-env, npm install -g env-cmd
 
   
 # gitignore 파일
