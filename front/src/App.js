@@ -34,20 +34,20 @@ function App() {
         pass:'user',
     }
     useEffect(() => {
-        axios.get('http://localhost:8080/product/cate1').then(res => {
+        axios.get(`${API_BASE_URL}/product/cate1`).then(res => {
             dispatch(changeCate1(res.data))
             console.log(res.data);
         }).catch(error => {
             console.log(error);
         })
-        axios.get('/product/cate2').then(res => {
+        axios.get(`${API_BASE_URL}/product/cate2`).then(res => {
             dispatch(changeCate2(res.data))
             console.log(res.data);
         }).catch(error => {
             console.log(error);
         })
         //user 데이터 받아오기 나중에는 로그인 페이지로 처리
-        axios.post('/member/login',member, {
+        axios.post(`${API_BASE_URL}/member/login`,member, {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -75,6 +75,7 @@ function App() {
     return (
         <>
             <Routes>
+                {/*여기에 배포 레포지토리 정의 해줌 index.js의 BrowserRouter의 base와 매칭 LotteON 등*/}
                 <Route path="/" element={
                     <Suspense fallback={fallbackData()}>
                         <BannerTopMemo/>
@@ -131,7 +132,7 @@ function BannerTop() {
         return (
             <div id="bannerTop" className="on" style={{background: '#e4dfdf'}}>
                 <article>
-                    <a href="#"><img src={'./images/topBanner1.png'}/></a>
+                    <a href="#"><img src={'/images/topBanner1.png'}/></a>
                     <button className="btnClose" onClick={() => {
                         dispatch(deleteBanner())
                     }}>close

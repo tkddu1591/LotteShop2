@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App, {HOME_URL} from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./store";
 import {BrowserRouter, HashRouter} from "react-router-dom";
@@ -13,6 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
+            {/*<BrowserRouter basename="/"> route 페이지 설정*/}
             <HashRouter>
                 <ScrollTop/>
                 <App/>

@@ -1,4 +1,5 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {HOME_URL} from "../../../App";
 
 function ProductItem({pageResponseDTO}) {
     let dtoList = pageResponseDTO.dtoList
@@ -23,7 +24,9 @@ function ProductItem({pageResponseDTO}) {
         }
     }
 
+    const productPage = `${HOME_URL}/product/list`;
     let navigate = useNavigate();
+    console.log(HOME_URL + "/product/view?prodNo=")
     return (
         <table border="0">
 
@@ -36,21 +39,22 @@ function ProductItem({pageResponseDTO}) {
                     (dtoList.map((item, index) => {
                         return <tr key={item.prodNo}>
                             <td><a onClick={() => {
-                                navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                navigate("/product/view?prodNo="+item.prodNo)
                             }}
                                    style={{cursor: 'pointer', userSelect: 'none'}}
                                    className="thumb"><img src="https://via.placeholder.com/120x120"
                                                           alt="상품이미지"/></a>
                             </td>
+
                             <td>
                                 <h3 className="name"
                                     onClick={() => {
-                                        navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                        navigate("/product/view?prodNo=" + item.prodNo)
                                     }}
                                     style={{cursor: 'pointer', userSelect: 'none'}}
                                 >{item.prodName}</h3>
                                 <a onClick={() => {
-                                    navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                    navigate("/product/view?prodNo=" + item.prodNo)
                                 }}
                                    style={{cursor: 'pointer', userSelect: 'none'}}
                                    className="desc">{item.descript}</a>
