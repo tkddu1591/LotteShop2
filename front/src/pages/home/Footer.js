@@ -21,6 +21,7 @@ function Footer() {
                     <strong>고객센터</strong><br/>
                     Tel : 1899-7000(유료) (평일 09:00~18:00)<br/>
                     Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br/>
+                    App Version : LotteON-0.0.4-SNAPSHOT<br/>
                 </p>
             </div>
         </footer>

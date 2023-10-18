@@ -1,5 +1,6 @@
 import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import {HOME_URL} from "../../App";
 
 function Aside() {
     const content1 = [
@@ -105,7 +106,7 @@ function Categories({type, name, c2Name,cate2, cate1}) {
 
     return (
         <li>
-            <Link to={process.env.PUBLIC_URL+"/product/list?cate="+cate1}
+            <Link to={HOME_URL+"/product/list?cate="+cate1}
                   style={ {cursor: 'pointer', userSelect: 'none'}}
             ><i className={"fas fa-" + type}></i>{name}<i
                 className="fas fa-angle-right"
@@ -115,7 +116,7 @@ function Categories({type, name, c2Name,cate2, cate1}) {
                 {Array.isArray(cate) &&cate.map((item, index) => {
                     return (
                         <li key={index}>
-                            <Link to={process.env.PUBLIC_URL+"/product/list?cate="+item.cate2}
+                            <Link to={HOME_URL+"/product/list?cate="+item.cate2}
                                   style={ {cursor: 'pointer', userSelect: 'none'}}
                             >{item.c2Name}</Link>
                         </li>

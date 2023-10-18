@@ -22,11 +22,11 @@ function Info({completeList, completeTotal}) {
                                         <article>
                                             <img src="https://via.placeholder.com/80x80" alt=""
                                                  onClick={() => {
-                                                     navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                                     navigate("/product/view?prodNo=" + item.prodNo)
                                                  }} style={{cursor: 'pointer'}}/>
                                             <div>
                                                 <h2><a onClick={() => {
-                                                    navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)
+                                                    navigate("/product/view?prodNo=" + item.prodNo)
                                                 }} style={{cursor: 'pointer'}}>상품명</a></h2>
                                                 <p>상품설명</p>
                                             </div>

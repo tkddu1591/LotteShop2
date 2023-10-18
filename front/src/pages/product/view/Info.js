@@ -219,7 +219,7 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
                                    totalDiscountPrice : (cartDTO.price*cartDTO.discount)/100
                                }))
 
-                               navigate(process.env.PUBLIC_URL + "/product/order")
+                               navigate("/product/order")
 
                            }}
 

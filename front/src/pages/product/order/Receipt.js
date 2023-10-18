@@ -82,7 +82,7 @@ function Receipt({orderEnd, usePoint, orderProducts}) {
                                .catch((error) => {
                                    console.error(error);
                                });
-                           await navigate(process.env.PUBLIC_URL + "/product/complete")
+                           await navigate("/product/complete")
                        }
                    }}
             />

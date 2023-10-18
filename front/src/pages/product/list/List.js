@@ -69,6 +69,8 @@ function List() {
         changePageRequest('cate', '0')
     }
 
+    console.log(pageResponseDTO);
+    console.log(pageRequestDTO);
     return (
         <>
             <CateRoot thisCate={cate}></CateRoot>
