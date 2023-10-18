@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.thymeleaf.org/"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+      xmlns:layout="http://www.thymeleaf.org/">
     <meta charset="UTF-8">
+    <!--  -->
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
     <head>
         <div th:replace="/admin/header.html :: header"></div>
     </head>
@@ -20,12 +21,12 @@
             <!-- 상품목록 컨텐츠 시작 -->
             <section>
 
-                <form th:action="@{/admin/cs/notice/delete.do}" method="post">
+                <form>
                     <div>
                         <select name="searchCate1" id="searchCate1">
                             <option value="">유형선택</option>
                         </select>
-                        <input type="text" name="searchKeyword" id="searchKeyword" value="" placeholder="검색어를 입력하세요." >
+                        <input type="text" name="searchKeyword" id="searchKeyword" value="{cateName}" placeholder="검색어를 입력하세요." >
                         <input type="hidden" name="searchPg" id="searchPg">
                     </div>
                     <table class="listTable">
@@ -44,50 +45,53 @@
                             <th:each var="dto" items="">
                                 <tr>
                                     <td><input type="checkbox" name="chk" value="${dto.noticeNo}"/></td>
-                                    <td>글 번호</td>
-                                    <td>분류 유형</td>
-                                    <td><a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}">[[ ${dto.c2Name} ]] [[${dto.title}]]</a></td>
-                                    <td>조회수</td>
-                                    <td>작성 날짜</td>
+                                    <td>[[${dto.noticeNo}]]</td>
+                                    <td>[[${dto.cateName}]]</td>
+                                    <td><a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}">[ ${dto.cateName} ] ${dto.title}</a></td>
+                                    <td>[[${dto.hit}]]</td>
+                                    <td>[[${dto.rdate}]]</td>
                                     <td>
-                                        <a th:href="@{/admin/cs/notice/delete.do}" class="noticeDelete">[삭제]</a>
+                                        <a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}" class="noticeDelete">[삭제]</a>
                                         <br/>
-                                        <a th:href="@{/admin/cs/notice/update.do}" class="noticeUpdate">[수정]</a>
+                                        <a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}" class="noticeUpdate">[수정]</a>
                                     </td>
                                 </tr>
                             </th:each>
-                            <th:if test="${fn:length(noticeList) eq 0}">
+                            <th:block th:if="${noticeNo == null or noticeNo.isEmpty()}">
                                 <tr>
                                     <td colspan="7">
                                         조회 결과가 없습니다.
                                     </td>
                                 </tr>
-                            </th:if>
+                            </th:block>
                         </tbody>
                     </table>
 
 
                     <input type="submit" value="선택삭제" class="deleteAll" />
-                    <a th:href="@{/admin/cs/notice/write.do}" class="writeBtn">작성하기</a>
+                    <a th:href="@{/admin/cs/notice/write}" class="writeBtn">작성하기</a>
                 </form>
 
 
                 <div class="paging">
-                    <th:if>
+                    <li th:if="${pageResponseDTO.prev}" class="paginate_button previous" aria-controls="dataTables-example" tabindex="0">
 			        	<span class="prev">
-			            	<a th:href="@{/admin/cs/notice/list}"><&nbsp;이전</a>
+			            	<a th:href="@{/admin/cs/notice/list(cate=${pageResponseDTO.cate}, pg=${pageResponseDTO.start - 1})}"><&nbsp;이전</a>
 		            	</span>
-                    </th:if>
-                    <th:forEach>
-			            	<span class="num">
-			            		<a th:href="@{/admin/cs/notice/list}"></a>
-			            	</span>
-                    </th:forEach>
-                    <th:if test="${pageGroupEnd < lastPageNum}">
-	                        <span class="next">
-			            		<a th:href="@{/admin/cs/notice/list}">다음&nbsp;></a>
-			            	</span>
-                    </th:if>
+                    </li>
+                    <li th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}"
+                        th:class="${num} == ${currentPage} ? 'paginate_button active' : 'paginate_button'"
+                        aria-controls="dataTables-example"
+                        tabindex="0">
+                        <span class="num">
+                            <a th:href="@{/article/list(cate=${pageResponseDTO.cate}, pg=${num})}" th:text="${num}"></a>
+                        </span>
+                    </li>
+                    <li th:if="${pageResponseDTO.next}" class="paginate_button next" aria-controls="dataTables-example" tabindex="0">
+                        <span class="next">
+                            <a th:href="@{/article/list(cate=${pageResponseDTO.cate},pg=${pageResponseDTO.end + 1})}">다음</a>
+                        </span>
+                    </li>
                 </div>
 
             </section>
