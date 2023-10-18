@@ -10,7 +10,7 @@ import org.springframework.data.domain.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageRequestDTO {
+public class CsPageRequestDTO {
 
     @Builder.Default
     private int pg=1;
@@ -20,7 +20,6 @@ public class PageRequestDTO {
 
     private String cate;
     private int type;
-
 
     // Limit 처리 됨
     // descending() : order by DESC랑 동일한거임
