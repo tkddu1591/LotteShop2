@@ -152,7 +152,7 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
                 <nav>
                     <span className="origin">원산지-상세설명 참조</span>
                 </nav>
-                <img src="../images/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립!" className="banner"/>
+                <img src={`${process.env.REACT_APP_HOME_URL}/images/vip_plcc_banner.png`} alt="100원만 결제해도 1만원 적립!" className="banner"/>
 
                 <div className="count">
                     {cartDTO.count !== 1 ? <button className="decrease" onClick={() => {

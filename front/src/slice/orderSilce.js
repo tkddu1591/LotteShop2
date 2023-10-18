@@ -29,9 +29,12 @@ let orderTotal=createSlice({
     reducers: {
         insertOrderTotal(state,action){
             return action.payload
+        },
+        deleteOrderTotal: (state, action) => {
+            return [];
         }
     }
 })
 export const {insertOrderProduct,deleteOrderProduct,deleteAllProduct} = orderProducts.actions;
-export const {insertOrderTotal} = orderTotal.actions;
+export const {insertOrderTotal,deleteOrderTotal} = orderTotal.actions;
 export {orderProducts, orderTotal}

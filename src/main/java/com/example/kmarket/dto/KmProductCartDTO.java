@@ -27,5 +27,4 @@ public class KmProductCartDTO {
     private String prodName;
     private String descript;
 
-
 }
