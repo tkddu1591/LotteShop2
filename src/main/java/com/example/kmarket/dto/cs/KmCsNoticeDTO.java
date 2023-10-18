@@ -1,5 +1,6 @@
 package com.example.kmarket.dto.cs;
 
+import com.example.kmarket.entity.cs.KmCsNoticeEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
