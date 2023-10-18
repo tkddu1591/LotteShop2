@@ -20,3 +20,14 @@ Lotte 쇼핑몰 프로젝트 구조
 # gitignore 파일
 - application.properties
 - build.gradle
+
+
+# git 작업
+1. master
+2. git 패치, 풀(ctrl+t)
+3. master -> 작업 브랜치 변경
+4. 작업
+5. git 패치(ctrl+t)
+6. git 커밋(ctrl+k)
+7. 푸쉬
+8. 풀리퀘스트
