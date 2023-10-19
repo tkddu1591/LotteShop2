@@ -57,6 +57,12 @@ function Delivery({member, changeOrderEnd, orderEnd, changeMemeber}) {
         changeOrderEnd('recipAddr1', postDTO.addr1)
         changeOrderEnd('recipAddr2', postDTO.addr2)
     }, [postDTO]);
+
+    function detailPostHandle(e){
+        handleInputChange(e, 'recipAddr2')
+        changePostDTO('addr2',e.target.value)
+    }
+    console.log(orderEnd)
     return <>
 
         <article className="delivery">
@@ -116,7 +122,7 @@ function Delivery({member, changeOrderEnd, orderEnd, changeMemeber}) {
                         <td>
                             <input type="text" name="addr2" defaultValue={postDTO.addr2}
                                    onChange={(e) => {
-                                       handleInputChange(e, 'recipAddr2')
+                                       detailPostHandle(e)
                                    }}/>
                         </td>
                     </tr>

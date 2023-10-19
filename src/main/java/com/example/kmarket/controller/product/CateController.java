@@ -1,8 +1,8 @@
 package com.example.kmarket.controller.product;
 
-import com.example.kmarket.dto.KmProductCate1DTO;
-import com.example.kmarket.dto.KmProductCate2DTO;
-import com.example.kmarket.service.KmProductCateService;
+import com.example.kmarket.dto.product.KmProductCate1DTO;
+import com.example.kmarket.dto.product.KmProductCate2DTO;
+import com.example.kmarket.service.product.KmProductCateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
