@@ -2,13 +2,9 @@ package com.example.kmarket.service.admin;
 
 import com.example.kmarket.dto.admin.KmAdminFaqDTO;
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
-import com.example.kmarket.mapper.admin.KmAdminNoticeMapper;
-import com.example.kmarket.mapper.cs.KmCsCateMapper;
-import com.example.kmarket.repository.cs.KmCsCateRepository;
+import com.example.kmarket.mapper.admin.KmAdminFaqMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,36 +14,27 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class KmAdminNoticeService {
+public class KmAdminFaqService {
 
-    private final KmAdminNoticeMapper kmAdminNoticeMapper;
+    private final KmAdminFaqMapper kmAdminFaqMapper;
 
-    public List<KmAdminNoticeDTO> selectCsNotices() {
+    // select * all
+    public List<KmAdminFaqDTO> selectCsFaq(){
 
-        // select * all
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNotices();
+        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaq();
 
-        return noticeList;
+        return faqList;
     }
 
-    public List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate() {
+    // select * from where faqNo = ?
+    public KmAdminFaqDTO selectCsFaqByfaqNo() {
 
-        // cs_notice 테이블과 cs_cate 테이블 join
-        List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate = kmAdminNoticeMapper.selectCsNoticesjoinCsCate();
+        KmAdminFaqDTO selectCsFaqByfaqNo = kmAdminFaqMapper.selectCsFaqByfaqNo();
 
-        return selectCsNoticesjoinCsCate;
-    }
-
-    public KmAdminNoticeDTO selectCsNoticeBynoticeNo() {
-
-        // select * from where noticeNo = ?
-        KmAdminNoticeDTO selectCsNoticeBynoticeNo = kmAdminNoticeMapper.selectCsNoticeBynoticeNo();
-
-        return selectCsNoticeBynoticeNo;
+        return selectCsFaqByfaqNo;
     }
 
     // 중복을 제거하는 람다 함수
@@ -57,27 +44,27 @@ public class KmAdminNoticeService {
     }
 
     // 유형 선택 중복 제거
-    public List<KmAdminNoticeDTO> distinctCate(){
+    public List<KmAdminFaqDTO> distinctCate(){
 
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNotices();
+        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaq();
 
-        List<KmAdminNoticeDTO> distinctCate = noticeList.stream()
-                .filter(distinctByKey(KmAdminNoticeDTO::getCate))
+        List<KmAdminFaqDTO> distinctCate = faqList.stream()
+                .filter(distinctByKey(KmAdminFaqDTO::getCate))
                 .collect(Collectors.toList());
 
-        return  distinctCate;
+        return distinctCate;
     }
 
     // 페이징 시작
-    public int selectNoticeCountTotal(){
-        return kmAdminNoticeMapper.selectNoticeCountTotal();
+    public int selectFaqCountTotal(){
+        return kmAdminFaqMapper.selectFaqCountTotal();
     }
 
-    public List<KmAdminNoticeDTO> selectNotices(int start) {
+    public List<KmAdminFaqDTO> selectFaq(int start) {
         int pageSize = 10; // 페이지당 항목 수
         int startIdx = (start - 1) * pageSize; // 시작 위치 계산
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectNotices(startIdx);
-        return noticeList;
+        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectFaq(startIdx);
+        return faqList;
     }
 
 
@@ -130,5 +117,4 @@ public class KmAdminNoticeService {
     public int getStartNum(int currentPage) {
         return (currentPage - 1) * 10;
     }
-
 }

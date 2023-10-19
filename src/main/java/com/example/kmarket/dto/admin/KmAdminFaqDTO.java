@@ -9,19 +9,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class KmAdminNoticeDTO {
-    private int noticeNo;
+public class KmAdminFaqDTO {
+    private int faqNo;
     private String cate;
     private int type;
     private String title;
-    private String hit;
     private String content;
+    private int relatedFaq;
     private String writer;
     private String regip;
     private LocalDateTime rdate;
-
-
-    //추가 필드
-    private String cateName;
-    private String typeName;
 }
