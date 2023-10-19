@@ -37,7 +37,7 @@
                         <h2>공지사항 [[${cateDto.cateName}]] 내용입니다.</h2>
                     </nav>
                     <table>
-                        <th:block th:each="notice : ${pageResponseDTO.dtoList}">
+                        <th:block th:each="notice : ${adminPageResponseDTO.dtoList}">
                         <tr>
                             <td>
                                 <!--(cate=notice.cate, bno=notice.noticeNo) -->
