@@ -6,7 +6,7 @@ import Info from "./Info";
 import Notice from "./Notice";
 import PageNavigation from "../list/PageNavigation";
 import {useDispatch, useSelector} from "react-redux";
-import {categoryNo, changeCategoryNo, changeCateNames} from "../../../slice/cateSilce";
+import {changeCategoryNo} from "../../../slice/cateSilce";
 import {API_BASE_URL} from "../../../App";
 
 function View() {

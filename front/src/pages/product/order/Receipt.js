@@ -1,11 +1,10 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {API_BASE_URL} from "../../../App";
-import discount from "./Discount";
 import {deleteOrderProduct, deleteOrderTotal} from "../../../slice/orderSilce";
 import {useDispatch} from "react-redux";
 
-function Receipt({orderEnd, usePoint, orderProducts}) {
+function Receipt({orderEnd, orderProducts}) {
     let navigate = useNavigate();
     let dispatch = useDispatch();
     return <>
