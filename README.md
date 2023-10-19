@@ -35,6 +35,7 @@ Lotte 쇼핑몰 프로젝트 구조
 - daum : npm install react-daum-postcode
 - hook-form: npm i react-hook-form
 - 기본 모듈 : npm install
+- env.cmd : install env-cmd
 # gitignore 파일
 - application.properties
 - build.gradle
