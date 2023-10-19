@@ -17,6 +17,7 @@ public class KmProductCartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartNo;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
     private KmMemberEntity kmMemberEntity;
@@ -32,6 +33,4 @@ public class KmProductCartEntity {
     private int delivery;
     private int total;
     private LocalDateTime rdate;
-
-
 }

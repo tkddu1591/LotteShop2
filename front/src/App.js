@@ -1,6 +1,7 @@
-import './App.css';
+import './css/App.css';
+import './css/product.css'
 import {lazy, memo, Suspense, useEffect, useState,} from "react";
-import {Outlet, Route, Routes} from "react-router-dom";
+import {Outlet, Route, Routes, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {changeCate1, changeCate2} from "./slice/cateSilce";
 import {useDispatch, useSelector} from "react-redux";
@@ -29,9 +30,9 @@ function App() {
         return <div>로딩중</div>
     }
 
-    let member ={
-        uid:'user',
-        pass:'user',
+    let member = {
+        uid: 'user',
+        pass: 'user',
     }
     useEffect(() => {
         axios.get(`${API_BASE_URL}/product/cate1`).then(res => {
@@ -47,7 +48,7 @@ function App() {
             console.log(error);
         })
         //user 데이터 받아오기 나중에는 로그인 페이지로 처리
-        axios.post(`${API_BASE_URL}/member/login`,member, {
+        axios.post(`${API_BASE_URL}/member/login`, member, {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -59,6 +60,7 @@ function App() {
     }, []);
 
 
+    let navigate = useNavigate();
     let BannerTopMemo = memo(function () {
         return <BannerTop></BannerTop>
     })
@@ -117,6 +119,7 @@ function App() {
                     </Route>
 
                     <Route path="" element={<MainPage></MainPage>}/>
+                    <Route path="*" element={<div>없는 페이지 입니다</div>}/>
 
                 </Route>
             </Routes>
@@ -132,7 +135,7 @@ function BannerTop() {
         return (
             <div id="bannerTop" className="on" style={{background: '#e4dfdf'}}>
                 <article>
-                    <a href="#"><img src={'/images/topBanner1.png'}/></a>
+                    <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/topBanner1.png`}/></a>
                     <button className="btnClose" onClick={() => {
                         dispatch(deleteBanner())
                     }}>close

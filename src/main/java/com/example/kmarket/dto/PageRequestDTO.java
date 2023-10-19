@@ -10,11 +10,13 @@ import org.springframework.data.domain.Sort;
 @NoArgsConstructor
 @ToString
 public class PageRequestDTO {
+
+    //-------------------기본데이터
     @Builder.Default
     private int pg = 1;
-
     @Builder.Default
     private int size = 10;
+    //-------------------기본데이터
 
     @Builder.Default
     private int cate = 0;

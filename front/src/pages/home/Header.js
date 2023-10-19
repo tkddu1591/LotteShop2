@@ -2,6 +2,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {changeCategoryNo, changeCateNames} from "../../slice/cateSilce";
 import {useDispatch} from "react-redux";
+import {HOME_URL} from "../../App";
 
 function Header() {
     let navigator = useNavigate();
@@ -22,7 +23,7 @@ function Header() {
         <header>
             <div className="top">
                 <div>
-                    <a href="/member/login.html">로그인</a>
+                    <Link  to={HOME_URL+"/member/login"}>로그인</Link>
                     <a href="#">회원가입</a>
                     <a href="#">마이페이지</a>
                     <a onClick={(e) => {
@@ -38,7 +39,7 @@ function Header() {
             </div>
             <div className="logo">
                 <div>
-                    <Link to={process.env.PUBLIC_URL + "/"}><img src="/images/header_logo.png" alt="로고"/></Link>
+                    <Link to={process.env.PUBLIC_URL + "/"}><img src={`${process.env.REACT_APP_HOME_URL}/images/header_logo.png`} alt="로고"/></Link>
                     <div>
                         <input
                             onChange={(e) => {

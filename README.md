@@ -15,6 +15,7 @@ Lotte 쇼핑몰 프로젝트 구조
 - jquery: npm install jquery
 - 기본 모듈 : npm install
 - cross-env : npm install cross-env, npm install -g env-cmd
+- daum_map : npm i react-daum-postcode
 
   
 # gitignore 파일

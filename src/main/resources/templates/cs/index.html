@@ -18,41 +18,41 @@
 
             <section class="faq">
                 <h1>자주 묻는 질문
-                    <a th:href="@{/cs/faq/list}">전체보기</a>
+                    <a th:href="@{/cs/faq/list(cate=member)}">전체보기</a>
                 </h1>
                 <ol>
                     <li>
-                        <a th:href="@{/cs/faq/list/member}">
+                        <a th:href="@{/cs/faq/list(cate=member)}">
                             <span>회원</span>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/cs/faq/list/coupon}">
+                        <a th:href="@{/cs/faq/list(cate=coupon)}">
                             <span>쿠폰/이벤트</span>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/cs/faq/list/order}">
+                        <a th:href="@{/cs/faq/list(cate=order)}">
                             <span>주문/결제</span>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/cs/faq/list/delivery}">
+                        <a th:href="@{/cs/faq/list(cate=delivery)}">
                             <span>배송</span>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/cs/faq/list/cancle}">
+                        <a th:href="@{/cs/faq/list(cate=cancel)}">
                             <span>취소/반품/교환</span>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/cs/faq/list/travel}">
+                        <a th:href="@{/cs/faq/list(cate=travel)}">
                             <span>여행/숙박/항공</span>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/cs/faq/list/safe}">
+                        <a th:href="@{/cs/faq/list(cate=safe)}">
                             <span>안전거래</span>
                         </a>
                     </li>
@@ -62,11 +62,11 @@
             <section class="qna">
                 <h1>
                     문의하기
-                    <a th:href="@{/cs/qna/list/member}">전체보기</a>
+                    <a th:href="@{/cs/qna/list(cate=member)}">전체보기</a>
                 </h1>
                 <ul>
                     <li>
-                        <a th:href="@{/cs/qna/view}" class="title">
+                        <a th:href="@{/cs/qna/view(bno=1)}" class="title">
                             [회원] 개인회원과 법인회원에 차이가 있나요?
                         </a>
                         <p>

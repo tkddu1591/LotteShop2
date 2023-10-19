@@ -46,7 +46,7 @@
                                     <td><input type="checkbox" name="chk" value="${dto.noticeNo}"/></td>
                                     <td>글 번호</td>
                                     <td>분류 유형</td>
-                                    <td><a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}">[ ${dto.c2Name} ] ${dto.title}</a></td>
+                                    <td><a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}">[[ ${dto.c2Name} ]] [[${dto.title}]]</a></td>
                                     <td>조회수</td>
                                     <td>작성 날짜</td>
                                     <td>

@@ -38,7 +38,7 @@ function OrderProducts({orderProducts}) {
                         </td>
                         <td>{item.count}</td>
                         <td>
-                            {item.discount != 0 ? <div style={{position: 'relative', top: '-6px'}}>
+                            {item.discount !== 0 ? <div style={{position: 'relative', top: '-6px'}}>
                                     <p
                                         style={{color: 'grey', textDecoration: 'line-through', fontSize: '10px'}}
                                     >

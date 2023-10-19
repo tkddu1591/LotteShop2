@@ -14,10 +14,10 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             {/*<BrowserRouter basename="/"> route 페이지 설정*/}
-            <HashRouter>
+            <BrowserRouter>
                 <ScrollTop/>
                 <App/>
-            </HashRouter>
+            </BrowserRouter>
         </Provider>
     </React.StrictMode>
 );

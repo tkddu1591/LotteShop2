@@ -25,7 +25,6 @@ public class KmCsNoticeEntity {
 	@JoinColumn(name = "cate")
 	private KmCsCateEntity kmCsCateEntity;
 
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "type")
 	private KmCsTypeEntity kmCsTypeEntity;
@@ -37,10 +36,4 @@ public class KmCsNoticeEntity {
 	@CreationTimestamp
     private LocalDateTime rdate;
 
-	public LocalDateTime getRdateSub() {
-		String formatDate
-				= LocalDateTime.now()
-				.format(DateTimeFormatter.ofPattern("yy.MM.dd"));
-		return LocalDateTime.parse(formatDate);
-	}
 }

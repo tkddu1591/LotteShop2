@@ -15,11 +15,12 @@ public interface KmProductCartRepository extends JpaRepository<KmProductCartEnti
 
     void deleteKmProductCartEntitiesByKmMemberEntity_Uid(String uid);
 
-    @Query("SELECT pc, p.thumb1, p.prodName, p.descript FROM KmProductCartEntity pc " +
+    @Query("SELECT pc, p.thumb1, p.prodName, p.descript " +
+            "FROM KmProductCartEntity pc " +
             "JOIN pc.kmMemberEntity m " +
             "JOIN pc.kmProductEntity p " +
             "WHERE m.uid = :uid " +
             "ORDER BY pc.cartNo DESC")
-    List<Object[]> findByKmMemberEntity_UidWithKmProduct(@Param("uid") String uid);
+    List<KmProductCartEntity> findByKmMemberEntity_UidWithKmProduct(@Param("uid") String uid);
 }
 

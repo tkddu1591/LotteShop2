@@ -5,34 +5,34 @@
                 <div>
                     <p>
                         <a th:href="@{/cs/index}">홈</a><span>&gt;</span>
-                        <a th:href="@{/cs/faq/list}">자주묻는질문</a>
+                        <a th:href="@{/cs/faq/list(cate=member)}">자주묻는질문</a>
                     </p>
                 </div>
             </nav>
             <section id="pageCss" class="list">
                 <aside>
-                    <h2>자주묻는 질문</h2>
+                    <h2>자주 묻는 질문</h2>
                     <ul>
-                        <li class="@{cate eq 'member' ? 'on' : '' }">
-                            <a th:href="@{/cs/faq/list/member}">회원</a>
+                        <li class="${cateDto.getCate() eq 'member' ? 'on' : '' }">
+                            <a th:href="@{/cs/faq/list(cate=member)}">회원</a>
                         </li>
-                        <li class="${cate eq 'coupon' ? 'on' : ''}">
-                            <a th:href="@{/cs/faq/list/coupon}">쿠폰/이벤트</a>
+                        <li class="${cateDto.getCate() eq 'coupon' ? 'on' : '' }">
+                            <a th:href="@{/cs/faq/list(cate=coupon)}">쿠폰/이벤트</a>
                         </li>
-                        <li class="${cate eq 'order' ? 'on' : '' }">
-                            <a th:href="@{/cs/faq/list/order}">주문/결제</a>
+                        <li class="${cateDto.getCate() eq 'order' ? 'on' : '' }">
+                            <a th:href="@{/cs/faq/list(cate=order)}">주문/결제</a>
                         </li>
-                        <li class="${cate eq 'delivery' ? 'on' : '' }">
-                            <a th:href="@{/cs/fqa/list/delivery}">배송</a>
+                        <li class="${cateDto.getCate() eq 'delivery' ? 'on' : '' }">
+                            <a th:href="@{/cs/faq/list(cate=delivery)}">배송</a>
                         </li>
-                        <li class="${cate eq 'cancle' ? 'on' : '' }">
-                            <a th:href="@{/cs/fqa/list/cancle}">취소/반품/교환</a>
+                        <li class="${cateDto.getCate() eq 'cancel' ? 'on' : '' }">
+                            <a th:href="@{/cs/faq/list(cate=cancel)}">취소/반품/교환</a>
                         </li>
-                        <li class="${cate eq 'travel' ? 'on' : '' }">
-                            <a th:href="@{cs/fqa/list/travel}">여행/숙박/항공</a>
+                        <li class="${cateDto.getCate() eq 'travel' ? 'on' : '' }">
+                            <a th:href="@{/cs/faq/list(cate=travel)}">여행/숙박/항공</a>
                         </li>
-                        <li class="${cate eq 'safe' ? 'on' : '' }">
-                            <a th:href="@{cs/faq/list/safe}">안전거래</a>
+                        <li class="${cateDto.getCate() eq 'safe' ? 'on' : '' }">
+                            <a th:href="@{/cs/faq/list(cate=safe)}">안전거래</a>
                         </li>
                     </ul>
                 </aside>

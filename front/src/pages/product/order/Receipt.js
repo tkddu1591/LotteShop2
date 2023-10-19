@@ -1,11 +1,13 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {API_BASE_URL} from "../../../App";
+import discount from "./Discount";
+import {deleteOrderProduct, deleteOrderTotal} from "../../../slice/orderSilce";
+import {useDispatch} from "react-redux";
 
 function Receipt({orderEnd, usePoint, orderProducts}) {
     let navigate = useNavigate();
-    console.log(orderProducts)
-    console.log(orderEnd)
+    let dispatch = useDispatch();
     return <>
         <div className="final" style={{height: 'auto'}}>
             <h2>최종결제 정보</h2>
@@ -42,7 +44,7 @@ function Receipt({orderEnd, usePoint, orderProducts}) {
                     {orderEnd.savePoint !== 0 ?
                         <tr>
                             <td>포인트 적립</td>
-                            <td style={{color: 'dodgerblue'}}> {orderEnd.savePoint.toLocaleString()} P</td>
+                            <td style={{color: 'dodgerblue'}}> {orderEnd.savePoint&&orderEnd.savePoint.toLocaleString()} P</td>
                         </tr>
                         : null}
                     <tr>
@@ -82,7 +84,9 @@ function Receipt({orderEnd, usePoint, orderProducts}) {
                                .catch((error) => {
                                    console.error(error);
                                });
-                           await navigate(process.env.PUBLIC_URL + "/product/complete")
+                           await dispatch(deleteOrderProduct())
+                           await dispatch(deleteOrderTotal())
+                           await navigate("/product/complete")
                        }
                    }}
             />

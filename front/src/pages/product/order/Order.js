@@ -15,7 +15,7 @@ function Order() {
     let newOrderProducts = [];
     let [newOrderTotal, setNewOrderTotal] = useState(orderTotal);
     let [usePoint, setUsePoint] = useState(0);
-    let [member] = useState(useSelector((state) => state.member));
+    let member = useSelector((state) => state.member);
     let [orderEnd, setOrderEnd] = useState({
         ordCount: newOrderTotal.totalCount,
         ordPrice: newOrderTotal.totalProductPrice,
@@ -36,8 +36,6 @@ function Order() {
     const [formattedPhoneNumber, setFormattedPhoneNumber] = useState(
         orderEnd.recipHp
     );
-    console.log(newOrderTotal)
-
     const changeOrderEnd = (key, value) => {
         setOrderEnd((orderTotal) => {
             let newOrderTotal = {...orderTotal};
@@ -45,8 +43,7 @@ function Order() {
             return newOrderTotal;
         });
     };
-
-    if(orderProducts!==newOrderProducts)
+    if (orderProducts !== newOrderProducts)
         for (let data of orderProducts) {
             let copy = newOrderProducts
             newOrderProducts = ([...copy, {
@@ -60,34 +57,28 @@ function Order() {
             }])
         }
 
-    console.log(newOrderProducts)
-    return <>
+    if (member.uid !== '' && orderEnd.ordCount !== 0)
+        return <>
+            <OrderProducts orderProducts={orderProducts}></OrderProducts>
+            <Receipt orderEnd={orderEnd} orderProducts={newOrderProducts} member={member}></Receipt>
+            <Delivery setOrderEnd={setOrderEnd}
+                      member={member}
+                      changeOrderEnd={changeOrderEnd}
+                      orderEnd={orderEnd}
+                      formattedPhoneNumber={formattedPhoneNumber}
+                      setFormattedPhoneNumber={setFormattedPhoneNumber}
+            ></Delivery>
+            <Discount usePoint={usePoint}
+                      changeOrderEnd={changeOrderEnd}
+                      member={member}
+                      newOrderTotal={newOrderTotal}
+                      setUsePoint={setUsePoint}></Discount>
+            <Payment changeOrderEnd={changeOrderEnd} orderEnd={orderEnd}></Payment>
 
-        {member.uid !== '' ? orderEnd.ordCount !== 0 ? <>
-                    <OrderProducts orderProducts={orderProducts}></OrderProducts>
-                    <Receipt orderEnd={orderEnd} orderProducts={newOrderProducts} member={member}></Receipt>
-                    <Delivery setOrderEnd={setOrderEnd}
-                              member={member}
-                              changeOrderEnd={changeOrderEnd}
-                              orderEnd={orderEnd}
-                              formattedPhoneNumber={formattedPhoneNumber}
-                              setFormattedPhoneNumber={setFormattedPhoneNumber}>
-                        ></Delivery>
-                    <Discount usePoint={usePoint}
-                              changeOrderEnd={changeOrderEnd}
-                              member={member}
-                              newOrderTotal={newOrderTotal}
-                              setUsePoint={setUsePoint}></Discount>
-                    <Payment changeOrderEnd={changeOrderEnd} orderEnd={orderEnd}></Payment>
-
-                    <Alert></Alert>
-                </>
-                : <Error></Error>
-            : <Error></Error>
-
-        }
-
-    </>
+            <Alert></Alert>
+        </>
+    else
+        return <Error></Error>
 }
 
 

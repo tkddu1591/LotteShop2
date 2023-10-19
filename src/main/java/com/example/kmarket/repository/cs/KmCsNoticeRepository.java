@@ -17,16 +17,5 @@ public interface KmCsNoticeRepository extends JpaRepository<KmCsNoticeEntity, In
     public Page<KmCsNoticeEntity> findAll(Pageable pageable);
 
     public Page<KmCsNoticeEntity> findByKmCsCateEntity_Cate(Pageable pageable, String cate);
-    @Query("SELECT n, c.cateName, t.typeName FROM KmCsNoticeEntity n " +
-            "JOIN n.kmCsCateEntity c " +
-            "JOIN n.kmCsTypeEntity t " +
-            "WHERE n.kmCsCateEntity.cate = :cate")
-    List<Object[]> findNoticeAndCateAndTypeByCate(@Param("cate") String cate);
-    @Query("SELECT n, c.cateName, t.typeName FROM KmCsNoticeEntity n " +
-            "JOIN n.kmCsCateEntity c " +
-            "JOIN n.kmCsTypeEntity t " +
-            " ORDER BY n.noticeNo")
-    List<Object[]> findAllCateName();
-
 }
 

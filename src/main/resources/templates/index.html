@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
     <meta charset="UTF-8" />
     <title>롯데ON::롯데 온라인 쇼핑몰</title>
@@ -71,6 +74,7 @@
           <div>
             <a href="./member/login.html">로그인</a>
             <a href="#">회원가입</a>
+            <a th:href="@{/admin/index}">관리자</a>
             <a href="#">마이페이지</a>
             <a href="#"
             ><i class="fa fa-shopping-cart" aria-hidden="true"></i
@@ -97,9 +101,9 @@
               <li><a href="#">할인상품</a></li>
             </ul>
             <ul>
-              <li><a th:href="@{/cs/notice}">공지사항</a></li>
-              <li><a th:href="@{/cs/faq}">자주묻는질문</a></li>
-              <li><a th:href="@{/cs/qna}">문의하기</a></li>
+              <li><a th:href="@{/cs/notice/list(cate=all)}">공지사항</a></li>
+              <li><a th:href="@{/cs/faq/list(cate=member)}">자주묻는질문</a></li>
+              <li><a th:href="@{/cs/qna/list(cate=member)}">문의하기</a></li>
               <li><a th:href="@{/cs/index}">고객센터</a></li>
             </ul>
           </div>

@@ -50,7 +50,7 @@ function Total({total, selectedCartList}) {
                     } else {
                         await dispatch(insertOrderTotal(total))
                         await dispatch(insertOrderProduct(selectedCartList))
-                        await navigator(process.env.PUBLIC_URL + "/product/order")
+                        await navigator("/product/order")
                     }
                 }} style={{cursor: 'pointer', userSelect: 'none'}}
                 />

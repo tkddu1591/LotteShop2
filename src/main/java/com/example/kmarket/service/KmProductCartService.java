@@ -28,9 +28,11 @@ public class KmProductCartService {
     }
 
     public List<KmProductCartDTO> findByUid(String uid) {
-        List<Object[]> objects = kmProductCartRepository.findByKmMemberEntity_UidWithKmProduct(uid);
-        List<KmProductCartDTO> dtos = new ArrayList<>();
+        List<KmProductCartEntity> objects = kmProductCartRepository.findByKmMemberEntity_UidWithKmProduct(uid);
+        List<KmProductCartDTO> dtos = objects.stream().map(kmProductCartMapper::toDTO).toList();
+        return dtos;
 
+/*
         for (Object[] result : objects) {
             KmProductCartEntity pc = (KmProductCartEntity) result[0];
             String thumb1 = (String) result[1]; // KmProductEntity의 thumb1 값
@@ -42,14 +44,14 @@ public class KmProductCartService {
             dto.setProdName(prodName);
             dto.setDescript(descript);
             dtos.add(dto);
-        }
+        }*/
 
     /*
                 .stream()
                 .map(kmProductCartMapper::toDTO)
                 .toList();*/
 
-        return dtos;
+
     }
 
     public void save(KmProductCartDTO kmProductCartDTO) {

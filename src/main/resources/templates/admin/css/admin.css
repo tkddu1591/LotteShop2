@@ -1,8 +1,8 @@
-/* 초기화 */
+/* ì´ˆê¸°í™” */
 * {
     margin: 0;
     padding: 0;
-    font: normal 12px '고딕';
+    font: normal 12px 'ê³ ë”•';
 }
 
 ul, ol {list-style: none;}
@@ -13,7 +13,7 @@ a {text-decoration: none; color: #111;}
     height: auto;
 }
 
-/* 헤더영역 */
+/* í—¤ë”ì˜ì—­ */
 header {
     width: 100%;
     height: 120px;
@@ -41,7 +41,7 @@ header > div > p > a {
     color: #fff;
 }
 
-/* 메인영역 - 공통 */
+/* ë©”ì¸ì˜ì—­ - ê³µí†µ */
 main {
     width: 1400px;
     height: auto;
@@ -179,7 +179,7 @@ main table span {
 }
 
 
-/* 푸터영역 */
+/* í‘¸í„°ì˜ì—­ */
 footer {
     width: 100%;
     height: 60px;
@@ -199,7 +199,7 @@ footer > div > p {
     box-sizing: border-box;
 }
 
-/* 아이콘, 버튼 공통 */
+/* ì•„ì´ì½˜, ë²„íŠ¼ ê³µí†µ */
 p.ico {
     width: 100%;
     height: 58px;
@@ -295,7 +295,7 @@ button[type=submit] {
     height: auto;
     overflow: hidden;
 }
-#admin-index > article > table {
+#admin-index > article table {
     width: 100%;
     margin-top: 6px;
     margin-bottom: 16px;
@@ -303,24 +303,24 @@ button[type=submit] {
     border-top: 2px solid #8798a3;
 }
 
-#admin-index > article > table tr {}
-#admin-index > article > table tr:first-child {
+#admin-index > article table tr {}
+#admin-index > article table tr:first-child {
     background: #fafafa !important;
 }
-#admin-index > article > table tr > td {
+#admin-index > article table tr > td {
     width: 20%;
     border: 1px solid #e5e5e5;
     padding: 6px 6px 6px 12px;
     color: #111;
     text-align: center;
 }
-#admin-index > article > table tr > td > strong {
+#admin-index > article table tr > td > strong {
     display: block;
     font-size: 16px;
     font-weight: bold;
     padding-top: 10px;
 }
-#admin-index > article > table tr > td > span {
+#admin-index > article table tr > td > span {
     display: block;
     padding: 16px;
     font-size: 16px;
@@ -328,17 +328,17 @@ button[type=submit] {
     color: #bc2e13;
 }
 
-#admin-index > article > table tr > td > p {
+#admin-index > article table tr > td > p {
     padding: 6px;
     overflow: hidden;
 }
-#admin-index > article > table tr > td > p > span {
+#admin-index > article table tr > td > p > span {
     font-size: 14px;
 }
-#admin-index > article > table tr > td > p > span:nth-child(1) {
+#admin-index > article table tr > td > p > span:nth-child(1) {
     float: left;
 }
-#admin-index > article > table tr > td > p > span:nth-child(2) {
+#admin-index > article table tr > td > p > span:nth-child(2) {
     float: right;
 }
 
@@ -388,7 +388,7 @@ button[type=submit] {
 
 
 
-/* 상품등록 : product-register */
+/* ìƒí’ˆë“±ë¡ : product-register */
 #admin-product-register {}
 #admin-product-register input[type=submit] {
     float: right;
@@ -397,37 +397,37 @@ button[type=submit] {
 
 
 
-/* 상품목록 : product-list */
+/* ìƒí’ˆëª©ë¡ : product-list */
 #admin-product-list {}
 #admin-product-list > section > div  {
     margin-bottom: 10px;
 }
 
-#admin-product-list > section > table  {
+#admin-product-list > section table  {
     border-top: 2px solid #8798a3;
 }
-#admin-product-list > section > table  tr > th{
+#admin-product-list > section table  tr > th{
     padding: 10px 0;
     background: #f6f6f6;
 }
-#admin-product-list > section > table  tr > td {
+#admin-product-list > section table  tr > td {
     background: #fff;
     text-align: center;
     box-sizing: border-box;
 }
-#admin-product-list > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-product-list > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
-#admin-product-list > section > table  tr > td:nth-child(5) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(11) {width: 100px;}
+#admin-product-list > section table  tr > td:nth-child(1) {width: 20px;}
+#admin-product-list > section table  tr > td:nth-child(2) {width: 80px;}
+#admin-product-list > section table  tr > td:nth-child(3) {width: 80px;}
+#admin-product-list > section table  tr > td:nth-child(4) {width: auto; text-align: left;}
+#admin-product-list > section table  tr > td:nth-child(5) {width: 80px;}
+#admin-product-list > section table  tr > td:nth-child(6) {width: 80px;}
+#admin-product-list > section table  tr > td:nth-child(7) {width: 80px;}
+#admin-product-list > section table  tr > td:nth-child(8) {width: 80px;}
+#admin-product-list > section table  tr > td:nth-child(9) {width: 80px;}
+#admin-product-list > section table  tr > td:nth-child(10) {width: 80px;}
+#admin-product-list > section table  tr > td:nth-child(11) {width: 100px;}
 
-#admin-product-list > section > table img.thumb {width: 60px;}
+#admin-product-list > section table img.thumb {width: 60px;}
 
 #admin-product-list > section input[type=button] {
     float: left;
@@ -443,7 +443,7 @@ button[type=submit] {
 
 #admin-product-list .paging > span > a {
     color: #777;
-    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-family: "ë‹ì›€", Dotum, Tahoma, sans-serif;
     font-size: 11px;
     letter-spacing: -1px;
 }
@@ -458,7 +458,7 @@ button[type=submit] {
     margin: 0 2px;
     padding: 8px 9px;
     border: 1px solid #c4c4c4;
-    background: url("/static/images/ico_power_dealer.gif") 0 0 repeat-x;
+    background: 0 0 repeat-x;
     color: #000;
     font-family: Tahoma;
     font-size: 12px;
@@ -474,7 +474,7 @@ button[type=submit] {
     font-weight: bold;
 }
 
-/* 배너관리 config-banner */
+/* ë°°ë„ˆê´€ë¦¬ config-banner */
 #admin-config-banner {}
 #admin-config-banner > article > section {
     overflow: hidden;
@@ -483,32 +483,32 @@ button[type=submit] {
     margin-bottom: 10px;
 }
 
-#admin-config-banner section > table  {
+#admin-config-banner section table  {
     border-top: 2px solid #8798a3;
 }
-#admin-config-banner section > table  tr > th{
+#admin-config-banner section table  tr > th{
     padding: 10px 0;
     background: #f6f6f6;
 }
-#admin-config-banner section > table  tr > td {
+#admin-config-banner section table  tr > td {
     background: #fff;
     text-align: center;
     box-sizing: border-box;
 }
-#admin-config-banner section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-config-banner section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
-#admin-config-banner section > table  tr > td:nth-child(5) {width: 240px;}
-#admin-config-banner section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(11) {width: 100px;}
+#admin-config-banner section table  tr > td:nth-child(1) {width: 20px;}
+#admin-config-banner section table  tr > td:nth-child(2) {width: 80px;}
+#admin-config-banner section table  tr > td:nth-child(3) {width: 80px;}
+#admin-config-banner section table  tr > td:nth-child(4) {width: auto; text-align: left;}
+#admin-config-banner section table  tr > td:nth-child(5) {width: 240px;}
+#admin-config-banner section table  tr > td:nth-child(6) {width: 80px;}
+#admin-config-banner section table  tr > td:nth-child(7) {width: 80px;}
+#admin-config-banner section table  tr > td:nth-child(8) {width: 80px;}
+#admin-config-banner section table  tr > td:nth-child(9) {width: 80px;}
+#admin-config-banner section table  tr > td:nth-child(10) {width: 80px;}
+#admin-config-banner section table  tr > td:nth-child(11) {width: 100px;}
 
-#admin-config-banner section > table img.thumb {width: 60px;}
-#admin-config-banner section > table ul > li {line-height: 19px;}
+#admin-config-banner section table img.thumb {width: 60px;}
+#admin-config-banner section table ul > li {line-height: 19px;}
 
 #admin-config-banner section input[type=button] {
     width: 100px;
@@ -541,4 +541,126 @@ button[type=submit] {
     vertical-align: middle;
     box-sizing: border-box;
     cursor: pointer;
+}
+
+/*** product ***/
+.thumb1 {
+    width:100px !important;
+    height:100px !important;
+}
+
+/******* cs **********/
+.writeBtn {
+
+    width: 200px !important;
+    padding: 6px;
+    border: 1px solid #959595;
+    font-size: 13px;
+    background-color: #b2e0fe;
+    color: #333;
+    vertical-align: middle;
+    box-sizing: border-box;
+    float:right;
+    text-align:center;
+}
+.listTable {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.csInputTable input {
+    width:100% !important;
+    height: 100% !important;
+}
+.csInputTable textarea {
+    width:100% !important;
+    height: 400px !important;
+}
+.linkBtn{
+    display:inline-block;
+    width: 150px;
+    padding: 6px;
+    text-align:center;
+    border: 1px solid #959595;
+    font-size: 13px;
+    background-color: #fefefe;
+    color: #333;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+.mainBtn{
+    background-color: #a2c9dd;
+}
+#faqListTable  tr > td:nth-child(3) {
+    width: 120px !important;
+    text-align:center !important;
+}
+#faqListTable  tr > td:nth-child(4) {
+    width: 120px !important;
+    text-align:center !important;
+}
+#faqListTable  tr > td:nth-child(5) {
+    width: auto !important;
+    text-align:left !important;
+}
+.answer0 {
+    color: #aaa !important;
+}
+.answer1 {
+    color: red !important;
+}
+.answer2 {
+    color: blue !important;
+}
+.qnaRadio{
+    display:block;
+    font-size: 9px;
+    line-height: 2rem;
+}
+.qnaRadio > [type="radio"] {
+    vertical-align: middle;
+    appearance: none;
+    border: max(2px, 0.1em) solid rgb(128, 128, 128);
+    border-radius: 50%;
+    width: 1em !important;
+    height: 1em !important;
+}
+[type="radio"]:checked {
+    border: 0.4em solid tomato;
+}
+.file span{
+    display:inline-block;
+}
+
+.file  .fileImg{
+    display:inline-block;
+    line-height:30px;
+    width:30px;
+    height:30px;
+    border: 1px solid #ccc;
+    overflow:hidden;
+}
+.file .fileImg img{
+    width: 100%;
+}
+.fileList{
+    display:block;
+    margin-top : 4px;
+}
+
+.fileList * {
+    display:inline-block;
+}
+.fileList .fileImg{
+    margin : 0 3px 0 0;
+    display:block;
+    float:left;
+    border: 1px solid #ccc;
+
+}
+.fileImg img{
+    display:inline-block;
+    line-height:60px;
+    width:60px;
+    height:60px;
+    overflow:hidden;
 }

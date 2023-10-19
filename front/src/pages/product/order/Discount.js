@@ -19,7 +19,7 @@ function Discount({setUsePoint, member, usePoint, changeOrderEnd, newOrderTotal}
             <h1>할인정보</h1>
 
             <div>
-                <p>현재 포인트 : <span>{member.point.toLocaleString()}</span>점</p>
+                <p>현재 포인트 : <span>{member.point&&member.point.toLocaleString()}</span>점</p>
                 <label>
                     <input type="text" name="point"
                            value={usePoint.toLocaleString()}
