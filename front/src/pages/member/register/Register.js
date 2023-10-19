@@ -2,7 +2,27 @@ import {useState} from "react";
 
 function Register() {
     let [member, setMember] = useState({
-
+        uid: '',
+        pass: '',
+        name: '',
+        hp: '',
+        zip: '',
+        addr1: '',
+        addr2: '',
+        email: '',
+        gender: '',
+        type: '',
+        company: '',
+        ceo:'',
+        bizRegNum:'',
+        comRegNum:'',
+        tel: '',
+        manager: '',
+        managerHp:'',
+        fax:'',
+        regIp:'',
+        rdate:'',
+        wdate:'',
     })
     return <>
         <div className="register">
