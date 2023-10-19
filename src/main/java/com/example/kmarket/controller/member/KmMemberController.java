@@ -24,12 +24,12 @@ public class KmMemberController {
         // return ResponseEntity.ok(memberService.getMyInfoBySecurity());
     }
 
-    @PostMapping("/nickname")
+    @PostMapping("/nick")
     public ResponseEntity<KmMemberResponseDTO> setMemberNickname(@RequestBody KmMemberRequestDTO request) {
         return ResponseEntity.ok(memberService.changeMemberNickname(request.getEmail(), request.getNick()));
     }
 
-    @PostMapping("/password")
+    @PostMapping("/pass")
     public ResponseEntity<KmMemberResponseDTO> setMemberPassword(@RequestBody ChangePasswordRequestDTO request) {
         return ResponseEntity.ok(memberService.changeMemberPassword(request.getExPassword(), request.getNewPassword()));
     }

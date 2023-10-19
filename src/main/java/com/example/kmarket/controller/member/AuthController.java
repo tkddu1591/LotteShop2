@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/member")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
