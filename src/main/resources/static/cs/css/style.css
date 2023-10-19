@@ -991,6 +991,9 @@ footer p > strong {
 #cs > .qna > .list > article > table a {
   font-size: 16px;
 }
+#cs > .qna > .list > article > table a span {
+  font-size: 16px;
+}
 
 #cs > .qna > .list > article > .page {
   text-align: center;
