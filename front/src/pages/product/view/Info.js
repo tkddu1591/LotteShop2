@@ -1,12 +1,11 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import header from "../../home/Header";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
 import {useNavigate} from "react-router-dom";
 import {API_BASE_URL} from "../../../App";
 
-function Info({prodDTO, scrollY, changeProdDTO}) {
+function Info({prodDTO, scrollY}) {
 
     function scrollToYPosition(scrollY) {
         window.scrollTo({
@@ -20,22 +19,22 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
     }
 
     function checkScore(score) {
-        if (score == 0) {
+        if (score === 0) {
             return <h5>상품평이 없습니다.</h5>
         } else if (score > 4.5) {
-            return <h5 className="rating star5"><a onClick={(e) => scrollToYPosition(scrollY)}
+            return <h5 className="rating star5"><a onClick={() => scrollToYPosition(scrollY)}
                                                    style={{cursor: 'pointer', userSelect: 'none'}}>상품평보기</a></h5>
         } else if (score > 3.5) {
-            return <h5 className="rating star4"><a onClick={(e) => scrollToYPosition(scrollY)}
+            return <h5 className="rating star4"><a onClick={() => scrollToYPosition(scrollY)}
                                                    style={{cursor: 'pointer', userSelect: 'none'}}>상품평보기</a></h5>
         } else if (score > 2.5) {
-            return <h5 className="rating star3"><a onClick={(e) => scrollToYPosition(scrollY)}
+            return <h5 className="rating star3"><a onClick={() => scrollToYPosition(scrollY)}
                                                    style={{cursor: 'pointer', userSelect: 'none'}}>상품평보기</a></h5>
         } else if (score > 1.5) {
-            return <h5 className="rating star2"><a onClick={(e) => scrollToYPosition(scrollY)}
+            return <h5 className="rating star2"><a onClick={() => scrollToYPosition(scrollY)}
                                                    style={{cursor: 'pointer', userSelect: 'none'}}>상품평보기</a></h5>
         } else {
-            return <h5 className="rating star1"><a onClick={(e) => scrollToYPosition(scrollY)}
+            return <h5 className="rating star1"><a onClick={() => scrollToYPosition(scrollY)}
                                                    style={{cursor: 'pointer', userSelect: 'none'}}>상품평보기</a></h5>
         }
     }
@@ -53,10 +52,8 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
 
     function changeFommatDate() {
         return '모레(' + dayOfWeef + ')   ' + ('0' + (deliveryDay.getMonth() + 1)).slice(-2) + '/' + ('0' + deliveryDay.getDate()).slice(-2) + ' 도착예정';
-        ;
     }
 
-    let [count, changeCartDTO] = useState(1)
     const handleInputChange = (event) => {
         const updateCount = event.target.value
         if (isNaN(Number(updateCount))) {
@@ -98,7 +95,7 @@ function Info({prodDTO, scrollY, changeProdDTO}) {
         });
     };
     useEffect(() => {
-        if (cartDTO.price == 0) {
+        if (cartDTO.price === 0) {
             setCartDTO({
                 count: 1,
                 uid: 'user',
