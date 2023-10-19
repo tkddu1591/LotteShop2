@@ -1,5 +1,11 @@
 package com.example.kmarket.security;
 
+import com.example.kmarket.jwt.JwtAccessDeniedHandler;
+import com.example.kmarket.jwt.JwtAuthenticationEntryPoint;
+import com.example.kmarket.jwt.TokenProvider;
+import com.nimbusds.jwt.JWT;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,16 +13,26 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
+
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
+@Component
 public class SecurityConfigration {
 
-
+    private final TokenProvider tokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
@@ -26,7 +42,17 @@ public class SecurityConfigration {
                 .csrf(CsrfConfigurer::disable)
                 //기본 HTTP 인증방식 비활성
                 .httpBasic(HttpBasicConfigurer::disable)
+                //sessionManagement = 세션 비활성(세션말고 토큰씀)
+                .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 //form login 비활성(토큰방식일때는 안씀)
+                .formLogin(FormLoginConfigurer::disable)
+
+                //핸들링
+                .exceptionHandling(exceptionHandling -> {
+                    exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint);
+                    exceptionHandling.accessDeniedHandler(jwtAccessDeniedHandler);
+                })
+                /*
                 .formLogin(config -> config.loginPage("/user/login")
                         .defaultSuccessUrl("/")
                         .failureUrl("/user/login?success=100")
@@ -36,11 +62,14 @@ public class SecurityConfigration {
                 //로그아웃 설정
                 .logout(config -> config.invalidateHttpSession(true)
                         .logoutUrl("/user/logout")
-                        .logoutSuccessUrl("/user/login?success=200"))
+                        .logoutSuccessUrl("/user/login?success=200"))*/
                 //인가권한설정 (back에서는 DB에 접속하는 기능을 제한함)
                 .authorizeHttpRequests(authorizeHttpRequest -> authorizeHttpRequest
                         .requestMatchers("/").permitAll()//인가설정
-                        .requestMatchers("/**").permitAll());//인가설정
+                        .requestMatchers("/**").permitAll())
+
+                //tokenProvider 적용
+                .apply(new JwtSecurityConfig(tokenProvider));
 
         // 인가 설정
 /*

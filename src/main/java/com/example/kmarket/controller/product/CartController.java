@@ -1,7 +1,7 @@
 package com.example.kmarket.controller.product;
 
-import com.example.kmarket.dto.KmProductCartDTO;
-import com.example.kmarket.service.KmProductCartService;
+import com.example.kmarket.dto.product.KmProductCartDTO;
+import com.example.kmarket.service.product.KmProductCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

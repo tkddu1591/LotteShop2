@@ -1,10 +1,11 @@
 package com.example.kmarket.dto;
 
-import com.example.kmarket.dto.cs.KmCsNoticeDTO;
+import com.example.kmarket.dto.product.KmProductCartDTO;
+import com.example.kmarket.dto.product.KmProductDTO;
+import com.example.kmarket.dto.product.KmProductReviewDTO;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
