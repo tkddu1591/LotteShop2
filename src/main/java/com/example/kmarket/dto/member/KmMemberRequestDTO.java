@@ -21,8 +21,8 @@ public class KmMemberRequestDTO {
     private String hp;
     private String email;
     private int type = 1;
-    private int point =0;
-    private int level =1;
+    private int point = 0;
+    private int level = 1;
     private String zip;
     private String addr1;
     private String addr2;
@@ -37,14 +37,14 @@ public class KmMemberRequestDTO {
     private String regIp;
     private String wdate;
     private String rdate;
-    private int etc1 =0;
-    private int etc2 =0;
+    private int etc1 = 0;
+    private int etc2 = 0;
     private String etc3;
     private String etc4;
     private String etc5;
 
     public KmMemberEntity toMember(PasswordEncoder passwordEncoder) {
-        return KmMemberEntity.builder()
+        KmMemberEntity kmMemberEntity = KmMemberEntity.builder()
                 .uid(uid)
                 .email(email)
                 .pass(passwordEncoder.encode(pass))
@@ -74,13 +74,21 @@ public class KmMemberRequestDTO {
                 .etc3(etc3)
                 .etc4(etc4)
                 .etc5(etc5)
-                .authority(AuthorityEntity.ROLE_USER)
                 .build();
+        if (type == 9) {
+            kmMemberEntity.setAuthority(AuthorityEntity.ROLE_ADMIN);
+        } else if (type == 2) {
+            kmMemberEntity.setAuthority(AuthorityEntity.ROLE_SELLER);
+        } else {
+            kmMemberEntity.setAuthority(AuthorityEntity.ROLE_USER);
+        }
+
+        return kmMemberEntity;
     }
 
     public UsernamePasswordAuthenticationToken toAuthentication() {
         return new UsernamePasswordAuthenticationToken(uid, pass);
     }
-    
-    
+
+
 }

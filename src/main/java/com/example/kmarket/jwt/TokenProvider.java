@@ -69,27 +69,6 @@ public class TokenProvider {
                 .build();
     }
 
-    public String createToken(KmMemberEntity user, int days) {
-
-        // 발급일, 만료일 생성
-        Date issuedDate = new Date();
-        Date expireDate = new Date(issuedDate.getTime() + Duration.ofDays(days).toMillis());
-
-        // 클레임 생성
-        Claims claims = Jwts.claims();
-        claims.put("uid", user.getUid());
-        claims.put("role", user.getType());
-
-        // 토큰 생성
-        return Jwts.builder()
-                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setIssuer(issuer)
-                .setIssuedAt(issuedDate)
-                .setExpiration(expireDate)
-                .addClaims(claims)
-                .signWith(secretKey, SignatureAlgorithm.HS256)
-                .compact();
-    }
     public Authentication getAuthentication(String accessToken) {
         Claims claims = parseClaims(accessToken);
 
