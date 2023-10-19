@@ -1,5 +1,6 @@
 import './css/App.css';
-import './css/product.css'
+import './css/Product.css'
+import './css/Member.css'
 import {lazy, memo, Suspense, useEffect, useState,} from "react";
 import {Outlet, Route, Routes, useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -21,6 +22,8 @@ const List = lazy(() => import('./pages/product/list/List.js'))
 const View = lazy(() => import('./pages/product/view/View.js'))
 const Cart = lazy(() => import('./pages/product/cart/Cart.js'))
 const Complete = lazy(() => import('./pages/product/complete/Complete.js'))
+const LoginHeader = lazy(() => import('./pages/home/LoginHeader.js'))
+const Login = lazy(() => import('./pages/login/Login.js'))
 
 function App() {
 
@@ -74,30 +77,43 @@ function App() {
         return <Aside></Aside>
     })
 
+    let [userRegisterType, setUserRegisterType] = useState('USER');
     return (
         <>
             <Routes>
                 {
-                    <Route path="/member" element={
-                        <Suspense fallback={fallbackData()}>
-
-
-                        </Suspense>}>
-                    </Route>
-
                     /*여기에 배포 레포지토리 정의 해줌 index.js의 BrowserRouter의 base와 매칭 LotteON 등*/}
                 <Route path="/" element={
                     <Suspense fallback={fallbackData()}>
                         <BannerTopMemo/>
-                        <HeaderMemo></HeaderMemo>
-                        <main id="product">
-                            <AsideMemo></AsideMemo>
-                            <Outlet></Outlet>
-                        </main>
+                        <Outlet></Outlet>
                         <FooterMemo></FooterMemo>
                     </Suspense>
                 }>
-                    <Route path="product">
+                    {/*멤버 라우트*/}
+                    <Route path="member" element={
+                        <><LoginHeader></LoginHeader>
+                            <main id="member">
+                                <Outlet></Outlet>
+                            </main>
+                        </>
+                    }>
+
+                        <Route path="login" element={<Suspense fallback={fallbackData()}>
+                            <Login></Login>
+                        </Suspense>}/>
+
+
+                    </Route>
+                    {/*프로덕트 라우트*/}
+                    <Route path="product" element={
+                        <>
+                            <HeaderMemo></HeaderMemo>
+                            <main id="product">
+                                <AsideMemo></AsideMemo>
+                                <Outlet></Outlet>
+                            </main>
+                        </>}>
                         <Route path="list" element={<section className="list"><List></List></section>}/>
                         <Route path="view" element={<Suspense fallback={fallbackData()}>
                             <section className="view">
@@ -126,8 +142,14 @@ function App() {
                         </Suspense>}/>
                     </Route>
 
-                    <Route path="" element={<MainPage></MainPage>}/>
-                    <Route path="*" element={<div>없는 페이지 입니다</div>}/>
+                    <Route path="" element={<><HeaderMemo/>
+                        <main><AsideMemo></AsideMemo><MainPage></MainPage></main>
+                    </>}/>
+                    <Route path="*" element={<><HeaderMemo/>
+                        <main><AsideMemo></AsideMemo>
+                            <div>없는 페이지 입니다</div>
+                        </main>
+                    </>}/>
 
                 </Route>
             </Routes>

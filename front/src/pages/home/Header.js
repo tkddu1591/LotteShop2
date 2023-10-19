@@ -24,7 +24,7 @@ function Header() {
             <div className="top">
                 <div>
                     <Link  to={HOME_URL+"/member/login"}>로그인</Link>
-                    <a href="#">회원가입</a>
+                    <Link to={HOME_URL+"/member/singUp"}>회원가입</Link>
                     <a href="#">마이페이지</a>
                     <a onClick={(e) => {
                         navigator(process.env.PUBLIC_URL + "/product/cart")
