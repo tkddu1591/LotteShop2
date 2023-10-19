@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageRequestDTO {
+public class AdminPageRequestDTO {
 
     @Builder.Default
     private int pg=1;

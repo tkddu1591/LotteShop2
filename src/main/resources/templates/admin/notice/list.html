@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <!--  -->
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
+
     <head>
         <div th:replace="/admin/header.html :: header"></div>
     </head>
@@ -41,22 +42,22 @@
                                 <th>관리</th>
                             </tr>
                         </thead>
-                        <tbody class="listTbody">
-                            <th:each var="dto" items="">
+                        <tbody class="listTbody" th:if="${adminPageResponseDTO != null}">
+                            <th:block th:each="dto : ${adminPageResponseDTO.dtoList}">
                                 <tr>
-                                    <td><input type="checkbox" name="chk" value="${dto.noticeNo}"/></td>
-                                    <td>[[${dto.noticeNo}]]</td>
-                                    <td>[[${dto.cateName}]]</td>
-                                    <td><a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}">[ ${dto.cateName} ] ${dto.title}</a></td>
-                                    <td>[[${dto.hit}]]</td>
-                                    <td>[[${dto.rdate}]]</td>
+                                    <td><input type="checkbox" name="chk" th:value="${dto.noticeNo}"/></td>
+                                    <td th:text="${dto.noticeNo}"></td>
+                                    <td th:text="${dto.cateName}"></td>
+                                    <td><a th:href="@{/admin/cs/notice/view.do(no=${dto.noticeNo})}">[ <span th:text="${dto.cateName}"></span> ] <span th:text="${dto.title}"></span></a></td>
+                                    <td th:text="${dto.hit}"></td>
+                                    <td th:text="${dto.rdate}"></td>
                                     <td>
-                                        <a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}" class="noticeDelete">[삭제]</a>
+                                        <a th:href="@{/admin/cs/notice/view.do(no=${dto.noticeNo})}" class="noticeDelete">[삭제]</a>
                                         <br/>
-                                        <a th:href="@{/admin/cs/notice/view.do?no=${dto.noticeNo}}" class="noticeUpdate">[수정]</a>
+                                        <a th:href="@{/admin/cs/notice/view.do(no=${dto.noticeNo})}" class="noticeUpdate">[수정]</a>
                                     </td>
                                 </tr>
-                            </th:each>
+                            </th:block>
                             <th:block th:if="${noticeNo == null or noticeNo.isEmpty()}">
                                 <tr>
                                     <td colspan="7">
@@ -66,30 +67,28 @@
                             </th:block>
                         </tbody>
                     </table>
-
-
                     <input type="submit" value="선택삭제" class="deleteAll" />
                     <a th:href="@{/admin/cs/notice/write}" class="writeBtn">작성하기</a>
                 </form>
 
 
-                <div class="paging">
-                    <li th:if="${pageResponseDTO.prev}" class="paginate_button previous" aria-controls="dataTables-example" tabindex="0">
-			        	<span class="prev">
-			            	<a th:href="@{/admin/cs/notice/list(cate=${pageResponseDTO.cate}, pg=${pageResponseDTO.start - 1})}"><&nbsp;이전</a>
-		            	</span>
+                <div class="paging" th:if="${adminPageResponseDTO != null}">
+                    <li th:if="${adminPageResponseDTO.prev}" class="paginate_button previous" aria-controls="dataTables-example" tabindex="0">
+                        <span class="prev">
+                            <a th:href="@{/admin/cs/notice/list(cate=${adminPageResponseDTO.cate}, pg=${adminPageResponseDTO.start - 1})}"><&nbsp;이전</a>
+                        </span>
                     </li>
-                    <li th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}"
+                    <li th:each="num: ${#numbers.sequence(adminPageResponseDTO.start, adminPageResponseDTO.end)}"
                         th:class="${num} == ${currentPage} ? 'paginate_button active' : 'paginate_button'"
                         aria-controls="dataTables-example"
                         tabindex="0">
                         <span class="num">
-                            <a th:href="@{/article/list(cate=${pageResponseDTO.cate}, pg=${num})}" th:text="${num}"></a>
+                            <a th:href="@{/article/list(cate=${adminPageResponseDTO.cate}, pg=${num})}" th:text="${num}"></a>
                         </span>
                     </li>
-                    <li th:if="${pageResponseDTO.next}" class="paginate_button next" aria-controls="dataTables-example" tabindex="0">
+                    <li th:if="${adminPageResponseDTO.next}" class="paginate_button next" aria-controls="dataTables-example" tabindex="0">
                         <span class="next">
-                            <a th:href="@{/article/list(cate=${pageResponseDTO.cate},pg=${pageResponseDTO.end + 1})}">다음</a>
+                            <a th:href="@{/article/list(cate=${adminPageResponseDTO.cate},pg=${adminPageResponseDTO.end + 1})}">다음</a>
                         </span>
                     </li>
                 </div>
