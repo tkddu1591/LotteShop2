@@ -1,18 +1,23 @@
 package com.example.kmarket.mapper.admin;
 
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
-import com.example.kmarket.entity.admin.KmAdminNoticeEntity;
-import org.mapstruct.Mapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+import java.util.List;
+
+@Mapper
 public interface KmAdminNoticeMapper {
 
-    @Mapping(source = "kmCsCateEntity.cateName", target = "cateName")
-    @Mapping(source = "kmCsTypeEntity.typeName", target = "typeName")
-    public KmAdminNoticeDTO toDTO(KmAdminNoticeEntity adminNotcieEntity);
+    public List<KmAdminNoticeDTO> selectCsNotices();
 
-    @Mapping(source = "cateName", target = "kmCsCateEntity.cateName")
-    @Mapping(source = "typeName", target = "kmCsTypeEntity.typeName")
-    public KmAdminNoticeEntity toEntity(KmAdminNoticeDTO kmAdminNoticeDTO);
+    public List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate();
+
+    public KmAdminNoticeDTO selectCsNoticeBynoticeNo();
+
+    // 페이징
+    public int selectNoticeCountTotal();
+
+    public List<KmAdminNoticeDTO> selectNotices(int start);
+
 }

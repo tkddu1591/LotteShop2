@@ -1,9 +1,7 @@
 package com.example.kmarket.jwt;
 
 import com.example.kmarket.dto.member.TokenDTO;
-import com.example.kmarket.entity.member.KmMemberEntity;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
-import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
