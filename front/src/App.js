@@ -77,7 +77,15 @@ function App() {
     return (
         <>
             <Routes>
-                {/*여기에 배포 레포지토리 정의 해줌 index.js의 BrowserRouter의 base와 매칭 LotteON 등*/}
+                {
+                    <Route path="/member" element={
+                        <Suspense fallback={fallbackData()}>
+
+
+                        </Suspense>}>
+                    </Route>
+
+                    /*여기에 배포 레포지토리 정의 해줌 index.js의 BrowserRouter의 base와 매칭 LotteON 등*/}
                 <Route path="/" element={
                     <Suspense fallback={fallbackData()}>
                         <BannerTopMemo/>

@@ -18,7 +18,7 @@ function Review({pageResponseDTO}) {
         }
     }
 
-    if (reviewDtoList == undefined) {
+    if (reviewDtoList === undefined) {
         return <div className="empty">
             <div>상품 리뷰가 없습니다.</div>
         </div>

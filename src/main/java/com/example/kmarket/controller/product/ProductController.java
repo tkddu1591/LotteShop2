@@ -1,17 +1,13 @@
 package com.example.kmarket.controller.product;
 
 import com.example.kmarket.dto.*;
-import com.example.kmarket.entity.KmProductReviewEntity;
-import com.example.kmarket.repository.KmProductReviewRepository;
-import com.example.kmarket.service.KmProductCartService;
-import com.example.kmarket.service.KmProductReviewService;
-import com.example.kmarket.service.KmProductService;
+import com.example.kmarket.dto.product.KmProductDTO;
+import com.example.kmarket.service.product.KmProductCartService;
+import com.example.kmarket.service.product.KmProductReviewService;
+import com.example.kmarket.service.product.KmProductService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @Slf4j

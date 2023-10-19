@@ -1,22 +1,37 @@
 package com.example.kmarket.controller.member;
 
-import com.example.kmarket.dto.KmMemberDTO;
-import com.example.kmarket.service.KmMemberService;
+import com.example.kmarket.dto.member.ChangePasswordRequestDTO;
+import com.example.kmarket.dto.member.KmMemberRequestDTO;
+import com.example.kmarket.dto.member.KmMemberResponseDTO;
+import com.example.kmarket.service.member.KmMemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class KmMemberController {
 
-    @Autowired
-    private KmMemberService service;
-    @PostMapping("/login")
-    public KmMemberDTO login(@RequestBody KmMemberDTO dto){
-        return service.findByUidAndPass(dto);
+    private final KmMemberService memberService;
+
+    @GetMapping("/me")
+    public ResponseEntity<KmMemberResponseDTO> getMyMemberInfo() {
+        KmMemberResponseDTO myInfoBySecurity = memberService.getMyInfoBySecurity();
+        System.out.println(myInfoBySecurity.getNick());
+        return ResponseEntity.ok((myInfoBySecurity));
+        // return ResponseEntity.ok(memberService.getMyInfoBySecurity());
+    }
+
+    @PostMapping("/nick")
+    public ResponseEntity<KmMemberResponseDTO> setMemberNickname(@RequestBody KmMemberRequestDTO request) {
+        return ResponseEntity.ok(memberService.changeMemberNickname(request.getEmail(), request.getNick()));
+    }
+
+    @PostMapping("/pass")
+    public ResponseEntity<KmMemberResponseDTO> setMemberPassword(@RequestBody ChangePasswordRequestDTO request) {
+        return ResponseEntity.ok(memberService.changeMemberPassword(request.getExPassword(), request.getNewPassword()));
     }
 
 }
