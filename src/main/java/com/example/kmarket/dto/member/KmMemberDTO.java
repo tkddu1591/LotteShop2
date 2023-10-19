@@ -12,6 +12,7 @@ public class KmMemberDTO {
     private String uid;
     private String pass;
     private String name;
+    private String nick;
     private int gender;
     private String hp;
     private String email;
