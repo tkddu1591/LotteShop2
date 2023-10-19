@@ -1,20 +1,8 @@
 import {useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {HOME_URL} from "../../App";
 
 function Aside() {
-    const content1 = [
-        '남성의류', '여성의류', '잡화', '뷰티'
-    ]
-    const content2 = [
-        '노트북/PC', '가전', '휴대폰', '기타'
-    ]
-    const content3 = [
-        '신선식품', '가공식품', '건강식품', '생필품'
-    ]
-    const content4 = [
-        '가구/DIY', '침구·커튼', '생활용품', '사무용품'
-    ]
 
     const cate1 = useSelector((state) => state.cate1);
     const cate2 = useSelector((state) => state.cate2);
@@ -23,7 +11,7 @@ function Aside() {
         if (cate2 != null) {
             let cate2Terms2 = [];
             for (let cate2Item of cate2) {
-                if (cate2Item.cate1 == cate1No) {
+                if (cate2Item.cate1 === cate1No) {
                     cate2Terms2.push(cate2Item);
                 }
             }
@@ -32,6 +20,7 @@ function Aside() {
     }
     function cate2Names(cate1No){
         let cate2Terms=[];
+        // eslint-disable-next-line array-callback-return
         (Array.isArray(cate2Cheak(cate1No))&&cate2Cheak(cate1No).map((item, index) => {
             cate2Terms.push(item.c2Name)
         }))
@@ -39,6 +28,7 @@ function Aside() {
     }
     function cate2Nos(cate1No){
         let cate2Terms=[];
+        // eslint-disable-next-line array-callback-return
         (Array.isArray(cate2Cheak(cate1No)) &&cate2Cheak(cate1No).map((item, index) => {
             cate2Terms.push(item.cate2)
         }))
@@ -51,7 +41,7 @@ function Aside() {
         <aside>
             <ul className="category">
                 <li><i className="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-                {Array.isArray(cate1) && cate1.map((item, index) => {
+                {Array.isArray(cate1) && cate1.map((item) => {
                     return <Categories key={item.c1Name} type={item.icon} name={item.c1Name}
                                        c2Name={cate2Names(item.cate1)}
                                        cate2={cate2Nos(item.cate1)}
@@ -77,6 +67,7 @@ function Aside() {
 function BestProduct() {
     return (
         <li>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a href="#">
                 <div className="thumb">
                     <i>5</i>
@@ -99,6 +90,7 @@ function BestProduct() {
 
 function Categories({type, name, c2Name,cate2, cate1}) {
     const cate =[]
+    // eslint-disable-next-line array-callback-return
     Array.isArray(c2Name) &&c2Name.map((item, index) => {
         cate.push({cate2:cate2[index],c2Name:item})
     })

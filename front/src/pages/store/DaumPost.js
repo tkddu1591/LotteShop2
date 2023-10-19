@@ -1,6 +1,7 @@
 import DaumPostCode from 'react-daum-postcode';
+import {changeDTO} from "./ChangeDTO";
 
-const DaumPost = ({changePostDTO, setPostOn}) => {
+const DaumPost = ({setPostDTO, setPostOn}) => {
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
@@ -19,8 +20,8 @@ const DaumPost = ({changePostDTO, setPostOn}) => {
         //fullAddress -> 전체 주소반환
 
         setPostOn(false);
-        changePostDTO('addr1', fullAddress)
-        changePostDTO('zip', data.zonecode)
+        changeDTO(setPostDTO,'addr1', fullAddress)
+        changeDTO(setPostDTO,'zip', data.zonecode)
     }
     return (<div style={{
         position: 'fixed',

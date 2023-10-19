@@ -1,10 +1,16 @@
+import React from "react";
+
 function Footer() {
     return (
         <footer>
             <ul>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <li><a href="#">회사소개</a></li>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <li><a href="#">서비스이용약관</a></li>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <li><a href="#">개인정보처리방침</a></li>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <li><a href="#">전자금융거래약관</a></li>
             </ul>
             <div>
@@ -21,7 +27,7 @@ function Footer() {
                     <strong>고객센터</strong><br/>
                     Tel : 1899-7000(유료) (평일 09:00~18:00)<br/>
                     Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br/>
-                    App Version : LotteON-0.0.6-SNAPSHOT<br/>
+                    App Version : LotteON-0.0.8-SNAPSHOT<br/>
                 </p>
             </div>
         </footer>

@@ -3,6 +3,7 @@ import {useState} from "react";
 import {changeCategoryNo, changeCateNames} from "../../slice/cateSilce";
 import {useDispatch} from "react-redux";
 import {HOME_URL} from "../../App";
+import LoginHeader from "./LoginHeader";
 
 function Header() {
     let navigator = useNavigate();
@@ -21,22 +22,7 @@ function Header() {
 
     return (
         <header>
-            <div className="top">
-                <div>
-                    <Link  to={HOME_URL+"/member/login"}>로그인</Link>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a onClick={(e) => {
-                        navigator(process.env.PUBLIC_URL + "/product/cart")
-                    }}
-                       style={{cursor: 'pointer', userSelect: 'none'}}
-                    ><i className="fa fa-shopping-cart" aria-hidden="true"
-
-                    ></i
-                    >&nbsp;장바구니</a
-                    >
-                </div>
-            </div>
+            <LoginHeader></LoginHeader>
             <div className="logo">
                 <div>
                     <Link to={process.env.PUBLIC_URL + "/"}><img src={`${process.env.REACT_APP_HOME_URL}/images/header_logo.png`} alt="로고"/></Link>
