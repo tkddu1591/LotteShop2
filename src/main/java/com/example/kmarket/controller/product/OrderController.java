@@ -1,10 +1,10 @@
 package com.example.kmarket.controller.product;
 
-import com.example.kmarket.dto.KmProductOrderDTO;
-import com.example.kmarket.dto.KmProductOrderItemDTO;
-import com.example.kmarket.mapper.KmProdcutOrderItemMapper;
-import com.example.kmarket.service.KmProductOrderItemService;
-import com.example.kmarket.service.KmProductOrderService;
+import com.example.kmarket.dto.product.KmProductOrderDTO;
+import com.example.kmarket.dto.product.KmProductOrderItemDTO;
+import com.example.kmarket.mapper.product.KmProdcutOrderItemMapper;
+import com.example.kmarket.service.product.KmProductOrderItemService;
+import com.example.kmarket.service.product.KmProductOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

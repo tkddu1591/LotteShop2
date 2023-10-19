@@ -1,10 +1,10 @@
 package com.example.kmarket.security;
 
 
-import com.example.kmarket.dto.KmMemberDTO;
-import com.example.kmarket.entity.KmMemberEntity;
-import com.example.kmarket.mapper.KmMemberMapper;
-import com.example.kmarket.repository.KmMemberRepository;
+import com.example.kmarket.dto.member.KmMemberDTO;
+import com.example.kmarket.entity.member.KmMemberEntity;
+import com.example.kmarket.mapper.member.KmMemberMapper;
+import com.example.kmarket.repository.member.KmMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;

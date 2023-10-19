@@ -1,7 +1,7 @@
 package com.example.kmarket.security;
 
 
-import com.example.kmarket.entity.KmMemberEntity;
+import com.example.kmarket.entity.member.KmMemberEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
