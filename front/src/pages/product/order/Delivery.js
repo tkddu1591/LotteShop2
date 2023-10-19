@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {paste} from "@testing-library/user-event/dist/paste";
-import DaumPost from "./DaumPost";
+import DaumPost from "../../store/DaumPost";
 function Delivery({member, changeOrderEnd, orderEnd, changeMemeber}) {
 
     const [formattedPhoneNumber, setFormattedPhoneNumber] = useState(
@@ -62,12 +62,11 @@ function Delivery({member, changeOrderEnd, orderEnd, changeMemeber}) {
         handleInputChange(e, 'recipAddr2')
         changePostDTO('addr2',e.target.value)
     }
-    console.log(orderEnd)
     return <>
 
         <article className="delivery">
             {postOn&&<>
-                <DaumPost changePostDTO={changePostDTO} setPostOn={setPostOn}></DaumPost>
+                <DaumPost setPostDTO={setPostDTO} setPostOn={setPostOn}></DaumPost>
             </>}
 
             <h1>배송정보</h1>

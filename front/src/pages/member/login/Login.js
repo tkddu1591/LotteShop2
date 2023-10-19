@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react";
-import {API_BASE_URL} from "../../App";
+import {API_BASE_URL} from "../../../App";
 import axios from "axios";
-import {changeDTO} from "../store/ChangeDTO";
+import {changeDTO} from "../../store/ChangeDTO";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
     let [memberDTO, setMemberDTO] = useState({uid: '', pass: ''})
     let [memberCheck, setMemberCheck] = useState(false)
+    let navigate = useNavigate();
     console.log(memberDTO)
     return <div className="login">
         <nav>
@@ -30,6 +32,7 @@ function Login() {
                 </tbody>
             </table>
             <input type="submit"
+                   style={{cursor:'pointer'}}
                    onClick={async (e) => {
                        await axios.post(`${API_BASE_URL}/member/login`, memberDTO, {
                            headers: {
@@ -49,7 +52,7 @@ function Login() {
             <span style={{position: 'absolute', left: '10px', bottom: '10px'}}>
                 <span href="#" style={{border: 'none'}}>아이디찾기</span>
                 <span href="#">비밀번호찾기</span>
-                <span href="#">회원가입</span>
+                <span onClick={()=>navigate("/member/join")}>회원가입</span>
             </span>
             <a href="#" className="banner"><img
                 src={`${process.env.REACT_APP_HOME_URL}/images/member/member_login_banner.jpg`}

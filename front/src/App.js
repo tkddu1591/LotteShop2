@@ -23,7 +23,10 @@ const View = lazy(() => import('./pages/product/view/View.js'))
 const Cart = lazy(() => import('./pages/product/cart/Cart.js'))
 const Complete = lazy(() => import('./pages/product/complete/Complete.js'))
 const LoginHeader = lazy(() => import('./pages/home/LoginHeader.js'))
-const Login = lazy(() => import('./pages/login/Login.js'))
+const Login = lazy(() => import('./pages/member/login/Login.js'))
+const SignUp = lazy(() => import('./pages/member/signUp/SignUp.js'))
+const Join = lazy(() => import('./pages/member/join/Join.js'))
+const MemberRegister = lazy(() => import('./pages/member/register/Register.js'))
 
 function App() {
 
@@ -101,6 +104,15 @@ function App() {
 
                         <Route path="login" element={<Suspense fallback={fallbackData()}>
                             <Login></Login>
+                        </Suspense>}/>
+                        <Route path="join" element={<Suspense fallback={fallbackData()}>
+                            <Join setUserRegisterType={setUserRegisterType}></Join>
+                        </Suspense>}/>
+                        <Route path="signUp" element={<Suspense fallback={fallbackData()}>
+                            <SignUp userRegisterType={userRegisterType}></SignUp>
+                        </Suspense>}/>
+                        <Route path="register" element={<Suspense fallback={fallbackData()}>
+                            <MemberRegister userRegisterType={userRegisterType}></MemberRegister>
                         </Suspense>}/>
 
 
