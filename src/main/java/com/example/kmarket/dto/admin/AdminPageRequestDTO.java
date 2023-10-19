@@ -1,16 +1,18 @@
-package com.example.kmarket.dto.cs;
+package com.example.kmarket.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageRequestDTO {
+public class AdminPageRequestDTO {
 
     @Builder.Default
     private int pg=1;

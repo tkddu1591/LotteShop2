@@ -1,14 +1,13 @@
 package com.example.kmarket.dto.admin;
 
 import com.example.kmarket.dto.cs.KmCsFaqDTO;
-import com.example.kmarket.dto.admin.PageRequestDTO;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class PageResponseDTO {
+public class AdminPageResponseDTO {
     // 위에는 추가해야 되는 값
     private List<KmAdminNoticeDTO> dtoList;
     private List<KmCsFaqDTO> faqList;
@@ -23,12 +22,12 @@ public class PageResponseDTO {
     private boolean prev, next;
 
     @Builder
-    public PageResponseDTO(PageRequestDTO pageRequestDTO,
-                           List<KmAdminNoticeDTO> dtoList, int total,
-                           List<KmCsFaqDTO> faqList) {
-        this.cate = pageRequestDTO.getCate();
-        this.pg = pageRequestDTO.getPg();
-        this.size = pageRequestDTO.getSize();
+    public AdminPageResponseDTO(AdminPageRequestDTO adminPageRequestDTO,
+                                List<KmAdminNoticeDTO> dtoList, int total,
+                                List<KmCsFaqDTO> faqList) {
+        this.cate = adminPageRequestDTO.getCate();
+        this.pg = adminPageRequestDTO.getPg();
+        this.size = adminPageRequestDTO.getSize();
         this.total = total;
 
         this.dtoList = dtoList;
