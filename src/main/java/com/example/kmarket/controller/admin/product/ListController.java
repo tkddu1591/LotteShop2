@@ -10,28 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ListController {
 
-    /*
+
     @GetMapping("/admin/product/list")
-    public String List(HttpServletRequest req) {
-        // 검색조건과 검색내용 가져오기
-        String searchType = req.getParameter("searchType");
-        if (searchType == null || searchType.equals("null")) {
-            searchType = "prodName";
-        }
-        String search = req.getParameter("search");
-        if (search == null || search.equals("null")) {
-            search = "";
-        }
-        // 현재 페이지 가져오기
-        String pg = req.getParameter("pg");
+    // 상품 목록 출력
+    public String List() {
 
-        // 세션에서 현재 로그인 사용자의 정보를 가져온다
-        KmMemberDTO member = (KmMemberDTO) req.getSession().getAttribute("sessMember");
+       // 이미지 상품코드 상품명 판매가격 할인율 포인트 재고 판매자 조회  필요
+              km_product  thumb1 prodNo prodName price discount point stock seller hit
 
-        // 검색조건들을 모으기 위한 form
+
 
     }
 
-     */
+
 }
 
