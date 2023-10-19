@@ -1,11 +1,30 @@
-# LotteShop
+# LotteON
 Lotte 쇼핑몰 프로젝트 구조
 - product
 - admin cs
 - admin product
 - cs
 - login
-  
+
+# LotteON 프로젝트 업데이트 내역
+
+## 0.0.1-SNAPSHOT
+- 프로젝트 구조 설계
+- 프로젝트 화면 구현
+## 0.0.2-SNAPSHOT
+- product List 구현 완료
+- product View 구현 완료
+## 0.0.3-SNAPSHOT
+- CS Index 구현 완료
+- CS List 구현 완료
+## 0.0.4-SNAPSHOT
+- product Cart 구현 완료
+## 0.0.5-SNAPSHOT
+- product Order 구현완료
+## 0.0.6-SNAPSHOT
+- product Complete 구현완료
+- Member register Backend 구현완료
+
 
 # react 필요 파일
 - 리액트 쿼리 : npm install @tanstack/react-query
@@ -14,21 +33,6 @@ Lotte 쇼핑몰 프로젝트 구조
 - redux : npm install @reduxjs/toolkit react-redux
 - jquery: npm install jquery
 - 기본 모듈 : npm install
-- cross-env : npm install cross-env, npm install -g env-cmd
-- daum_map : npm i react-daum-postcode
-
-  
 # gitignore 파일
 - application.properties
 - build.gradle
-
-
-# git 작업
-1. master
-2. git 패치, 풀(ctrl+t)
-3. master -> 작업 브랜치 변경
-4. 작업
-5. git 패치(ctrl+t)
-6. git 커밋(ctrl+k)
-7. 푸쉬
-8. 풀리퀘스트
