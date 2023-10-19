@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>롯데ON::관리자 페이지</title>
@@ -110,54 +113,23 @@
                             <th>관리</th>
                         </tr>
 
-                        <tr>
+                        <tr th:each="product : ${products}">
                             <td><input type="checkbox" name="상품코드"/></td>
                             <td><img src="../images/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
+                            <td>[[${product.prodNo}]]</td>
+                            <td>[[${product.prodName}]]</td>
+                            <td>[[${#numbers.formatInteger(product.price, 3, 'COMMA')}]]</td>
+                            <td>[[${product.discount}]]</td>
+                            <td>[[${product.point}]]</td>
+                            <td>[[${product.stock}]]</td>
+                            <td>[[${product.seller}]]</td>
+                            <td>[[${product.hit}]]</td>
                             <td>
                                 <a href="#">[삭제]</a>
                                 <a href="#">[수정]</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"/></td>
-                            <td><img src="../images/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"/></td>
-                            <td><img src="../images/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
+
                         
                     </table>
 

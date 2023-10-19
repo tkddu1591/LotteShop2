@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RegisterController {
 
-  /*GetMapping("/admin/product/register")
-    public string register(){
+  @GetMapping ("/admin/product/register")
+    public String register(){
+      return "admin/product/register";
+
     }
- */
+
 
 }
