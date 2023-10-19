@@ -8,7 +8,6 @@ function Login() {
     let [memberDTO, setMemberDTO] = useState({uid: '', pass: ''})
     let [memberCheck, setMemberCheck] = useState(false)
     let navigate = useNavigate();
-    console.log(memberDTO)
     return <div className="login">
         <nav>
             <h1>로그인</h1>

@@ -1,153 +1,76 @@
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useForm} from "react-hook-form";
+import DaumPost from "../../store/DaumPost";
+import SellerRegister from "./SellerRegister";
+import UserRegister from "./UserRegister";
+import RequiredInformation from "./RequiredInformation";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
-function Register() {
-    let [member, setMember] = useState({
-        uid: '',
-        pass: '',
-        name: '',
-        hp: '',
+function Register({userRegisterType, ip}) {
+    const {
+        watch,
+        register,
+        setValue,
+        formState: {
+            errors,
+        }, handleSubmit
+    } = useForm({mode: "onTouched"});
+    let navigate = useNavigate();
+    const onValid = async (data) => {
+        console.log(data);
+        await axios.post(`${process.env.REACT_APP_API_ROOT}/member/signup`, data)
+            .then(res=>{
+                alert('회원가입이 완료되었습니다.')
+                navigate("/member/login")
+            }).catch(err => {
+
+            });
+    }
+    let [postOn, setPostOn] = useState(false);
+    let [postDTO, setPostDTO] = useState({
         zip: '',
         addr1: '',
-        addr2: '',
-        email: '',
-        gender: '',
-        type: '',
-        company: '',
-        ceo:'',
-        bizRegNum:'',
-        comRegNum:'',
-        tel: '',
-        manager: '',
-        managerHp:'',
-        fax:'',
-        regIp:'',
-        rdate:'',
-        wdate:'',
-    })
-    return <>
-        <div className="register">
-            <nav>
-                <h1>판매자 회원가입</h1>
-            </nav>
+        addr2: ''
+    });
+    useEffect(() => {
+            setValue("zip",postDTO.zip)
+            setValue("addr1",postDTO.addr1)
+            setValue("addr2",postDTO.addr2)
+    }, [postDTO]);
 
-            <div>
-                <section>
-                    <table>
-                        <caption>필수 정보입력</caption>
-                        <tbody>
-                            <tr>
-                                <th><span className="essential">*</span>아이디</th>
-                                <td><input type="text" name="km_uid" placeholder="아이디를 입력"
-                                           required/> <span className="msgSId">&nbsp;&nbsp;영문, 숫자로
-										4~12자까지 설정해 주세요.</span></td>
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>비밀번호</th>
-                                <td><input type="password" name="km_pass"
-                                           placeholder="비밀번호를 입력" required/> <span className="msgPass">&nbsp;&nbsp;영문,
-										숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span></td>
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>비밀번호확인</th>
-                                <td><input type="password" name="km_pass"
-                                           placeholder="비밀번호를 확인" required/> <span className="msgPass">&nbsp;&nbsp;비밀번호
-										재입력</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+    if(userRegisterType === ""){
+        return <div className="register"><nav><h1>정보를 불러오는 중 오류가 발생했습니다. 처음부터 다시 시도해주세요.</h1></nav></div>
+    }else {
+        return <>
+            <div className="register">
+                <nav>
+                    {userRegisterType === "USER" && <h1>일반 회원가입</h1>}
+                    {userRegisterType === "SELLER" && <h1>판매자 회원가입</h1>}
+                </nav>
 
-                <section>
-                    <table>
-                        <caption>판매자 정보입력</caption>
-                        <tbody>
-                            <tr>
-                                <th><span className="essential">*</span>회사명</th>
-                                <td><input type="text" name="kms_company"
-                                           placeholder="회사명 입력" required/> <span
-                                    className="msgCompany">&nbsp;&nbsp;(주)포함
-										입력, 예) (주)케이마켓</span></td>
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>대표자</th>
-                                <td><input type="text" name="kms_ceo" placeholder="대표자 입력"
-                                           required/></td>
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>사업자등록번호</th>
-                                <td><input type="text" name="kms_corp_reg"
-                                           placeholder="사업자등록번호 입력" required/> <span className="msgCorp">&nbsp;&nbsp;-
-										표시 포함 12자리 입력, 예) 123-45-67890</span></td>
+                <form onSubmit={handleSubmit(onValid)}>
+                    <input type="hidden" {...register('regIp')} value={ip}/>
+                    <RequiredInformation register={register} errors={errors} watch={watch}></RequiredInformation>
 
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>통신판매업신고 번호</th>
-                                <td><input type="text" name="kms_online_reg"
-                                           placeholder="통신판매업신고 입력" required/> <span className="msgOnline">&nbsp;&nbsp;-
-										표시 포함, 예) 강남-12345, 제 1-01-23-4567호, 2017-경기성남-0011</span></td>
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>전화번호</th>
-                                <td><input type="text" name="kms_tel" placeholder="전화번호 입력"
-                                           required/> <span className="msgTel">&nbsp;&nbsp;- 표시 포함,
-										지역번호 포함, 예) 02-234-1234</span></td>
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>팩스번호</th>
-                                <td><input type="text" name="kms_fax" placeholder="팩스번호 입력"
-                                           required/> <span className="msgFax">&nbsp;&nbsp;- 표시 포함,
-										지역번호 포함, 예) 02-234-1234</span></td>
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>EMAIL</th>
-                                <td><input type="email" name="kms_email"
-                                           placeholder="이메일 입력" required/></td>
-                            </tr>
-                            <tr className="addr">
-                                <th>회사주소</th>
-                                <td>
-                                    <div>
-                                        <input type="text" name="kms_zip" id="zip"
-                                               placeholder="우편번호 입력 클릭" readonly/>
-                                    </div>
-                                    <div>
-                                        <input type="text" name="kms_addr1" id="addr1" size="50"
-                                               placeholder="주소를 검색하세요." readonly/>
-                                    </div>
-                                    <div>
-                                        <input type="text" name="kms_addr2" id="addr2" size="50"
-                                               placeholder="상세주소를 입력하세요."/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-                <section>
-                    <table>
-                        <caption>담당자 정보입력</caption>
-                        <tbody>
-                            <tr>
-                                <th><span className="essential">*</span>이름</th>
-                                <td><input type="text" name="km_name" placeholder="이름을 입력"
-                                           required/></td>
-                            </tr>
-                            <tr>
-                                <th><span className="essential">*</span>휴대폰</th>
-                                <td><input type="text" name="km_hp" maxlength="13"
-                                           placeholder="휴대폰번호 입력" required/> <span className="msgHp">&nbsp;&nbsp;-
-										포함 13자리를 입력하세요.</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+                    {userRegisterType === "USER" &&
+                        <UserRegister register={register} errors={errors} setPostOn={setPostOn} postDTO={postDTO}
+                                      postOn={postOn} setPostDTO={setPostDTO}></UserRegister>}
 
-                <div>
-                    <input type="submit" className="join" value="회원가입"/>
-                </div>
+                    {userRegisterType === "SELLER" && <>
+                        <SellerRegister postOn={postOn} register={register} postDTO={postDTO} setPostDTO={setPostDTO}
+                                        setPostOn={setPostOn} errors={errors}></SellerRegister>
+
+                    </>}
+
+
+                    <div>
+                        <input type="submit" className="join" value="회원가입"/>
+                    </div>
+                </form>
             </div>
-        </div>
-    </>
+        </>
+    }
 }
 
 export default Register;

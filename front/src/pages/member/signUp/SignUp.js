@@ -1,6 +1,6 @@
 import {Link, useNavigate} from "react-router-dom";
 import {API_BASE_URL, HOME_URL} from "../../../App";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {changeDTO} from "../../store/ChangeDTO";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ function SignUp({userRegisterType}) {
     console.log(termsCheck);
     let navigate = useNavigate();
 
-    if (terms.terms !== undefined) {
+    if (userRegisterType !== '') {
         return <>
             <div className="signup">
                 <nav>
@@ -71,6 +71,11 @@ function SignUp({userRegisterType}) {
                     />
                 </div>
             </div>
+        </>
+    }
+    else{
+        return <>
+            <div className="register"><nav><h1>정보를 불러오는 중 오류가 발생했습니다. 처음부터 다시 시도해주세요.</h1></nav></div>
         </>
     }
 }

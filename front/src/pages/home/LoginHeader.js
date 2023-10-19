@@ -4,9 +4,9 @@ import {HOME_URL} from "../../App";
 function LoginHeader() {
     let navigate = useNavigate();
     return <>
-        <header>
             <div className="top">
                 <div>
+                    <Link to={HOME_URL + "/"}>홈</Link>
                     <Link to={HOME_URL + "/member/login"}>로그인</Link>
                     <Link to={HOME_URL+"/member/join"}>회원가입</Link>
                     <a href="#">마이페이지</a>
@@ -21,7 +21,6 @@ function LoginHeader() {
                     >
                 </div>
             </div>
-        </header>
     </>
 }
 

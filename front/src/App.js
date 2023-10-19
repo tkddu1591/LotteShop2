@@ -1,8 +1,8 @@
 import './css/App.css';
 import './css/Product.css'
 import './css/Member.css'
-import {lazy, memo, Suspense, useEffect, useState,} from "react";
-import {Outlet, Route, Routes, useNavigate} from "react-router-dom";
+import React, {lazy, memo, Suspense, useEffect, useState,} from "react";
+import {Outlet, Route, Routes} from "react-router-dom";
 import axios from "axios";
 import {changeCate1, changeCate2} from "./slice/cateSilce";
 import {useDispatch, useSelector} from "react-redux";
@@ -31,6 +31,14 @@ const MemberRegister = lazy(() => import('./pages/member/register/Register.js'))
 function App() {
 
     let dispatch = useDispatch();
+    const [ip, setIp] = useState();
+
+    useEffect(() => {
+        axios.get('https://geolocation-db.com/json/')
+            .then((res) => {
+                setIp(res.data.IPv4)
+            })
+    }, [])
 
     function fallbackData() {
         return <div>로딩중</div>
@@ -43,30 +51,18 @@ function App() {
     useEffect(() => {
         axios.get(`${API_BASE_URL}/product/cate1`).then(res => {
             dispatch(changeCate1(res.data))
-            console.log(res.data);
         }).catch(error => {
             console.log(error);
         })
         axios.get(`${API_BASE_URL}/product/cate2`).then(res => {
             dispatch(changeCate2(res.data))
-            console.log(res.data);
         }).catch(error => {
             console.log(error);
         })
         //user 데이터 받아오기 나중에는 로그인 페이지로 처리
-        axios.post(`${API_BASE_URL}/member/login`, member, {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }).then(response => {
-            dispatch(insertMember(response.data));
-        }).catch(error => {
-            console.log(error);
-        })
     }, []);
 
 
-    let navigate = useNavigate();
     let BannerTopMemo = memo(function () {
         return <BannerTop></BannerTop>
     })
@@ -80,7 +76,7 @@ function App() {
         return <Aside></Aside>
     })
 
-    let [userRegisterType, setUserRegisterType] = useState('USER');
+    let [userRegisterType, setUserRegisterType] = useState('');
     return (
         <>
             <Routes>
@@ -95,7 +91,8 @@ function App() {
                 }>
                     {/*멤버 라우트*/}
                     <Route path="member" element={
-                        <><LoginHeader></LoginHeader>
+                        <>
+                            <header><LoginHeader></LoginHeader></header>
                             <main id="member">
                                 <Outlet></Outlet>
                             </main>
@@ -112,7 +109,7 @@ function App() {
                             <SignUp userRegisterType={userRegisterType}></SignUp>
                         </Suspense>}/>
                         <Route path="register" element={<Suspense fallback={fallbackData()}>
-                            <MemberRegister userRegisterType={userRegisterType}></MemberRegister>
+                            <MemberRegister userRegisterType={userRegisterType} ip={ip}></MemberRegister>
                         </Suspense>}/>
 
 
@@ -177,6 +174,7 @@ function BannerTop() {
         return (
             <div id="bannerTop" className="on" style={{background: '#e4dfdf'}}>
                 <article>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/topBanner1.png`}/></a>
                     <button className="btnClose" onClick={() => {
                         dispatch(deleteBanner())

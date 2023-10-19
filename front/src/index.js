@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App, {HOME_URL} from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./store";
-import {BrowserRouter, HashRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import ScrollTop from "./components/ScrollToTop";
 

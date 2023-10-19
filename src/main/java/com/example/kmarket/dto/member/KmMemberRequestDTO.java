@@ -6,6 +6,8 @@ import lombok.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString
 @AllArgsConstructor
@@ -35,8 +37,8 @@ public class KmMemberRequestDTO {
     private String managerHp;
     private String fax;
     private String regIp;
-    private String wdate;
-    private String rdate;
+    private LocalDateTime wdate;
+    private LocalDateTime rdate;
     private int etc1 = 0;
     private int etc2 = 0;
     private String etc3;

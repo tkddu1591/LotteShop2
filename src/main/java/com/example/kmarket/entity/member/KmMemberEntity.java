@@ -4,6 +4,8 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString
 @AllArgsConstructor
@@ -35,8 +37,8 @@ public class KmMemberEntity {
     private String managerHp;
     private String fax;
     private String regIp;
-    private String wdate;
-    private String rdate;
+    private LocalDateTime wdate;
+    private LocalDateTime rdate;
     private int etc1 =0;
     private int etc2 =0;
     private String etc3;
