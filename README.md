@@ -32,6 +32,8 @@ Lotte 쇼핑몰 프로젝트 구조
 - axios : npm install axios
 - redux : npm install @reduxjs/toolkit react-redux
 - jquery: npm install jquery
+- daum : npm install react-daum-postcode
+- hook-form: npm i react-hook-form
 - 기본 모듈 : npm install
 # gitignore 파일
 - application.properties
