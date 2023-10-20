@@ -34,7 +34,6 @@ public class KmCsQnaEntity {
 	private String file3;
 	private String file4;
 	private String writer;
-	private String ordNo; //null 값 넣기 위해 String으로 변경 
 	private int answerComplete;
 	private String regip;
 

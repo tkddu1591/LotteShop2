@@ -1,4 +1,4 @@
-package com.example.kmarket.mapper;
+package com.example.kmarket.mapper.cs;
 
 import com.example.kmarket.entity.cs.KmCsCateEntity;
 import org.apache.ibatis.annotations.Mapper;

@@ -6,7 +6,7 @@ import com.example.kmarket.dto.cs.CsPageResponseDTO;
 import com.example.kmarket.entity.cs.KmCsCateEntity;
 import com.example.kmarket.entity.cs.KmCsQnaEntity;
 import com.example.kmarket.mapper.cs.KmCsQnaMapper;
-import com.example.kmarket.mapper.MybatisCSMapper;
+import com.example.kmarket.mapper.cs.MybatisCSMapper;
 import com.example.kmarket.repository.cs.KmCsQnaRepository;
 import com.example.kmarket.util.Util;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +42,6 @@ public class KmQnaService {
         for(KmCsQnaDTO qna : qnaList) {
             // TODO 나중에 여기서 Uid 오솔라이즈 잡아서 처리 해주는 로직 달기
             qna.setWriter(util.maskingUid(qna.getWriter()));
-//            qna.setRdate(util.getRdateSub(qna.getRdate()));
         }
         log.info(qnaList.toString());
 
@@ -57,8 +56,17 @@ public class KmQnaService {
         log.info("!!!!!!!!!!!!!!!!!!!!!!" + type);
         List<KmCsCateEntity> cateList
                 = mybatisCsMapper.findTypeForCate(type);
-        log.info("@@@@@@@@@@@@@@@@@"+cateList.toString());
+//        log.info("@@@@@@@@@@@@@@@@@"+cateList.toString());
 
         return cateList;
+    }
+
+    public void save(KmCsQnaDTO dto){
+        log.info(dto.toString());
+        KmCsQnaEntity entity = kmCsQnaMapper.toEntity(dto);
+        log.info("qna service save entity : " + entity);
+        log.info(entity.getKmCsCateEntity());
+        log.info(entity.getKmCsTypeEntity());
+        kmCsQnaRepository.save(entity);
     }
 }
