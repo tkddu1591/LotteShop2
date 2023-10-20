@@ -80,7 +80,9 @@ public class KmNoticeService {
 
     public List<KmCsNoticeDTO> findAll() {
         List<KmCsNoticeEntity> entity = kmNoticeRepo.findAll();
-        return entity.stream().map(mapper::toDTO).toList();
+        return entity.stream()
+                    .map(mapper::toDTO)
+                    .toList();
     }
 
 }

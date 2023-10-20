@@ -20,8 +20,8 @@ public class RestCsController {
 
     // cate로 type 찾기
     @GetMapping("/cate")
-    public List<KmCsTypeEntity> cateForType(String optionValue){
+    public List<KmCsTypeEntity> cateForType(String optionValue, int type){
         log.info(optionValue);
-        return ccs.cateForType(optionValue);
+        return ccs.cateForType(optionValue, 90);
     }
 }

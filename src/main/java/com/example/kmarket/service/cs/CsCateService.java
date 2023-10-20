@@ -29,14 +29,14 @@ public class CsCateService {
         KmCsCateDTO dto = cateMapper.toDTO(entity);
         return dto;
     }
-
     public List<KmCsCateEntity> findAll(){
         List<KmCsCateEntity> cateEntityList = cateRepo.findAll();
         return cateEntityList;
     }
 
-    public List<KmCsTypeEntity> cateForType(String cate){
-        List<KmCsTypeEntity> cateEntityList = typeRepo.findByCate(cate);
+    public List<KmCsTypeEntity> cateForType(String cate, int type){
+        List<KmCsTypeEntity> cateEntityList = typeRepo.findByCateAndTypeLessThan(cate, type);
+        log.info("ccs CateForType typeName : "+cateEntityList.toString());
         return cateEntityList;
     }
 }
