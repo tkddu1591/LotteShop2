@@ -58,6 +58,8 @@ function Order() {
     const [formattedPhoneNumber, setFormattedPhoneNumber] = useState(
         orderEnd.recipHp
     );
+    console.log(orderEnd)
+    console.log(orderProducts)
     const changeOrderEnd = (key, value) => {
         setOrderEnd((orderTotal) => {
             let newOrderTotal = {...orderTotal};
