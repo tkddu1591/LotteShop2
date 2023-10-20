@@ -55,6 +55,8 @@ public class KmAdminProductService {
         int pageGroupStart = (currentPageGroup - 1) * 10 + 1;
         int pageGroupEnd = currentPageGroup * 10;
 
+        // 페이지 그룹 마지막 넘버가 페이지 넘버보다 클 경우, 페이지 마지막 넘버 = 페이지 그룹 마지막 넘버
+        // ex) 페이지 넘버가 8이 마지막일 경우, 페이지 그룹 마지막 넘버가 10이 아니라 8이 됨.
         if(pageGroupEnd > lastPageNum){
             pageGroupEnd = lastPageNum;
         }
