@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
 import {useNavigate} from "react-router-dom";
 import {API_BASE_URL} from "../../../App";
+import {member} from "../../../slice/memberSlice";
 
 function Info({prodDTO, scrollY}) {
 
@@ -38,6 +39,7 @@ function Info({prodDTO, scrollY}) {
                                                    style={{cursor: 'pointer', userSelect: 'none'}}>상품평보기</a></h5>
         }
     }
+
     function addDays(date, days) {
         const clone = new Date(date);
         clone.setDate(date.getDate() + days)
@@ -72,7 +74,7 @@ function Info({prodDTO, scrollY}) {
 
     let [cartDTO, setCartDTO] = useState({
         thumb1: prodDTO.thumb1,
-        prodName:prodDTO.prodName,
+        prodName: prodDTO.prodName,
         descript: prodDTO.descript,
         count: 1,
         uid: localStorage.getItem('memberUid'),
@@ -107,10 +109,10 @@ function Info({prodDTO, scrollY}) {
             total: changeDiscountPrice(prodDTO.price, prodDTO.discount)
         })
     }
-    console.log(cartDTO)
     let navigate = useNavigate();
-    let dispatch = useDispatch();
+    console.log(localStorage.getItem('memberUid'))
 
+    let dispatch = useDispatch();
     return <>
         <article className="info">
             <div className="image">
@@ -148,7 +150,8 @@ function Info({prodDTO, scrollY}) {
                 <nav>
                     <span className="origin">원산지-상세설명 참조</span>
                 </nav>
-                <img src={`${process.env.REACT_APP_HOME_URL}/images/vip_plcc_banner.png`} alt="100원만 결제해도 1만원 적립!" className="banner"/>
+                <img src={`${process.env.REACT_APP_HOME_URL}/images/vip_plcc_banner.png`} alt="100원만 결제해도 1만원 적립!"
+                     className="banner"/>
 
                 <div className="count">
                     {cartDTO.count !== 1 ? <button className="decrease" onClick={() => {
@@ -168,10 +171,10 @@ function Info({prodDTO, scrollY}) {
                     <button className="increase" onClick={() => {
                         if (cartDTO.count >= prodDTO.stock) {
                             changeCartData('count', prodDTO.stock);
-                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount)*(cartDTO.count+1))
+                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount) * (cartDTO.count + 1))
                         } else {
                             changeCartData('count', cartDTO.count + 1);
-                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount)*(cartDTO.count+1))
+                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount) * (cartDTO.count + 1))
                         }
 
                     }}
@@ -188,36 +191,44 @@ function Info({prodDTO, scrollY}) {
                 <div className="button">
                     <input type="button" className="cart"
                            onClick={() => {
-                               axios.post(`${API_BASE_URL}/product/cart`, cartDTO,
-                                   {
-                                       headers: {
-                                           'Content-Type': 'application/json',
-                                       }
+                               if (localStorage.getItem('memberUid') !== null) {
+                                   axios.post(`${API_BASE_URL}/product/cart`, cartDTO,
+                                       {
+                                           headers: {
+                                               'Content-Type': 'application/json',
+                                           }
+                                       })
+                                       .then(() => {
+                                               alert('선택하신 상품이 장바구니에 담겼습니다.')
+                                           }
+                                       ).catch((error) => {
+                                       alert('로그인 후 시도해주시기 바랍니다.')
+                                       console.error(error)
                                    })
-                                   .then(() => {
-                                           alert('선택하신 상품이 장바구니에 담겼습니다.')
-                                       }
-                                   ).catch((error) => {
-                                   console.error(error)
-                               })
+                               } else {
+                                   alert('로그인 후 시도해주시기 바랍니다.')
+                               }
                            }}
                            value="장바구니"/>
                     <input type="button" className="order"
                            onClick={async () => {
+                               if (localStorage.getItem('memberUid') !== null) {
+                                   await dispatch(insertOrderProduct([cartDTO]))
+                                   await dispatch(insertOrderTotal({
+                                       totalCount: 1,
+                                       totalDelivery: cartDTO.delivery,
+                                       totalDiscount: cartDTO.discount,
+                                       totalOrderPrice: cartDTO.total,
+                                       totalProductPrice: cartDTO.price * cartDTO.count,
+                                       totalPoint: cartDTO.point,
+                                       totalDiscountPrice: (cartDTO.price * cartDTO.discount) / 100
 
-                               console.log(cartDTO)
-                               await dispatch(insertOrderProduct([cartDTO]))
-                               await dispatch(insertOrderTotal({
-                                   totalCount : 1,
-                                   totalDelivery : cartDTO.delivery,
-                                   totalDiscount : cartDTO.discount,
-                                   totalOrderPrice : cartDTO.total,
-                                   totalProductPrice : cartDTO.price*cartDTO.count,
-                                   totalPoint : cartDTO.point,
-                                   totalDiscountPrice : (cartDTO.price*cartDTO.discount)/100
-                               }))
+                                   }))
+                                   navigate("/product/order")
+                               }else{
+                                   alert('로그인 후 시도해주시기 바랍니다.')
+                               }
 
-                               navigate("/product/order")
 
                            }}
 

@@ -25,7 +25,7 @@ function Order() {
     let [memberUid,setMemberUid] = useState(localStorage.getItem('memberUid'));
     let [orderEnd, setOrderEnd] = useState({})
     useEffect(() => {
-        if (memberUid !== null) {
+        if (memberUid !== null && retrieveStoredToken().token !=null) {
             axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
                 .then(response => {
                     setMember(response.data)
