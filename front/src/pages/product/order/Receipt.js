@@ -54,13 +54,11 @@ function Receipt({orderEnd, orderProducts}) {
             </table>
             <input type="button" value="결제하기"
                    onClick={async () => {
-                       console.log(orderEnd.recipHp.length)
                        if (orderEnd.recipHp.length !== 13) {
                            alert('휴대폰 번호를 확인해주세요')
                        } else if (orderEnd.ordPayment === 0) {
                            alert('결제방식을 선택해주세요')
                        } else {
-                           console.log(orderProducts)
                            await axios.post(`${API_BASE_URL}/product/order/total`, orderEnd,
                                {
                                    headers: {

@@ -20,7 +20,6 @@ public class CartController {
     }
     @DeleteMapping("/cart")
     public void deleteCart(@RequestBody List<Integer> selectCartsNo){
-        log.info(String.valueOf(selectCartsNo));
         kmProductCartService.deleteProductCart(selectCartsNo);
     }
     @GetMapping("/cart")
