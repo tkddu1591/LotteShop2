@@ -18,6 +18,7 @@ public class KmCsFaqDTO {
 	private int relatedFaq;
 	private String writer;
 	private String regip;
+	private int hit;
 	private LocalDateTime rdate;
 
 
