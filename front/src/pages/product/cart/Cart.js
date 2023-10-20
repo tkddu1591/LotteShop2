@@ -74,6 +74,7 @@ function Cart() {
         }
     }, [selectedCartList])
 
+    console.log(selectedCartList)
     if (memberUid !== null) {
         return <>
 
@@ -101,7 +102,7 @@ function Cart() {
                            });
                        axios.get(`${API_BASE_URL}/product/cart`, {
                            params: {
-                               uid: 'user'
+                               uid: memberUid
                            }
                        }).then(res => {
                            setCartDataList(res.data)
