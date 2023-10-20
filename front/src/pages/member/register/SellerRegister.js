@@ -1,4 +1,4 @@
-import DaumPost from "../../store/DaumPost";
+import DaumPost from "../../../store/DaumPost";
 import React from "react";
 
 function SellerRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors}) {

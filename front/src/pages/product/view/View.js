@@ -118,7 +118,6 @@ function View() {
         }
     }, []);
 
-    let categoryNo = useSelector((state) => state.categoryNo);
     let dispatch = useDispatch();
 
     useEffect(() => {
@@ -127,30 +126,29 @@ function View() {
         }
     }, [prodDTO]);
 
-
-    return <>
-        <Info prodDTO={prodDTO} scrollY={divYPosition} changeProdDTO={changeProdDTO}></Info>
-
-
-        <Detail></Detail>
-        <Notice prodDTO={prodDTO}></Notice>
-
-        <article className="review">
-            <nav>
-                <h1 ref={divRef}>상품리뷰</h1>
-            </nav>
-
-            <Review pageResponseDTO={pageResponseDTO}></Review>
-
-            <PageNavigation pageResponseDTO={pageResponseDTO} changePageRequest={changePageRequest}>
-
-            </PageNavigation>
-
-        </article>
-
-    </>
+    if (prodDTO.company !== '') {
+        return <>
+            <Info prodDTO={prodDTO} scrollY={divYPosition} changeProdDTO={changeProdDTO}></Info>
 
 
+            <Detail></Detail>
+            <Notice prodDTO={prodDTO}></Notice>
+
+            <article className="review">
+                <nav>
+                    <h1 ref={divRef}>상품리뷰</h1>
+                </nav>
+
+                <Review pageResponseDTO={pageResponseDTO}></Review>
+
+                <PageNavigation pageResponseDTO={pageResponseDTO} changePageRequest={changePageRequest}>
+
+                </PageNavigation>
+
+            </article>
+
+        </>
+    }
 }
 
 function Detail() {
