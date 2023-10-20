@@ -12,7 +12,7 @@ function RequiredInformation({register, errors, watch}) {
                                    placeholder="아이디 입력"
                                    {...register("uid", {
                                        required: "아이디를 입력해 주세요.",
-                                       pattern: /^[a-z]+[a-z0-9]{4,12}$/
+                                       pattern: /^[a-z]+[a-z0-9]{3,12}$/
                                    })}
                                    style={errors.uid && {border: 'solid 2px red'}} required/> <span
                             className="msgSId">&nbsp;&nbsp;영문, 숫자로
@@ -27,13 +27,13 @@ function RequiredInformation({register, errors, watch}) {
                                    placeholder="비밀번호 입력" required
                                    {...register('pass', {
                                        required: "비밀번호를 입력해 주세요.",
-                                       pattern: /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,12}$/
+                                       pattern: /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{7,15}$/
                                    })}
                                    style={errors.pass && {border: 'solid 2px red'}}
 
                         /> <span
                             className="msgPass">&nbsp;&nbsp;영문,
-										숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+										숫자, 특수문자를 조합하여 7~15자까지 설정해 주세요.</span>
                             {errors.pass && <div style={{color: 'red'}}>비밀번호를 형식에 맞춰 입력해주세요</div>}
                         </td>
                     </tr>

@@ -26,7 +26,7 @@ function Order() {
     let [orderEnd, setOrderEnd] = useState({})
     useEffect(() => {
         if (memberUid !== null && retrieveStoredToken().token !=null) {
-            axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
+            axios.get(`${API_BASE_URL}/mmember/e`, createTokenHeader(retrieveStoredToken().token))
                 .then(response => {
                     setMember(response.data)
                 }).catch(error => console.log('유저 정보가 없습니다.'))
