@@ -19,4 +19,5 @@ public class KmAdminFaqDTO {
     private String writer;
     private String regip;
     private LocalDateTime rdate;
+    private int hit;
 }
