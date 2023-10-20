@@ -39,7 +39,7 @@
             </aside>
 
             <article>
-                <form action="#">
+                <form th:action="@{/cs/qna/write}" method="post">
                     <table>
                         <tr>
                             <td>문의유형</td>
@@ -68,14 +68,21 @@
                                 <textarea name="content" required placeholder="내용을 입력하세요."></textarea>
                             </td>
                         </tr>
+                        <tr>
+                            <td>첨부파일</td>
+                            <td>
+                                <input type="file" name="file"/>
+                            </td>
+                        </tr>
                     </table>
                     <div>
-                        <a href="#" class="btnList">취소하기</a>
                         <input type="submit" class="btnSubmit" value="등록하기"/>
+                        <a href="#" class="btnList">취소하기</a>
                     </div>
                 </form>
             </article>
         </section>
     </div>
 </section>
+<script src="/cs/js/writeType.js"></script>
 <th:block th:insert="~{/cs/inc/footer.html}"/>

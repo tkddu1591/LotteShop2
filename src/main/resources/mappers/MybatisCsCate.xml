@@ -3,14 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.kmarket.mapper.MybatisCSMapper">
+<mapper namespace="com.example.kmarket.mapper.cs.MybatisCSMapper">
     <select id="findTypeForCate" resultType="com.example.kmarket.entity.cs.KmCsCateEntity">
+        <!-- <![CDATA[ ]]>
+            - xml의 특수 문자 예약어를 포함해야 할 때 문제를 해결하기 위한 것
+            - sql 쿼리 내에 특수 문자를 자유롭게 사용 할 수 있게됨
+            -> ``(백틱), < > 태그형 괄호 등을 읽을 수 있음
+        -->
         <![CDATA[
         SELECT DISTINCT CC.cate, CC.cateName
             FROM km_cs_type AS CT
             JOIN km_cs_cate AS CC
                 ON CT.cate = CC.cate
-            WHERE type < #{type};
+            WHERE type < #{type}
+            ORDER BY CC.cateName DESC;
         ]]>
     </select>
 </mapper>

@@ -21,8 +21,8 @@ public class KmCsQnaDTO {
 	private String file3;
 	private String file4;
 	private String writer;
-	private String ordNo; //null 값 넣기 위해 String으로 변경 
 	private String regip;
+	private int answerComplete;
 	private LocalDateTime rdate;
 	
 	//추가 필드
