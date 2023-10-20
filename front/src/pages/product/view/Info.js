@@ -168,10 +168,10 @@ function Info({prodDTO, scrollY}) {
                     <button className="increase" onClick={() => {
                         if (cartDTO.count >= prodDTO.stock) {
                             changeCartData('count', prodDTO.stock);
-                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount)*cartDTO.count)
+                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount)*(cartDTO.count+1))
                         } else {
                             changeCartData('count', cartDTO.count + 1);
-                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount)*cartDTO.count)
+                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount)*(cartDTO.count+1))
                         }
 
                     }}
