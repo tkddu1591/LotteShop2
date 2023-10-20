@@ -117,7 +117,7 @@ function App() {
                     {/*프로덕트 라우트*/}
                     <Route path="product" element={
                         <>
-                            <HeaderMemo></HeaderMemo>
+                            <Header></Header>
                             <main id="product">
                                 <AsideMemo></AsideMemo>
                                 <Outlet></Outlet>

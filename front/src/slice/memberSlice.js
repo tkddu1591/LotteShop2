@@ -8,7 +8,7 @@ let member = createSlice({
             return action.payload;
         },
         deleteMember: (state, action) => {
-            return null;
+            return '';
         }
     }
 })

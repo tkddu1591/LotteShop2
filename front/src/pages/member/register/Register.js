@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
-import DaumPost from "../../store/DaumPost";
+import DaumPost from "../../../store/DaumPost";
 import SellerRegister from "./SellerRegister";
 import UserRegister from "./UserRegister";
 import RequiredInformation from "./RequiredInformation";
@@ -18,7 +18,6 @@ function Register({userRegisterType, ip}) {
     } = useForm({mode: "onTouched"});
     let navigate = useNavigate();
     const onValid = async (data) => {
-        console.log(data);
         await axios.post(`${process.env.REACT_APP_API_ROOT}/member/signup`, data)
             .then(res=>{
                 alert('회원가입이 완료되었습니다.')
