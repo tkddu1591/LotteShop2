@@ -34,8 +34,6 @@ function Login() {
                                            }).then(response => {
                                                //로그인시 아이디가 있으면 토큰을 로컬에 저장
                                                loginTokenHandler(response.data.accessToken, response.data.tokenExpiresIn);
-                                               console.log(retrieveStoredToken(navigate).token)
-                                               console.log(retrieveStoredToken(navigate).duration)
                                            }).catch(error => setMemberCheck(true))
                                            //유저 정보를 들고옴
                                            if (localStorage.getItem('token') !== null) {
@@ -64,8 +62,6 @@ function Login() {
                                            }).then(response => {
                                                //로그인시 아이디가 있으면 토큰을 로컬에 저장
                                                loginTokenHandler(response.data.accessToken, response.data.tokenExpiresIn);
-                                               console.log(retrieveStoredToken(navigate).token)
-                                               console.log(retrieveStoredToken(navigate).duration)
                                            }).catch(error => setMemberCheck(true))
                                            //유저 정보를 들고옴
                                            if (localStorage.getItem('token') !== null) {
@@ -91,8 +87,6 @@ function Login() {
                        }).then(response => {
                            //로그인시 아이디가 있으면 토큰을 로컬에 저장
                            loginTokenHandler(response.data.accessToken, response.data.tokenExpiresIn);
-                           console.log(retrieveStoredToken(navigate).token)
-                           console.log(retrieveStoredToken(navigate).duration)
                        }).catch(error => setMemberCheck(true))
                        //유저 정보를 들고옴
                        if (localStorage.getItem('token') !== null) {

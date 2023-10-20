@@ -26,7 +26,6 @@ function ProductItem({pageResponseDTO}) {
 
     const productPage = `${HOME_URL}/product/list`;
     let navigate = useNavigate();
-    console.log(HOME_URL + "/product/view?prodNo=")
     return (
         <table border="0">
 

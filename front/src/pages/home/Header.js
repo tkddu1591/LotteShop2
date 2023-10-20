@@ -2,7 +2,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {changeCategoryNo, changeCateNames} from "../../slice/cateSilce";
 import {useDispatch, useSelector} from "react-redux";
-import {HOME_URL} from "../../App";
+import {API_BASE_URL, HOME_URL} from "../../App";
 import LoginHeader from "./LoginHeader";
 
 function Header() {
@@ -24,7 +24,8 @@ function Header() {
             <LoginHeader></LoginHeader>
             <div className="logo">
                 <div>
-                    <Link to={process.env.PUBLIC_URL + "/"}><img src={`${process.env.REACT_APP_HOME_URL}/images/header_logo.png`} alt="로고"/></Link>
+                    <Link to={process.env.PUBLIC_URL + "/"}><img
+                        src={`${process.env.REACT_APP_HOME_URL}/images/header_logo.png`} alt="로고"/></Link>
                     <div>
                         <input
                             onChange={(e) => {
@@ -51,37 +52,57 @@ function Header() {
             <div className="menu">
                 <div>
                     <ul>
-                        <li><a style={{fontWeight: (newCate === null ? newType === 'hit' ? 'bold' : null : null), cursor:'pointer', userSelect:'none'}}
+                        <li><a style={{
+                            fontWeight: (newCate === null ? newType === 'hit' ? 'bold' : null : null),
+                            cursor: 'pointer',
+                            userSelect: 'none'
+                        }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=hit"))
                                }
                                }>히트상품</a></li>
-                        <li><a style={{fontWeight: (newCate === null ? newType === 'score' ? 'bold' : null : null), cursor:'pointer', userSelect:'none'}}
+                        <li><a style={{
+                            fontWeight: (newCate === null ? newType === 'score' ? 'bold' : null : null),
+                            cursor: 'pointer',
+                            userSelect: 'none'
+                        }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=score"))
                                }
                                }>추천상품</a></li>
-                        <li><a style={{fontWeight: (newCate === null ? newType === 'rdate' ? 'bold' : null : null), cursor:'pointer', userSelect:'none'}}
+                        <li><a style={{
+                            fontWeight: (newCate === null ? newType === 'rdate' ? 'bold' : null : null),
+                            cursor: 'pointer',
+                            userSelect: 'none'
+                        }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=rdate"))
                                }
                                }>최신상품</a></li>
-                        <li><a style={{fontWeight: (newCate === null ? newType === 'sold' ? 'bold' : null : null), cursor:'pointer', userSelect:'none'}}
+                        <li><a style={{
+                            fontWeight: (newCate === null ? newType === 'sold' ? 'bold' : null : null),
+                            cursor: 'pointer',
+                            userSelect: 'none'
+                        }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=sold"))
                                }
                                }>인기상품</a></li>
-                        <li><a style={{fontWeight: (newCate === null ? newType === 'discount' ? 'bold' : null : null), cursor:'pointer', userSelect:'none'}}
+                        <li><a style={{
+                            fontWeight: (newCate === null ? newType === 'discount' ? 'bold' : null : null),
+                            cursor: 'pointer',
+                            userSelect: 'none'
+                        }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=discount"))
                                }
                                }>할인상품</a></li>
                     </ul>
                     <ul>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">자주묻는질문</a></li>
-                        <li><a href="#">문의하기</a></li>
-                        <li><a href="#">고객센터</a></li>
+                        <li><Link to={API_BASE_URL + "/cs/notice/list?cate=all"}>공지사항</Link></li>
+                        <li><Link to={API_BASE_URL + "/cs/faq/list?cate=member"}>자주묻는질문</Link></li>
+                        <li><Link to={API_BASE_URL + "/cs/qna/list?cate=member"}>문의하기</Link></li>
+                        <li><Link to={API_BASE_URL + "/cs/index"}>고객센터</Link></li>
                     </ul>
                 </div>
             </div>

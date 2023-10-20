@@ -107,7 +107,7 @@ function Info({prodDTO, scrollY}) {
             total: changeDiscountPrice(prodDTO.price, prodDTO.discount)
         })
     }
-    console.log(prodDTO)
+    console.log(cartDTO)
     let navigate = useNavigate();
     let dispatch = useDispatch();
 

@@ -15,14 +15,12 @@ function Complete() {
     let [completeTotal, setCompleteTotal] = useState({ordNo: undefined});
     let memberUid = localStorage.getItem('memberUid');
     let [member, setMember] = useState({});
-    console.log(localStorage.getItem('memberUid'))
     useEffect(() => {
         axios.get(`${API_BASE_URL}/product/complete/list`, {
             params: {
                 uid: memberUid
             }
         }).then(res => {
-            console.log(res.data)
             setCompleteList(res.data)
         }).catch(err => {
             console.log(err)
@@ -32,7 +30,6 @@ function Complete() {
                 uid: memberUid
             }
         }).then(res => {
-            console.log(res.data)
             setCompleteTotal(res.data)
         }).catch(err => {
             console.log(err)
@@ -46,8 +43,6 @@ function Complete() {
     }, []);
 
     let navigate = useNavigate();
-    console.log(completeList)
-    console.log(completeTotal.ordPayment)
     if (completeList.length > 0 && completeTotal.ordNo !== undefined && member.name !== undefined) {
         return <>
 

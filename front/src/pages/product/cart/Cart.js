@@ -89,7 +89,6 @@ function Cart() {
                        selectedCartList.map(item => item.cartNo).forEach(cartNo => {
                            selectCartsNo.push(cartNo);
                        })
-                       console.log(selectCartsNo)
                        await axios.delete(`${API_BASE_URL}/product/cart`, {
                            headers: {'Content-Type': 'application/json'},
                            data: selectCartsNo

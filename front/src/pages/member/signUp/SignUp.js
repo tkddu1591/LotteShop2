@@ -21,7 +21,6 @@ function SignUp({userRegisterType}) {
         }
     }, []);
 
-    console.log(termsCheck);
     let navigate = useNavigate();
 
     if (userRegisterType !== '') {

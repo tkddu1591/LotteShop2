@@ -7,7 +7,6 @@ import {useState} from "react";
 
 function LoginHeader() {
     let [member,setMember] = useState(localStorage.getItem('memberUid'));
-    console.log(member)
     let navigate = useNavigate();
     let dispatch = useDispatch();
 

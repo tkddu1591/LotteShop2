@@ -24,7 +24,6 @@ function Order() {
     let navigate = useNavigate();
     let [memberUid,setMemberUid] = useState(localStorage.getItem('memberUid'));
     let [orderEnd, setOrderEnd] = useState({})
-    console.log(memberUid)
     useEffect(() => {
         if (memberUid !== null) {
             axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
@@ -58,8 +57,6 @@ function Order() {
     const [formattedPhoneNumber, setFormattedPhoneNumber] = useState(
         orderEnd.recipHp
     );
-    console.log(orderEnd)
-    console.log(orderProducts)
     const changeOrderEnd = (key, value) => {
         setOrderEnd((orderTotal) => {
             let newOrderTotal = {...orderTotal};
