@@ -48,13 +48,11 @@ public class SecurityConfigration {
                     exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint);
                     exceptionHandling.accessDeniedHandler(jwtAccessDeniedHandler);
                 })
-                /*
-                .formLogin(config -> config.loginPage("/user/login")
+                /*.formLogin(config -> config.loginPage("/user/login")
                         .defaultSuccessUrl("/")
                         .failureUrl("/user/login?success=100")
                         .usernameParameter("uid")
                         .passwordParameter("pass"))
-
                 //로그아웃 설정
                 .logout(config -> config.invalidateHttpSession(true)
                         .logoutUrl("/user/logout")
