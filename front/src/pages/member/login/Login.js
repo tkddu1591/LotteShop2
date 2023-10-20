@@ -1,13 +1,17 @@
 import {useEffect, useState} from "react";
 import {API_BASE_URL} from "../../../App";
 import axios from "axios";
-import {changeDTO} from "../../store/ChangeDTO";
+import {changeDTO} from "../../../store/ChangeDTO";
 import {useNavigate} from "react-router-dom";
+import {createTokenHeader, GET, loginTokenHandler, retrieveStoredToken} from "../../../slice/tokenSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {insertMember} from "../../../slice/memberSlice";
 
 function Login() {
     let [memberDTO, setMemberDTO] = useState({uid: '', pass: ''})
     let [memberCheck, setMemberCheck] = useState(false)
     let navigate = useNavigate();
+    const dispatch = useDispatch();
     return <div className="login">
         <nav>
             <h1>로그인</h1>
@@ -31,15 +35,27 @@ function Login() {
                 </tbody>
             </table>
             <input type="submit"
-                   style={{cursor:'pointer'}}
+                   style={{cursor: 'pointer'}}
                    onClick={async (e) => {
                        await axios.post(`${API_BASE_URL}/member/login`, memberDTO, {
                            headers: {
                                'Content-Type': 'application/json',
                            }
                        }).then(response => {
-                           console.log(response.data)
+                           //로그인시 아이디가 있으면 토큰을 로컬에 저장
+                           loginTokenHandler(response.data.accessToken, response.data.tokenExpiresIn);
+                           console.log(retrieveStoredToken(navigate).token)
+                           console.log(retrieveStoredToken(navigate).duration)
                        }).catch(error => setMemberCheck(true))
+                       //유저 정보를 들고옴
+                       if (localStorage.getItem('token') !== null) {
+                           await axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
+                               .then(response => {
+                                   localStorage.setItem('memberUid', response.data.uid);
+                               }).catch(error => console.log('유저 정보가 없습니다.'))
+                           await navigate("/")
+                       }
+
                    }}
                    value="로그인"/>
             <span>
@@ -51,7 +67,7 @@ function Login() {
             <span style={{position: 'absolute', left: '10px', bottom: '10px'}}>
                 <span href="#" style={{border: 'none'}}>아이디찾기</span>
                 <span href="#">비밀번호찾기</span>
-                <span onClick={()=>navigate("/member/join")}>회원가입</span>
+                <span onClick={() => navigate("/member/join")}>회원가입</span>
             </span>
             <a href="#" className="banner"><img
                 src={`${process.env.REACT_APP_HOME_URL}/images/member/member_login_banner.jpg`}

@@ -1,7 +1,7 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {changeCategoryNo, changeCateNames} from "../../slice/cateSilce";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {HOME_URL} from "../../App";
 import LoginHeader from "./LoginHeader";
 
@@ -19,7 +19,6 @@ function Header() {
     const [type, setType] = useState(newType);
     const newSearch = searchParams.get('search');
     let [search, setSearch] = useState('');
-
     return (
         <header>
             <LoginHeader></LoginHeader>

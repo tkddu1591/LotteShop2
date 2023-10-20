@@ -73,7 +73,7 @@ function Info({prodDTO, scrollY}) {
 
     let [cartDTO, setCartDTO] = useState({
         count: 1,
-        uid: 'user',
+        uid: localStorage.getItem('memberUid'),
         price: prodDTO.price,
         discount: prodDTO.discount,
         delivery: prodDTO.delivery,

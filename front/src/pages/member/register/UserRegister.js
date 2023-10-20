@@ -1,4 +1,4 @@
-import DaumPost from "../../store/DaumPost";
+import DaumPost from "../../../store/DaumPost";
 import React from "react";
 
 function UserRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors}) {

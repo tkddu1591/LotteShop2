@@ -150,7 +150,6 @@ function View() {
 
     </>
 
-
 }
 
 function Detail() {
