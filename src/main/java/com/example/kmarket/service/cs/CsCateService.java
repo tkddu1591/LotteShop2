@@ -1,6 +1,7 @@
 package com.example.kmarket.service.cs;
 
 import com.example.kmarket.dto.cs.KmCsCateDTO;
+import com.example.kmarket.dto.cs.KmCsTypeDTO;
 import com.example.kmarket.entity.cs.KmCsCateEntity;
 import com.example.kmarket.entity.cs.KmCsTypeEntity;
 import com.example.kmarket.mapper.cs.KmCsCateMapper;
@@ -34,9 +35,15 @@ public class CsCateService {
         return cateEntityList;
     }
 
-    public List<KmCsTypeEntity> cateForType(String cate, int type){
+    public List<KmCsTypeDTO> cateForType(String cate, int type){
         List<KmCsTypeEntity> cateEntityList = typeRepo.findByCateAndTypeLessThan(cate, type);
         log.info("ccs CateForType typeName : "+cateEntityList.toString());
-        return cateEntityList;
+        List<KmCsTypeDTO> dtoList
+                = cateEntityList
+                .stream()
+                .map(typeMapper::toDTO)
+                .toList();
+
+        return dtoList;
     }
 }

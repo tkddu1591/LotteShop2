@@ -22,6 +22,7 @@ public class KmCsQnaDTO {
 	private String file4;
 	private String writer;
 	private String regip;
+	private int answerComplete;
 	private LocalDateTime rdate;
 	
 	//추가 필드

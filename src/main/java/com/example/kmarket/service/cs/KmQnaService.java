@@ -61,10 +61,12 @@ public class KmQnaService {
         return cateList;
     }
 
-    public List<KmCsQnaDTO> findAll(){
-        List<KmCsQnaEntity> entity = kmCsQnaRepository.findAll();
-        return entity.stream().
-                map(kmCsQnaMapper::toDTO)
-                .toList();
+    public void save(KmCsQnaDTO dto){
+        log.info(dto.toString());
+        KmCsQnaEntity entity = kmCsQnaMapper.toEntity(dto);
+        log.info("qna service save entity : " + entity);
+        log.info(entity.getKmCsCateEntity());
+        log.info(entity.getKmCsTypeEntity());
+        kmCsQnaRepository.save(entity);
     }
 }

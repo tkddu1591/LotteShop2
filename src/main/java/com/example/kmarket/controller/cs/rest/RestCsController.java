@@ -1,5 +1,6 @@
 package com.example.kmarket.controller.cs.rest;
 
+import com.example.kmarket.dto.cs.KmCsTypeDTO;
 import com.example.kmarket.entity.cs.KmCsTypeEntity;
 import com.example.kmarket.service.cs.CsCateService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class RestCsController {
 
     // cate로 type 찾기
     @GetMapping("/cate")
-    public List<KmCsTypeEntity> cateForType(String optionValue, int type){
+    public List<KmCsTypeDTO> cateForType(String optionValue, int type){
         log.info(optionValue);
         return ccs.cateForType(optionValue, 90);
     }

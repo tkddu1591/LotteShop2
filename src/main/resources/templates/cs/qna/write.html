@@ -39,7 +39,7 @@
             </aside>
 
             <article>
-                <form action="#">
+                <form th:action="@{/cs/qna/write}" method="post">
                     <table>
                         <tr>
                             <td>문의유형</td>
@@ -69,7 +69,10 @@
                             </td>
                         </tr>
                         <tr>
-
+                            <td>첨부파일</td>
+                            <td>
+                                <input type="file" name="file"/>
+                            </td>
                         </tr>
                     </table>
                     <div>
