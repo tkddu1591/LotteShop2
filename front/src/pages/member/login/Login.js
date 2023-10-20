@@ -24,13 +24,60 @@ function Login() {
                     <tr>
                         <td>아이디</td>
                         <td><input type="text" name="uid" placeholder="아이디 입력"
-                                   onChange={event => changeDTO(setMemberDTO, 'uid', event.target.value)}/></td>
+                                   onChange={event => changeDTO(setMemberDTO, 'uid', event.target.value)}
+                                   onKeyUp={async (e)=>{
+                                       if (e.key === 'Enter') {
+                                           await axios.post(`${API_BASE_URL}/member/login`, memberDTO, {
+                                               headers: {
+                                                   'Content-Type': 'application/json',
+                                               }
+                                           }).then(response => {
+                                               //로그인시 아이디가 있으면 토큰을 로컬에 저장
+                                               loginTokenHandler(response.data.accessToken, response.data.tokenExpiresIn);
+                                               console.log(retrieveStoredToken(navigate).token)
+                                               console.log(retrieveStoredToken(navigate).duration)
+                                           }).catch(error => setMemberCheck(true))
+                                           //유저 정보를 들고옴
+                                           if (localStorage.getItem('token') !== null) {
+                                               await axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
+                                                   .then(response => {
+                                                       localStorage.setItem('memberUid', response.data.uid);
+                                                   }).catch(error => console.log('유저 정보가 없습니다.'))
+                                               await navigate("/")
+                                           }
+                                       }
+                                   }}
+                        /></td>
+
                     </tr>
                     <tr>
                         <td>비밀번호</td>
                         <td><input type="password" name="pass"
                                    onChange={event => changeDTO(setMemberDTO, 'pass', event.target.value)}
-                                   placeholder="비밀번호 입력"/></td>
+                                   placeholder="비밀번호 입력"
+                                   onKeyUp={async (e)=>{
+                                       if (e.key === 'Enter') {
+                                           await axios.post(`${API_BASE_URL}/member/login`, memberDTO, {
+                                               headers: {
+                                                   'Content-Type': 'application/json',
+                                               }
+                                           }).then(response => {
+                                               //로그인시 아이디가 있으면 토큰을 로컬에 저장
+                                               loginTokenHandler(response.data.accessToken, response.data.tokenExpiresIn);
+                                               console.log(retrieveStoredToken(navigate).token)
+                                               console.log(retrieveStoredToken(navigate).duration)
+                                           }).catch(error => setMemberCheck(true))
+                                           //유저 정보를 들고옴
+                                           if (localStorage.getItem('token') !== null) {
+                                               await axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
+                                                   .then(response => {
+                                                       localStorage.setItem('memberUid', response.data.uid);
+                                                   }).catch(error => console.log('유저 정보가 없습니다.'))
+                                               await navigate("/")
+                                           }
+                                       }
+                                   }}
+                        /></td>
                     </tr>
                 </tbody>
             </table>

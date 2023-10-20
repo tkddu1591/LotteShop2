@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 let member = createSlice({
     name : 'member',
-    initialState : 0,
+    initialState : '',
     reducers : {
         insertMember:(state, action) => {
             return action.payload;
