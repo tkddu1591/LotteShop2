@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface KmAdminFaqMapper {
 
-   public List<KmAdminFaqDTO> selectCsFaq();
+   public List<KmAdminFaqDTO> selectCsFaqAll();
 
    public KmAdminFaqDTO selectCsFaqByfaqNo();
 

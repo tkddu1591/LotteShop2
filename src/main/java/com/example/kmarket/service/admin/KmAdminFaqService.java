@@ -24,7 +24,7 @@ public class KmAdminFaqService {
     // select * all
     public List<KmAdminFaqDTO> selectCsFaq(){
 
-        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaq();
+        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaqAll();
 
         return faqList;
     }
@@ -46,7 +46,7 @@ public class KmAdminFaqService {
     // 유형 선택 중복 제거
     public List<KmAdminFaqDTO> distinctCate(){
 
-        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaq();
+        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaqAll();
 
         List<KmAdminFaqDTO> distinctCate = faqList.stream()
                 .filter(distinctByKey(KmAdminFaqDTO::getCate))
@@ -61,9 +61,7 @@ public class KmAdminFaqService {
     }
 
     public List<KmAdminFaqDTO> selectFaq(int start) {
-        int pageSize = 10; // 페이지당 항목 수
-        int startIdx = (start - 1) * pageSize; // 시작 위치 계산
-        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectFaq(startIdx);
+        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectFaq(start);
         return faqList;
     }
 

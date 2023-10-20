@@ -63,7 +63,7 @@
                     </tr>
                     </thead>
                     <tbody class="listTbody">
-                    <th:block th:each="dto : ${noticeList}">
+                    <th:block th:each="dto : ${notices}">
                         <tr>
                             <td><input type="checkbox" name="chk" /></td>
                             <td th:text="${dto.noticeNo}"></td>
@@ -80,25 +80,32 @@
                     </th:block>
                     </tbody>
                 </table>
-                <input type="submit" value="선택삭제" class="deleteAll" />
-                <a th:href="@{/admin/cs/notice/write}" class="writeBtn">작성하기</a>
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <div>
+                        <input type="submit" value="선택삭제" class="deleteAll" />
+                    </div>
+                    <div>
+                        <a th:href="@{/admin/cs/notice/write}" class="writeBtn">작성하기</a>
+                    </div>
+                </div>
             </form>
 
             <div class="paging">
-                <span class="prev">
-                    <a href="#"><&nbsp;이전</a>
+                <span class="prev" th:if="${pageStartNum > 1}">
+                    <a th:href="@{/admin/notice/list(pg=${pageGroupStart - 1},search=${search})}"><&nbsp;이전</a>
                 </span>
                 <span class="num">
-                    <th:block th:each="num : ${#numbers.sequence(1,lastPageNum)}">
-                        <a th:href="@{/admin/notice/list(pg=${num})}" th:text="${num}">[[${num}]]</a>
+                    <th:block th:each="i : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                        <a th:href="@{/admin/notice/list(pg=${i},search=${search})}" th:classappend="${currentPage == i} ? 'current' : 'off'">
+                            [[${i}]]
+                        </a>
                     </th:block>
                 </span>
-                <span class="next">
-                    <a href="#">다음&nbsp;></a>
+                <span class="next" th:if="${pageGroupEnd < lastPageNum}">
+                    <a th:href="@{/admin/notice/list(pg=${pageGroupEnd + 1},search=${search})}">다음&nbsp;></a>
                 </span>
             </div>
         </section>
-
     </section>
 </main>
 <div th:replace="/admin/footer.html :: footer"></div>

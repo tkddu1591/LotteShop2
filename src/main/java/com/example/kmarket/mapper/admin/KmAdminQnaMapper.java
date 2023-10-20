@@ -8,5 +8,11 @@ import java.util.List;
 @Mapper
 public interface KmAdminQnaMapper {
 
-    public List<KmAdminQnaDTO> selectCsQna();
+    public List<KmAdminQnaDTO> selectCsQnaAll();
+
+    // 페이징
+    // 전체 상품 갯수 계산
+    public int selectQnaCountTotal();
+    // 게시글 10개씩 출력
+    public List<KmAdminQnaDTO> selectQnaCurrentPage(int start);
 }

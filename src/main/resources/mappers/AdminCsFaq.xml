@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kmarket.mapper.admin.KmAdminFaqMapper">
 
-    <select id="selectCsFaq" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
+    <select id="selectCsFaqAll" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
         SELECT * FROM `km_cs_faq`;
     </select>
 

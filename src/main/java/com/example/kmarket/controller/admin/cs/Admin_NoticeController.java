@@ -25,30 +25,51 @@ public class Admin_NoticeController {
     @GetMapping("/admin/notice/list")
     public String list(Model model, String pg){
 
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeService.selectCsNotices();
-        model.addAttribute("noticeList", noticeList);
+        log.info("pg : " + pg);
+
 
         List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate = kmAdminNoticeService.selectCsNoticesjoinCsCate();
-        model.addAttribute("selectCsNoticesjoinCsCate", selectCsNoticesjoinCsCate);
 
+        // 1,2차 선택 중복 제거
         List<KmAdminNoticeDTO> distinctCate = kmAdminNoticeService.distinctCate();
-        model.addAttribute("distinctCate", distinctCate);
 
         // 페이징 처리
+        // 현재 페이지 번호
+        int currentPage = kmAdminNoticeService.getCurrentPage(pg);
+        log.info("currentPage : " + currentPage);
+
+
+        // 전체 게시물 갯수
         int total = kmAdminNoticeService.selectNoticeCountTotal();
+
+        // 마지막 페이지 번호
         int lastPageNum = kmAdminNoticeService.getLastPageNum(total);
-        int currentPg = kmAdminNoticeService.getCurrentPage(pg);
-        int start = kmAdminNoticeService.getStartNum(currentPg);
+
+        // 페이지 그룹 start, end 번호
+        int[] result = kmAdminNoticeService.getPageGroupNum(currentPage, lastPageNum);
+
+        // 페이지 시작번호
+        int pageStartNum = kmAdminNoticeService.getPageStartNum(currentPage, lastPageNum);
+
+        // 시작 인덱스
+        int start = kmAdminNoticeService.getStartNum(currentPage);
+        log.info("start : " + start);
 
         // 상품 목록 출력
-        List<KmAdminNoticeDTO> notices = kmAdminNoticeService.selectNotices(start);
+        List<KmAdminNoticeDTO> notices = kmAdminNoticeService.selectNoticesCurrentPage(start);
+        log.info("notices : " + notices);
+
 
         // 뷰(템플릿)에서 참조하기 위해 모델 참조
-        model.addAttribute("notices", notices);
+        model.addAttribute("selectCsNoticesjoinCsCate", selectCsNoticesjoinCsCate);
+        model.addAttribute("distinctCate", distinctCate);
 
-        // 페이징 처리
+        model.addAttribute("currentPage", currentPage);
         model.addAttribute("lastPageNum", lastPageNum);
-
+        model.addAttribute("pageGroupStart", result[0]);
+        model.addAttribute("pageGroupEnd", result[1]);
+        model.addAttribute("pageStartNum", pageStartNum+1);
+        model.addAttribute("notices", notices);
 
 
         return "admin/notice/list";
