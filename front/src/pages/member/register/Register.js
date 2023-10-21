@@ -15,7 +15,7 @@ function Register({userRegisterType, ip}) {
         formState: {
             errors,
         }, handleSubmit
-    } = useForm({mode: "onTouched"});
+    } = useForm({mode: "onBlur"});
     let navigate = useNavigate();
     const onValid = async (data) => {
         await axios.post(`${process.env.REACT_APP_API_ROOT}/member/signup`, data)

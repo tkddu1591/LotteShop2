@@ -14,5 +14,6 @@ public interface KmMemberRepository extends JpaRepository<KmMemberEntity, String
     Optional<KmMemberEntity> findByUid(String email);
     boolean existsByUid(String email);
 
+    int countByUid(String uid);
 }
 

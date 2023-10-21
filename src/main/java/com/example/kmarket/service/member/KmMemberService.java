@@ -40,4 +40,8 @@ public class KmMemberService {
         return KmMemberResponseDTO.of(memberRepository.save(member));
 
     }
+
+    public int checkUid(String uid) {
+        return memberRepository.countByUid(uid);
+    }
 }
