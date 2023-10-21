@@ -1,8 +1,8 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {changeCategoryNo, changeCateNames} from "../../slice/cateSilce";
-import {useDispatch, useSelector} from "react-redux";
-import {API_BASE_URL, HOME_URL} from "../../App";
+import {changeCategoryNo, changeCateNames, deleteCate1, deleteCate2} from "../../slice/cateSilce";
+import {useDispatch} from "react-redux";
+import {API_BASE_URL} from "../../App";
 import LoginHeader from "./LoginHeader";
 
 function Header() {
@@ -14,10 +14,7 @@ function Header() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const newCate = searchParams.get('cate');
-    const [cate, setCate] = useState(newCate);
     const newType = searchParams.get('type');
-    const [type, setType] = useState(newType);
-    const newSearch = searchParams.get('search');
     let [search, setSearch] = useState('');
     return (
         <header>
@@ -59,6 +56,8 @@ function Header() {
                         }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=hit"))
+                                   dispatch(changeCateNames(''))
+                                   dispatch(changeCategoryNo(0))
                                }
                                }>히트상품</a></li>
                         <li><a style={{
@@ -68,6 +67,8 @@ function Header() {
                         }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=score"))
+                                   dispatch(changeCateNames(''))
+                                   dispatch(changeCategoryNo(0))
                                }
                                }>추천상품</a></li>
                         <li><a style={{
@@ -77,6 +78,8 @@ function Header() {
                         }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=rdate"))
+                                   dispatch(changeCateNames(''))
+                                   dispatch(changeCategoryNo(0))
                                }
                                }>최신상품</a></li>
                         <li><a style={{
@@ -86,6 +89,8 @@ function Header() {
                         }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=sold"))
+                                   dispatch(changeCateNames(''))
+                                   dispatch(changeCategoryNo(0))
                                }
                                }>인기상품</a></li>
                         <li><a style={{
@@ -95,6 +100,8 @@ function Header() {
                         }}
                                onClick={() => {
                                    (navigator(process.env.PUBLIC_URL + "/product/list?type=discount"))
+                                   dispatch(changeCateNames(''))
+                                   dispatch(changeCategoryNo(0))
                                }
                                }>할인상품</a></li>
                     </ul>

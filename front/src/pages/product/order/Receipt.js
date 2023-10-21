@@ -43,7 +43,7 @@ function Receipt({orderEnd, orderProducts}) {
                     {orderEnd.savePoint !== 0 ?
                         <tr>
                             <td>포인트 적립</td>
-                            <td style={{color: 'dodgerblue'}}> {orderEnd.savePoint&&orderEnd.savePoint.toLocaleString()} P</td>
+                            <td style={{color: 'dodgerblue'}}> {orderEnd.savePoint && orderEnd.savePoint.toLocaleString()} P</td>
                         </tr>
                         : null}
                     <tr>
@@ -54,8 +54,14 @@ function Receipt({orderEnd, orderProducts}) {
             </table>
             <input type="button" value="결제하기"
                    onClick={async () => {
-                       if (orderEnd.recipHp.length !== 13) {
+                       if(orderEnd.recipName === '') {
+                           alert('수령자명을 입력해주세요')
+                       }
+                       else if (orderEnd.recipHp.length !== 13) {
                            alert('휴대폰 번호를 확인해주세요')
+                       } else if (orderEnd.recipZip === ''
+                       ) {
+                           alert('주소를 입력해주세요')
                        } else if (orderEnd.ordPayment === 0) {
                            alert('결제방식을 선택해주세요')
                        } else {
@@ -75,7 +81,7 @@ function Receipt({orderEnd, orderProducts}) {
                                }).catch((error) => {
                                console.error(error)
                            })
-                           await axios.delete(`${API_BASE_URL}/product/cart/all?uid=`+orderEnd.ordUid, {
+                           await axios.delete(`${API_BASE_URL}/product/cart/all?uid=` + orderEnd.ordUid, {
                                headers: {'Content-Type': 'application/json'}
                            })
                                .catch((error) => {

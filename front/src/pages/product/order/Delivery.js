@@ -72,6 +72,11 @@ function Delivery({member, changeOrderEnd, orderEnd, changeMemeber}) {
                     <tr>
                         <td>주문자</td>
                         <td><input type="text" name="orderer" value={member.name}
+                        /></td>
+                    </tr>
+                    <tr>
+                        <td>수령자</td>
+                        <td><input type="text" name="orderer" value={orderEnd.recipName}
                                    onChange={(e) => {
                                        handleInputChange(e, 'recipName')
                                    }}
@@ -86,7 +91,6 @@ function Delivery({member, changeOrderEnd, orderEnd, changeMemeber}) {
                                 value={formattedPhoneNumber}
                                 onChange={(e) => autoHyphen(e.target.value)}
                             />
-                            <span>- 포함 입력</span>
                         </td>
                     </tr>
                     <tr>
@@ -97,6 +101,7 @@ function Delivery({member, changeOrderEnd, orderEnd, changeMemeber}) {
                                        handleInputChange(e, 'recipZip')
                                    }}/>
                             <input type="button"
+                                   style={{marginLeft: '5px'}}
                                    onClick={()=>{
                                        setPostOn(!postOn)
                                    }}

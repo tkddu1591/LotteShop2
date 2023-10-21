@@ -10,6 +10,7 @@ function CateRoot({thisCate, type}) {
     let newCategory = {}
     let cateNumber = thisCate;
 
+
     const cateNames = useSelector((state) => state.cateNames);
     const categoryNo = useSelector((state) => state.categoryNo);
 
@@ -41,6 +42,7 @@ function CateRoot({thisCate, type}) {
 
     }, [cateNumber, categoryNo])
 
+    console.log(categoryNo)
     function getCateName() {
         if (cateNames.c2Name != null) {
             return <>
@@ -54,7 +56,14 @@ function CateRoot({thisCate, type}) {
         }
         return null;
     }
-
+    if(thisCate===null) {
+        return <>
+            <nav>
+                <h1>상품목록</h1>
+                <p>HOME {getCateName()}</p>
+            </nav>
+        </>
+    }
     if (type === "cart")
         return <>
             <nav>

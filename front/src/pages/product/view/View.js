@@ -51,7 +51,6 @@ function View() {
         thumb3: ''
     });
     //페이징 변수 선언
-
     let [pageRequestDTO, setPageRequestDTO] = useState({
         pg: 1, size: 5, prodNo: prodNo
     })
@@ -118,13 +117,6 @@ function View() {
         }
     }, []);
 
-    let dispatch = useDispatch();
-
-    useEffect(() => {
-        if (prodDTO !== null) {
-            dispatch(changeCategoryNo(prodDTO.prodCate2))
-        }
-    }, [prodDTO]);
 
     if (prodDTO.company !== '') {
         return <>
