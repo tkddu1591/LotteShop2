@@ -26,14 +26,6 @@ public class KmAdminNoticeService {
 
     private final KmAdminNoticeMapper kmAdminNoticeMapper;
 
-    public List<KmAdminNoticeDTO> selectCsNotices() {
-
-        // select * all
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNotices();
-
-        return noticeList;
-    }
-
     public List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate() {
 
         // cs_notice 테이블과 cs_cate 테이블 join
@@ -59,7 +51,7 @@ public class KmAdminNoticeService {
     // 유형 선택 중복 제거
     public List<KmAdminNoticeDTO> distinctCate(){
 
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNotices();
+        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNoticeAll();
 
         List<KmAdminNoticeDTO> distinctCate = noticeList.stream()
                 .filter(distinctByKey(KmAdminNoticeDTO::getCate))
@@ -73,10 +65,8 @@ public class KmAdminNoticeService {
         return kmAdminNoticeMapper.selectNoticeCountTotal();
     }
 
-    public List<KmAdminNoticeDTO> selectNotices(int start) {
-        int pageSize = 10; // 페이지당 항목 수
-        int startIdx = (start - 1) * pageSize; // 시작 위치 계산
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectNotices(startIdx);
+    public List<KmAdminNoticeDTO> selectNoticesCurrentPage(int start) {
+        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectNoticesCurrentPage(start);
         return noticeList;
     }
 

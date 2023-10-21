@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:inline="javascript">
         function filterTable() {
             var selectedValueCate = document.getElementById("searchCate1").value;
@@ -26,8 +25,7 @@
                 }
             }
         }
-    </script>
-    <script>
+
         document.addEventListener('DOMContentLoaded', function() {
             var allCheckbox = document.querySelector("input[name='all']");
             allCheckbox.addEventListener('click', function() {
@@ -36,8 +34,20 @@
                     checkboxes[i].checked = allCheckbox.checked;
                 }
             });
+
+            var searchCate1 = document.getElementById("searchCate1");
+            var searchCate2 = document.getElementById("searchCate2");
+
+            searchCate1.addEventListener("change", function() {
+                filterTable();
+            });
+
+            searchCate2.addEventListener("change", function() {
+                filterTable();
+            });
         });
     </script>
+
     <div th:replace="/admin/header.html :: header"></div>
 </head>
     <main>
@@ -55,15 +65,20 @@
 
                 <form action="#" method="post">
                     <div>
-                        <select name="searchCate1" id="searchCate1" onchange="filterTable()">
-                            <option value="">1차선택</option>
-                            <option th:each="dto : ${qnaList}" th:value="${dto.cate}" th:text="${dto.cateName}">1차선택</option>
-                        </select>
-                        <select name="searchCate2" id="searchCate2" onchange="filterTable()">
-                            <option value="">2차선택</option>
-                            <option th:each="dto : ${qnaList}" th:value="${dto.type}" th:text="${dto.typeName}">2차선택</option>
-                        </select>
-                        <!-- 중략 -->
+                        <div>
+                            <select name="searchCate1" id="searchCate1" onchange="filterTable()">
+                                <option value="">1차선택</option>
+                                <th:block th:each="dto, iterStat : ${qnaList}">
+                                    <option th:value="${dto.cate}" th:text="${dto.cateName}" th:if="${iterStat.index == 0 or dto.cate != qnaList[iterStat.index - 1].cate}">1차선택</option>
+                                </th:block>
+                            </select>
+                            <select name="searchCate2" id="searchCate2" onchange="filterTable()">
+                                <option value="">2차선택</option>
+                                <th:block th:each="dto, iterStat : ${qnaList}">
+                                    <option th:value="${dto.type}" th:text="${dto.typeName}" th:if="${iterStat.index == 0 or dto.type != qnaList[iterStat.index - 1].type}">2차선택
+                                </th:block>
+                            </select>
+                        </div>
                     </div>
                     <table class="listTable">
                         <thead>
@@ -79,7 +94,7 @@
                             </tr>
                         </thead>
                         <tbody class="listTbody" id="noticeTable">
-                                <tr th:each="dto:${qnaList}">
+                                <tr th:each="dto:${qna}">
                                     <td><input type="checkbox" name="chk"/></td>
                                     <td th:text="${dto.qnaNo}"></td>
                                     <td th:text="${dto.cate}"></td>
@@ -97,28 +112,29 @@
                         </tbody>
                     </table>
 
-
-                    <input type="submit" value="선택삭제" class="deleteAll" />
-                    <a th:href="@{/admin/cs/notice/write.do}" class="writeBtn">작성하기</a>
+                    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                        <div>
+                            <input type="submit" value="선택삭제" class="deleteAll" />
+                        </div>
+                    </div>
                 </form>
-                <!--
+
                 <div class="paging">
-                <span class="prev">
-                    <a href="#"><&nbsp;이전</a>
+                <span class="prev" th:if="${pageStartNum > 1}">
+                    <a th:href="@{/admin/qna/list(pg=${pageGroupStart - 1},search=${search})}"><&nbsp;이전</a>
                 </span>
                     <span class="num">
-                    <th:block th:each="num : ${#numbers.sequence(1,lastPageNum)}">
-                        <a th:href="@{/admin/faq/list(pg=${num})}" th:text="${num}">[[${num}]]</a>
+                    <th:block th:each="i : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                        <a th:href="@{/admin/qna/list(pg=${i},search=${search})}" th:classappend="${currentPage == i} ? 'current' : 'off'">
+                            [[${i}]]
+                        </a>
                     </th:block>
                 </span>
-                    <span class="next">
-                    <a href="#">다음&nbsp;></a>
+                    <span class="next" th:if="${pageGroupEnd < lastPageNum}">
+                    <a th:href="@{/admin/qna/list(pg=${pageGroupEnd + 1},search=${search})}">다음&nbsp;></a>
                 </span>
-                </div>-->
-
+                </div>
             </section>
-
-            <!-- 상품목록 컨텐츠 끝 -->
         </section>
     </main>
     <div th:replace="/admin/footer.html :: footer"></div>

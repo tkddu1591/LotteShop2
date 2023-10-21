@@ -4,8 +4,24 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kmarket.mapper.admin.KmAdminQnaMapper">
 
-    <select id="selectCsQna" resultType="com.example.kmarket.dto.admin.KmAdminQnaDTO">
+    <select id="selectCsQnaAll" resultType="com.example.kmarket.dto.admin.KmAdminQnaDTO">
         SELECT * FROM `km_cs_qna`;
+    </select>
+
+    <!--
+    // 페이징
+    // 전체 게시글 갯수 계산
+    -->
+    <select id="selectQnaCountTotal" resultType="int">
+        SELECT COUNT(*) FROM `km_cs_qna`;
+    </select>
+
+    <!--
+    // 페이징
+    // 게시글 10개씩 출력
+    -->
+    <select id="selectQnaCurrentPage" resultType="com.example.kmarket.dto.admin.KmAdminQnaDTO">
+        SELECT * FROM `km_cs_qna` LIMIT #{start}, 10;
     </select>
 
 </mapper>
