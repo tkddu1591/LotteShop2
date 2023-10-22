@@ -44,4 +44,8 @@ public class KmMemberService {
     public int checkUid(String uid) {
         return memberRepository.countByUid(uid);
     }
+
+    public int checkEmail(String email) {
+        return memberRepository.countByEmail(email);
+    }
 }

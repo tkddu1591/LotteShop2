@@ -1,7 +1,8 @@
 import DaumPost from "../../../store/DaumPost";
 import React from "react";
+import EmailCheck from "./EmailCheck";
 
-function SellerRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors}) {
+function SellerRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors, watch}) {
     return <>
         <section>
             <table>
@@ -98,19 +99,7 @@ function SellerRegister({postOn, register, postDTO, setPostDTO, setPostOn, error
 										지역번호 포함, 예) 02-234-1234</span>
                             {errors.fax && <div style={{color: 'red'}}>{errors.fax.message}</div>}</td>
                     </tr>
-                    <tr>
-                        <th><span className="essential">*</span>EMAIL</th>
-                        <td><input type="email" name="kms_email"
-                                   placeholder="이메일 입력" required
-                                   {...register("email", {
-                                       required: "이메일을 입력해 주세요.",
-                                       pattern: {value: /^[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
-                                       message: '유효한 이메일을 입력해주세요'}
-                                   })}
-                                   style={errors.email && {border: 'solid 2px red'}}
-                                   />
-                            {errors.email && <div style={{color: 'red'}}>{errors.email.message}</div>}</td>
-                    </tr>
+                    <EmailCheck errors={errors} watch={watch} register={register}></EmailCheck>
                     <tr className="addr">
                         <th>회사주소</th>
                         <td>

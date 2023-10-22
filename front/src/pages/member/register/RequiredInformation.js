@@ -23,7 +23,6 @@ function RequiredInformation({register, errors, watch}) {
                                                let test;
                                                await axios.post(`${process.env.REACT_APP_API_ROOT}/member/checkUid`, {uid: value})
                                                    .then((response) => {
-                                                       console.log(response.data);
                                                        test = response.data;
                                                    })
                                                if (test !== 0) {

@@ -27,6 +27,10 @@ public class KmMemberController {
     public int checkUid(@RequestBody KmMemberRequestDTO request){
         return memberService.checkUid(request.getUid());
     }
+    @PostMapping("/checkEmail")
+    public int checkEmail(@RequestBody KmMemberRequestDTO request){
+        return memberService.checkEmail(request.getEmail());
+    }
 
     @PostMapping("/nickChagne")
     public ResponseEntity<KmMemberResponseDTO> setMemberNickname(@RequestBody KmMemberRequestDTO request) {
