@@ -42,7 +42,6 @@ function CateRoot({thisCate, type}) {
 
     }, [cateNumber, categoryNo])
 
-    console.log(categoryNo)
     function getCateName() {
         if (cateNames.c2Name != null) {
             return <>
