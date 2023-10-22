@@ -1506,13 +1506,13 @@
 }
 
 /* 상품검색 페이지 */
-#product > .search > .group {
+#product  .group {
     width: 100%;
     margin: 16px 0;
     border: 1px solid #d7d7d7;
 }
 
-#product > .search > .group > h3 {
+#product  .group > h3 {
     border-bottom: 1px solid #d7d7d7;
     color: #111;
     font-size: 17px;
@@ -1521,33 +1521,33 @@
     padding: 10px 15px;
 }
 
-#product > .search > .group > h3 > strong {
+#product  .group > h3 > strong {
     color: #d50c0d;
     font-size: 18px;
     margin-right: 6px;
 }
 
-#product > .search > .group > h3 > em {
+#product   .group > h3 > em {
     color: #888;
     font-size: 14px;
 }
 
-#product > .search > .group > h3 span {
+#product .group > h3 span {
     color: #d50c0d;
 }
 
-#product > .search > .group > form {
+#product  .group > div {
     border-bottom: 1px solid #d7d7d7;
     padding: 10px 15px;
 }
 
-#product > .search > .group > form > input[type=text] {
+#product  .group > div > input[type=text] {
     height: 30px;
     border: 1px solid #bbb;
     padding: 0 10px;
 }
 
-#product > .search > .group > form > input[type=submit] {
+#product  .group > div > input[type=submit] {
     height: 32px;
     padding: 0 5px;
     font-weight: bold;
@@ -1556,23 +1556,23 @@
     border: 0;
 }
 
-#product > .search > .group > form > span {
+#product   .group > div > span {
     float: right;
     margin-top: 0;
 }
 
-#product > .search > .group > form > span > label {
+#product   .group > div > span > label {
     margin-right: 10px;
 }
 
-#product > .search > .group > form > span > input {
+#product   .group > div > span > input {
     width: 100px;
     height: 30px;
     border: 1px solid #bbb;
     padding: 0 10px;
 }
 
-#product > .search > .group > .info {
+#product   .group > .info {
     padding: 15px;
     background: #f5f5f5;
     color: #737373;

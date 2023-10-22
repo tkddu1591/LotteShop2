@@ -22,7 +22,7 @@ function OrderProducts({orderProducts}) {
             </thead>
             <tbody>
                 {Array.isArray(orderProducts) && orderProducts.map((item, index) => {
-                    return <tr key={item.cartNo}>
+                    return <tr key={item.cartNo+index}>
                         <td>
                             <article>
                                 <a onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}

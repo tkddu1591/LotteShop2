@@ -16,7 +16,7 @@ function ListSort({changePageRequest, pageRequestDTO, cate, search}) {
             <li>
                 <a onClick={() => changeType('sold')}
                    style={{cursor: 'pointer', userSelect: 'none'}}
-                   className={pageRequestDTO.type === 'sold' ? 'on' : ''}>판매많은순</a></li>
+                   className={pageRequestDTO.type === 'sold' || pageRequestDTO.type===null? 'on' : ''}>판매많은순</a></li>
             <li>
                 <a onClick={() => changeType('price')}
                    style={{cursor: 'pointer', userSelect: 'none'}}

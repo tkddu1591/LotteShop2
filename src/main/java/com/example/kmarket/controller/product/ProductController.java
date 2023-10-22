@@ -22,6 +22,7 @@ public class ProductController {
 
     @GetMapping("/list")
     public PageResponseDTO list(PageRequestDTO pageRequestDTO){
+        log.info(pageRequestDTO.toString());
         return kmProductService.findByProducts(pageRequestDTO);
     }
     @GetMapping("/view")

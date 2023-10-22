@@ -26,7 +26,7 @@ function Order() {
     let [orderEnd, setOrderEnd] = useState({})
     useEffect(() => {
         if (memberUid !== null && retrieveStoredToken().token !=null) {
-            axios.get(`${API_BASE_URL}/mmember/e`, createTokenHeader(retrieveStoredToken().token))
+            axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
                 .then(response => {
                     setMember(response.data)
                 }).catch(error => console.log('유저 정보가 없습니다.'))
@@ -84,7 +84,7 @@ function Order() {
             fontSize: '15px',
             marginTop: '100px'
         }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요</div>
-    else if (member !== undefined && orderEnd.ordCount !== undefined)
+    else if (member !== undefined && orderEnd.ordCount !== undefined && orderEnd.ordCount !== 0)
         return <>
             <OrderProducts orderProducts={orderProducts}></OrderProducts>
             <Receipt orderEnd={orderEnd} orderProducts={newOrderProducts} member={member}></Receipt>
