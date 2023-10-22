@@ -19,12 +19,12 @@
 <div id="admin-wrapper">
     <header>
         <div>
-            <a href="./index.html" class="logo"><img src="./images/admin_logo.png" alt="admin_logo"/></a>
+            <a th:href="@{/admin/index}" class="logo"><img th:src="@{/admin/images/admin_logo.png}" alt="admin_logo"/></a>
             <p>
                 <span>홍길동님 반갑습니다.</span>
-                <a href="#">HOME |</a>
-                <a href="#">로그아웃 |</a>
-                <a href="#">고객센터</a>
+                <a th:href="@{/index}">HOME |</a>
+                <a th:href="@{/index}">로그아웃 |</a>
+                <a th:href="@{/templates/cs/index}">고객센터</a>
             </p>
         </div>
     </header>
