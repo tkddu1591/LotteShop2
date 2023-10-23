@@ -1,14 +1,12 @@
 import {Link, useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../App";
-import {useDispatch, useSelector} from "react-redux";
-import {deleteMember, insertMember} from "../../slice/memberSlice";
+import {useDispatch} from "react-redux";
 import {logoutActionHandler} from "../../slice/tokenSlice";
 import {useState} from "react";
 
 function LoginHeader() {
-    let [member,setMember] = useState(localStorage.getItem('memberUid'));
+    let [member] = useState(localStorage.getItem('memberUid'));
     let navigate = useNavigate();
-    let dispatch = useDispatch();
 
 
     return <>
@@ -24,12 +22,12 @@ function LoginHeader() {
                     <>
                         <a style={{color:'#E60012'}}>{member}</a>
                         <a style={{cursor: 'pointer', userSelect: 'none'}}
-                           onClick={(e) => {
+                           onClick={() => {
                                logoutActionHandler()
                                navigate(0)
                            }}>로그아웃</a>
-                        <Link>마이페이지</Link>
-                        <a onClick={(e) => {
+                        <Link to={`${process.env.REACT_APP_HOME_URL}/my/home`}>마이페이지</Link>
+                        <a onClick={() => {
                             navigate(process.env.PUBLIC_URL + "/product/cart")
                         }}
                            style={{cursor: 'pointer', userSelect: 'none'}}

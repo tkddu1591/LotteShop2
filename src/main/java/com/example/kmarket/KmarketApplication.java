@@ -19,7 +19,7 @@ public class KmarketApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000", "http://localhost:8080", "http://localhost:63342", "http://3.35.208.185:3000", "http://3.35.208.185:8080")
+                        .allowedOrigins("http://localhost:3000", "http://localhost:8080", "http://localhost:63342", "http://54.180.120.147:3000", "http://54.180.120.147:8080")
                         .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE");
             }
         };

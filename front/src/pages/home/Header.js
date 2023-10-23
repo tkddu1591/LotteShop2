@@ -1,9 +1,10 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {changeCategoryNo, changeCateNames, deleteCate1, deleteCate2} from "../../slice/cateSilce";
+import {changeCategoryNo, changeCateNames} from "../../slice/cateSilce";
 import {useDispatch} from "react-redux";
 import {API_BASE_URL} from "../../App";
 import LoginHeader from "./LoginHeader";
+import SearchBar from "./SearchBar";
 
 function Header() {
     let navigator = useNavigate();
@@ -15,37 +16,11 @@ function Header() {
     const searchParams = new URLSearchParams(location.search);
     const newCate = searchParams.get('cate');
     const newType = searchParams.get('type');
-    let [search, setSearch] = useState('');
+
     return (
         <header>
             <LoginHeader></LoginHeader>
-            <div className="logo">
-                <div>
-                    <Link to={process.env.PUBLIC_URL + "/"}><img
-                        src={`${process.env.REACT_APP_HOME_URL}/images/header_logo.png`} alt="로고"/></Link>
-                    <div>
-                        <input
-                            onChange={(e) => {
-                                setSearch(e.target.value)
-                            }}
-                            onKeyUp={(e) => {
-                                if (e.keyCode === 13) {
-                                    dispatch(changeCateNames(''))
-                                    dispatch(changeCategoryNo(0))
-                                    navigator(process.env.PUBLIC_URL + "/product/list?search=" + search)
-                                }
-                            }}
-
-
-                        />
-                        <button><i className="fa fa-search"
-                                   onClick={(e) => {
-                                       navigator(process.env.PUBLIC_URL + "/product/list?search=" + search)
-                                   }}
-                        ></i></button>
-                    </div>
-                </div>
-            </div>
+            <SearchBar></SearchBar>
             <div className="menu">
                 <div>
                     <ul>
@@ -116,5 +91,4 @@ function Header() {
         </header>
     )
 }
-
 export default Header;

@@ -44,7 +44,7 @@ public class KmMemberEntity {
     private String etc3;
     private String etc4;
     private String etc5;
-
+    private String refreshToken;
     @Enumerated(EnumType.STRING)
     private AuthorityEntity authority;
 

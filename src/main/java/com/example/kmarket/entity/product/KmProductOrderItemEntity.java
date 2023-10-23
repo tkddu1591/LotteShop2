@@ -17,7 +17,10 @@ public class KmProductOrderItemEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ordNo")
     private KmProductOrderEntity kmProductOrderEntity;
-    private int prodNo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prodNo")
+    private KmProductEntity kmProductEntity;
     private int count;
     private int price;
     private int discount;

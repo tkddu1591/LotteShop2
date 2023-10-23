@@ -154,7 +154,7 @@ function Group({
                }) {
 
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             resetPageRequest() // 작성한 댓글 post 요청하는 함수
         }
