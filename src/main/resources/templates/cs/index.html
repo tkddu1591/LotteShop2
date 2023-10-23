@@ -1,4 +1,11 @@
-<th:block th:insert="~{/cs/inc/header.html}"/>
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cs/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
     <section id="cs">
         <div class="main">
             <h1 class="title"><strong>롯데ON</strong>이 도와드릴게요!</h1>
@@ -119,4 +126,5 @@
             </section>
         </div>
     </section>
-<th:block th:insert="~{/cs/inc/footer.html}"/>
+</th:block>
+</html>

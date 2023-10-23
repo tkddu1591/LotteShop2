@@ -61,18 +61,13 @@ public class KmNoticeService {
                 .build();
     }
 
-  /*  public KmCsCateDTO findByCate(String cate) {
-        KmCsCateEntity entity = kmCsCateRepository.findByCate(cate);
-        KmCsCateDTO dto = kmCsCateMapper.toDTO(entity);
-        return dto;
-    }*/
-
     public void saveNotice(KmCsNoticeDTO dto) {
         KmCsNoticeEntity entity = mapper.toEntity(dto);
         kmNoticeRepo.save(entity);
     }
 
     public KmCsNoticeDTO findById(int noticeNo) {
+        log.info("@@@@@@@@@ notice Service noticeNo : " + noticeNo);
         KmCsNoticeEntity entity = kmNoticeRepo.findById(noticeNo).get();
         KmCsNoticeDTO dto = mapper.toDTO(entity);
         return dto;

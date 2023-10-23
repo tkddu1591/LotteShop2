@@ -1,4 +1,11 @@
-<th:block th:insert="~{/cs/inc/header.html}"/>
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cs/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
 <section id="cs">
     <div class="qna">
         <nav>
@@ -85,4 +92,5 @@
     </div>
 </section>
 <script src="/cs/js/writeType.js"></script>
-<th:block th:insert="~{/cs/inc/footer.html}"/>
+</th:block>
+</html>
