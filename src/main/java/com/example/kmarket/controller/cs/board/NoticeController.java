@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,7 +35,12 @@ public class NoticeController {
     }
 
     @GetMapping("/view")
-    public String view() {
+    public String view(Model model, int no) {
+        KmCsNoticeDTO dto = ns.findById(no);
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@ notice view no : " + no);
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@ notice view dto : " + dto);
+        model.addAttribute("notice", dto);
+
         return "cs/notice/view";
     }
 
