@@ -31,7 +31,7 @@ function Review({userReview}) {
                     {userReview.map((item, index) => {
                         return <>
                             <tr key={index}>
-                                <td>{item.prodNo}</td>
+                                <td>{item.prodNo.toLocaleString()}</td>
                                 <td>{item.prodName}</td>
                                 <td>{item.content}</td>
                                 {ratingCheck(item.rating)}

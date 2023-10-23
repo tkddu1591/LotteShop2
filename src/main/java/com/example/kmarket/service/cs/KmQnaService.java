@@ -105,4 +105,7 @@ public class KmQnaService {
                 .build();
     }
 
+    public int countByUid(String memberUid) {
+        return kmCsQnaRepository.countByWriterAndAnswerCompleteBetween(memberUid, 0, 1);
+    }
 }

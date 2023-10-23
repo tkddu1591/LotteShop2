@@ -24,7 +24,7 @@ public class KmCsQnaDTO {
 	private String regip;
 	private int answerComplete;
 	private LocalDateTime rdate;
-	
+	private String answer;
 	//추가 필드
 	private String writerName;
 	private String cateName;

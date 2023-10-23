@@ -11,7 +11,6 @@ import './pages/home/slider.css';
 import CateRoot from "./pages/product/CateRoot";
 import {deleteBanner} from "./slice/bannerSilce";
 import Order from "./pages/product/order/Order";
-import MyNav from "./pages/my/myNav";
 
 export const API_BASE_URL = process.env.REACT_APP_API_ROOT;
 export const HOME_URL = process.env.REACT_APP_HOME_URL;

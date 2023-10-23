@@ -12,5 +12,7 @@ public interface KmProductOrderRepository extends JpaRepository<KmProductOrderEn
     KmProductOrderEntity findFirstByOrderByOrdNoDesc();
 
     KmProductOrderEntity findByOrdUidOrderByOrdNoDesc(String uid);
+
+    int countByOrdUidAndOrdCompleteBetween(String memberUid, int start, int end);
 }
 

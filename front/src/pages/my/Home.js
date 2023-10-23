@@ -1,4 +1,3 @@
-import {Route} from "react-router-dom";
 import MyNav from "./myNav";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
@@ -10,7 +9,8 @@ import Review from "./home/Review";
 import Qna from "./home/Qna";
 import MyInfo from "./home/MyInfo";
 import {createTokenHeader, retrieveStoredToken} from "../../slice/tokenSlice";
-import Error from "../product/order/Error";
+import {changeDTO} from "../../store/ChangeDTO";
+import {Link} from "react-router-dom";
 
 function Home() {
     let [userData, setUserData] = useState({});
@@ -25,13 +25,41 @@ function Home() {
     let [pageResponseDTO, setPageResponseDTO] = useState({
         dtoList: [], end: 10, start: 1, next: true, prev: true, total: 10, size: 10
     });
+    let [memberDTO, setMemberDTO] = useState({});
+    let [divName, setDivName] = useState('home');
+    useEffect(() => {
+        //유저 포인트 들고오기
+        axios.get(`${API_BASE_URL}/my/list`, {params: pageRequestDTO})
+            .then(res => {
+                setPageResponseDTO(res.data)
+            }).catch(error => {
+            console.log(error);
+        })
+    }, [pageRequestDTO]);
+    useEffect(() => {
+        changeDTO(setPageRequestDTO, 'type', divName)
+    }, [divName]);
     useEffect(() => {
         if (memberUid !== null) {
             if (memberUid !== null && retrieveStoredToken().token != null) {
+
                 axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
                     .then(response => {
-                        setUserData(response.data)
+                        setMemberDTO(response.data)
                     }).catch(error => console.log('유저 정보가 없습니다.'))
+
+                axios.get(`${API_BASE_URL}/my/memberCount`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }, params: {
+                        memberUid: memberUid
+                    }
+                }).then((response) => {
+                    console.log(response.data);
+                    setUserData(response.data)
+                }).catch(error => {
+                    console.log(error);
+                })
             }
 
             //유저 포인트 들고오기
@@ -65,10 +93,7 @@ function Home() {
             console.log(pageRequestDTO);
             axios.get(`${API_BASE_URL}/my/list`, {
                 params: {
-                    pg: 1,
-                    size: 5,
-                    type: 'qna',
-                    memberUid: memberUid
+                    pg: 1, size: 5, type: 'qna', memberUid: memberUid
                 }
             })
                 .then(res => {
@@ -77,34 +102,73 @@ function Home() {
                 console.log(error);
             })
         }
-    }, [pageRequestDTO]);
-    let [divName, setDivName] = useState('home');
-    console.log(userPoint)
-    console.log(userOrder)
-    console.log(userReview)
-    console.log(userQna)
-    console.log(userData)
+    }, []);
+    console.log(pageResponseDTO);
+    function ratingCheck(value) {
+        if (value >= 4.5)
+            return <td><span className="rating star5">상품평</span></td>
+        else if (value >= 3.5)
+            return <td><span className="rating star4">상품평</span></td>
+        else if (value >= 2.5)
+            return <td><span className="rating star3">상품평</span></td>
+        else if (value >= 1.5)
+            return <td><span className="rating star2">상품평</span></td>
+        else
+            return <td><span className="rating star1">상품평</span></td>
+    }
 
     return <>
         <div id="my">
             <MyNav setDivName={setDivName} divName={divName} userData={userData}></MyNav>
             <div className={divName}>
-                <Menu></Menu>
-                {memberUid !== null ?
-                    <section>
+                <Menu divName={divName} setDivName={setDivName}></Menu>
+                {memberUid !== null ? <section>
                         <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/my/my_banner2.png`}
                                          alt="패션, 타운 하나로 끝" className="banner"/></a>
-                        <Latest userOrder={userOrder}></Latest>
-                        <Point userPoint={userPoint}></Point>
-                        <Review userReview={userReview}></Review>
-                        <Qna userQna={userQna}></Qna>
-                        <MyInfo></MyInfo>
+                        {divName === 'home' && <>
+                            <Latest userOrder={userOrder}></Latest>
+                            <Point userPoint={userPoint}></Point>
+                            <Review userReview={userReview}></Review>
+                            <Qna userQna={userQna}></Qna>
+                            <MyInfo></MyInfo></>}
+                        {divName === 'review' && <>
+                            <article>
+                                <h3>나의리뷰</h3>
+
+                                <table border="0">
+                                    <tbody>
+                                        <tr>
+                                            <th>번호</th>
+                                            <th>상품명</th>
+                                            <th>내용</th>
+                                            <th>평점</th>
+                                            <th>작성일</th>
+                                        </tr>
+                                        {pageResponseDTO.reviewDtoList&&pageResponseDTO.reviewDtoList.map((item, index) => {
+                                            console.log(pageResponseDTO.total-index)
+                                            return <>
+                                                <tr key={index}>
+                                                    <td className="no">{pageResponseDTO.total-index - pageRequestDTO.pg*10 +10}</td>
+                                                    <td className="prodName"><Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=`+item.prodNo}>{item.prodName}</Link></td>
+                                                    <td className="content">{item.content}</td>
+                                                    {ratingCheck(item.rating)}
+                                                    <td className="date">{item.rdate.substring(0,10)}</td>
+                                                </tr>
+
+
+                                            </>
+                                        })}
+                                    < /tbody>
+                                </table>
+                            </article>
+                        </>}
                     </section>
-                :<section className="error" style={{
-                        padding: '50px 0 !important',
-                        textAlign: 'center',
-                        fontSize: '15px',
-                    }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요.</section>}
+                    :
+                    <section className="error" style={{
+                        padding: '50px 0 !important', textAlign: 'center', fontSize: '15px',
+                    }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요.
+                    </section>
+                }
 
 
             </div>

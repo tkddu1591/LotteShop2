@@ -2,21 +2,13 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import CartList from "./CartList";
 import Total from "./Total";
-import qs from "qs";
-import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
 import {API_BASE_URL} from "../../../App";
-import {useSelector} from "react-redux";
-import {createTokenHeader, retrieveStoredToken} from "../../../slice/tokenSlice";
-import {insertMember} from "../../../slice/memberSlice";
-import Error from "../order/Error";
-import {useNavigate} from "react-router-dom";
 
 function Cart() {
 
     let [cartDataList, setCartDataList] = useState([]);
     let [selectedCartList, setSelectedCartList] = useState([]);
-    let [memberUid,setMemberUid] = useState(localStorage.getItem('memberUid'));
-    let navigate = useNavigate()
+    let [memberUid] = useState(localStorage.getItem('memberUid'));
     useEffect(() => {
         axios.get(`${API_BASE_URL}/product/cart`, {
             params: {

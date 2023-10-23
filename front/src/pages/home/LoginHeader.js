@@ -1,6 +1,5 @@
 import {Link, useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../App";
-import {useDispatch} from "react-redux";
 import {logoutActionHandler} from "../../slice/tokenSlice";
 import {useState} from "react";
 

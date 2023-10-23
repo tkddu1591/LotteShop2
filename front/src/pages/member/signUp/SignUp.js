@@ -1,5 +1,5 @@
-import {Link, useNavigate} from "react-router-dom";
-import {API_BASE_URL, HOME_URL} from "../../../App";
+import { useNavigate} from "react-router-dom";
+import {API_BASE_URL} from "../../../App";
 import React, {useEffect, useState} from "react";
 import {changeDTO} from "../../../store/ChangeDTO";
 import axios from "axios";

@@ -36,7 +36,7 @@ public class KmCsQnaEntity {
 	private String writer;
 	private int answerComplete;
 	private String regip;
-
+	private String answer;
 	@CreationTimestamp
 	private LocalDateTime rdate;
 }

@@ -1,10 +1,9 @@
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
 import {useNavigate} from "react-router-dom";
 import {API_BASE_URL} from "../../../App";
-import {member} from "../../../slice/memberSlice";
 
 function Info({prodDTO, scrollY}) {
 

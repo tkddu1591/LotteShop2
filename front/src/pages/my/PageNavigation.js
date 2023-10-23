@@ -1,4 +1,6 @@
-function PageNavigation({pageResponseDTO, changePageRequest}) {
+import {changeDTO} from "../../store/ChangeDTO";
+
+function PageNavigation({pageResponseDTO, setPageRequestDTO}) {
     let start = pageResponseDTO.start;
     let end = pageResponseDTO.end;
     let next = pageResponseDTO.next;
@@ -16,25 +18,22 @@ function PageNavigation({pageResponseDTO, changePageRequest}) {
     return <div className="paging">
 
         {prev && <span className="prev">
-                <a onClick={() => changePageRequest('pg', start - 1)}
+                <a onClick={() =>changeDTO(setPageRequestDTO,'pg', start - 1)}
                    style={{cursor: 'pointer', userSelect: 'none'}}> &lt; 이전 </a>
             </span>}
         <span className="num">
 
             {no.map((item, index) => {
                 return <a key={index}
-                          onClick={() => changePageRequest('pg', item)} style={{cursor: 'pointer', userSelect: 'none'}}
+                          onClick={() => changeDTO(setPageRequestDTO,'pg', item)} style={{cursor: 'pointer', userSelect: 'none'}}
                           className={pg === item ? 'on' : ''}>{item}</a>
             })}
         </span>
 
         {next && <span className="">
-                <a onClick={() => changePageRequest('pg', end + 1)}
+                <a onClick={() => changeDTO(setPageRequestDTO,'pg', end + 1)}
                    style={{cursor: 'pointer', userSelect: 'none'}}> 다음 &gt;</a>
             </span>}
 
     </div>
 }
-
-
-export default PageNavigation;
