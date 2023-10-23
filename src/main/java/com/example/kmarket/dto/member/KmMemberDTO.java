@@ -38,7 +38,11 @@ public class KmMemberDTO {
     private String etc3;
     private String etc4;
     private String etc5;
+    private int order;
+    private int coupon;
+    private int qna;
 
-    
-    
+
+
+
 }

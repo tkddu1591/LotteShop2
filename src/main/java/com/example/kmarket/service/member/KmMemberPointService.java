@@ -51,4 +51,9 @@ public class KmMemberPointService {
                 .total(totalElement)
                 .build();
     }
+
+
+    public int findByUidAndPoint(String memberUid) {
+        return (kmMemberPointRepository.findByUid(memberUid).getPoint());
+    }
 }

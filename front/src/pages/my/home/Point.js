@@ -21,8 +21,8 @@ function Point({userPoint}) {
                             <tr key={index}>
                                 <td>{item.ordDate.substring(0, 10)}</td>
                                 <td>적립</td>
-                                <td>{item.ordNo}</td>
-                                <td>{item.point}</td>
+                                <td>{item.ordNo.toLocaleString()}</td>
+                                <td>{item.point.toLocaleString()}</td>
                                 <td>{item.ordComplete === 2 ? '적립취소' : '적립완료'}</td>
                                 <td>{item.pointDate.substring(0, 10)}</td>
                             </tr>
