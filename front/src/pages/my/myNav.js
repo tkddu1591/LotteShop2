@@ -1,4 +1,4 @@
-import {API_BASE_URL, HOME_URL} from "../../App";
+import {HOME_URL} from "../../App";
 
 function MyNav({setDivName, divName, userData}){
 

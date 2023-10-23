@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
 import Info from "./Info";
 import Alert from "./Alert";
 import Message from "./Message";
@@ -42,7 +41,6 @@ function Complete() {
         }
     }, []);
 
-    let navigate = useNavigate();
     if (completeList.length > 0 && completeTotal.ordNo !== undefined && member.name !== undefined) {
         return <>
 

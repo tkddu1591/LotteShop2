@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../../App";
 import {changeCategoryNo} from "../../../slice/cateSilce";
 import {useDispatch} from "react-redux";
@@ -26,7 +26,6 @@ function ProductItem({pageResponseDTO}) {
         }
     }
 
-    const productPage = `${HOME_URL}/product/list`;
     let navigate = useNavigate();
     let dispatch = useDispatch();
     return (

@@ -10,19 +10,16 @@ import Error from "./Error";
 import axios from "axios";
 import {API_BASE_URL} from "../../../App";
 import {createTokenHeader, retrieveStoredToken} from "../../../slice/tokenSlice";
-import {insertMember} from "../../../slice/memberSlice";
-import {useNavigate} from "react-router-dom";
 
 function Order() {
 
     let orderTotal = useSelector((state) => state.orderTotal);
     let orderProducts = useSelector((state) => state.orderProducts);
     let newOrderProducts = [];
-    let [newOrderTotal, setNewOrderTotal] = useState(orderTotal);
+    let [newOrderTotal, ] = useState(orderTotal);
     let [usePoint, setUsePoint] = useState(0);
     let [member, setMember] = useState();
-    let navigate = useNavigate();
-    let [memberUid,setMemberUid] = useState(localStorage.getItem('memberUid'));
+    let [memberUid] = useState(localStorage.getItem('memberUid'));
     let [orderEnd, setOrderEnd] = useState({})
     useEffect(() => {
         if (memberUid !== null && retrieveStoredToken().token !=null) {

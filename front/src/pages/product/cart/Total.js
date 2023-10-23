@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {insertOrderProduct, insertOrderTotal, orderProducts, orderTotal} from "../../../slice/orderSilce";
+import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
 
 function Total({total, selectedCartList}) {
     let navigator = useNavigate();

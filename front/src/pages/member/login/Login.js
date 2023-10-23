@@ -1,17 +1,14 @@
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import {API_BASE_URL} from "../../../App";
 import axios from "axios";
 import {changeDTO} from "../../../store/ChangeDTO";
 import {useNavigate} from "react-router-dom";
-import {createTokenHeader, GET, loginTokenHandler, retrieveStoredToken} from "../../../slice/tokenSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {insertMember} from "../../../slice/memberSlice";
+import {createTokenHeader, loginTokenHandler, retrieveStoredToken} from "../../../slice/tokenSlice";
 
 function Login() {
     let [memberDTO, setMemberDTO] = useState({uid: '', pass: ''})
     let [memberCheck, setMemberCheck] = useState(false)
     let navigate = useNavigate();
-    const dispatch = useDispatch();
     return <div className="login">
         <nav>
             <h1>로그인</h1>

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
-import DaumPost from "../../../store/DaumPost";
 import SellerRegister from "./SellerRegister";
 import UserRegister from "./UserRegister";
 import RequiredInformation from "./RequiredInformation";

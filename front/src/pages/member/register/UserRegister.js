@@ -1,7 +1,5 @@
 import DaumPost from "../../../store/DaumPost";
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {API_BASE_URL} from "../../../App";
+import React from "react";
 import EmailCheck from "./EmailCheck";
 
 function UserRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors, watch}) {

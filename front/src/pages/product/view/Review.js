@@ -3,7 +3,7 @@ function Review({pageResponseDTO}) {
 
 
     function checkScore(score) {
-        if (score == 0) {
+        if (score === 0) {
             return <h5>상품평이 없습니다.</h5>
         } else if (score > 4.5) {
             return <h5 className="rating star5">상품평</h5>

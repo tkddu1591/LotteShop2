@@ -1,5 +1,4 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {useState} from "react";
 import {changeCategoryNo, changeCateNames} from "../../slice/cateSilce";
 import {useDispatch} from "react-redux";
 import {API_BASE_URL} from "../../App";

@@ -1,11 +1,8 @@
 function PageNavigation({pageResponseDTO, changePageRequest}) {
     let start = pageResponseDTO.start;
     let end = pageResponseDTO.end;
-    let size = pageResponseDTO.size;
     let next = pageResponseDTO.next;
     let prev = pageResponseDTO.prev;
-    let cate = pageResponseDTO.cate;
-    let total = pageResponseDTO.total;
     let pg = pageResponseDTO.pg;
 
     let no = []

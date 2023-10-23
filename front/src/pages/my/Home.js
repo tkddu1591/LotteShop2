@@ -1,4 +1,3 @@
-import {Route} from "react-router-dom";
 import MyNav from "./myNav";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
@@ -10,7 +9,6 @@ import Review from "./home/Review";
 import Qna from "./home/Qna";
 import MyInfo from "./home/MyInfo";
 import {createTokenHeader, retrieveStoredToken} from "../../slice/tokenSlice";
-import Error from "../product/order/Error";
 
 function Home() {
     let [userData, setUserData] = useState({});

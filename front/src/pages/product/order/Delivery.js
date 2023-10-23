@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {paste} from "@testing-library/user-event/dist/paste";
 import DaumPost from "../../../store/DaumPost";
 function Delivery({member, changeOrderEnd, orderEnd, changeMemeber}) {
 
