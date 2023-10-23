@@ -26,20 +26,12 @@ public class KmAdminNoticeService {
 
     private final KmAdminNoticeMapper kmAdminNoticeMapper;
 
-    public List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate() {
 
-        // cs_notice 테이블과 cs_cate 테이블 join
-        List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate = kmAdminNoticeMapper.selectCsNoticesjoinCsCate();
+    public List<KmAdminNoticeDTO> selectCsNoticeAll(int start) {
 
-        return selectCsNoticesjoinCsCate;
-    }
+        List<KmAdminNoticeDTO> selectCsNoticeAll = kmAdminNoticeMapper.selectCsNoticeAll(start);
 
-    public KmAdminNoticeDTO selectCsNoticeBynoticeNo() {
-
-        // select * from where noticeNo = ?
-        KmAdminNoticeDTO selectCsNoticeBynoticeNo = kmAdminNoticeMapper.selectCsNoticeBynoticeNo();
-
-        return selectCsNoticeBynoticeNo;
+        return selectCsNoticeAll;
     }
 
     // 중복을 제거하는 람다 함수
@@ -49,9 +41,9 @@ public class KmAdminNoticeService {
     }
 
     // 유형 선택 중복 제거
-    public List<KmAdminNoticeDTO> distinctCate(){
+    public List<KmAdminNoticeDTO> distinctCate(int start){
 
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNoticeAll();
+        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNoticeAll(start);
 
         List<KmAdminNoticeDTO> distinctCate = noticeList.stream()
                 .filter(distinctByKey(KmAdminNoticeDTO::getCate))
@@ -119,6 +111,14 @@ public class KmAdminNoticeService {
     // Limit 시작번호
     public int getStartNum(int currentPage) {
         return (currentPage - 1) * 10;
+    }
+
+    // 글 보기
+    public KmAdminNoticeDTO selectArticleNotice(int noticeNo){
+
+        KmAdminNoticeDTO kmAdminNoticeDTO = kmAdminNoticeMapper.selectArticleNotice(noticeNo);
+
+        return kmAdminNoticeDTO;
     }
 
 }

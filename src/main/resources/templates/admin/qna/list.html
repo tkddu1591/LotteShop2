@@ -94,15 +94,15 @@
                             </tr>
                         </thead>
                         <tbody class="listTbody" id="noticeTable">
-                                <tr th:each="dto:${qna}">
+                                <tr th:each="dto:${qnaList}">
                                     <td><input type="checkbox" name="chk"/></td>
-                                    <td th:text="${dto.qnaNo}"></td>
-                                    <td th:text="${dto.cate}"></td>
-                                    <td th:text="${dto.typeName}"></td>
-                                    <td><a th:href="@{/admin/cs/qna/view/{qnaNo}(qnaNo=${dto.qnaNo})}"><span th:text="${dto.title}"></span></a></td>
-                                    <td th:text="${dto.writer}"></td>
-                                    <td th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                    <td>
+                                    <td style="text-align: center; width: 5%" th:text="${dto.qnaNo}"></td>
+                                    <td style="text-align: center; width: 10%" th:text="${dto.cateName}"></td>
+                                    <td style="text-align: center; width: 10%" th:text="${dto.typeName}"></td>
+                                    <td style="text-align: center; width: 20%" ><a th:href="@{/admin/cs/qna/view/{qnaNo}(qnaNo=${dto.qnaNo})}"><span th:text="${dto.title}"></span></a></td>
+                                    <td style="text-align: center; width: 10%" th:text="${dto.writer}"></td>
+                                    <td style="text-align: center; width: 30%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td style="text-align: center; width: 15%" >
                                         <a th:if="${dto.answerComplete}">
                                             <span th:if="${dto.answerComplete == 1}">검토중</span>
                                             <span th:if="${dto.answerComplete == 2}" style="color: blue;">답변완료</span>
@@ -120,8 +120,8 @@
                 </form>
 
                 <div class="paging">
-                <span class="prev" th:if="${pageStartNum > 1}">
-                    <a th:href="@{/admin/qna/list(pg=${pageGroupStart - 1},search=${search})}"><&nbsp;이전</a>
+                <span class="prev" th:if="${pageGroupStart > 1}">
+                    <a th:href="@{/admin/qna/list(pg=${pageGroupStart - 1})}"><&nbsp;이전</a>
                 </span>
                     <span class="num">
                     <th:block th:each="i : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
@@ -131,7 +131,7 @@
                     </th:block>
                 </span>
                     <span class="next" th:if="${pageGroupEnd < lastPageNum}">
-                    <a th:href="@{/admin/qna/list(pg=${pageGroupEnd + 1},search=${search})}">다음&nbsp;></a>
+                    <a th:href="@{/admin/qna/list(pg=${pageGroupEnd + 1})}">다음&nbsp;></a>
                 </span>
                 </div>
             </section>

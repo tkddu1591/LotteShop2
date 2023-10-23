@@ -66,12 +66,12 @@
                     <th:block th:each="dto : ${notices}">
                         <tr>
                             <td><input type="checkbox" name="chk" /></td>
-                            <td th:text="${dto.noticeNo}"></td>
-                            <td th:text="${dto.cate}"></td>
-                            <td><a th:href="@{/admin/notice/view(pg=${dto.noticeNo})}"> <span th:text="${dto.title}"></span> </a></td>
-                            <td th:text="${dto.hit}"></td>
-                            <td th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                            <td>
+                            <td style="text-align: center; width: 10%" th:text="${dto.noticeNo}"></td>
+                            <td style="text-align: center; width: 10%" th:text="${dto.cateName}"></td>
+                            <td style="text-align: center; width: 40%"><a th:href="@{/admin/notice/view(noticeNo=${dto.noticeNo})}"> <span th:text="'[' + ${dto.typeName} + ']' + ${dto.title}"></span> </a></td>
+                            <td style="text-align: center; width: 10%" th:text="${dto.hit}"></td>
+                            <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td style="text-align: center; width: 10%">
                                 <a th:href="@{/write}" class="noticeDelete">[삭제]</a>
                                 <br />
                                 <a th:href="@{/write}" class="noticeUpdate">[수정]</a>
@@ -91,8 +91,8 @@
             </form>
 
             <div class="paging">
-                <span class="prev" th:if="${pageStartNum > 1}">
-                    <a th:href="@{/admin/notice/list(pg=${pageGroupStart - 1},search=${search})}"><&nbsp;이전</a>
+                <span class="prev" th:if="${pageGroupStart > 1}">
+                    <a th:href="@{/admin/notice/list(pg=${pageGroupStart - 1})}">이전</a>
                 </span>
                 <span class="num">
                     <th:block th:each="i : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
@@ -102,7 +102,7 @@
                     </th:block>
                 </span>
                 <span class="next" th:if="${pageGroupEnd < lastPageNum}">
-                    <a th:href="@{/admin/notice/list(pg=${pageGroupEnd + 1},search=${search})}">다음&nbsp;></a>
+                    <a th:href="@{/admin/notice/list(pg=${pageGroupEnd + 1})}">다음</a>
                 </span>
             </div>
         </section>
