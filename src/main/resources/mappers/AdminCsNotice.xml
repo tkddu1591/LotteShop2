@@ -4,36 +4,35 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kmarket.mapper.admin.KmAdminNoticeMapper">
 
-    <!--  -->
-    <select id="selectCsNoticesjoinCsCate" resultType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
-        SELECT `km_cs_notice`.*, `km_cs_cate`.*
-        FROM `km_cs_notice`
-        JOIN `km_cs_cate` ON `km_cs_notice`.cate = `km_cs_cate`.cate;
-
-    </select>
-
+    <!-- 게시글 10개씩 출력 -->
     <select id="selectCsNoticeAll" resultType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
-        SELECT * FROM `km_cs_notice`;
+        SELECT
+            a.*,
+            b.`cateName` AS `cateName`,
+            c.`typeName` AS `typeName`
+        FROM `km_cs_notice` AS a
+        LEFT JOIN `km_cs_cate` AS b ON a.`cate` = b.`cate`
+        LEFT JOIN `km_cs_type` AS c ON a.`type` = c.`type`
+        LIMIT #{start}, 10
     </select>
 
-    <select id="selectCsNoticesBynoticeNo" resultType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
-        SELECT * FROM `km_cs_notice` WHERE `noticeNo`=?;
-    </select>
-
-    <!--
-    // 페이징
-    // 전체 게시글 갯수 계산
-    -->
+    <!-- 페이징 -->
+    <!-- 전체 게시글 갯수 계산 -->
     <select id="selectNoticeCountTotal" resultType="int">
         SELECT COUNT(*) FROM `km_cs_notice`;
     </select>
 
-    <!--
-    // 페이징
-    // 게시글 10개씩 출력
-    -->
-    <select id="selectNoticesCurrentPage" resultType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
-        SELECT * FROM `km_cs_notice` LIMIT #{start}, 10;
+    <!-- VIEW 게시글 보기 -->
+    <select id="selectArticleNotice" resultType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
+        SELECT
+            a.*,
+            b.`cateName`,
+            c.`typeName`
+        FROM
+            `km_cs_notice` AS a
+        LEFT JOIN `km_cs_cate` AS b ON a.`cate` = b.`cate`
+        LEFT JOIN `km_cs_type` AS c ON a.`type` = c.`type`
+        WHERE a.`noticeNo` = #{noticeNo}
     </select>
 
 </mapper>

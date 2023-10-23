@@ -1,7 +1,5 @@
 package com.example.kmarket.controller.admin.cs;
 
-import com.example.kmarket.dto.admin.AdminPageResponseDTO;
-import com.example.kmarket.dto.admin.AdminPageRequestDTO;
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.service.admin.KmAdminNoticeService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,19 +22,10 @@ public class Admin_NoticeController {
     @GetMapping("/admin/notice/list")
     public String list(Model model, String pg){
 
-        log.info("pg : " + pg);
-
-
-        List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate = kmAdminNoticeService.selectCsNoticesjoinCsCate();
-
-        // 1,2차 선택 중복 제거
-        List<KmAdminNoticeDTO> distinctCate = kmAdminNoticeService.distinctCate();
-
         // 페이징 처리
         // 현재 페이지 번호
         int currentPage = kmAdminNoticeService.getCurrentPage(pg);
         log.info("currentPage : " + currentPage);
-
 
         // 전체 게시물 갯수
         int total = kmAdminNoticeService.selectNoticeCountTotal();
@@ -55,13 +43,13 @@ public class Admin_NoticeController {
         int start = kmAdminNoticeService.getStartNum(currentPage);
         log.info("start : " + start);
 
-        // 상품 목록 출력
-        List<KmAdminNoticeDTO> notices = kmAdminNoticeService.selectNoticesCurrentPage(start);
-        log.info("notices : " + notices);
+        // 1,2차 선택 중복 제거
+        List<KmAdminNoticeDTO> distinctCate = kmAdminNoticeService.distinctCate(start);
 
+        // 상품 목록 출력
+        List<KmAdminNoticeDTO> notices = kmAdminNoticeService.selectCsNoticeAll(start);
 
         // 뷰(템플릿)에서 참조하기 위해 모델 참조
-        model.addAttribute("selectCsNoticesjoinCsCate", selectCsNoticesjoinCsCate);
         model.addAttribute("distinctCate", distinctCate);
 
         model.addAttribute("currentPage", currentPage);
@@ -75,20 +63,19 @@ public class Admin_NoticeController {
         return "admin/notice/list";
     }
 
-    @GetMapping("/view")
-    public String view(Model model, @RequestParam int pg, @RequestParam int prodNo){
+    @GetMapping("/admin/notice/view")
+    public String view(Model model, int noticeNo){
 
-        KmAdminNoticeDTO selectCsNoticeBynoticeNo = kmAdminNoticeService.selectCsNoticeBynoticeNo();
+        log.info("noticeNo : " + noticeNo);
+        KmAdminNoticeDTO noticeView = kmAdminNoticeService.selectArticleNotice(noticeNo);
+        model.addAttribute("noticeView", noticeView);
+        log.info("noticeView : " + noticeView);
 
-        // 필요한 데이터를 가져오는 로직 추가
-        model.addAttribute("url", "http://localhost:8080/admin/notice/view?prodNo=" + prodNo);
-
-        model.addAttribute("noticeBynoticeNo", selectCsNoticeBynoticeNo);
 
         return "admin/notice/view";
     }
 
-    @GetMapping("/write")
+    @GetMapping("/admin/notice/write")
     public String write(){
         return "/admin/notice/write";
     }

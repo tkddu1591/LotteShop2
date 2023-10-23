@@ -22,11 +22,20 @@ public class KmAdminQnaService {
 
     private final KmAdminQnaMapper kmAdminQnaMapper;
 
-    public List<KmAdminQnaDTO> selectCsQnaAll(){
+    // 게시글 목록 출력
+    public List<KmAdminQnaDTO> selectCsQnaAll(int start){
 
-        List<KmAdminQnaDTO> qnaList = kmAdminQnaMapper.selectCsQnaAll();
+        List<KmAdminQnaDTO> qnaList = kmAdminQnaMapper.selectCsQnaAll(start);
 
         return qnaList;
+    }
+
+    // 글 보기
+    public KmAdminQnaDTO selectArticleQna(int qnaNo){
+
+        KmAdminQnaDTO kmAdminQnaDTO = kmAdminQnaMapper.selectArticleQna(qnaNo);
+
+        return kmAdminQnaDTO;
     }
 
     // 중복을 제거하는 람다 함수
@@ -36,9 +45,9 @@ public class KmAdminQnaService {
     }
 
     // 유형 선택 중복 제거
-    public List<KmAdminQnaDTO> distinctCate(){
+    public List<KmAdminQnaDTO> distinctCate(int start){
 
-        List<KmAdminQnaDTO> qnaList = kmAdminQnaMapper.selectCsQnaAll();
+        List<KmAdminQnaDTO> qnaList = kmAdminQnaMapper.selectCsQnaAll(start);
 
         List<KmAdminQnaDTO> distinctCate = qnaList.stream()
                 .filter(distinctByKey(KmAdminQnaDTO::getCate))
