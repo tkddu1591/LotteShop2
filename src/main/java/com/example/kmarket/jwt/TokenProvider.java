@@ -24,7 +24,9 @@ public class TokenProvider {
 
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "bearer";
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30; // 30분: 1000*60*30
+
+    private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000L * 60 * 60 * 24 * 7; // 7일
 
     private String issuer;
     private SecretKey secretKey;
@@ -48,6 +50,7 @@ public class TokenProvider {
 
 
         Date tokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+        Date refreshTokenExpiresIn = new Date(now + REFRESH_TOKEN_EXPIRE_TIME);
 
         System.out.println(tokenExpiresIn);
 
@@ -57,13 +60,21 @@ public class TokenProvider {
                 .setExpiration(tokenExpiresIn)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
+        String refreshToken = Jwts.builder()
+                .setSubject(authentication.getName())
+                .claim(AUTHORITIES_KEY, authorities)
+                .setExpiration(refreshTokenExpiresIn)
+                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .compact();
 
         return TokenDTO.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .tokenExpiresIn(tokenExpiresIn.getTime())
                 .build();
     }
+
 
     public Authentication getAuthentication(String accessToken) {
         Claims claims = parseClaims(accessToken);

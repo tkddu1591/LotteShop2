@@ -1,7 +1,10 @@
 package com.example.kmarket.entity.member;
 
+import com.example.kmarket.entity.product.KmProductOrderEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -15,8 +18,10 @@ public class KmMemberPointEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pointNo;
     private String uid;
-    private int orderNo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ordNo")
+    private KmProductOrderEntity orderEntity;
     private int point;
-    private String pointDate;
+    private LocalDateTime pointDate;
 
 }

@@ -36,6 +36,7 @@ public class PageRequestDTO {
     private Boolean isProdName =false;
     @Builder.Default
     private Boolean isDescript =false;
+    private String memberUid;
 
     public Pageable getPageableDesc(String sort){
         return PageRequest.of(this.pg - 1, this.size, Sort.by(sort).descending());

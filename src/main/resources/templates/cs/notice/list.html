@@ -1,4 +1,10 @@
-<th:block th:insert="~{@{/cs/inc/header.html}}"/>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cs/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
     <section id="cs">
         <div class="notice">
             <nav>
@@ -41,7 +47,7 @@
                         <tr>
                             <td>
                                 <!--(cate=notice.cate, bno=notice.noticeNo) -->
-                                <a th:href="@{cs/notice/view}">
+                                <a th:href="@{/cs/notice/view(no=${notice.noticeNo})}">
                                     [<span th:text="${notice.typeName}"></span>]
                                     [[${notice.title}]]
                                 </a>
@@ -72,4 +78,5 @@
             </section>
         </div>
     </section>
-<th:block th:insert="~{@{/cs/inc/footer.html}}"/>
+</th:block>
+</html>
