@@ -68,7 +68,7 @@
                             <td><input type="checkbox" name="chk" /></td>
                             <td th:text="${dto.noticeNo}"></td>
                             <td th:text="${dto.cate}"></td>
-                            <td><a th:href="@{/admin/notice/view(pg=${dto.noticeNo})}"> <span th:text="${dto.title}"></span> </a></td>
+                            <td><a th:href="@{/admin/notice/view(noticeNo=${dto.noticeNo})}"> <span th:text="${dto.title}"></span> </a></td>
                             <td th:text="${dto.hit}"></td>
                             <td th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                             <td>

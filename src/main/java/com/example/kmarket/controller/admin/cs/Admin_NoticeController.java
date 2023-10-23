@@ -76,9 +76,12 @@ public class Admin_NoticeController {
     }
 
     @GetMapping("/view")
-    public String view(Model model, @RequestParam int pg){
+    public String view(Model model, @RequestParam int pg, @RequestParam int prodNo){
 
         KmAdminNoticeDTO selectCsNoticeBynoticeNo = kmAdminNoticeService.selectCsNoticeBynoticeNo();
+
+        // 필요한 데이터를 가져오는 로직 추가
+        model.addAttribute("url", "http://localhost:8080/admin/notice/view?prodNo=" + prodNo);
 
         model.addAttribute("noticeBynoticeNo", selectCsNoticeBynoticeNo);
 
