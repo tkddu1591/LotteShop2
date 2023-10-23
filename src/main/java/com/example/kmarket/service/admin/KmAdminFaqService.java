@@ -21,20 +21,12 @@ public class KmAdminFaqService {
 
     private final KmAdminFaqMapper kmAdminFaqMapper;
 
-    // select * all
-    public List<KmAdminFaqDTO> selectCsFaq(){
+    // 게시글 리스트 10개씩 출력
+    public List<KmAdminFaqDTO> selectCsFaqAll(int start){
 
-        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaqAll();
+        List<KmAdminFaqDTO> selectCsFaqAll = kmAdminFaqMapper.selectCsFaqAll(start);
 
-        return faqList;
-    }
-
-    // select * from where faqNo = ?
-    public KmAdminFaqDTO selectCsFaqByfaqNo() {
-
-        KmAdminFaqDTO selectCsFaqByfaqNo = kmAdminFaqMapper.selectCsFaqByfaqNo();
-
-        return selectCsFaqByfaqNo;
+        return selectCsFaqAll;
     }
 
     // 중복을 제거하는 람다 함수
@@ -44,12 +36,13 @@ public class KmAdminFaqService {
     }
 
     // 유형 선택 중복 제거
-    public List<KmAdminFaqDTO> distinctCate(){
+    public List<KmAdminFaqDTO> distinctCate(int start){
 
-        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaqAll();
+        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectCsFaqAll(start);
 
         List<KmAdminFaqDTO> distinctCate = faqList.stream()
                 .filter(distinctByKey(KmAdminFaqDTO::getCate))
+                .filter(distinctByKey(KmAdminFaqDTO::getType))
                 .collect(Collectors.toList());
 
         return distinctCate;
@@ -58,11 +51,6 @@ public class KmAdminFaqService {
     // 페이징 시작
     public int selectFaqCountTotal(){
         return kmAdminFaqMapper.selectFaqCountTotal();
-    }
-
-    public List<KmAdminFaqDTO> selectFaq(int start) {
-        List<KmAdminFaqDTO> faqList = kmAdminFaqMapper.selectFaq(start);
-        return faqList;
     }
 
 
@@ -114,5 +102,13 @@ public class KmAdminFaqService {
     // Limit 시작번호
     public int getStartNum(int currentPage) {
         return (currentPage - 1) * 10;
+    }
+
+    // 글 보기
+    public KmAdminFaqDTO selectArticleFaq(int faqNo){
+
+        KmAdminFaqDTO kmAdminFaqDTO = kmAdminFaqMapper.selectArticleFaq(faqNo);
+
+        return kmAdminFaqDTO;
     }
 }
