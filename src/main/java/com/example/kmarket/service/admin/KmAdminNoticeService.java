@@ -26,7 +26,7 @@ public class KmAdminNoticeService {
 
     private final KmAdminNoticeMapper kmAdminNoticeMapper;
 
-
+    // 게시글 리스트 10개씩 출력
     public List<KmAdminNoticeDTO> selectCsNoticeAll(int start) {
 
         List<KmAdminNoticeDTO> selectCsNoticeAll = kmAdminNoticeMapper.selectCsNoticeAll(start);
@@ -55,11 +55,6 @@ public class KmAdminNoticeService {
     // 페이징 시작
     public int selectNoticeCountTotal(){
         return kmAdminNoticeMapper.selectNoticeCountTotal();
-    }
-
-    public List<KmAdminNoticeDTO> selectNoticesCurrentPage(int start) {
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectNoticesCurrentPage(start);
-        return noticeList;
     }
 
 
@@ -120,5 +115,20 @@ public class KmAdminNoticeService {
 
         return kmAdminNoticeDTO;
     }
+
+    // cateName, typeName 찾기
+    public List<KmAdminNoticeDTO> findCateNameAndTypeName(String cateName, String typeName){
+
+        List<KmAdminNoticeDTO> kmAdminNoticeDTO = kmAdminNoticeMapper.findCateNameAndTypeName(cateName, typeName);
+
+        return kmAdminNoticeDTO;
+    }
+
+    // 글 쓰기
+    public int insertArticleNotice(KmAdminNoticeDTO kmAdminNoticeDTO){
+
+        return kmAdminNoticeMapper.insertArticleNotice(kmAdminNoticeDTO);
+    }
+
 
 }

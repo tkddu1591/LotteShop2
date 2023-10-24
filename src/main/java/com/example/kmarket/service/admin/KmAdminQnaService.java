@@ -61,11 +61,6 @@ public class KmAdminQnaService {
         return kmAdminQnaMapper.selectQnaCountTotal();
     }
 
-    public List<KmAdminQnaDTO> selectQnaCurrentPage(int start) {
-        List<KmAdminQnaDTO> qnaList = kmAdminQnaMapper.selectQnaCurrentPage(start);
-        return qnaList;
-    }
-
 
     public int getLastPageNum(int total) {
 

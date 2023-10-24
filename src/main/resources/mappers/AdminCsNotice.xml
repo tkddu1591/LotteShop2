@@ -35,4 +35,21 @@
         WHERE a.`noticeNo` = #{noticeNo}
     </select>
 
+    <!-- cateName, typeName 검색 -->
+    <select id="findCateNameAndTypeName" resultType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
+        SELECT
+            a.*,
+            b.`type`, `typeName`
+        FROM `km_cs_cate` AS a
+        LEFT JOIN `km_cs_type` AS b ON a.`cate` = b.`cate`
+        WHERE cateName = #{cateName} AND typename = #{typeName};
+    </select>
+
+    <!-- resultType은 select문만 필요함 -->
+    <!-- 게시글 작성 -->
+    <insert id="insertArticleNotice" parameterType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
+        INSERT INTO `km_cs_notice` (`content`, `rdate`, `regip`, `title`, `writer`, `hit`, `cate`, `type`)
+                           VALUES (#{content}, #{rdate}, #{regip}, #{title}, #{writer}, #{hit}, #{cate}, #{type})
+    </insert>
+
 </mapper>

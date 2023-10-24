@@ -72,7 +72,7 @@
                             <td style="text-align: center; width: 10%" th:text="${dto.hit}"></td>
                             <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                             <td style="text-align: center; width: 10%">
-                                <a th:href="@{/write}" class="noticeDelete">[삭제]</a>
+                                <a th:href="@{/admin/notice/write}" class="noticeDelete">[삭제]</a>
                                 <br />
                                 <a th:href="@{/write}" class="noticeUpdate">[수정]</a>
                             </td>
@@ -85,7 +85,7 @@
                         <input type="submit" value="선택삭제" class="deleteAll" />
                     </div>
                     <div>
-                        <a th:href="@{/admin/cs/notice/write}" class="writeBtn">작성하기</a>
+                        <a th:href="@{/admin/notice/write}" class="writeBtn">작성하기</a>
                     </div>
                 </div>
             </form>
