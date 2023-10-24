@@ -1,4 +1,4 @@
-import {changeDTO} from "../../store/ChangeDTO";
+import {changeDTO} from "../../store/changeDTO";
 
 function MyPageNavigation({pageResponseDTO, setPageRequestDTO}) {
     let start = pageResponseDTO.start;

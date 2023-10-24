@@ -1,7 +1,7 @@
 import { useState} from "react";
 import {API_BASE_URL} from "../../../App";
 import axios from "axios";
-import {changeDTO} from "../../../store/ChangeDTO";
+import {changeDTO} from "../../../store/changeDTO";
 import {useNavigate} from "react-router-dom";
 import {createTokenHeader, loginTokenHandler, retrieveStoredToken} from "../../../slice/tokenSlice";
 

@@ -1,5 +1,5 @@
 import DaumPostCode from 'react-daum-postcode';
-import {changeDTO} from "./ChangeDTO";
+import {changeDTO} from "./changeDTO";
 
 const DaumPost = ({setPostDTO, setPostOn}) => {
     const handleComplete = (data) => {
