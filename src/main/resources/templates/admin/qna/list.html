@@ -93,15 +93,15 @@
                                 <th>상태</th>
                             </tr>
                         </thead>
-                        <tbody class="listTbody" id="noticeTable">
-                                <tr th:each="dto:${qnaList}">
+                        <tbody class="listTbody">
+                                <tr th:each="dto : ${qnaList}">
                                     <td><input type="checkbox" name="chk"/></td>
                                     <td style="text-align: center; width: 5%" th:text="${dto.qnaNo}"></td>
                                     <td style="text-align: center; width: 10%" th:text="${dto.cateName}"></td>
                                     <td style="text-align: center; width: 10%" th:text="${dto.typeName}"></td>
-                                    <td style="text-align: center; width: 20%" ><a th:href="@{/admin/cs/qna/view/{qnaNo}(qnaNo=${dto.qnaNo})}"><span th:text="${dto.title}"></span></a></td>
+                                    <td style="text-align: center; width: 30%" ><a th:href="@{/admin/qna/view(qnaNo=${dto.qnaNo})}"><span th:text="'[' + ${dto.typeName} + ']' + ${dto.title}"></span></a></td>
                                     <td style="text-align: center; width: 10%" th:text="${dto.writer}"></td>
-                                    <td style="text-align: center; width: 30%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td style="text-align: center; width: 15%" >
                                         <a th:if="${dto.answerComplete}">
                                             <span th:if="${dto.answerComplete == 1}">검토중</span>

@@ -50,6 +50,7 @@ public class Admin_NoticeController {
         List<KmAdminNoticeDTO> notices = kmAdminNoticeService.selectCsNoticeAll(start);
 
         // 뷰(템플릿)에서 참조하기 위해 모델 참조
+        model.addAttribute("notices", notices);
         model.addAttribute("distinctCate", distinctCate);
 
         model.addAttribute("currentPage", currentPage);
@@ -57,8 +58,6 @@ public class Admin_NoticeController {
         model.addAttribute("pageGroupStart", result[0]);
         model.addAttribute("pageGroupEnd", result[1]);
         model.addAttribute("pageStartNum", pageStartNum+1);
-        model.addAttribute("notices", notices);
-
 
         return "admin/notice/list";
     }
@@ -76,7 +75,22 @@ public class Admin_NoticeController {
     }
 
     @GetMapping("/admin/notice/write")
-    public String write(){
+    public String write(Model model, String cateName, String typeName){
+
+        log.info("here1");
+
+        List<KmAdminNoticeDTO> findCateNameAndTypeName = kmAdminNoticeService.findCateNameAndTypeName(cateName, typeName);
+
+        log.info("here2 : " + findCateNameAndTypeName);
+
+        int noticeWrite = kmAdminNoticeService.insertArticleNotice(KmAdminNoticeDTO.builder().build());
+
+        log.info("here3 : " + noticeWrite);
+
+        model.addAttribute("CnameTname", findCateNameAndTypeName);
+        model.addAttribute("noticeWrite", noticeWrite);
+
+
         return "/admin/notice/write";
     }
 
