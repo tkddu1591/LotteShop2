@@ -17,6 +17,7 @@ public class CsPageResponseDTO {
     private int pg;
     private int size;
     private int total;
+    private int last;
 
     private int start, end;
     private boolean prev, next;
@@ -35,9 +36,10 @@ public class CsPageResponseDTO {
         this.qnaList = qnaList;
         this.faqList = faqList;
 
-        this.end = (int) (Math.ceil(this.pg / 10.0)) * 10;
-        this.start = this.end - 9;
+        this.end = (int) (Math.ceil(this.pg / 5.0)) * 5;
+        this.start = this.end - 4;
         int last = (int)(Math.ceil(total / (double)size));
+        this.last = last;
 
         this.end = end > last ? last:end;
         this.prev = this.start > 1;

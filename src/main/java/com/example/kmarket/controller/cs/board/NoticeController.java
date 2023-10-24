@@ -37,8 +37,8 @@ public class NoticeController {
     @GetMapping("/view")
     public String view(Model model, int no) {
         KmCsNoticeDTO dto = ns.findById(no);
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@ notice view no : " + no);
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@ notice view dto : " + dto);
+//        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@ notice view no : " + no);
+//        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@ notice view dto : " + dto);
         model.addAttribute("notice", dto);
 
         return "cs/notice/view";
