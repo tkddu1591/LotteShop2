@@ -1,13 +1,15 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
-function Latest({userOrder}) {
-    let[review,setReview] = useState(false)
+function Latest({userOrder, setDivName}) {
+    let [review, setReview] = useState(false)
     return <>
-        {review && <div>dd</div>}
         <article className="latest">
             <h3>최근주문내역</h3>
-            <a href="#" className="more">더보기</a>
-            <table border="0">
+            <a onClick={() => {
+                setDivName('order')
+            }} className="more">더보기</a>
+            <table>
                 <tbody>
                     <tr>
                         <th>날짜</th>
@@ -16,16 +18,15 @@ function Latest({userOrder}) {
                         <th>확인/신청</th>
                     </tr>
                     {userOrder.map((item, index) => {
-                        return <>
-                            <tr key={index}>
+                        return <tr key={`latest${index}${item.prodNo}`}>
                                 <td className="date">{item.ordDate.substring(0, 10)}</td>
                                 <td className="info">
-                                    <a href="#" className="thumb"><img
-                                        src="https://via.placeholder.com/80x80"
-                                        alt=""/></a>
+                                    <Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + item.prodNo} className="thumb">
+                                        <img src="https://via.placeholder.com/80x80"
+                                            alt=""/></Link>
                                     <ul>
-                                        <li className="company"><a href="#">{item.company}</a></li>
-                                        <li className="prodName"><a href="#">{item.prodName}</a></li>
+                                        <li className="company"><Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + item.prodNo}>{item.company}</Link></li>
+                                        <li className="prodName"><Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + item.prodNo}>{item.prodName}</Link></li>
                                         <li className="orderNo">수량 : <span
                                             className="prodCount">{item.count}</span>개 /
                                             주문번호
@@ -36,13 +37,13 @@ function Latest({userOrder}) {
                                 <td className="status">{item.ordComplete === 1 ? '배송완료' : item.ordComplete === 0 ? '배송중' : '주문취소'}</td>
                                 <td className="confirm">
                                     <a href="#" className="receive">수취확인</a>
-                                    <a href="#" className="review" onClick={() => {setReview(true)
+                                    <a href="#" className="review" onClick={() => {
+                                        setReview(true)
                                     }}>상품평</a>
                                     <a href="#" className="refund">반품신청</a>
                                     <a href="#" className="exchange">교환신청</a>
                                 </td>
                             </tr>
-                        </>
                     })}
 
                 </tbody>

@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/product")
 @RestController
 public class CateController {
-
     @Autowired
     private KmProductCateService cateService;
     @GetMapping("/cate1")

@@ -41,6 +41,8 @@ public class MyController {
             pageResponseDTO = qnaService.findByWriter(pageRequestDTO);
         }else if(pageRequestDTO.getType().equals("order")){
             pageResponseDTO = productOrderItemService.findByUid(pageRequestDTO);
+        }else if(pageRequestDTO.getType().equals("coupon")){
+            pageResponseDTO = couponService.findByUid(pageRequestDTO);
         }
         return pageResponseDTO;
     }
