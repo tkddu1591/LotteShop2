@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>롯데ON::관리자 페이지</title>
@@ -10,21 +13,17 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../css/admin.css">
-    <script>
-
-
-    </script>
 </head>
 <body>
     <div id="admin-wrapper">
         <header>
             <div>
-                <a href="../index.html" class="logo"><img src="../images/admin_logo.png" alt="admin_logo"/></a>
+                <a th:href="@{/admin/index}" class="logo"><img src="../images/admin_logo.png" alt="admin_logo"/></a>
                 <p>
                     <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
+                    <a th:href="@{/}">HOME |</a>
                     <a href="#">로그아웃 |</a>
-                    <a href="#">고객센터</a>
+                    <a th:href="@{/cs/index}">고객센터</a>
                 </p>
             </div>
         </header>
@@ -103,7 +102,7 @@
                                 <tr>
                                     <td>1차 분류</td>
                                     <td>
-                                        <select name="category1">
+                                        <select name="prodCate1">
                                             <option>1차 분류 선택</option>
                                             <option value="10">브랜드패션</option>
                                         </select>
@@ -112,7 +111,7 @@
                                 <tr>
                                     <td>2차 분류</td>
                                     <td>
-                                        <select name="category2">
+                                        <select name="prodCate2">
                                             <option>2차 분류 선택</option>
                                             <option value="1010">브랜드 여성의류</option>
                                         </select>
