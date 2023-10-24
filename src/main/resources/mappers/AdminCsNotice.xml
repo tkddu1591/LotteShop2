@@ -35,21 +35,27 @@
         WHERE a.`noticeNo` = #{noticeNo}
     </select>
 
-    <!-- cateName, typeName 검색 -->
-    <select id="findCateNameAndTypeName" resultType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
-        SELECT
-            a.*,
-            b.`type`, `typeName`
-        FROM `km_cs_cate` AS a
-        LEFT JOIN `km_cs_type` AS b ON a.`cate` = b.`cate`
-        WHERE cateName = #{cateName} AND typename = #{typeName};
+    <!-- cateName 검색 -->
+    <select id="findCateName" resultType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
+        SELECT * FROM `km_cs_cate`;
     </select>
 
     <!-- resultType은 select문만 필요함 -->
     <!-- 게시글 작성 -->
     <insert id="insertArticleNotice" parameterType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
-        INSERT INTO `km_cs_notice` (`content`, `rdate`, `regip`, `title`, `writer`, `hit`, `cate`, `type`)
-                           VALUES (#{content}, #{rdate}, #{regip}, #{title}, #{writer}, #{hit}, #{cate}, #{type})
+        INSERT INTO `km_cs_notice` (`content`, `rdate`, `title`, `cate`)
+                           VALUES (#{content}, NOW(), #{title}, #{cate})
     </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="updateArticleNotice" parameterType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
+        UPDATE `km_cs_notice` SET cate = #{cate}, title = #{title}, content = #{content}
+        WHERE `noticeNo` = #{noticeNo}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteArticleNotice" parameterType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
+        DELETE FROM `km_cs_notice` WHERE `noticeNo` = #{noticeNO}
+    </delete>
 
 </mapper>

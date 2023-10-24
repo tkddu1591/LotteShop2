@@ -16,22 +16,50 @@
         LIMIT #{start}, 10
     </select>
 
+    <!-- 페이징 -->
+    <!-- 전체 게시글 갯수 계산 -->
+    <select id="selectFaqCountTotal" resultType="int">
+        SELECT COUNT(*) FROM `km_cs_faq`
+    </select>
+
     <!-- VIEW 게시글 보기 -->
     <select id="selectArticleFaq" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
         SELECT
-            a.*,
-            b.`cateName` AS `cateName`,
-            c.`typeName` AS `typeName`
+        a.*,
+        b.`cateName` AS `cateName`,
+        c.`typeName` AS `typeName`
         FROM `km_cs_faq` AS a
         LEFT JOIN `km_cs_cate` AS b ON a.`cate` = b.`cate`
         LEFT JOIN `km_cs_type` AS c ON a.`type` = c.`type`
         WHERE a.`faqNo` = #{faqNo}
     </select>
 
-    <!-- 페이징 -->
-    <!-- 전체 게시글 갯수 계산 -->
-    <select id="selectFaqCountTotal" resultType="int">
-        SELECT COUNT(*) FROM `km_cs_faq`
+    <!-- cateName, typeName 검색 -->
+    <select id="findCnameAndTname" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
+        SELECT
+            a.*,
+            b.`type`, `typeName`
+        FROM `km_cs_cate` AS a
+        LEFT JOIN `km_cs_type` AS b ON a.`cate` = b.`cate`
     </select>
+
+    <select id="findCateAndType" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
+        SELECT
+        a.cate,
+        b.`type`
+        FROM `km_cs_cate` AS a
+        LEFT JOIN `km_cs_type` AS b ON a.`cate` = b.`cate`
+    </select>
+
+    <!-- resultType은 select문만 필요함 -->
+    <!-- 게시글 작성 -->
+    <insert id="insertArticleFaq">
+        INSERT INTO `km_cs_faq` SET
+            `cate`= #{cate},
+            `type`= #{type},
+            `content`= #{content},
+            `rdate`= NOW(),
+            `title`= #{title};
+    </insert>
 
 </mapper>

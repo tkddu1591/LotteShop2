@@ -6,14 +6,17 @@ import com.example.kmarket.dto.admin.KmAdminFaqDTO;
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.mapper.admin.KmAdminFaqMapper;
 import com.example.kmarket.service.admin.KmAdminFaqService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
 @Controller
+@Log4j2
 public class Admin_FaqController {
 
     @Autowired
@@ -70,6 +73,28 @@ public class Admin_FaqController {
         return "admin/faq/view";
     }
 
+    @GetMapping("/admin/faq/write")
+    public String write(Model model, String cateName, String typeName){
+
+        List<KmAdminFaqDTO> findCnameAndTname = kmAdminFaqService.findCnameAndTname(cateName, typeName);
+        int faqWrite = kmAdminFaqService.insertArticleFaq(KmAdminFaqDTO.builder().build());
+
+        model.addAttribute("findCnameAndTname", findCnameAndTname);
+        model.addAttribute("faqWrite", faqWrite);
+
+        return "/admin/faq/write";
+    }
+
+    @PostMapping("/admin/faq/write")
+    public String write(Model model, KmAdminFaqDTO kmAdminFaqDTO){
+
+        log.info("kmAdminFaqDTO", kmAdminFaqDTO);
+
+
+        kmAdminFaqService.insertArticleFaq(kmAdminFaqDTO);
+
+        return "redirect:/admin/faq/write";
+    }
 
 
 }
