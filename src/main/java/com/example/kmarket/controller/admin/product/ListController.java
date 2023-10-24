@@ -24,6 +24,9 @@ public class ListController {
         int lastPageNum = kmAdminProductService.getLastPageNum(total);
         int currentPg = kmAdminProductService.getCurrentPage(pg);
         int start = kmAdminProductService.getStartNum(currentPg);
+        int[] result = kmAdminProductService.getPageGroupNum(currentPg, lastPageNum);
+        int pageStartNum = kmAdminProductService.getPageStartNum(total, currentPg);
+        int startNum = kmAdminProductService.getStartNum(currentPg);
 
 
         // 상품 목록 출력
@@ -32,7 +35,9 @@ public class ListController {
         // 뷰(템플릿)에서 참조하기 위해 모델 참조
         model.addAttribute("products", products);
         model.addAttribute("lastPageNum", lastPageNum);
-
+        model.addAttribute("pageGroupStart", result[0]);
+        model.addAttribute("pageGroupEnd", result[1]);
+        model.addAttribute("pageStartNum", pageStartNum+1);
 
         return "/admin/product/list";
     }
