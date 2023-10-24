@@ -11,6 +11,8 @@ import MyInfo from "./home/MyInfo";
 import {createTokenHeader, retrieveStoredToken} from "../../slice/tokenSlice";
 import {changeDTO} from "../../store/ChangeDTO";
 import {Link} from "react-router-dom";
+import PageNavigation from "../product/list/PageNavigation";
+import MyPageNavigation from "./MyPageNavigation";
 
 function Home() {
     let [userData, setUserData] = useState({});
@@ -148,7 +150,7 @@ function Home() {
                                             console.log(pageResponseDTO.total-index)
                                             return <>
                                                 <tr key={index}>
-                                                    <td className="no">{pageResponseDTO.total-index - pageRequestDTO.pg*10 +10}</td>
+                                                    <td className="no">{pageResponseDTO.total-index - pageResponseDTO.pg*10 +10}</td>
                                                     <td className="prodName"><Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=`+item.prodNo}>{item.prodName}</Link></td>
                                                     <td className="content">{item.content}</td>
                                                     {ratingCheck(item.rating)}
@@ -160,6 +162,7 @@ function Home() {
                                         })}
                                     < /tbody>
                                 </table>
+                                <MyPageNavigation pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageRequestDTO}></MyPageNavigation>
                             </article>
                         </>}
                     </section>
