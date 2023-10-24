@@ -20,7 +20,11 @@ public class IndexController  {
         model.addAttribute("memberUid", memberUid);
         model.addAttribute("expirationTime", expirationTime);
         model.addAttribute("token", token);
-        return "/cs/index";
+        return "cs/index";
+    }
+    @GetMapping(value = {"/index", "/"})
+    public String index() {
+        return "index";
     }
 
 }
