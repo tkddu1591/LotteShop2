@@ -28,6 +28,9 @@ public class PageResponseDTO {
     private int start, end, last;
     private boolean prev, next;
 
+    // 1~ 10 페이지 설정
+    @Builder.Default
+    private int pageSize =10;
 
     @Builder
     public PageResponseDTO(PageRequestDTO pageRequestDTO,
@@ -51,8 +54,8 @@ public class PageResponseDTO {
         this.orderItemDTOS = orderItemDTOS;
         this.qnaDTOS = qnaDTOS;
 
-        this.end = (int) (Math.ceil(this.pg / 10.0)) * 10;
-        this.start = this.end - 9;
+        this.end = (int) (Math.ceil(this.pg / (float)pageSize)) * pageSize;
+        this.start = this.end - pageSize+1;
 
 
         this.last = (int) (Math.ceil(total / (double) size));

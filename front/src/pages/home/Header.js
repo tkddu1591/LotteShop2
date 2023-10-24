@@ -88,7 +88,7 @@ function Header() {
                                 <input type="hidden" name="memberUid" value={localStorage.getItem('memberUid')}/>
                                 <input type="hidden" name="expirationTime" value={localStorage.getItem('expirationTime')}/>
                                 <input type="hidden" name="token" value={localStorage.getItem('token')}/>
-                                <input type="submit" value="고객센터"></input></form>
+                                <input type="submit" value="고객센터" style={{border:'none',   borderLeft: '1px solid #e9e9e9', padding: '0 10px'}}></input></form>
                         </li>
                     </ul>
                 </div>

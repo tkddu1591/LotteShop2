@@ -2,7 +2,7 @@ import MyNav from "./myNav";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {API_BASE_URL} from "../../App";
-import Menu from "./home/Menu";
+import Menu from "./Menu";
 import Latest from "./home/Latest";
 import Point from "./home/Point";
 import Review from "./home/Review";
@@ -11,6 +11,8 @@ import MyInfo from "./home/MyInfo";
 import {createTokenHeader, retrieveStoredToken} from "../../slice/tokenSlice";
 import {changeDTO} from "../../store/changeDTO";
 import MyReview from "./review/MyReview";
+import MyPageNavigation from "./MyPageNavigation";
+import {Link} from "react-router-dom";
 
 function Home() {
     let [userData, setUserData] = useState({});
@@ -38,11 +40,11 @@ function Home() {
     }, [pageRequestDTO]);
     useEffect(() => {
         changeDTO(setPageRequestDTO, 'type', divName)
+        changeDTO(setPageRequestDTO, 'pg', 1)
     }, [divName]);
     useEffect(() => {
         if (memberUid !== null) {
             if (memberUid !== null && retrieveStoredToken().token != null) {
-
                 axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
                     .then(response => {
                         setMemberDTO(response.data)
@@ -105,199 +107,122 @@ function Home() {
     }, []);
     console.log(pageResponseDTO);
 
+    function answer(value) {
+        if (value === 0) {
+            return <td className="status"><span style={{color: 'grey'}}>미확인</span></td>
+        }
+        if (value === 1) {
+            return <td className="status"><span style={{color: '#8972EE'}}>검토중</span></td>
+        }
+        if (value === 2) {
+            return <td className="status"><span className="answered">답변완료</span></td>
+        }
+    }
+
+    function content(value, setAnswerCheck, index) {
+        if (value.cate === 'cancel' || value.cate === 'delivery' || value.cate === 'order' || value.cate === 'safe') {
+            return <td className="tit">
+                <ul>
+                    <li className="prodName"><Link
+                        to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + value.prodNo}>{value.prodName}</Link>
+                    </li>
+                    {value.answerComplete === 2 ? <li className="question"><span style={{cursor: 'pointer'}}
+                                                                                 onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}
+                    >{value.title}</span></li> : <li className="question">{value.title}</li>}
+                </ul>
+            </td>
+        } else {
+            return <>
+                {value.answerComplete === 2 ? <td className="tit"><span style={{cursor: 'pointer'}}
+                                                                        onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}>{value.title}</span>
+                </td> : <td className="tit">{value.title}</td>}</>
+        }
+    }
+
+    let [answerCheck, setAnswerCheck] = useState({
+        1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false,
+    });
+
+    console.log(answerCheck)
+
     return <>
         <div id="my">
             <MyNav setDivName={setDivName} divName={divName} userData={userData}></MyNav>
             <div className={divName}>
                 <Menu divName={divName} setDivName={setDivName}></Menu>
                 {memberUid !== null ? <section>
-                        <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/my/my_banner2.png`}
-                                         alt="패션, 타운 하나로 끝" className="banner"/></a>
-                        {divName === 'qna' && <>
-                            <article>
-                                <h3>문의하기</h3>
+                    <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/my/my_banner2.png`}
+                                     alt="패션, 타운 하나로 끝" className="banner"/></a>
+                    {divName === 'qna' && <>
+                        <article>
+                            <h3>문의하기</h3>
 
-                                <table border="0">
-                                    <tbody>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>문의채널</th>
-                                            <th>문의유형</th>
-                                            <th>제목</th>
-                                            <th>작성일</th>
-                                            <th>상태</th>
-                                        </tr>
-                                        <tr>
-                                            <td className="no">5</td>
-                                            <td className="channel">고객센터</td>
-                                            <td className="type">주문/결제</td>
-                                            <td className="tit"><a href="#">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a></td>
-                                            <td className="date">2024-12-12</td>
-                                            <td className="status"><span className="notAnswerYet">검토중</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td className="no">4</td>
-                                            <td className="channel">고객센터</td>
-                                            <td className="type">주문/결제</td>
-                                            <td className="tit"><a href="#">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a></td>
-                                            <td className="date">2024-12-12</td>
-                                            <td className="status"><span className="answered">답변완료</span></td>
-                                        </tr>
-                                        <tr className="answerRow">
-                                            <td colSpan="6">
-                                                <div className="question">
-                                                    <p className="tit">
-                                                        신용카드 결제 중 오류가 난 경우 어떻게 하나요?
-                                                        <span className="date">2022-12-16 10:08:25</span>
-                                                    </p>
-                                                    <p className="content">
-                                                        결제하다가 오류가 나서 결제가 안됩니다.
-                                                    </p>
-                                                </div>
-                                                <div className="answer">
-                                                    <p className="tit">
-                                                        주문/결제 문의 답변입니다.
-                                                        <span className="date">2022-12-17 10:08:25</span>
-                                                    </p>
-                                                    <p className="content">
-                                                        다른 카드로 결제 하세요. 그러면 될거에요.
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="no">3</td>
-                                            <td className="channel">판매자게시판</td>
-                                            <td className="type">배송</td>
-                                            <td className="tit">
-                                                <ul>
-                                                    <li className="prodName"><a href="#">상품명</a></li>
-                                                    <li className="question"><a href="#">배송기간이 보통 얼마나 걸리나요?</a></li>
-                                                </ul>
-                                            </td>
-                                            <td className="date">2024-12-12</td>
-                                            <td className="status"><span className="answered">답변완료</span></td>
-                                        </tr>
-                                        <tr className="answerRow">
-                                            <td colSpan="6">
-                                                <div className="question">
-                                                    <p className="tit">
-                                                        배송기간이 보통 얼마나 걸리나요?
-                                                        <span className="date">2022-12-16 10:08:25</span>
-                                                    </p>
-                                                    <p className="content">
-                                                        알고싶어요. 알려주세요.
-                                                    </p>
-                                                </div>
-                                                <div className="answer">
-                                                    <p className="tit">
-                                                        배송 문의 답변입니다.
-                                                        <span className="date">2022-12-17 10:08:25</span>
-                                                    </p>
-                                                    <p className="content">
-                                                        보통 한달 걸립니다.
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="no">2</td>
-                                            <td className="channel">판매자게시판</td>
-                                            <td className="type">상품</td>
-                                            <td className="tit">
-                                                <ul>
-                                                    <li className="prodName"><a href="#">상품명</a></li>
-                                                    <li className="question"><a href="#">흰색 상품은 없나요?</a></li>
-                                                </ul>
-                                            </td>
-                                            <td className="date">2024-12-12</td>
-                                            <td className="status"><span className="answered">답변완료</span></td>
-                                        </tr>
-                                        <tr className="answerRow">
-                                            <td colSpan="6">
-                                                <div className="question">
-                                                    <p className="tit">
-                                                        흰색 상품은 없나요?
-                                                        <span className="date">2022-12-16 10:08:25</span>
-                                                    </p>
-                                                    <p className="content">
-                                                        흰색 살래요~
-                                                    </p>
-                                                </div>
-                                                <div className="answer">
-                                                    <p className="tit">
-                                                        상품 문의 답변입니다.
-                                                        <span className="date">2022-12-17 10:08:25</span>
-                                                    </p>
-                                                    <p className="content">
-                                                        네 없어요.
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="no">1</td>
-                                            <td className="channel">판매자게시판</td>
-                                            <td className="type">반품</td>
-                                            <td className="tit">
-                                                <ul>
-                                                    <li className="prodName"><a href="#">상품명</a></li>
-                                                    <li className="question"><a href="#">사이즈가 너무 작아요. 반품 요청합니다.</a></li>
-                                                </ul>
-                                            </td>
-                                            <td className="date">2024-12-12</td>
-                                            <td className="status"><span className="answered">답변완료</span></td>
-                                        </tr>
-                                        <tr className="answerRow">
-                                            <td colSpan="6">
-                                                <div className="question">
-                                                    <p className="tit">
-                                                        사이즈가 너무 작아요. 반품 요청합니다.
-                                                        <span className="date">2022-12-16 10:08:25</span>
-                                                    </p>
-                                                    <p className="content">
-                                                        반품 해주세요.
-                                                    </p>
-                                                </div>
-                                                <div class="answer">
-                                                    <p class="tit">
-                                                        반품 문의 답변입니다.
-                                                        <span class="date">2022-12-17 10:08:25</span>
-                                                    </p>
-                                                    <p class="content">
-                                                        반품 안돼요.
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <table border="0">
+                                <tbody>
+                                    <tr>
+                                        <th style={{width:'30px'}}>번호</th>
+                                        <th style={{width:'80px'}}>문의채널</th>
+                                        <th style={{width:'100px'}}>문의유형</th>
+                                        <th style={{width:'200px'}}>제목</th>
+                                        <th style={{width:'80px'}}>작성일</th>
+                                        <th style={{width:'50px'}}>상태</th>
+                                    </tr>
+                                    {Array.isArray(pageResponseDTO.qnaDTOS) && pageResponseDTO.qnaDTOS.map((qna, index) => {
+                                        return <>
+                                            <tr key={index}>
+                                                <td className="no">{pageResponseDTO.total - index - pageResponseDTO.pg * 10 + 10}</td>
+                                                <td className="channel">{qna.cateName}</td>
+                                                <td className="type">{qna.typeName}</td>
+                                                {content(qna, setAnswerCheck, index)}
+                                                <td className="date">{qna.rdate.substring(0, 10)}</td>
+                                                {answer(qna.answerComplete)}
+                                            </tr>
+                                            {qna.answerComplete === 2 && answerCheck[index] &&
+                                                <tr className="answerRow" key={index + 'answer'}>
+                                                    <td colSpan="6">
+                                                        <div className="question">
+                                                            <p className="tit">
+                                                                {qna.title}
+                                                                <span className="date">{qna.rdate.substring(0,10)} {qna.rdate.substring(11,20)}</span>
+                                                            </p>
+                                                            <p className="content">
+                                                                {qna.content}
+                                                            </p>
+                                                        </div>
+                                                        <div className="answer">
+                                                            <p className="tit">
+                                                                {qna.typeName} 문의 답변입니다.
+                                                                <span className="date">{qna.answerDate.substring(0,10)} {qna.answerDate.substring(11,20)}</span>
+                                                            </p>
+                                                            <p className="content">
+                                                                {qna.answer}
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                </tr>}
+                                        </>
+                                    })}
+                                </tbody>
+                            </table>
 
-                                <p class="page">
-                                    <a href="#" class="prev">이전</a>
-                                    <a href="#" class="num on">1</a>
-                                    <a href="#" class="num">2</a>
-                                    <a href="#" class="num">3</a>
-                                    <a href="#" class="next">다음</a>
-                                </p>
-                            </article>
-                        </>}
-                        {divName === 'home' && <>
-                            <Latest userOrder={userOrder}></Latest>
-                            <Point userPoint={userPoint}></Point>
-                            <Review userReview={userReview}></Review>
-                            <Qna userQna={userQna}></Qna>
-                            <MyInfo></MyInfo></>}
-                        {divName === 'review' && <>
-                            <MyReview pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageRequestDTO}></MyReview>
-                        </>}
-                    </section>
-                    :
-                    <section className="error" style={{
-                        padding: '50px 0 !important', textAlign: 'center', fontSize: '15px',
-                    }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요.
-                    </section>
-                }
+                            <MyPageNavigation pageResponseDTO={pageResponseDTO}
+                                              setPageRequestDTO={setPageRequestDTO}></MyPageNavigation>
+                        </article>
+                    </>}
+                    {divName === 'home' && <>
+                        <Latest userOrder={userOrder}></Latest>
+                        <Point userPoint={userPoint}></Point>
+                        <Review userReview={userReview}></Review>
+                        <Qna userQna={userQna}></Qna>
+                        <MyInfo></MyInfo></>}
+                    {divName === 'review' && <>
+                        <MyReview pageResponseDTO={pageResponseDTO}
+                                  setPageRequestDTO={setPageRequestDTO}></MyReview>
+                    </>}
+                </section> : <section className="error" style={{
+                    padding: '50px 0 !important', textAlign: 'center', fontSize: '15px',
+                }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요.
+                </section>}
 
 
             </div>

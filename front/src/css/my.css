@@ -1164,7 +1164,6 @@ footer p > strong {
 #my > .qna > section > article > table .answered {color: #01a900;}
 
 #my > .qna > section > article > table .answerRow {
-    display: none;
     background-color: #fafafa;
 }
 #my > .qna > section > article > table .answerRow td {}
