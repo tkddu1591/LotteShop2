@@ -1,7 +1,7 @@
 import { useNavigate} from "react-router-dom";
 import {API_BASE_URL} from "../../../App";
 import React, {useEffect, useState} from "react";
-import {changeDTO} from "../../../store/ChangeDTO";
+import {changeDTO} from "../../../store/changeDTO";
 import axios from "axios";
 
 function SignUp({userRegisterType}) {

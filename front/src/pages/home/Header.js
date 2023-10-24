@@ -83,11 +83,18 @@ function Header() {
                         <li><Link to={API_BASE_URL + "/cs/notice/list?cate=all"}>공지사항</Link></li>
                         <li><Link to={API_BASE_URL + "/cs/faq/list?cate=member"}>자주묻는질문</Link></li>
                         <li><Link to={API_BASE_URL + "/cs/qna/list?cate=member"}>문의하기</Link></li>
-                        <li><Link to={API_BASE_URL + "/cs/index"}>고객센터</Link></li>
+                        <li>
+                            <form action={API_BASE_URL + "/index"} method="post">
+                                <input type="hidden" name="memberUid" value={localStorage.getItem('memberUid')}/>
+                                <input type="hidden" name="expirationTime" value={localStorage.getItem('expirationTime')}/>
+                                <input type="hidden" name="token" value={localStorage.getItem('token')}/>
+                                <input type="submit" value="고객센터" style={{border:'none',   borderLeft: '1px solid #e9e9e9', padding: '0 10px', cursor:'pointer'}}></input></form>
+                        </li>
                     </ul>
                 </div>
             </div>
         </header>
     )
 }
+
 export default Header;

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Review({userReview}) {
+function Review({userReview, setDivName}) {
 
     function ratingCheck(value) {
         if (value >= 4.5)
@@ -18,7 +18,7 @@ function Review({userReview}) {
     return <>
         <article className="review">
             <h3>상품평</h3>
-            <a href="#" className="more">더보기</a>
+            <a onClick={()=>{setDivName('review')}} className="more">더보기</a>
             <table border="0">
                 <tbody>
                     <tr>
@@ -29,15 +29,13 @@ function Review({userReview}) {
                         <th>작성일</th>
                     </tr>
                     {userReview.map((item, index) => {
-                        return <>
-                            <tr key={index}>
+                        return <tr key={index+item.prodNo}>
                                 <td>{item.prodNo.toLocaleString()}</td>
                                 <td>{item.prodName}</td>
                                 <td>{item.content}</td>
                                 {ratingCheck(item.rating)}
                                 <td>{item.rdate.substring(0, 10)}</td>
                             </tr>
-                        </>
                     })}
                 </tbody>
             </table>

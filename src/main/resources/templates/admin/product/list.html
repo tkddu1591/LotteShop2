@@ -18,12 +18,12 @@
     <div id="admin-wrapper">
         <header>
             <div>
-                <a href="../index.html" class="logo"><img src="../images/admin_logo.png" alt="admin_logo"/></a>
+                <a th:href="@{/admin/index}" class="logo"><img src="../images/admin_logo.png" alt="admin_logo"/></a>
                 <p>
                     <span>홍길동님 반갑습니다.</span>
-                    <a th:href="@{/admin/index}">HOME |</a>
+                    <a th:href="@{/}">HOME |</a>
                     <a href="#">로그아웃 |</a>
-                    <a th:href="@{/admin/notice/list}">고객센터</a>
+                    <a th:href="@{/cs/index}">고객센터</a>
                 </p>
             </div>
         </header>
@@ -139,15 +139,16 @@
 
                     <div class="paging">
                         <span class="prev">
-                            <a href="#"><&nbsp;이전</a>
+
+                            <a th:href="@{/admin/product/list(pg=${pageGroupStart - 1})}" th:if="${pageGroupStart > 1}"><이전</a>
                         </span>
                         <span class="num">
-                            <th:block th:each="num : ${#numbers.sequence(1,lastPageNum)}">
+                            <th:block th:each="num : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
                                 <a th:href="@{/admin/product/list(pg=${num})}">[[${num}]]</a>
                             </th:block>
                         </span>
                         <span class="next">
-                            <a href="#">다음&nbsp;></a>
+                            <a th:href="@{/admin/product/list(pg=${pageGroupEnd + 1})}" th:if="${pageGroupEnd < lastPageNum}">다음></a>
                         </span>
                         </div>
 

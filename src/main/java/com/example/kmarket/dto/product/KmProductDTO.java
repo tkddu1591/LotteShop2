@@ -1,7 +1,7 @@
 package com.example.kmarket.dto.product;
 
 import lombok.*;
-
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Data
@@ -26,6 +26,12 @@ public class KmProductDTO {
     private int hit;
     private int score;
     private int review;
+
+    private MultipartFile fileThumb1;
+    private MultipartFile fileThumb2;
+    private MultipartFile fileThumb3;
+    private MultipartFile fileDetail;
+
     private String thumb1;
     private String thumb2;
     private String thumb3;

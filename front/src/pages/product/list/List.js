@@ -6,7 +6,7 @@ import PageNavigation from "./PageNavigation";
 import CateRoot from "../CateRoot";
 import ListSort from "./ListSort";
 import {API_BASE_URL} from "../../../App";
-import {changeDTO} from "../../../store/ChangeDTO";
+import {changeDTO} from "../../../store/changeDTO";
 
 function List() {
     const location = useLocation();

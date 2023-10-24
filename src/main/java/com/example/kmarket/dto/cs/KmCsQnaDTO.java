@@ -25,8 +25,14 @@ public class KmCsQnaDTO {
 	private int answerComplete;
 	private LocalDateTime rdate;
 	private String answer;
+	private String orderItemId;
+	private LocalDateTime answerDate;
+
 	//추가 필드
 	private String writerName;
 	private String cateName;
 	private String typeName;
+	private String prodName;
+	private String prodNo;
+
 }

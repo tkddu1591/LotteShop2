@@ -2,15 +2,17 @@ import MyNav from "./myNav";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {API_BASE_URL} from "../../App";
-import Menu from "./home/Menu";
+import Menu from "./Menu";
 import Latest from "./home/Latest";
 import Point from "./home/Point";
 import Review from "./home/Review";
 import Qna from "./home/Qna";
 import MyInfo from "./home/MyInfo";
 import {createTokenHeader, retrieveStoredToken} from "../../slice/tokenSlice";
-import {changeDTO} from "../../store/ChangeDTO";
-import {Link} from "react-router-dom";
+import {changeDTO} from "../../store/changeDTO";
+import MyReview from "./review/MyReview";
+import MyCoupon from "./coupon/MyCoupon";
+import MyQna from "./qna/MyQna";
 
 function Home() {
     let [userData, setUserData] = useState({});
@@ -38,11 +40,11 @@ function Home() {
     }, [pageRequestDTO]);
     useEffect(() => {
         changeDTO(setPageRequestDTO, 'type', divName)
+        changeDTO(setPageRequestDTO, 'pg', 1)
     }, [divName]);
     useEffect(() => {
         if (memberUid !== null) {
             if (memberUid !== null && retrieveStoredToken().token != null) {
-
                 axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
                     .then(response => {
                         setMemberDTO(response.data)
@@ -55,7 +57,6 @@ function Home() {
                         memberUid: memberUid
                     }
                 }).then((response) => {
-                    console.log(response.data);
                     setUserData(response.data)
                 }).catch(error => {
                     console.log(error);
@@ -90,7 +91,6 @@ function Home() {
                 console.log(error);
             })
             //유저 QnA 들고오기
-            console.log(pageRequestDTO);
             axios.get(`${API_BASE_URL}/my/list`, {
                 params: {
                     pg: 1, size: 5, type: 'qna', memberUid: memberUid
@@ -103,19 +103,7 @@ function Home() {
             })
         }
     }, []);
-    console.log(pageResponseDTO);
-    function ratingCheck(value) {
-        if (value >= 4.5)
-            return <td><span className="rating star5">상품평</span></td>
-        else if (value >= 3.5)
-            return <td><span className="rating star4">상품평</span></td>
-        else if (value >= 2.5)
-            return <td><span className="rating star3">상품평</span></td>
-        else if (value >= 1.5)
-            return <td><span className="rating star2">상품평</span></td>
-        else
-            return <td><span className="rating star1">상품평</span></td>
-    }
+
 
     return <>
         <div id="my">
@@ -123,52 +111,31 @@ function Home() {
             <div className={divName}>
                 <Menu divName={divName} setDivName={setDivName}></Menu>
                 {memberUid !== null ? <section>
-                        <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/my/my_banner2.png`}
-                                         alt="패션, 타운 하나로 끝" className="banner"/></a>
-                        {divName === 'home' && <>
-                            <Latest userOrder={userOrder}></Latest>
-                            <Point userPoint={userPoint}></Point>
-                            <Review userReview={userReview}></Review>
-                            <Qna userQna={userQna}></Qna>
-                            <MyInfo></MyInfo></>}
-                        {divName === 'review' && <>
-                            <article>
-                                <h3>나의리뷰</h3>
-
-                                <table border="0">
-                                    <tbody>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>상품명</th>
-                                            <th>내용</th>
-                                            <th>평점</th>
-                                            <th>작성일</th>
-                                        </tr>
-                                        {pageResponseDTO.reviewDtoList&&pageResponseDTO.reviewDtoList.map((item, index) => {
-                                            console.log(pageResponseDTO.total-index)
-                                            return <>
-                                                <tr key={index}>
-                                                    <td className="no">{pageResponseDTO.total-index - pageRequestDTO.pg*10 +10}</td>
-                                                    <td className="prodName"><Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=`+item.prodNo}>{item.prodName}</Link></td>
-                                                    <td className="content">{item.content}</td>
-                                                    {ratingCheck(item.rating)}
-                                                    <td className="date">{item.rdate.substring(0,10)}</td>
-                                                </tr>
-
-
-                                            </>
-                                        })}
-                                    < /tbody>
-                                </table>
-                            </article>
-                        </>}
-                    </section>
-                    :
-                    <section className="error" style={{
-                        padding: '50px 0 !important', textAlign: 'center', fontSize: '15px',
-                    }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요.
-                    </section>
-                }
+                    <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/my/my_banner2.png`}
+                                     alt="패션, 타운 하나로 끝" className="banner"/></a>
+                    {divName === 'coupon' && <>
+                        <MyCoupon pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageResponseDTO}
+                                  userData={userData}></MyCoupon>
+                    </>}
+                    {divName === 'qna' && <>
+                        <MyQna pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageRequestDTO}></MyQna>
+                    </>}
+                    {divName === 'home' && <>
+                        <Latest userOrder={userOrder} setDivName={setDivName}></Latest>
+                        <Point userPoint={userPoint} setDivName={setDivName}></Point>
+                        <Review userReview={userReview} setDivName={setDivName}></Review>
+                        <Qna userQna={userQna} setDivName={setDivName}></Qna>
+                        <MyInfo setDivName={setDivName}></MyInfo>
+                    </>
+                    }
+                    {divName === 'review' && <>
+                        <MyReview pageResponseDTO={pageResponseDTO}
+                                  setPageRequestDTO={setPageRequestDTO}></MyReview>
+                    </>}
+                </section> : <section className="error" style={{
+                    padding: '50px 0 !important', textAlign: 'center', fontSize: '15px',
+                }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요.
+                </section>}
 
 
             </div>
@@ -179,5 +146,6 @@ function Home() {
 
 
 }
+
 
 export default Home;
