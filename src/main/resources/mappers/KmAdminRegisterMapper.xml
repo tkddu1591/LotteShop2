@@ -7,19 +7,26 @@
 
     <insert id="insertProduct">
         INSERT INTO `km_product` SET
+            `prodCate1`=#{prodCate1},
+            `prodCate2`=#{prodCate2},
             `prodName`=#{prodName},
             `descript`=#{descript},
             `company`=#{company},
             `price`=#{price},
             `discount`=#{discount},
+            `point`=#{point},
             `stock`=#{stock},
+            `thumb1`=#{thumb1},
+            `thumb2`=#{thumb2},
+            `thumb3`=#{thumb3},
+            `detail`=#{detail},
             `delivery`=#{delivery},
             `status`=#{status},
             `duty`=#{duty},
             `receipt`=#{receipt},
             `bizType`=#{bizType},
-            `origin`=#{origin};
-
+            `origin`=#{origin},
+            `rdate`=NOW();
     </insert>
 
     <select id="selectProduct" resultType="com.example.kmarket.dto.product.KmProductDTO"></select>
