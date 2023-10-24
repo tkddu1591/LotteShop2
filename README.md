@@ -6,6 +6,22 @@ Lotte 쇼핑몰 프로젝트 구조
 - cs
 - login
 
+# react 필요 파일
+- 리액트 쿼리 : npm install @tanstack/react-query
+- 라우터 : npm install react-router-dom@6
+- axios : npm install axios
+- redux : npm install @reduxjs/toolkit react-redux
+- jquery: npm install jquery
+- daum : npm install react-daum-postcode
+- hook-form: npm i react-hook-form
+- 기본 모듈 : npm install
+- env.cmd : install env-cmd
+
+# gitignore 파일
+- application.properties
+- build.gradle
+
+
 # LotteON 프로젝트 업데이트 내역
 
 ## 0.0.1-SNAPSHOT
@@ -24,18 +40,13 @@ Lotte 쇼핑몰 프로젝트 구조
 ## 0.0.6-SNAPSHOT
 - product Complete 구현완료
 - Member register Backend 구현완료
-
-
-# react 필요 파일
-- 리액트 쿼리 : npm install @tanstack/react-query
-- 라우터 : npm install react-router-dom@6
-- axios : npm install axios
-- redux : npm install @reduxjs/toolkit react-redux
-- jquery: npm install jquery
-- daum : npm install react-daum-postcode
-- hook-form: npm i react-hook-form
-- 기본 모듈 : npm install
-- env.cmd : install env-cmd
-# gitignore 파일
-- application.properties
-- build.gradle
+## 0.0.7-SNAPSHOT
+- member/login 페이지 구현완료
+- member/terms 페이지 구현완료
+## 0.0.8-SNAPSHOT
+- cs/view 페이지 구현완료
+- member/register 페이지 구현완료
+## 0.0.9-SNAPSHOT
+- product 검색기능 추가
+## 0.1.1-SNAPSHOT
+- my/home 구현완료
