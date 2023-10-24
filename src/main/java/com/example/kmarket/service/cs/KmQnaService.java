@@ -67,7 +67,6 @@ public class KmQnaService {
     }
 
     public void save(KmCsQnaDTO dto){
-        log.info(dto.toString());
         KmCsQnaEntity entity = kmCsQnaMapper.toEntity(dto);
         log.info("qna service save entity : " + entity);
         log.info(entity.getKmCsCateEntity());
