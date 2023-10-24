@@ -1,4 +1,11 @@
-<th:block th:insert="~{/cs/inc/header.html}"/>
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cs/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
 <section id="cs">
     <div class="qna">
         <nav>
@@ -39,7 +46,7 @@
             </aside>
 
             <article>
-                <form action="#">
+                <form th:action="@{/cs/qna/write}" method="post">
                     <table>
                         <tr>
                             <td>문의유형</td>
@@ -68,14 +75,24 @@
                                 <textarea name="content" required placeholder="내용을 입력하세요."></textarea>
                             </td>
                         </tr>
+                        <tr>
+                            <td calss="form-group">
+                                <label>첨부파일</label>
+                                <td>
+                                    <input type="file" name="file"/>
+                                </td>
+                            </td>
+                        </tr>
                     </table>
                     <div>
-                        <a href="#" class="btnList">취소하기</a>
                         <input type="submit" class="btnSubmit" value="등록하기"/>
+                        <a href="#" class="btnList">취소하기</a>
                     </div>
                 </form>
             </article>
         </section>
     </div>
 </section>
-<th:block th:insert="~{/cs/inc/footer.html}"/>
+<script src="/cs/js/writeType.js"></script>
+</th:block>
+</html>

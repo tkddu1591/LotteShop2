@@ -1,11 +1,10 @@
 import DaumPostCode from 'react-daum-postcode';
-import {changeDTO} from "./ChangeDTO";
+import {changeDTO} from "./changeDTO";
 
 const DaumPost = ({setPostDTO, setPostOn}) => {
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
-        console.log(data.zonecode);
 
         const {addressType, bname, buildingName} = data
         if (addressType === 'R') {

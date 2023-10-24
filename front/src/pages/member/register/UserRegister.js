@@ -1,7 +1,10 @@
-import DaumPost from "../../store/DaumPost";
+import DaumPost from "../../../store/DaumPost";
 import React from "react";
+import EmailCheck from "./EmailCheck";
 
-function UserRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors}) {
+function UserRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors, watch}) {
+
+
     return <>
         <section>
             <table>
@@ -12,11 +15,14 @@ function UserRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors}
                         <td><input type="text" name="km_name" placeholder="이름 입력"
                                    {...register("name", {
                                        required: "이름을 입력해 주세요.",
-                                       pattern: /^[가-힣]{2,10}$/
+                                       pattern: {
+                                           value: /^[가-힣]{2,10}$/,
+                                           message: '유효한 이름을 입력해주세요'
+                                       }
                                    })}
                                    style={errors.name && {border: 'solid 2px red'}}
                                    required/>
-                            {errors.name && <div style={{color: 'red'}}>유효한 이름을 입력해주세요</div>}
+                            {errors.name && <div style={{color: 'red'}}>{errors.name.message}</div>}
                         </td>
 
                     </tr>
@@ -27,29 +33,21 @@ function UserRegister({postOn, register, postDTO, setPostDTO, setPostOn, errors}
                             <label><input type="radio" value="2" {...register("gender")}/>여</label>
                         </td>
                     </tr>
-                    <tr>
-                        <th><span className="essential">*</span>EMAIL</th>
-                        <td><input type="email" name="km_email" placeholder="이메일 입력"
-                                   {...register("email", {
-                                       required: "이메일을 입력해 주세요.",
-                                       pattern: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
-                                   })}
-                                   style={errors.email && {border: 'solid 2px red'}}
-                                   required/>
-                            {errors.email && <div style={{color: 'red'}}>유효한 이메일을 입력해주세요</div>}
-                        </td>
-                    </tr>
+                    <EmailCheck errors={errors} watch={watch} register={register}></EmailCheck>
                     <tr>
                         <th><span className="essential">*</span>휴대폰</th>
                         <td><input type="text" name="km_hp" maxLength="13"
                                    placeholder="휴대폰번호 입력" required
                                    {...register("hp", {
                                        required: "휴대폰번호를 입력해 주세요.",
-                                       pattern: /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/
+                                       pattern: {
+                                           value: /^01(?:0|1|[6-9])-(\d{4})-\d{4}$/,
+                                           message: '유효한 휴대폰 번호를 입력해주세요'
+                                       }
                                    })}
                                    style={errors.hp && {border: 'solid 2px red'}}
-                                   required/><span>&nbsp;&nbsp;- 포함하여 13자리를 입력해주세요.</span>
-                            {errors.hp && <div style={{color: 'red'}}>유효한 휴대폰 번호를 입력해주세요</div>}</td>
+                        /><span>&nbsp;&nbsp;- 포함하여 13자리를 입력해주세요.</span>
+                            {errors.hp && <div style={{color: 'red'}}>{errors.hp.message}</div>}</td>
                     </tr>
                     <tr className="addr">
                         <th>주소</th>

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KmProductReviewRepository extends JpaRepository<KmProductReviewEntity, Integer> {
-    public Page<KmProductReviewEntity> findByProdNo(int prodNo, Pageable pageable);
-    public int countByProdNo(int prodNo);
+    public Page<KmProductReviewEntity> findByKmProductEntity_ProdNo(int prodNo, Pageable pageable);
+    public int countByKmProductEntity_ProdNo(int prodNo);
+
+    Page<KmProductReviewEntity> findByUid(String uid, Pageable pageable);
 }
 

@@ -26,6 +26,17 @@ public class PageRequestDTO {
     private String type ="sold";
     @Builder.Default
     private int prodNo =0;
+    @Builder.Default
+    private int min =0;
+    @Builder.Default
+    private int max =1000000000;
+    @Builder.Default
+    private Boolean isNum =false;
+    @Builder.Default
+    private Boolean isProdName =false;
+    @Builder.Default
+    private Boolean isDescript =false;
+    private String memberUid;
 
     public Pageable getPageableDesc(String sort){
         return PageRequest.of(this.pg - 1, this.size, Sort.by(sort).descending());

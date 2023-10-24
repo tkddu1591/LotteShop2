@@ -9,12 +9,13 @@ import java.util.List;
 @Mapper
 public interface KmAdminFaqMapper {
 
-   public List<KmAdminFaqDTO> selectCsFaq();
+   // 게시글 리스트 10개씩 출력
+   public List<KmAdminFaqDTO> selectCsFaqAll(int start);
 
-   public KmAdminFaqDTO selectCsFaqByfaqNo();
+   // 글 보기
+   public KmAdminFaqDTO selectArticleFaq(int faqNo);
 
    // 페이징
+   // 전체 게시글 갯수 계산
    public int selectFaqCountTotal();
-
-   public List<KmAdminFaqDTO> selectFaq(int start);
 }

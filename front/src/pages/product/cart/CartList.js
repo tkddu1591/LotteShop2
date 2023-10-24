@@ -30,7 +30,8 @@ function CartList({cartDataList, setSelectedCartList, selectedCartList}) {
             setSelectedCartList([...selectedCartList, cartNo]);
         }
     };
-
+    console.log(selectedCartList)
+    console.log(cartDataList)
     return <>
         <table>
             <thead>

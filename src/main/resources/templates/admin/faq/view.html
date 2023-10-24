@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.thymeleaf.org/"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+      xmlns:layout="http://www.thymeleaf.org/">
+<head>
     <meta charset="UTF-8">
-    <head>
-        <div th:replace="/admin/header.html :: header"></div>
-    </head>
-    <main>
-        <div th:replace="/admin/aside.html :: aside"></div>
-    </main>
-    <div th:replace="/admin/footer.html :: footer"></div>
+    <script src="./js/gnb.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
+</head>
+<body>
+<div th:replace="/admin/header.html :: header"></div>
+<main>
+    <div th:replace="/admin/aside.html :: aside"></div>
+    <section id="admin-product-register">
+        <nav>
+            <h3>공지사항 조회</h3>
+            <p>
+                HOME > 고객센터 > <strong>공지사항</strong>
+            </p>
+        </nav>
+        <article>
+            <table class="csInputTable csViewTable">
+                <tr>
+                    <td>유형</td>
+                    <td>
+                        <p th:text="'[' + ${faqView.cateName} + '] - ' + ${faqView.typeName}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>제목</td>
+                    <td th:text="${faqView.title}"></td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td th:text="${faqView.content}"></td>
+                </tr>
+            </table>
+            <div style="text-align: right;">
+                <a th:style="'font-size: 20px;'" class="linkBtn" href="#">삭제</a>
+                <a th:style="'font-size: 20px;'" class="linkBtn" href="#">수정</a>
+                <a th:style="'font-size: 20px;'" class="linkBtn mainBtn" th:href="@{/admin/notice/list}">목록</a>
+            </div>
+        </article>
+    </section>
+</main>
+<div th:replace="/admin/footer.html :: footer"></div>
+</body>
 </html>

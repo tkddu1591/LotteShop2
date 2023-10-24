@@ -1,5 +1,7 @@
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../../App";
+import {changeCategoryNo} from "../../../slice/cateSilce";
+import {useDispatch} from "react-redux";
 
 function ProductItem({pageResponseDTO}) {
     let dtoList = pageResponseDTO.dtoList
@@ -24,9 +26,8 @@ function ProductItem({pageResponseDTO}) {
         }
     }
 
-    const productPage = `${HOME_URL}/product/list`;
     let navigate = useNavigate();
-    console.log(HOME_URL + "/product/view?prodNo=")
+    let dispatch = useDispatch();
     return (
         <table border="0">
 
@@ -39,6 +40,7 @@ function ProductItem({pageResponseDTO}) {
                     (dtoList.map((item, index) => {
                         return <tr key={item.prodNo}>
                             <td><a onClick={() => {
+                                dispatch(changeCategoryNo(item.prodCate2))
                                 navigate("/product/view?prodNo="+item.prodNo)
                             }}
                                    style={{cursor: 'pointer', userSelect: 'none'}}
@@ -49,6 +51,7 @@ function ProductItem({pageResponseDTO}) {
                             <td>
                                 <h3 className="name"
                                     onClick={() => {
+                                        dispatch(changeCategoryNo(item.prodCate2))
                                         navigate("/product/view?prodNo=" + item.prodNo)
                                     }}
                                     style={{cursor: 'pointer', userSelect: 'none'}}

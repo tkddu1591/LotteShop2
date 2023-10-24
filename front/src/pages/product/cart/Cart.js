@@ -1,20 +1,18 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import CartList from "./CartList";
 import Total from "./Total";
-import qs from "qs";
-import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
 import {API_BASE_URL} from "../../../App";
 
 function Cart() {
 
     let [cartDataList, setCartDataList] = useState([]);
     let [selectedCartList, setSelectedCartList] = useState([]);
-
+    let [memberUid] = useState(localStorage.getItem('memberUid'));
     useEffect(() => {
         axios.get(`${API_BASE_URL}/product/cart`, {
             params: {
-                uid: 'user'
+                uid: memberUid
             }
         }).then(res => {
             setCartDataList(res.data)
@@ -68,46 +66,55 @@ function Cart() {
         }
     }, [selectedCartList])
 
-    return <>
+    console.log(selectedCartList)
+    if (memberUid !== null) {
+        return <>
 
-        <CartList cartDataList={cartDataList}
-                  setSelectedCartList={setSelectedCartList}
-                  selectedCartList={selectedCartList}
-        />
+            <CartList cartDataList={cartDataList}
+                      setSelectedCartList={setSelectedCartList}
+                      selectedCartList={selectedCartList}
+            />
 
-        <input type="button" name="del" value="선택삭제"
-               onClick={async () => {
-                   //get 배열 보내는 방법
-                   let selectCartsNo = [];
-                   selectedCartList.map(item => item.cartNo).forEach(cartNo => {
-                       selectCartsNo.push(cartNo);
-                   })
-                   console.log(selectCartsNo)
-                   await axios.delete(`${API_BASE_URL}/product/cart`, {
-                       headers: {'Content-Type': 'application/json'},
-                       data: selectCartsNo
-                   })
-                       .then(() => {
-                           alert('선택하신 상품이 삭제되었습니다.');
+            <input type="button" name="del" value="선택삭제"
+                   onClick={async () => {
+                       //get 배열 보내는 방법
+                       let selectCartsNo = [];
+                       selectedCartList.map(item => item.cartNo).forEach(cartNo => {
+                           selectCartsNo.push(cartNo);
                        })
-                       .catch((error) => {
-                           console.error(error);
-                       });
-                   axios.get(`${API_BASE_URL}/product/cart`, {
-                       params: {
-                           uid: 'user'
-                       }
-                   }).then(res => {
-                       setCartDataList(res.data)
-                   }).catch(error => {
-                       console.error(error)
-                   })
-               }}
-        />
+                       await axios.delete(`${API_BASE_URL}/product/cart`, {
+                           headers: {'Content-Type': 'application/json'},
+                           data: selectCartsNo
+                       })
+                           .then(() => {
+                               alert('선택하신 상품이 삭제되었습니다.');
+                           })
+                           .catch((error) => {
+                               console.error(error);
+                           });
+                       axios.get(`${API_BASE_URL}/product/cart`, {
+                           params: {
+                               uid: memberUid
+                           }
+                       }).then(res => {
+                           setCartDataList(res.data)
+                       }).catch(error => {
+                           console.error(error)
+                       })
+                   }}
+            />
 
-        <Total total={total} selectedCartList={selectedCartList}/>
+            <Total total={total} selectedCartList={selectedCartList}/>
 
-    </>
+        </>
+    }else {
+        return<div className="error" style={{
+            padding: '50px 0 !important',
+            textAlign: 'center',
+            fontSize: '15px',
+            marginTop: '100px'
+        }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해 주세요</div>
+    }
 
 }
 

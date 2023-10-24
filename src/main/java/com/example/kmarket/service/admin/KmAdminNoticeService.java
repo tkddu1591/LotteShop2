@@ -26,28 +26,12 @@ public class KmAdminNoticeService {
 
     private final KmAdminNoticeMapper kmAdminNoticeMapper;
 
-    public List<KmAdminNoticeDTO> selectCsNotices() {
+    // 게시글 리스트 10개씩 출력
+    public List<KmAdminNoticeDTO> selectCsNoticeAll(int start) {
 
-        // select * all
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNotices();
+        List<KmAdminNoticeDTO> selectCsNoticeAll = kmAdminNoticeMapper.selectCsNoticeAll(start);
 
-        return noticeList;
-    }
-
-    public List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate() {
-
-        // cs_notice 테이블과 cs_cate 테이블 join
-        List<KmAdminNoticeDTO> selectCsNoticesjoinCsCate = kmAdminNoticeMapper.selectCsNoticesjoinCsCate();
-
-        return selectCsNoticesjoinCsCate;
-    }
-
-    public KmAdminNoticeDTO selectCsNoticeBynoticeNo() {
-
-        // select * from where noticeNo = ?
-        KmAdminNoticeDTO selectCsNoticeBynoticeNo = kmAdminNoticeMapper.selectCsNoticeBynoticeNo();
-
-        return selectCsNoticeBynoticeNo;
+        return selectCsNoticeAll;
     }
 
     // 중복을 제거하는 람다 함수
@@ -57,9 +41,9 @@ public class KmAdminNoticeService {
     }
 
     // 유형 선택 중복 제거
-    public List<KmAdminNoticeDTO> distinctCate(){
+    public List<KmAdminNoticeDTO> distinctCate(int start){
 
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNotices();
+        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNoticeAll(start);
 
         List<KmAdminNoticeDTO> distinctCate = noticeList.stream()
                 .filter(distinctByKey(KmAdminNoticeDTO::getCate))
@@ -71,13 +55,6 @@ public class KmAdminNoticeService {
     // 페이징 시작
     public int selectNoticeCountTotal(){
         return kmAdminNoticeMapper.selectNoticeCountTotal();
-    }
-
-    public List<KmAdminNoticeDTO> selectNotices(int start) {
-        int pageSize = 10; // 페이지당 항목 수
-        int startIdx = (start - 1) * pageSize; // 시작 위치 계산
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectNotices(startIdx);
-        return noticeList;
     }
 
 
@@ -130,5 +107,28 @@ public class KmAdminNoticeService {
     public int getStartNum(int currentPage) {
         return (currentPage - 1) * 10;
     }
+
+    // 글 보기
+    public KmAdminNoticeDTO selectArticleNotice(int noticeNo){
+
+        KmAdminNoticeDTO kmAdminNoticeDTO = kmAdminNoticeMapper.selectArticleNotice(noticeNo);
+
+        return kmAdminNoticeDTO;
+    }
+
+    // cateName, typeName 찾기
+    public List<KmAdminNoticeDTO> findCateNameAndTypeName(String cateName, String typeName){
+
+        List<KmAdminNoticeDTO> kmAdminNoticeDTO = kmAdminNoticeMapper.findCateNameAndTypeName(cateName, typeName);
+
+        return kmAdminNoticeDTO;
+    }
+
+    // 글 쓰기
+    public int insertArticleNotice(KmAdminNoticeDTO kmAdminNoticeDTO){
+
+        return kmAdminNoticeMapper.insertArticleNotice(kmAdminNoticeDTO);
+    }
+
 
 }

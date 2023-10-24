@@ -1,23 +1,33 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org/">
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
-<script th:src="../js/gnb.js"></script>
-<script th:inline="javascript">
-    function filterTable() {
-        var selectedValue = document.getElementById("searchCate1").value;
-        var rows = document.getElementById("noticeTable").getElementsByTagName("tr");
-        for (var i = 0; i < rows.length; i++) {
-            var cells = rows[i].getElementsByTagName("td");
-            if (cells.length > 0) {
-                var cellValue = cells[2].textContent || cells[2].innerText;
-                rows[i].style.display = (cellValue === selectedValue || selectedValue === "유형선택") ? "" : "none";
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:inline="javascript">
+        function filterTable() {
+            var selectedValue = document.getElementById("searchCate1").value;
+            var rows = document.getElementById("noticeTable").getElementsByTagName("tr");
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName("td");
+                if (cells.length > 0) {
+                    var cellValue = cells[2].textContent || cells[2].innerText;
+                    rows[i].style.display = (cellValue === selectedValue || selectedValue === "유형선택") ? "" : "none";
+                }
             }
         }
-    }
-</script>
-
-<head>
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var allCheckbox = document.querySelector("input[name='all']");
+            allCheckbox.addEventListener('click', function() {
+                var checkboxes = document.getElementsByName('chk');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = allCheckbox.checked;
+                }
+            });
+        });
+    </script>
     <div th:replace="/admin/header.html :: header"></div>
 </head>
 <main>
@@ -36,6 +46,7 @@
             <form>
                 <div>
                     <select name="searchCate1" id="searchCate1" onchange="filterTable()">
+                        <option value="" selected disabled hidden>유형선택</option>
                         <option th:each="dto : ${(distinctCate)}" th:value="${dto.cate}" th:text="${dto.cate}">유형선택</option>
                     </select>
                 </div>
@@ -52,16 +63,16 @@
                     </tr>
                     </thead>
                     <tbody class="listTbody">
-                    <th:block th:each="dto : ${noticeList}">
+                    <th:block th:each="dto : ${notices}">
                         <tr>
                             <td><input type="checkbox" name="chk" /></td>
-                            <td th:text="${dto.noticeNo}"></td>
-                            <td th:text="${dto.cate}"></td>
-                            <td><a th:href="@{/admin/notice/view(pg=${dto.noticeNo})}"> <span th:text="${dto.title}"></span> </a></td>
-                            <td th:text="${dto.hit}"></td>
-                            <td th:text="${dto.rdate}"></td>
-                            <td>
-                                <a th:href="@{/write}" class="noticeDelete">[삭제]</a>
+                            <td style="text-align: center; width: 10%" th:text="${dto.noticeNo}"></td>
+                            <td style="text-align: center; width: 10%" th:text="${dto.cateName}"></td>
+                            <td style="text-align: center; width: 40%"><a th:href="@{/admin/notice/view(noticeNo=${dto.noticeNo})}"> <span th:text="'[' + ${dto.typeName} + ']' + ${dto.title}"></span> </a></td>
+                            <td style="text-align: center; width: 10%" th:text="${dto.hit}"></td>
+                            <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td style="text-align: center; width: 10%">
+                                <a th:href="@{/admin/notice/write}" class="noticeDelete">[삭제]</a>
                                 <br />
                                 <a th:href="@{/write}" class="noticeUpdate">[수정]</a>
                             </td>
@@ -69,25 +80,32 @@
                     </th:block>
                     </tbody>
                 </table>
-                <input type="submit" value="선택삭제" class="deleteAll" />
-                <a th:href="@{/admin/cs/notice/write}" class="writeBtn">작성하기</a>
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <div>
+                        <input type="submit" value="선택삭제" class="deleteAll" />
+                    </div>
+                    <div>
+                        <a th:href="@{/admin/notice/write}" class="writeBtn">작성하기</a>
+                    </div>
+                </div>
             </form>
 
             <div class="paging">
-                <span class="prev">
-                    <a href="#"><&nbsp;이전</a>
+                <span class="prev" th:if="${pageGroupStart > 1}">
+                    <a th:href="@{/admin/notice/list(pg=${pageGroupStart - 1})}">이전</a>
                 </span>
                 <span class="num">
-                    <th:block th:each="num : ${#numbers.sequence(1,lastPageNum)}">
-                        <a th:href="@{/admin/notice/list(pg=${num})}" th:text="${num}">[[${num}]]</a>
+                    <th:block th:each="i : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                        <a th:href="@{/admin/notice/list(pg=${i},search=${search})}" th:classappend="${currentPage == i} ? 'current' : 'off'">
+                            [[${i}]]
+                        </a>
                     </th:block>
                 </span>
-                <span class="next">
-                    <a href="#">다음&nbsp;></a>
+                <span class="next" th:if="${pageGroupEnd < lastPageNum}">
+                    <a th:href="@{/admin/notice/list(pg=${pageGroupEnd + 1})}">다음</a>
                 </span>
             </div>
         </section>
-
     </section>
 </main>
 <div th:replace="/admin/footer.html :: footer"></div>

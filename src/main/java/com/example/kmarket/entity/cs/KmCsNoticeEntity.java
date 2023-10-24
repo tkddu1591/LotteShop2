@@ -17,23 +17,23 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "km_cs_notice")
 public class KmCsNoticeEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int noticeNo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int noticeNo;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cate")
-	private KmCsCateEntity kmCsCateEntity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cate")
+    private KmCsCateEntity kmCsCateEntity;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "type")
-	private KmCsTypeEntity kmCsTypeEntity;
-	private String title;
-	private String content;
-	private String writer;
-	private String regip;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type")
+    private KmCsTypeEntity kmCsTypeEntity;
+    private String title;
+    private String content;
+    private String writer;
+    private String regip;
 
-	@CreationTimestamp
+    @CreationTimestamp
     private LocalDateTime rdate;
 
 }

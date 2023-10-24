@@ -1,4 +1,4 @@
-<footer>
+<footer th:fragment="footer">
     <ul>
         <li><a href="#">회사소개</a></li>
         <li><a href="#">서비스이용약관</a></li>
@@ -21,7 +21,14 @@
             Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br />
         </p>
     </div>
+<script>
+    $(function(){
+        $(".btnList").click(function(e){
+            e.preventDefault();
+            history.go(-1);
+        });
+    })
+</script>
 </footer>
 </div>
-</body>
 </html>

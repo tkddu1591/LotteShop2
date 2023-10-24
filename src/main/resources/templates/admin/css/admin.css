@@ -550,6 +550,18 @@ button[type=submit] {
 }
 
 /******* cs **********/
+.deleteAll{
+    width: 200px !important;
+    padding: 6px;
+    border: 1px solid #959595;
+    font-size: 13px;
+    background-color: white;
+    color: #333;
+    vertical-align: middle;
+    box-sizing: border-box;
+    float:right;
+    text-align:center;
+}
 .writeBtn {
 
     width: 200px !important;

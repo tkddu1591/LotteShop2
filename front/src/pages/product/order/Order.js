@@ -7,32 +7,50 @@ import Discount from "./Discount";
 import Delivery from "./Delivery";
 import Alert from "./Alert";
 import Error from "./Error";
+import axios from "axios";
+import {API_BASE_URL} from "../../../App";
+import {createTokenHeader, retrieveStoredToken} from "../../../slice/tokenSlice";
 
 function Order() {
 
     let orderTotal = useSelector((state) => state.orderTotal);
     let orderProducts = useSelector((state) => state.orderProducts);
     let newOrderProducts = [];
-    let [newOrderTotal, setNewOrderTotal] = useState(orderTotal);
+    let [newOrderTotal, ] = useState(orderTotal);
     let [usePoint, setUsePoint] = useState(0);
-    let member = useSelector((state) => state.member);
-    let [orderEnd, setOrderEnd] = useState({
-        ordCount: newOrderTotal.totalCount,
-        ordPrice: newOrderTotal.totalProductPrice,
-        ordDiscount: newOrderTotal.totalDiscountPrice,
-        ordDelivery: newOrderTotal.totalDelivery,
-        savePoint: newOrderTotal.totalPoint,
-        ordTotPrice: newOrderTotal.totalOrderPrice,
-        ordComplete: 1,
-        ordPayment: 0,
-        usedPoint: 0,
-        recipName: member.name,
-        recipHp: member.hp,
-        recipAddr1: member.addr1,
-        recipAddr2: member.addr2,
-        recipZip: member.zip,
-        ordUid: member.uid,
-    })
+    let [member, setMember] = useState();
+    let [memberUid] = useState(localStorage.getItem('memberUid'));
+    let [orderEnd, setOrderEnd] = useState({})
+    useEffect(() => {
+        if (memberUid !== null && retrieveStoredToken().token !=null) {
+            axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
+                .then(response => {
+                    setMember(response.data)
+                }).catch(error => console.log('유저 정보가 없습니다.'))
+        }
+    }, []);
+
+    useEffect(() => {
+        if (member !== undefined) {
+            setOrderEnd({
+                ordCount: newOrderTotal.totalCount,
+                ordPrice: newOrderTotal.totalProductPrice,
+                ordDiscount: newOrderTotal.totalDiscountPrice,
+                ordDelivery: newOrderTotal.totalDelivery,
+                savePoint: newOrderTotal.totalPoint,
+                ordTotPrice: newOrderTotal.totalOrderPrice,
+                ordComplete: 1,
+                ordPayment: 0,
+                usedPoint: 0,
+                recipName: member.name,
+                recipHp: member.hp,
+                recipAddr1: member.addr1,
+                recipAddr2: member.addr2,
+                recipZip: member.zip,
+                ordUid: member.uid,
+            })
+        }
+    }, [member]);
     const [formattedPhoneNumber, setFormattedPhoneNumber] = useState(
         orderEnd.recipHp
     );
@@ -56,8 +74,14 @@ function Order() {
                 total: data.total,
             }])
         }
-
-    if (member.uid !== '' && orderEnd.ordCount !== 0)
+    if (memberUid === null)
+        return <div className="error" style={{
+            padding: '50px 0 !important',
+            textAlign: 'center',
+            fontSize: '15px',
+            marginTop: '100px'
+        }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요</div>
+    else if (member !== undefined && orderEnd.ordCount !== undefined && orderEnd.ordCount !== 0)
         return <>
             <OrderProducts orderProducts={orderProducts}></OrderProducts>
             <Receipt orderEnd={orderEnd} orderProducts={newOrderProducts} member={member}></Receipt>

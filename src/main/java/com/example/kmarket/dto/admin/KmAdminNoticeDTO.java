@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class KmAdminNoticeDTO {
     private int noticeNo;
     private String cate;

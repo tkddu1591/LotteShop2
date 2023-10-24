@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
@@ -72,8 +72,11 @@ function Info({prodDTO, scrollY}) {
     //*****************user 추가하고 uid 수정필요*****************
 
     let [cartDTO, setCartDTO] = useState({
+        thumb1: prodDTO.thumb1,
+        prodName: prodDTO.prodName,
+        descript: prodDTO.descript,
         count: 1,
-        uid: 'user',
+        uid: localStorage.getItem('memberUid'),
         price: prodDTO.price,
         discount: prodDTO.discount,
         delivery: prodDTO.delivery,
@@ -87,31 +90,28 @@ function Info({prodDTO, scrollY}) {
         setCartDTO((cartDTO) => {
             let newCartDTO = {...cartDTO};
             newCartDTO[key] = parseInt(value);
-            console.log(key)
             if (key === 'count') {
                 newCartDTO.total = (value * changeDiscountPrice(prodDTO.price, prodDTO.discount))
             }
             return newCartDTO;
         });
     };
-    useEffect(() => {
-        if (cartDTO.price === 0) {
-            setCartDTO({
-                count: 1,
-                uid: 'user',
-                price: prodDTO.price,
-                discount: prodDTO.discount,
-                delivery: prodDTO.delivery,
-                point: prodDTO.point,
-                prodNo: prodDTO.prodNo,
-                total: changeDiscountPrice(prodDTO.price, prodDTO.discount)
-            })
-        }
-    }, [prodDTO]);
-
+    if (cartDTO.price === 0) {
+        setCartDTO({
+            count: 1,
+            uid: 'user',
+            price: prodDTO.price,
+            discount: prodDTO.discount,
+            delivery: prodDTO.delivery,
+            point: prodDTO.point,
+            prodNo: prodDTO.prodNo,
+            total: changeDiscountPrice(prodDTO.price, prodDTO.discount)
+        })
+    }
     let navigate = useNavigate();
-    let dispatch = useDispatch();
+    console.log(localStorage.getItem('memberUid'))
 
+    let dispatch = useDispatch();
     return <>
         <article className="info">
             <div className="image">
@@ -149,7 +149,8 @@ function Info({prodDTO, scrollY}) {
                 <nav>
                     <span className="origin">원산지-상세설명 참조</span>
                 </nav>
-                <img src={`${process.env.REACT_APP_HOME_URL}/images/vip_plcc_banner.png`} alt="100원만 결제해도 1만원 적립!" className="banner"/>
+                <img src={`${process.env.REACT_APP_HOME_URL}/images/vip_plcc_banner.png`} alt="100원만 결제해도 1만원 적립!"
+                     className="banner"/>
 
                 <div className="count">
                     {cartDTO.count !== 1 ? <button className="decrease" onClick={() => {
@@ -169,8 +170,10 @@ function Info({prodDTO, scrollY}) {
                     <button className="increase" onClick={() => {
                         if (cartDTO.count >= prodDTO.stock) {
                             changeCartData('count', prodDTO.stock);
+                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount) * (cartDTO.count + 1))
                         } else {
                             changeCartData('count', cartDTO.count + 1);
+                            changeCartData('total', changeDiscountPrice(prodDTO.price, prodDTO.discount) * (cartDTO.count + 1))
                         }
 
                     }}
@@ -187,36 +190,44 @@ function Info({prodDTO, scrollY}) {
                 <div className="button">
                     <input type="button" className="cart"
                            onClick={() => {
-                               axios.post(`${API_BASE_URL}/product/cart`, cartDTO,
-                                   {
-                                       headers: {
-                                           'Content-Type': 'application/json',
-                                       }
+                               if (localStorage.getItem('memberUid') !== null) {
+                                   axios.post(`${API_BASE_URL}/product/cart`, cartDTO,
+                                       {
+                                           headers: {
+                                               'Content-Type': 'application/json',
+                                           }
+                                       })
+                                       .then(() => {
+                                               alert('선택하신 상품이 장바구니에 담겼습니다.')
+                                           }
+                                       ).catch((error) => {
+                                       alert('로그인 후 시도해주시기 바랍니다.')
+                                       console.error(error)
                                    })
-                                   .then(() => {
-                                           alert('선택하신 상품이 장바구니에 담겼습니다.')
-                                       }
-                                   ).catch((error) => {
-                                   console.error(error)
-                               })
+                               } else {
+                                   alert('로그인 후 시도해주시기 바랍니다.')
+                               }
                            }}
                            value="장바구니"/>
                     <input type="button" className="order"
                            onClick={async () => {
+                               if (localStorage.getItem('memberUid') !== null) {
+                                   await dispatch(insertOrderProduct([cartDTO]))
+                                   await dispatch(insertOrderTotal({
+                                       totalCount: 1,
+                                       totalDelivery: cartDTO.delivery,
+                                       totalDiscount: cartDTO.discount,
+                                       totalOrderPrice: cartDTO.total,
+                                       totalProductPrice: cartDTO.price * cartDTO.count,
+                                       totalPoint: cartDTO.point,
+                                       totalDiscountPrice: (cartDTO.price * cartDTO.discount) / 100
 
-                               console.log(cartDTO)
-                               await dispatch(insertOrderProduct([cartDTO]))
-                               await dispatch(insertOrderTotal({
-                                   totalCount : 1,
-                                   totalDelivery : cartDTO.delivery,
-                                   totalDiscount : cartDTO.discount,
-                                   totalOrderPrice : cartDTO.total,
-                                   totalProductPrice : cartDTO.price*cartDTO.count,
-                                   totalPoint : cartDTO.point,
-                                   totalDiscountPrice : (cartDTO.price*cartDTO.discount)/100
-                               }))
+                                   }))
+                                   navigate("/product/order")
+                               }else{
+                                   alert('로그인 후 시도해주시기 바랍니다.')
+                               }
 
-                               navigate("/product/order")
 
                            }}
 

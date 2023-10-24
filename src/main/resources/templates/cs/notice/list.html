@@ -1,4 +1,10 @@
-<th:block th:insert="~{@{/cs/inc/header.html}}"/>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cs/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
     <section id="cs">
         <div class="notice">
             <nav>
@@ -41,7 +47,7 @@
                         <tr>
                             <td>
                                 <!--(cate=notice.cate, bno=notice.noticeNo) -->
-                                <a th:href="@{cs/notice/view}">
+                                <a th:href="@{/cs/notice/view(no=${notice.noticeNo})}">
                                     [<span th:text="${notice.typeName}"></span>]
                                     [[${notice.title}]]
                                 </a>
@@ -56,20 +62,31 @@
                     </table>
 
                     <div class="page">
-                        <a href="#"
-                           class="prev">&laquo;</a>
-                        <a href="#"
-                           class="prev">이전</a>
-                        <a href="#"
-                           class="num on">1</a>
-                        <a href="#"
-                           class="next">다음</a>
-                        <a href="#"
-                           class="next">&raquo;</a>
+                        <span th:if="${csPageResponseDTO.prev}" class="prev">
+                            <a th:href="@{/cs/notice/list(cate=${csPageResponseDTO.cate}, pg=1)}"
+                               class="prev">&laquo;</a>
+                            <a th:href="@{/cs/notice/list(cate=${csPageResponseDTO.cate}, pg=${csPageResponseDTO.start - 1})}"
+                               class="prev">이전</a>
+                        </span>
+
+                        <span th:each="num : ${#numbers.sequence(csPageResponseDTO.start, csPageResponseDTO.end)}"
+                                class="num">
+                            <a th:href="@{/cs/notice/list(cate=${csPageResponseDTO.cate}, pg=${num})}"
+                               th:class="${csPageResponseDTO.pg eq num ? 'on' : 'off'}">
+                                [[${num}]]</a>
+                        </span>
+
+                        <span th:if="${csPageResponseDTO.next}" class="next">
+                            <a th:href="@{/cs/notice/list(cate=${csPageResponseDTO.cate}, pg=${csPageResponseDTO.end + 1})}"
+                               >다음</a>
+                            <a th:href="@{/cs/notice/list(cate=${csPageResponseDTO.cate}, pg=${csPageResponseDTO.last})}"
+                               >&raquo;</a>
+                        </span>
                     </div>
 
                 </article>
             </section>
         </div>
     </section>
-<th:block th:insert="~{@{/cs/inc/footer.html}}"/>
+</th:block>
+</html>

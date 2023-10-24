@@ -31,4 +31,8 @@ public class KmProductOrderService {
     public KmProductOrderDTO findByOrdNo(String uid) {
         return kmProductOrderMapper.toDTO(kmProductOrderRepository.findTopByOrdUidOrderByOrdNoDesc(uid));
     }
+
+    public int countByUid(String memberUid) {
+        return kmProductOrderRepository.countByOrdUidAndOrdCompleteBetween(memberUid, 0,1);
+    }
 }

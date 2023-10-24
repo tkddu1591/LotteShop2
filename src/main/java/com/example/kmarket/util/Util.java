@@ -20,16 +20,4 @@ public class Util {
         }
         return maskingUid.toString();
     }
-
-    public LocalDateTime getRdateSub(LocalDateTime rdate) {
-        String formatDate
-                = rdate.now()
-                .format(DateTimeFormatter.ofPattern("yy-MM-dd"));
-        log.info("@@@@@@@@@@@@@@@@@"+formatDate);
-
-        LocalDateTime parsedDate
-                = LocalDateTime.parse(formatDate, DateTimeFormatter.ofPattern("yy-MM-dd"));
-        log.info("!!!!!!!!!!!!!!!!!!!!"+parsedDate);
-        return parsedDate;
-    }
 }

@@ -5,8 +5,6 @@ import Review from "./Review";
 import Info from "./Info";
 import Notice from "./Notice";
 import PageNavigation from "../list/PageNavigation";
-import {useDispatch, useSelector} from "react-redux";
-import {changeCategoryNo} from "../../../slice/cateSilce";
 import {API_BASE_URL} from "../../../App";
 
 function View() {
@@ -51,7 +49,6 @@ function View() {
         thumb3: ''
     });
     //페이징 변수 선언
-
     let [pageRequestDTO, setPageRequestDTO] = useState({
         pg: 1, size: 5, prodNo: prodNo
     })
@@ -118,39 +115,30 @@ function View() {
         }
     }, []);
 
-    let categoryNo = useSelector((state) => state.categoryNo);
-    let dispatch = useDispatch();
 
-    useEffect(() => {
-        if (prodDTO !== null) {
-            dispatch(changeCategoryNo(prodDTO.prodCate2))
-        }
-    }, [prodDTO]);
+    if (prodDTO.company !== '') {
+        return <>
+            <Info prodDTO={prodDTO} scrollY={divYPosition} changeProdDTO={changeProdDTO}></Info>
 
 
-    return <>
-        <Info prodDTO={prodDTO} scrollY={divYPosition} changeProdDTO={changeProdDTO}></Info>
+            <Detail></Detail>
+            <Notice prodDTO={prodDTO}></Notice>
 
+            <article className="review">
+                <nav>
+                    <h1 ref={divRef}>상품리뷰</h1>
+                </nav>
 
-        <Detail></Detail>
-        <Notice prodDTO={prodDTO}></Notice>
+                <Review pageResponseDTO={pageResponseDTO}></Review>
 
-        <article className="review">
-            <nav>
-                <h1 ref={divRef}>상품리뷰</h1>
-            </nav>
+                <PageNavigation pageResponseDTO={pageResponseDTO} changePageRequest={changePageRequest}>
 
-            <Review pageResponseDTO={pageResponseDTO}></Review>
+                </PageNavigation>
 
-            <PageNavigation pageResponseDTO={pageResponseDTO} changePageRequest={changePageRequest}>
+            </article>
 
-            </PageNavigation>
-
-        </article>
-
-    </>
-
-
+        </>
+    }
 }
 
 function Detail() {

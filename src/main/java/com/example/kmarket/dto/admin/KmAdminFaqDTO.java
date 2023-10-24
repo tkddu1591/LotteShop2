@@ -19,4 +19,9 @@ public class KmAdminFaqDTO {
     private String writer;
     private String regip;
     private LocalDateTime rdate;
+    private int hit;
+
+    // 추가 필드
+    private String cateName;
+    private String typeName;
 }

@@ -1,6 +1,7 @@
 import './css/App.css';
 import './css/Product.css'
 import './css/Member.css'
+import './css/my.css'
 import React, {lazy, memo, Suspense, useEffect, useState,} from "react";
 import {Outlet, Route, Routes} from "react-router-dom";
 import axios from "axios";
@@ -10,7 +11,6 @@ import './pages/home/slider.css';
 import CateRoot from "./pages/product/CateRoot";
 import {deleteBanner} from "./slice/bannerSilce";
 import Order from "./pages/product/order/Order";
-import {insertMember} from "./slice/memberSlice";
 
 export const API_BASE_URL = process.env.REACT_APP_API_ROOT;
 export const HOME_URL = process.env.REACT_APP_HOME_URL;
@@ -27,6 +27,8 @@ const Login = lazy(() => import('./pages/member/login/Login.js'))
 const SignUp = lazy(() => import('./pages/member/signUp/SignUp.js'))
 const Join = lazy(() => import('./pages/member/join/Join.js'))
 const MemberRegister = lazy(() => import('./pages/member/register/Register.js'))
+const SearchBar = lazy(() => import('./pages/home/SearchBar'))
+const MyHome = lazy(() => import('./pages/my/Home.js'))
 
 function App() {
 
@@ -44,10 +46,6 @@ function App() {
         return <div>로딩중</div>
     }
 
-    let member = {
-        uid: 'user',
-        pass: 'user',
-    }
     useEffect(() => {
         axios.get(`${API_BASE_URL}/product/cate1`).then(res => {
             dispatch(changeCate1(res.data))
@@ -89,6 +87,21 @@ function App() {
                         <FooterMemo></FooterMemo>
                     </Suspense>
                 }>
+                    {/*my 라우트*/}
+
+                    <Route path="my" element={
+                        <>
+                            <header><LoginHeader></LoginHeader>
+                                <SearchBar></SearchBar>
+                            </header>
+                            <Outlet></Outlet>
+                        </>
+                    }>
+                        <Route path="home" element={<Suspense fallback={fallbackData()}>
+                            <MyHome></MyHome>
+                        </Suspense>}/>
+
+                    </Route>
                     {/*멤버 라우트*/}
                     <Route path="member" element={
                         <>
@@ -117,7 +130,7 @@ function App() {
                     {/*프로덕트 라우트*/}
                     <Route path="product" element={
                         <>
-                            <HeaderMemo></HeaderMemo>
+                            <Header></Header>
                             <main id="product">
                                 <AsideMemo></AsideMemo>
                                 <Outlet></Outlet>
@@ -159,7 +172,6 @@ function App() {
                             <div>없는 페이지 입니다</div>
                         </main>
                     </>}/>
-
                 </Route>
             </Routes>
         </>
