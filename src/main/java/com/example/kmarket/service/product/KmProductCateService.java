@@ -29,4 +29,8 @@ public class KmProductCateService {
         return cate2Repository.findAll().stream().map(cate2Mapper::toDTO).toList();
     }
 
+    public List<KmProductCate2DTO> getCate2(int cate1) {
+        return cate2Repository.findByCate1(cate1).stream().map(cate2Mapper::toDTO).toList();
+    }
+
 }

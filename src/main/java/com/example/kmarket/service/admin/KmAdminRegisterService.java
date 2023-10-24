@@ -60,6 +60,7 @@ public class KmAdminRegisterService {
         String path = new File(filePath).getAbsolutePath();
         log.info("fileUpload...3 : " + path);
 
+
         // 첨부파일 리스트화
         List<MultipartFile> files = Arrays.asList(
                 dto.getFileThumb1(),
@@ -81,7 +82,13 @@ public class KmAdminRegisterService {
             try {
                 log.info("fileUpload...5");
                 // 업로드 파일에 saveFile이라는 껍데기 입힘
-                file.transferTo(new File(path, sName)); // 저장할 폴더 이름, 저장할 파일 이름
+                File f = new File(path, sName);
+                if(!f.exists()){
+                    f.mkdirs();
+                }
+
+                file.transferTo(f); // 저장할 폴더 이름, 저장할 파일 이름
+
                 log.info("fileUpload...6");
             } catch (IOException e) {
                 log.error(e.getMessage());

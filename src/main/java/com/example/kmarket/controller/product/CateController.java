@@ -5,6 +5,7 @@ import com.example.kmarket.dto.product.KmProductCate2DTO;
 import com.example.kmarket.service.product.KmProductCateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,4 +25,10 @@ public class CateController {
     public List<KmProductCate2DTO> getCate2() {
         return cateService.getCate2();
     }
+
+    @GetMapping("/cate2/{cate1}")
+    public List<KmProductCate2DTO> getCate2(@PathVariable("cate1") int cate1) {
+        return cateService.getCate2(cate1);
+    }
+
 }
