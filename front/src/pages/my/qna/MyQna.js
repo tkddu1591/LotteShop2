@@ -25,14 +25,14 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                     </li>
                     {value.answerComplete === 2 ? <li className="question"><span style={{cursor: 'pointer'}}
                                                                                  onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}
-                    >{value.title}</span></li> : <li className="question">{value.title}</li>}
+                    >{value.title}</span></li> : <li className="question" style={{color:'gray'}}>{value.title}</li>}
                 </ul>
             </td>
         } else {
             return <>
                 {value.answerComplete === 2 ? <td className="tit"><span style={{cursor: 'pointer'}}
                                                                         onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}>{value.title}</span>
-                </td> : <td className="tit">{value.title}</td>}</>
+                </td> : <td className="tit" style={{color:'gray'}}>{value.title}</td>}</>
         }
     }
 

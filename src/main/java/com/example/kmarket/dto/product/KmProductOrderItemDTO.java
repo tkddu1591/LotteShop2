@@ -27,4 +27,5 @@ public class KmProductOrderItemDTO {
     private LocalDateTime ordDate;
     private String company;
     private int ordComplete;
+    private LocalDateTime ordCompleteDate;
 }

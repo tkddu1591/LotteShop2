@@ -22,7 +22,6 @@ function Review({userReview, setDivName}) {
             <table border="0">
                 <tbody>
                     <tr>
-                        <th>번호</th>
                         <th>상품명</th>
                         <th style={{width: '300px'}}>내용</th>
                         <th>평점</th>
@@ -30,7 +29,6 @@ function Review({userReview, setDivName}) {
                     </tr>
                     {userReview.map((item, index) => {
                         return <tr key={index+item.prodNo}>
-                                <td>{item.prodNo.toLocaleString()}</td>
                                 <td>{item.prodName}</td>
                                 <td>{item.content}</td>
                                 {ratingCheck(item.rating)}

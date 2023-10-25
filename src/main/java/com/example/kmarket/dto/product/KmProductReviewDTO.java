@@ -15,8 +15,8 @@ public class KmProductReviewDTO {
     private String content;
     private String uid;
     private int rating;
-    private LocalDateTime regIp;
-    private String rdate;
+    private String regIp;
+    private LocalDateTime rdate;
     //추가데이터
     private String prodName;
 

@@ -22,6 +22,7 @@ public class KmMemberPointEntity {
     @JoinColumn(name = "ordNo")
     private KmProductOrderEntity orderEntity;
     private int point;
+    private String comment;
     private LocalDateTime pointDate;
 
 }

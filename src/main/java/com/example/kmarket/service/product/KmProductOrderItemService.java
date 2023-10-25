@@ -46,7 +46,12 @@ public class KmProductOrderItemService {
         Page<KmProductOrderItemEntity> result = null;
         //dtoList
         //findBy머시기 by뒤가 where절이라고 보면 됨니다.
-        result = kmProductOrderItemRepository.findByKmProductOrderEntity_OrdUid(pageRequestDTO.getMemberUid(), pageable);
+
+        if(pageRequestDTO.getStartDate()==null) {
+            result = kmProductOrderItemRepository.findByKmProductOrderEntity_OrdUid(pageRequestDTO.getMemberUid(), pageable);
+        }else {
+            result = kmProductOrderItemRepository.findByKmProductOrderEntity_OrdUidAndKmProductOrderEntity_OrdDateBetween(pageRequestDTO.getMemberUid(), pageRequestDTO.getStartDate(), pageRequestDTO.getEndDate(), pageable);
+        }
 
         result.getContent(); // Entity
         result.getTotalElements(); // 숫자 형이 double -> int변경해줘야함
@@ -64,5 +69,9 @@ public class KmProductOrderItemService {
                 .orderItemDTOS(dtoList)
                 .total(totalElement)
                 .build();
+    }
+
+    public int countByUid(String memberUid) {
+        return kmProductOrderItemRepository.countByKmProductOrderEntity_OrdUidAndKmProductOrderEntity_OrdCompleteBetween(memberUid, 0,1);
     }
 }
