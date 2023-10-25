@@ -16,41 +16,42 @@
         </nav>
         <section>
             <article>
-                <form th:action="@{/admin/notice/write}" method="post">
+                <form th:action="@{/admin/notice/modify}" method="post">
+                    <input type="hidden" name="no" th:value="${kmAdminNoticeDTO.noticeNo}">
                     <section>
                         <table>
                             <tr>
                                 <td>유형</td>
                                 <td>
-                                    <select name="cate" id="searchCate1">
-                                        <option selected disabled>유형 선택</option>
+                                    <select name="searchCate1" id="searchCate1">
+                                        <option value="" selected disabled>유형 선택</option>
                                         <option th:each="cate1 : ${CnameTname}"
                                                 th:if="${cate1.cateName == '전체' or
                                                         cate1.cateName == '고객서비스' or
                                                         cate1.cateName == '안전거래' or
                                                         cate1.cateName == '위해상품' or
                                                         cate1.cateName == '이벤트당첨'}"
-                                                th:value="${cate1.cate}"
-                                                th:text="${cate1.cateName}">
-                                        </option>
+                                                th:value="${cate1.cateName}"
+                                                th:text="${cate1.cateName}"></option>
                                     </select>
                                 </td>
                             </tr>
                         </table>
-                    </section>9
+                    </section>
                     <section>
                         <table>
                             <tr>
                                 <td>제목</td>
-                                <td><textarea name="title" placeholder="제목을 입력하세요" rows="4" cols="100" style="background-color: white;"></textarea></td>
+                                <td><textarea name="title" placeholder="제목을 입력하세요" rows="4" cols="100" style="background-color: white;">[[${kmAdminNoticeDTO.title]]</textarea></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="content" placeholder="내용을 입력하세요."rows="12" cols="100" style="background-color: white;"></textarea></td>
+                                <td><textarea name="content" placeholder="내용을 입력하세요."rows="12" cols="100" style="background-color: white;">[[${kmAdminNoticeDTO.content]]</textarea></td>
                             </tr>
                         </table>
                     </section>
                     <div style="text-align: center">
+                        <input type="submit" value="취소하기" class="csRegister" th:onclick="|window.location.href='@{/admin/notice/list}'|">
                         <input type="submit" value="등록하기" class="csRegister">
                     </div>
                 </form>

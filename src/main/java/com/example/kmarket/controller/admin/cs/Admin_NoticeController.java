@@ -2,12 +2,13 @@ package com.example.kmarket.controller.admin.cs;
 
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.service.admin.KmAdminNoticeService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -75,23 +76,51 @@ public class Admin_NoticeController {
     }
 
     @GetMapping("/admin/notice/write")
-    public String write(Model model, String cateName, String typeName){
+    public String write(Model model, String cateName){
 
-        log.info("here1");
-
-        List<KmAdminNoticeDTO> findCateNameAndTypeName = kmAdminNoticeService.findCateNameAndTypeName(cateName, typeName);
-
-        log.info("here2 : " + findCateNameAndTypeName);
-
+        List<KmAdminNoticeDTO> findCateName = kmAdminNoticeService.findCateName(cateName);
         int noticeWrite = kmAdminNoticeService.insertArticleNotice(KmAdminNoticeDTO.builder().build());
 
-        log.info("here3 : " + noticeWrite);
-
-        model.addAttribute("CnameTname", findCateNameAndTypeName);
+        model.addAttribute("CnameTname", findCateName);
         model.addAttribute("noticeWrite", noticeWrite);
 
 
         return "/admin/notice/write";
     }
 
+    @PostMapping("/admin/notice/write")
+    public String write(Model model, KmAdminNoticeDTO kmAdminNoticeDTO){
+
+        log.info("kmAdminNoticeDTO : " + kmAdminNoticeDTO);
+        kmAdminNoticeService.insertArticleNotice(kmAdminNoticeDTO);
+
+        return "redirect:/admin/notice/list";
+    }
+
+    @GetMapping("/admin/notice/modify")
+    public String update(Model model, int noticeNo, String cateName){
+
+        KmAdminNoticeDTO kmAdminNoticeDTO = kmAdminNoticeService.selectArticleNotice(noticeNo);
+        List<KmAdminNoticeDTO> findCateName = kmAdminNoticeService.findCateName(cateName);
+
+        model.addAttribute("kmAdminNoticeDTO", kmAdminNoticeDTO);
+        model.addAttribute("findCateName", findCateName);
+
+        return "/admin/notice/modify";
+    }
+
+    @PostMapping("/admin/notice/modify")
+    public String update(Model model, KmAdminNoticeDTO kmAdminNoticeDTO){
+
+        kmAdminNoticeService.updateArticleNotice(kmAdminNoticeDTO);
+
+        return "redirect:/admin/notice/list";
+    }
+
+    @DeleteMapping("/admin/notice/delete/{noticeNo}")
+    @Transactional
+    public void delete(@PathVariable("noticeNo") int noticeNo){
+
+        kmAdminNoticeService.deleteArticleNotice(noticeNo);
+    }
 }
