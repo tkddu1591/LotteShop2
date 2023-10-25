@@ -8,7 +8,7 @@ function MyReview({pageResponseDTO, setPageRequestDTO}){
         <article>
             <h3>나의리뷰</h3>
 
-            <table border="0">
+            <table border="0" key="myReview">
                 <tbody>
                     <tr>
                         <th>번호</th>
@@ -18,9 +18,8 @@ function MyReview({pageResponseDTO, setPageRequestDTO}){
                         <th>작성일</th>
                     </tr>
                     {pageResponseDTO.reviewDtoList&&pageResponseDTO.reviewDtoList.map((item, index) => {
-                        console.log(pageResponseDTO.total-index)
                         return <>
-                            <tr key={index}>
+                            <tr key={index+item.revNo}>
                                 <td className="no">{pageResponseDTO.total-index - pageResponseDTO.pg*10 +10}</td>
                                 <td className="prodName"><Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=`+item.prodNo}>{item.prodName}</Link></td>
                                 <td className="content">{item.content}</td>

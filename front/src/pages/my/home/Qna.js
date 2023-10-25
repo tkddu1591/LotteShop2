@@ -1,11 +1,10 @@
 import React from "react";
 
-function Qna({userQna}) {
-    return <>
-        <article className="qna">
+function Qna({userQna ,setDivName}) {
+    return     <article className="qna">
             <h3>문의내역</h3>
-            <a href="#" className="more">더보기</a>
-            <table border="0">
+            <a onClick={()=>{setDivName('qna')}} className="more">더보기</a>
+            <table >
                 <tbody>
                     <tr>
                         <th>번호</th>
@@ -15,9 +14,9 @@ function Qna({userQna}) {
                         <th>작성일</th>
                         <th>상태</th>
                     </tr>
-                    {userQna.map((item, index) => {
-                        return <>
-                            <tr key={index}>
+                    {Array.isArray(userQna)&&userQna.map((item, index) => {
+                        return
+                            <tr key={'qna'+item.qnaNo*index+item.rdate}>
                                 <td>{item.qnaNo}</td>
                                 <td>{item.cateName}</td>
                                 <td>{item.typeName}</td>
@@ -27,11 +26,9 @@ function Qna({userQna}) {
                                     className="notAnswerYet">{item.answerComplete === 1 ? '검토중' : item.answerComplete === 2 ? '답변완료' : '확인중'}</span>
                                 </td>
                             </tr>
-                        </>
                     })}
                 </tbody>
             </table>
         </article>
-    </>
 }
 export default Qna;

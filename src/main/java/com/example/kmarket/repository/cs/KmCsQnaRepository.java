@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface KmCsQnaRepository extends JpaRepository<KmCsQnaEntity, Integer> {
     Page<KmCsQnaEntity> findByKmCsCateEntity_Cate(String cate, Pageable pageable);
 
+
+
     Page<KmCsQnaEntity> findByWriter(String memberUid, Pageable pageable);
 
     int countByWriterAndAnswerCompleteBetween(String memberUid,int start, int end);

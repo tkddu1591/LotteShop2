@@ -117,9 +117,9 @@ public class KmAdminNoticeService {
     }
 
     // cateName, typeName 찾기
-    public List<KmAdminNoticeDTO> findCateNameAndTypeName(String cateName, String typeName){
+    public List<KmAdminNoticeDTO> findCateName(String cateName){
 
-        List<KmAdminNoticeDTO> kmAdminNoticeDTO = kmAdminNoticeMapper.findCateNameAndTypeName(cateName, typeName);
+        List<KmAdminNoticeDTO> kmAdminNoticeDTO = kmAdminNoticeMapper.findCateName(cateName);
 
         return kmAdminNoticeDTO;
     }
@@ -127,8 +127,21 @@ public class KmAdminNoticeService {
     // 글 쓰기
     public int insertArticleNotice(KmAdminNoticeDTO kmAdminNoticeDTO){
 
+        log.info("kmAdminNoticeDTO : " + kmAdminNoticeDTO);
         return kmAdminNoticeMapper.insertArticleNotice(kmAdminNoticeDTO);
+
     }
 
+    // 글 수정
+    public void updateArticleNotice(KmAdminNoticeDTO kmAdminNoticeDTO){
+
+        kmAdminNoticeMapper.updateArticleNotice(kmAdminNoticeDTO);
+    }
+
+    // 글 삭제
+    public int deleteArticleNotice(int noticeNo){
+
+        return kmAdminNoticeMapper.deleteAriticleNotice(noticeNo);
+    }
 
 }

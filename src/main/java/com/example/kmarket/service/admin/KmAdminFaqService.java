@@ -111,4 +111,25 @@ public class KmAdminFaqService {
 
         return kmAdminFaqDTO;
     }
+
+    // cateName, typeName 찾기
+    public List<KmAdminFaqDTO> findCnameAndTname(String cateName, String typeName){
+
+        List<KmAdminFaqDTO> kmAdminFaqDTO = kmAdminFaqMapper.findCnameAndTname(cateName, typeName);
+
+        return kmAdminFaqDTO;
+    }
+
+    public List<KmAdminFaqDTO> findCateAndType(String cate, int type){
+
+        List<KmAdminFaqDTO> kmAdminFaqDTO = kmAdminFaqMapper.findCateAndType(cate, type);
+
+        return kmAdminFaqDTO;
+    }
+
+    // 글 쓰기
+    public int insertArticleFaq(KmAdminFaqDTO kmAdminFaqDTO){
+
+        return kmAdminFaqMapper.insertArticleFaq(kmAdminFaqDTO);
+    }
 }

@@ -1120,6 +1120,33 @@ footer p > strong {
     background: url('/public/images/my/my_sprites2.png') no-repeat -120px -300px;
     font-size: 0;
 }
+#my > .coupon > section > article > .page {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#my > .coupon > section > article > .page > a {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    box-sizing: border-box;
+    vertical-align: top;
+    color: #777;
+}
+#my > .coupon > section > article > .page > a.on {
+    font-weight: bold;
+    color: #1179ea;
+}
+
+#my > .coupon > section > article > .page > .prev {
+    background: url('/public/images/my/my_sprites2.png') no-repeat 0 -300px;
+    font-size: 0;
+}
+
+#my > .coupon > section > article > .page > .next {
+    background: url('/public/images/my/my_sprites2.png') no-repeat -120px -300px;
+    font-size: 0;
+}
 
 /* my - qna(문의하기) */
 #my > .qna > section > article > table {
@@ -1164,7 +1191,6 @@ footer p > strong {
 #my > .qna > section > article > table .answered {color: #01a900;}
 
 #my > .qna > section > article > table .answerRow {
-    display: none;
     background-color: #fafafa;
 }
 #my > .qna > section > article > table .answerRow td {}
