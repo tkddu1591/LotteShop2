@@ -37,6 +37,7 @@ public class KmMemberResponseDTO {
     private String regIp;
     private LocalDateTime wdate;
     private LocalDateTime rdate;
+    private LocalDateTime changeDate;
     private int etc1 =0;
     private int etc2 =0;
     private String etc3;
@@ -76,6 +77,7 @@ public class KmMemberResponseDTO {
                 .etc3(member.getEtc3())
                 .etc4(member.getEtc4())
                 .etc5(member.getEtc5())
+                .changeDate(member.getChangeDate())
                 .build();
     }
 

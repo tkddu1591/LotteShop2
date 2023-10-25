@@ -48,4 +48,9 @@ public class KmMemberService {
     public int checkEmail(String email) {
         return memberRepository.countByEmail(email);
     }
+
+
+    public int findByUidAndPoint(String memberUid) {
+        return (memberRepository.findById(memberUid).get().getPoint());
+    }
 }

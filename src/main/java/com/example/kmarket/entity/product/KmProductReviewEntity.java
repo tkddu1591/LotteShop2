@@ -2,6 +2,7 @@ package com.example.kmarket.entity.product;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +23,9 @@ public class KmProductReviewEntity {
     private String content;
     private String uid;
     private int rating;
+
     private String regIp;
+    @CreationTimestamp
     private LocalDateTime rdate;
 
 }

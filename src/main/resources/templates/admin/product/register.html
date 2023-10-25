@@ -18,23 +18,45 @@
 
         $(function (){
 
+            const prodCate1 = $('#prodCate1');
+            const prodCate2 = $('#prodCate2');
+
             $.ajax({
                 url: '/product/cate1',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data){
-
                     console.log(data);
-
-
+                    for(let val of data){
+                        prodCate1.append("<option value='"+val.cate1+"'>"+val.c1Name+"</option>");
+                    }
                 }
             });
 
 
 
+            prodCate1.change(function(){
+
+                const cate1Value = $(this).val();
+                //alert('here1 : ' + cate1Value);
+
+                prodCate2.empty();
+
+                $.ajax({
+                    url: '/product/cate2/'+cate1Value,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data){
+                        console.log(data);
+                            for(let val of data){
+                                prodCate2.append("<option value='"+val.cate2+"'>"+val.c2Name+"</option>");
+                            }
+                    }
+                });
+
+            });
+
         });
-
-
     </script>
 
 </head>
@@ -126,18 +148,16 @@
                                 <tr>
                                     <td>1차 분류</td>
                                     <td>
-                                        <select name="prodCate1">
+                                        <select name="prodCate1" id="prodCate1">
                                             <option>1차 분류 선택</option>
-                                            <option value="10">브랜드패션</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>2차 분류</td>
                                     <td>
-                                        <select name="prodCate2">
+                                        <select name="prodCate2" id="prodCate2">
                                             <option>2차 분류 선택</option>
-                                            <option value="1010">브랜드 여성의류</option>
                                         </select>
                                     </td>
                                 </tr>

@@ -12,7 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Builder
 public class KmCsCommentDTO {
 
-    private String cno;
+    private int cno;
     private String qnaNo;
     private String answer;
     private String comment;

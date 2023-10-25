@@ -1,12 +1,11 @@
+import DateSelect from "../DateSelect";
+import MyPageNavigation from "../MyPageNavigation";
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
-import axios from "axios";
+import {useNavigate} from "react-router-dom";
 import ReviewWrite from "../ReviewWrite";
+import axios from "axios";
 
-function Latest({userOrder, setDivName}) {
-    let [review, setReview] = useState(false)
-
-    let [reviewWrite, setReviewWrite] = useState('');
+function MyOrder({pageResponseDTO, setPageRequestDTO}) {
     function orderComplete(value) {
         if (value === 4)
             return <td className="status" style={{color: 'green'}}>배송완료</td>
@@ -19,13 +18,13 @@ function Latest({userOrder, setDivName}) {
             return <td className="status" style={{color: 'red'}}>주문취소</td>
     }
 
+    let navigate = useNavigate();
+    let [reviewWrite, setReviewWrite] = useState('');
     return <>
-        <article className="latest">
-            <h3>최근주문내역</h3>
-            <a onClick={() => {
-                setDivName('order')
-            }} className="more">더보기</a>
-            <table>
+        <article>
+            <h3>전체주문내역</h3>
+            <DateSelect setPageRequestDTO={setPageRequestDTO}></DateSelect>
+            <table border="0">
                 <tbody>
                     <tr>
                         <th>날짜</th>
@@ -33,26 +32,23 @@ function Latest({userOrder, setDivName}) {
                         <th>상태</th>
                         <th>확인/신청</th>
                     </tr>
-                    {userOrder.map((item, index) => {
-                        return <tr key={`latest${index}${item.prodNo}`}>
+                    {Array.isArray(pageResponseDTO.orderItemDTOS) && pageResponseDTO.orderItemDTOS.map((item, index) => {
+                        return <tr key={item.orderItemId}>
                             <td className="date">{item.ordDate.substring(0, 10)}</td>
-                            <td className="info">
-                                <Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + item.prodNo}
-                                      className="thumb">
-                                    <img src="https://via.placeholder.com/80x80"
-                                         alt=""/></Link>
+                            <td>
+                                <a onClick={() => {
+                                    navigate("/product/view?prodNo=" + item.prodNo)
+                                }} className="thumb"><img
+                                    src="https://via.placeholder.com/80x80"
+                                    alt={item.thumb1}/></a>
                                 <ul>
-                                    <li className="company"><Link
-                                        to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + item.prodNo}>{item.company}</Link>
-                                    </li>
-                                    <li className="prodName"><Link
-                                        to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + item.prodNo}>{item.prodName}</Link>
-                                    </li>
-                                    <li className="orderNo">수량 : <span
-                                        className="prodCount">{item.count}</span>개 /
-                                        주문번호
-                                        : <a href="#">{item.ordNo.toLocaleString()}</a></li>
-                                    <li className="prodPrice">{item.price.toLocaleString()}</li>
+                                    <li className="company">{item.company}</li>
+                                    <li className="prodName"><a onClick={() => {
+                                        navigate("/product/view?prodNo=" + item.prodNo)
+                                    }}>{item.prodName}</a></li>
+                                    <li>수량 : <span className="prodCount">{item.count}</span>개 / 주문번호 : <span
+                                        className="ordNo">{item.ordNo}</span></li>
+                                    <li className="prodPrice">{(item.price - (item.price * item.discount) / 100).toLocaleString()}</li>
                                 </ul>
                             </td>
                             {orderComplete(item.ordComplete)}
@@ -92,8 +88,10 @@ function Latest({userOrder, setDivName}) {
 
                 </tbody>
             </table>
+            <MyPageNavigation setPageRequestDTO={setPageRequestDTO}
+                              pageResponseDTO={pageResponseDTO}></MyPageNavigation>
         </article>
     </>
 }
 
-export default Latest;
+export default MyOrder

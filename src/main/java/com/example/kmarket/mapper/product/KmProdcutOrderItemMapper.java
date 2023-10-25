@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface KmProdcutOrderItemMapper {
     @Mapping(source = "kmProductOrderEntity.ordNo", target = "ordNo")
+    @Mapping(source = "kmProductOrderEntity.ordCompleteDate", target = "ordCompleteDate")
     @Mapping(source = "kmProductOrderEntity.ordDate", target = "ordDate")
     @Mapping(source = "kmProductOrderEntity.ordComplete", target = "ordComplete")
     @Mapping(source = "kmProductEntity.prodNo", target = "prodNo")
@@ -19,6 +20,7 @@ public interface KmProdcutOrderItemMapper {
     public KmProductOrderItemDTO toDTO(KmProductOrderItemEntity articleEntity);
 
     @Mapping(source = "ordNo", target = "kmProductOrderEntity.ordNo")
+    @Mapping(source = "ordCompleteDate", target = "kmProductOrderEntity.ordCompleteDate")
     @Mapping(source = "ordDate", target = "kmProductOrderEntity.ordDate")
     @Mapping(source = "ordComplete", target = "kmProductOrderEntity.ordComplete")
     @Mapping(source = "prodNo", target = "kmProductEntity.prodNo")
