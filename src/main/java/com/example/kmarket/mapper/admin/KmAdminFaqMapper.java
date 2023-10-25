@@ -19,7 +19,8 @@ public interface KmAdminFaqMapper {
    public KmAdminFaqDTO selectArticleFaq(int faqNo);
 
    // cateName, typeName 값 찾기
-   public List<KmAdminFaqDTO> findCnameAndTname(String cateName, String typeName);
+   public List<KmAdminFaqDTO> findCname(String cateName);
+   public List<KmAdminFaqDTO> findTname(String typeName);
    public List<KmAdminFaqDTO> findCateAndType(String cate, int type);
 
    // 글 작성

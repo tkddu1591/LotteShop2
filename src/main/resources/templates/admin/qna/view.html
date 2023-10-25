@@ -13,7 +13,7 @@
     <div th:replace="/admin/aside.html :: aside"></div>
     <section id="admin-product-register">
         <nav>
-            <h3>공지사항 조회</h3>
+            <h3>문의하기 조회</h3>
             <p>
                 HOME > 고객센터 > <strong>문의하기</strong>
             </p>
@@ -34,22 +34,24 @@
                     <td>내용</td>
                     <td th:text="${qnaView.content}"></td>
                 </tr>
+                <tr th:if="${qnaView.answerComplete == 0}">
+                    <td>답변</td>
+                    <td></td>
+                </tr>
                 <tr th:if="${qnaView.answerComplete == 1}">
                     <td>답변</td>
-                    <td>
-                        <textarea></textarea>
-                    </td>
+                    <td></td>
                 </tr>
                 <tr th:if="${qnaView.answerComplete == 2}">
                     <td>답변</td>
-                    <td>
-                        <td th:text="${qnaView.answer}"></td>
-                    </td>
+                    <td th:text="${qnaView.answer}"></td>
                 </tr>
             </table>
             <div style="text-align: right;">
                 <a th:style="'font-size: 20px;'" class="linkBtn" href="#">삭제</a>
-                <a th:style="'font-size: 20px;'" class="linkBtn" href="#">답변등록</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a th:style="'font-size: 20px;'" class="linkBtn" th:href="@{/admin/qna/write(qnaNo=${qnaView.qnaNo})}">답변작성</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a th:style="'font-size: 20px;'" class="linkBtn mainBtn" th:href="@{/admin/qna/list}">목록</a>
             </div>
         </article>

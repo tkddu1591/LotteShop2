@@ -1,5 +1,6 @@
 package com.example.kmarket.mapper.admin;
 
+import com.example.kmarket.dto.admin.KmAdminFaqDTO;
 import com.example.kmarket.dto.admin.KmAdminQnaDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,8 +15,13 @@ public interface KmAdminQnaMapper {
     // 글 보기
     public KmAdminQnaDTO selectArticleQna(int qnaNo);
 
-    // 페이징
-    // 전체 상품 갯수 계산
+    // 페이징 - 전체 상품 갯수 계산
     public int selectQnaCountTotal();
+
+    // 답변 쓰기
+    public void updateAnswerQna(KmAdminQnaDTO KmAdminQnaDTO);
+
+    // 게시글 삭제
+    public void deleteArticleQna(int qnaNo);
 
 }

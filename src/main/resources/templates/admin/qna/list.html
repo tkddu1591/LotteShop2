@@ -70,13 +70,13 @@
                             <select name="searchCate1" id="searchCate1" onchange="filterTable()">
                                 <option value="">1차선택</option>
                                 <th:block th:each="dto, iterStat : ${qnaList}">
-                                    <option th:value="${dto.cate}" th:text="${dto.cateName}" th:if="${iterStat.index == 0 or dto.cate != qnaList[iterStat.index - 1].cate}">1차선택</option>
+                                    <option th:value="${dto.cate}" th:text="${dto.cateName}">1차선택</option>
                                 </th:block>
                             </select>
                             <select name="searchCate2" id="searchCate2" onchange="filterTable()">
                                 <option value="">2차선택</option>
                                 <th:block th:each="dto, iterStat : ${qnaList}">
-                                    <option th:value="${dto.type}" th:text="${dto.typeName}" th:if="${iterStat.index == 0 or dto.type != qnaList[iterStat.index - 1].type}">2차선택
+                                    <option th:value="${dto.type}" th:text="${dto.typeName}">2차선택
                                 </th:block>
                             </select>
                         </div>
@@ -100,12 +100,11 @@
                                     <td style="text-align: center; width: 5%" th:text="${dto.qnaNo}"></td>
                                     <td style="text-align: center; width: 10%" th:text="${dto.cateName}"></td>
                                     <td style="text-align: center; width: 10%" th:text="${dto.typeName}"></td>
-                                    <td style="text-align: center; width: 30%" ><a th:href="@{/admin/qna/view(qnaNo=${dto.qnaNo})}"><span th:text="'[' + ${dto.typeName} + ']' + ${dto.title}"></span></a></td>
+                                    <td style="text-align: center; width: 30%" ><a th:href="@{/admin/qna/view(qnaNo=${dto.qnaNo})}"><span th:text="${dto.title}"></span></a></td>
                                     <td style="text-align: center; width: 10%" th:text="${dto.writer}"></td>
                                     <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td style="text-align: center; width: 15%" >
                                         <a th:if="${dto.answerComplete}">
-                                            <span th:if="${dto.answerComplete == 0}">답변없음</span>
                                             <span th:if="${dto.answerComplete == 1}">검토중</span>
                                             <span th:if="${dto.answerComplete == 2}" style="color: blue;">답변완료</span>
                                         </a>
@@ -115,9 +114,11 @@
                     </table>
 
                     <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-                        <div>
-                            <input type="submit" value="선택삭제" class="deleteAll" />
-                        </div>
+                        <form th:action="@{/admin/faq/delete/{qnaNo}(qnaNo=${qnaNo})}" method="post">
+                            <div>
+                                <input type="submit" value="선택삭제" class="deleteAll" />
+                            </div>
+                        </form>
                     </div>
                 </form>
 

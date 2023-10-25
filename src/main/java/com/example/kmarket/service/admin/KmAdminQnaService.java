@@ -1,6 +1,5 @@
 package com.example.kmarket.service.admin;
 
-import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.dto.admin.KmAdminQnaDTO;
 import com.example.kmarket.mapper.admin.KmAdminQnaMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,20 +21,12 @@ public class KmAdminQnaService {
 
     private final KmAdminQnaMapper kmAdminQnaMapper;
 
-    // 게시글 목록 출력
+    // 게시글 리스트 10개씩 출력
     public List<KmAdminQnaDTO> selectCsQnaAll(int start){
 
         List<KmAdminQnaDTO> qnaList = kmAdminQnaMapper.selectCsQnaAll(start);
 
         return qnaList;
-    }
-
-    // 글 보기
-    public KmAdminQnaDTO selectArticleQna(int qnaNo){
-
-        KmAdminQnaDTO kmAdminQnaDTO = kmAdminQnaMapper.selectArticleQna(qnaNo);
-
-        return kmAdminQnaDTO;
     }
 
     // 중복을 제거하는 람다 함수
@@ -55,6 +46,7 @@ public class KmAdminQnaService {
 
         return  distinctCate;
     }
+
 
     // 페이징 시작
     public int selectQnaCountTotal(){
@@ -110,5 +102,27 @@ public class KmAdminQnaService {
     // Limit 시작번호
     public int getStartNum(int currentPage) {
         return (currentPage - 1) * 10;
+    }
+    
+    // 글 보기
+    public KmAdminQnaDTO selectArticleQna(int qnaNo){
+
+        KmAdminQnaDTO kmAdminQnaDTO = kmAdminQnaMapper.selectArticleQna(qnaNo);
+
+        return kmAdminQnaDTO;
+    }
+
+    // 답변 쓰기
+    public void updateAnswerQna(KmAdminQnaDTO KmAdminQnaDTO){
+
+        kmAdminQnaMapper.updateAnswerQna(KmAdminQnaDTO);
+
+    }
+
+    // 게시글 삭제
+    public void deleteArticleQna(int qnaNo){
+
+        kmAdminQnaMapper.deleteArticleQna(qnaNo);
+
     }
 }

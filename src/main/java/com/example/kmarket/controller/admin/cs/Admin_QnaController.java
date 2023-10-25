@@ -1,12 +1,14 @@
 package com.example.kmarket.controller.admin.cs;
 
+import com.example.kmarket.dto.admin.KmAdminFaqDTO;
 import com.example.kmarket.dto.admin.KmAdminQnaDTO;
 import com.example.kmarket.service.admin.KmAdminQnaService;
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,21 +60,43 @@ public class Admin_QnaController {
         return "admin/qna/list";
     }
 
+    @Transactional
     @GetMapping("/admin/qna/view")
-    public String view(Model model, int qnaNo){
+    public String view(Model model, int qnaNo) {
 
-        log.info("qnaNo : " + qnaNo);
-        KmAdminQnaDTO qnaView = kmAdminQnaService.selectArticleQna(qnaNo);
-        model.addAttribute("qnaView", qnaView);
-        log.info("qnaView : " + qnaView);
+            KmAdminQnaDTO qnaView = kmAdminQnaService.selectArticleQna(qnaNo);
+            model.addAttribute("qnaView", qnaView);
 
         return "admin/qna/view";
     }
 
+    @GetMapping("/admin/qna/write")
+    public String write(Model model, int qnaNo) {
 
-    @GetMapping("/admin/qna/reply")
-    public String reply(){
-        return "admin/qna/reply";
+        KmAdminQnaDTO qnaView = kmAdminQnaService.selectArticleQna(qnaNo);
+
+        model.addAttribute("qnaView", qnaView);
+
+        return "admin/qna/write";
+    }
+
+    @PostMapping("/admin/qna/write")
+    public String writeSubmit(KmAdminQnaDTO kmAdminQnaDTO) {
+
+        log.info(kmAdminQnaDTO);
+        kmAdminQnaService.updateAnswerQna(kmAdminQnaDTO);
+
+
+        return "redirect:/admin/qna/write";
+    }
+
+    @DeleteMapping("/admin/faq/delete/{qnaNo}")
+    @Transactional
+    public void delete(@PathVariable("qnaNo") int qnaNo){
+
+        log.info(kmAdminQnaService);
+        kmAdminQnaService.deleteArticleQna(qnaNo);
+
     }
 
 }

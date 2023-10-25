@@ -17,9 +17,6 @@ public interface KmAdminNoticeMapper {
     // 글 보기
     public KmAdminNoticeDTO selectArticleNotice(int noticeNo);
 
-    // cateName 값 찾기
-    public List<KmAdminNoticeDTO> findCateName(String cateName);
-
     // 게시글 작성
     public int insertArticleNotice(KmAdminNoticeDTO kmAdminNoticeDTO);
 
