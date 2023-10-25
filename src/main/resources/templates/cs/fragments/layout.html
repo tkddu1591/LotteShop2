@@ -3,13 +3,13 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head th:replace="/cs/fragments/head :: head">
+<head th:replace="~{cs/fragments/head :: head}">
 </head>
 <body>
     <div id="wrapper">
-        <header th:replace="/cs/fragments/header :: header"></header>
+        <header th:replace="~{cs/fragments/header :: header}"></header>
         <th:block layout:fragment="content"></th:block>
     </div>
 </body>
-    <footer th:replace="/cs/fragments/footer :: footer"></footer>
+    <footer th:replace="~{cs/fragments/footer :: footer}"></footer>
 </html>

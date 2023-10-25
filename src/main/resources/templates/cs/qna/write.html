@@ -47,6 +47,7 @@
 
             <article>
                 <form th:action="@{/cs/qna/write}" method="post">
+                    <input type="hidden" name="writer" id="writer">
                     <table>
                         <tr>
                             <td>문의유형</td>
@@ -93,6 +94,12 @@
         </section>
     </div>
 </section>
+    <script>
+        let memberUid = window.localStorage.getItem('memberUid');
+        console.log(memberUid);
+        $('#writer').val(memberUid);
+        console.log($('#writer').val())
+    </script>
 <script src="/cs/js/writeType.js"></script>
 </th:block>
 </html>
