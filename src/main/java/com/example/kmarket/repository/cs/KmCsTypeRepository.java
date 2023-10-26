@@ -9,4 +9,6 @@ public interface KmCsTypeRepository extends JpaRepository<KmCsTypeEntity, Intege
     KmCsTypeEntity findByTypeAndCate(int type, String cate);
 
     List<KmCsTypeEntity> findByCateAndTypeLessThan(String cate, int type);
+
+    List<KmCsTypeEntity> findByType(int type);
 }

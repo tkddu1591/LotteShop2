@@ -17,28 +17,26 @@
             </nav>
 
             <section class="view">
-                <section id="pageCss" class="list">
-                    <aside>
-                        <h2>공지사항</h2>
-                        <ul>
-                            <li class="${(cateDto.getCate() eq 'all') ? 'on' : '' }">
-                                <a th:href="@{/cs/notice/list(cate=all)}">전체</a>
-                            </li>
-                            <li class="${(cateDto.getCate() eq 'cs') ? 'on' : '' }">
-                                <a th:href="@{/cs/notice/list(cate=cs)}">고객서비스</a>
-                            </li>
-                            <li class="${(cateDto.getCate() eq 'safe') ? 'on' : '' }">
-                                <a th:href="@{/cs/notice/list(cate=safe)}">안전거래</a>
-                            </li>
-                            <li class="${(cateDto.getCate() eq 'dangerProd') ? 'on' : '' }">
-                                <a th:href="@{/cs/notice/list(cate=dangerProd)}">위해상품</a>
-                            </li>
-                            <li class="${(cateDto.getCate() eq 'event') ? 'on' : '' }">
-                                <a th:href="@{/cs/notice/list(cate=event)}">이벤트당첨</a>
-                            </li>
-                        </ul>
-                    </aside>
-                </section>
+                <aside>
+                    <h2>공지사항</h2>
+                    <ul>
+                        <li class="${(cateDto.getCate() eq 'all') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=all)}">전체</a>
+                        </li>
+                        <li class="${(cateDto.getCate() eq 'cs') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=cs)}">고객서비스</a>
+                        </li>
+                        <li class="${(cateDto.getCate() eq 'safe') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=safe)}">안전거래</a>
+                        </li>
+                        <li class="${(cateDto.getCate() eq 'dangerProd') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=dangerProd)}">위해상품</a>
+                        </li>
+                        <li class="${(cateDto.getCate() eq 'event') ? 'on' : '' }">
+                            <a th:href="@{/cs/notice/list(cate=event)}">이벤트당첨</a>
+                        </li>
+                    </ul>
+                </aside>
 
                 <article>
                     <nav>

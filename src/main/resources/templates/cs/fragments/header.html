@@ -5,24 +5,34 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <body>
+    <input type="text" th:value="${memberUid}" id="memberUid"></input>
+    <input type="text" th:value="${token}" id="token"></input>
+    <input type="text" th:value="${expirationTime}" id="expirationTime"></input>
     <div id="wrapper">
         <header th:fragment="header">
             <div class="top">
                 <div>
                     <p>
-                        <span class="memberUid">ㅇㅇㅇ님</span>
-                        <a href="/admin/index">관리자</a>
-                        <a th:href="@{/index}">HOME</a>
-                        <a href="/member/logout">로그아웃</a>
+                        <th:block sec:authorize="isAuthenticated()">
+                            <span class="memberUid">ㅇㅇㅇ님</span>
+                            <th:block sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                                <a href="/admin/index">관리자</a>
+                            </th:block>
 
-                        <a th:href="@{/index}">HOME</a>
-                        <a href="/member/login">로그인</a>
-                        <a href="#">회원가입</a>
-                        <a href="#">마이페이지</a>
-                        <a href="#">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
-                            장바구니
-                        </a>
+                            <a th:href="@{/index}">HOME</a>
+                            <a href="#">마이페이지</a>
+                            <a href="#">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
+                                장바구니
+                            </a>
+                            <a href="/member/logout">로그아웃</a>
+                        </th:block>
+
+                        <th:block sec:authorize="isAnonymous()">
+                            <a th:href="@{/index}">HOME</a>
+                            <a href="/member/login">로그인</a>
+                            <a href="#">회원가입</a>
+                        </th:block>
                     </p>
                 </div>
             </div>

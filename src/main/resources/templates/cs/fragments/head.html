@@ -10,6 +10,23 @@
     <link rel="stylesheet" th:href="@{/cs/css/style.css}">
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        localStorage.setItem('memberUid',$('#memberUid').val())
+        localStorage.setItem('expirationTime',$('#expirationTime').val())
+        localStorage.setItem('token',$('#token').val())
+
+        /* 그냥 여기서 ajax 쏴서 token값이랑 role값 확인하고 그 값을 json데이터로 반환
+            -> 그래야 header에서는 그걸 계속 확인해서 인가설정이 가능
+            headers:{
+                "Authorsize " : "권한"
+                "token" : "JWT Token" ... 뭐 이런식으로..?
+            }
+            그거 가지고 header에서 인가 해서 출력한다네?
+            그래서 권한에 따라서 success와 false 나눠서 js로 tag 생성해서 그 값을 줘래..
+        */
+
+
+    </script>
 </head>
 
 </html>

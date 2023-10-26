@@ -53,7 +53,7 @@
                         <th:block th:each="qna : ${csPageResponseDTO.qnaList}">
                         <tr>
                             <td>
-                                <a th:href="@{/cs/qna/view}">
+                                <a th:href="@{/cs/qna/view(no=${qna.qnaNo})}">
                                     [<span th:text="${qna.typeName}"></span>]
                                     [[${qna.title}]]
                                 </a>
@@ -62,12 +62,15 @@
                                 [[${qna.writer}]]
                             </td>
                             <td>
-                                <span class="date"
-                                      th:text="${#temporals.format(qna.rdate, 'yy-MM-dd')}">
+                                <!-- answerComplete 여부에 따라서 미확인 / 답변완료 -->
+                                <span>
+                                    미확인
                                 </span>
                             </td>
                             <td>
-                                <span> 검토중 </span>
+                                <span class="date"
+                                      th:text="${#temporals.format(qna.rdate, 'yy-MM-dd')}">
+                                </span>
                             </td>
                         </tr>
                         </th:block>
