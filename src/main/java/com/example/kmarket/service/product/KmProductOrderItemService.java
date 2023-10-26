@@ -2,6 +2,7 @@ package com.example.kmarket.service.product;
 
 import com.example.kmarket.dto.PageRequestDTO;
 import com.example.kmarket.dto.PageResponseDTO;
+import com.example.kmarket.dto.product.KmProductOrderDTO;
 import com.example.kmarket.dto.product.KmProductOrderItemDTO;
 import com.example.kmarket.dto.product.KmProductReviewDTO;
 import com.example.kmarket.entity.product.KmProductOrderItemEntity;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class KmProductOrderItemService {

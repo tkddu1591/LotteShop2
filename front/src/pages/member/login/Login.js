@@ -36,6 +36,7 @@ function Login() {
                                            if (localStorage.getItem('token') !== null) {
                                                await axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
                                                    .then(response => {
+                                                       localStorage.setItem('authority', response.data.authority);
                                                        localStorage.setItem('memberUid', response.data.uid);
                                                    }).catch(error => console.log('유저 정보가 없습니다.'))
                                                await navigate("/")
@@ -64,6 +65,7 @@ function Login() {
                                            if (localStorage.getItem('token') !== null) {
                                                await axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
                                                    .then(response => {
+                                                       localStorage.setItem('authority', response.data.authority);
                                                        localStorage.setItem('memberUid', response.data.uid);
                                                    }).catch(error => console.log('유저 정보가 없습니다.'))
                                                await navigate("/")
@@ -90,6 +92,7 @@ function Login() {
                            await axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
                                .then(response => {
                                    localStorage.setItem('memberUid', response.data.uid);
+                                   localStorage.setItem('authority', response.data.authority);
                                }).catch(error => console.log('유저 정보가 없습니다.'))
                            await navigate("/")
                        }

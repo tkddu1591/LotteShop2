@@ -16,7 +16,15 @@ public interface KmProdcutOrderItemMapper {
     @Mapping(source = "kmProductEntity.thumb1", target = "thumb1")
     @Mapping(source = "kmProductEntity.prodName", target = "prodName")
     @Mapping(source = "kmProductEntity.descript", target = "descript")
-    @Mapping(source = "kmProductEntity.company", target = "company")
+
+    @Mapping(source = "kmProductEntity.memberEntity.uid", target = "seller")
+    @Mapping(source = "kmProductEntity.memberEntity.company", target = "company")
+    @Mapping(source = "kmProductEntity.memberEntity.ceo", target = "ceo")
+    @Mapping(source = "kmProductEntity.memberEntity.bizRegNum", target = "bizRegNum")
+    @Mapping(source = "kmProductEntity.memberEntity.tel", target = "tel")
+    @Mapping(source = "kmProductEntity.memberEntity.fax", target = "fax")
+    @Mapping(source = "kmProductEntity.memberEntity.level", target = "level")
+    @Mapping(source = "kmProductEntity.memberEntity.email", target = "email")
     public KmProductOrderItemDTO toDTO(KmProductOrderItemEntity articleEntity);
 
     @Mapping(source = "ordNo", target = "kmProductOrderEntity.ordNo")
@@ -27,7 +35,13 @@ public interface KmProdcutOrderItemMapper {
     @Mapping(source = "thumb1", target = "kmProductEntity.thumb1")
     @Mapping(source = "prodName", target = "kmProductEntity.prodName")
     @Mapping(source = "descript", target = "kmProductEntity.descript")
-    @Mapping(source = "company", target = "kmProductEntity.company")
+    @Mapping(target = "kmProductEntity.memberEntity.uid", source = "seller")
+    @Mapping(target = "kmProductEntity.memberEntity.company", source = "company")
+    @Mapping(target = "kmProductEntity.memberEntity.ceo", source = "ceo")
+    @Mapping(target = "kmProductEntity.memberEntity.bizRegNum", source = "bizRegNum")
+    @Mapping(target = "kmProductEntity.memberEntity.tel", source = "tel")
+    @Mapping(target = "kmProductEntity.memberEntity.fax", source = "fax")
+    @Mapping(target = "kmProductEntity.memberEntity.email", source = "email")
     public KmProductOrderItemEntity toEntity(KmProductOrderItemDTO articleDTO);
 }
 

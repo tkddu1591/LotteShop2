@@ -28,4 +28,12 @@ public class KmProductOrderItemDTO {
     private String company;
     private int ordComplete;
     private LocalDateTime ordCompleteDate;
+    private String seller;
+    private String ceo;
+    private String bizRegNum;
+    private String comRegNum;
+    private String tel;
+    private String fax;
+    private String email;
+    private int level;
 }
