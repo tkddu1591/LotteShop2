@@ -3,14 +3,20 @@ import axios from "axios";
 import CartList from "./CartList";
 import Total from "./Total";
 import {API_BASE_URL} from "../../../App";
+import {useNavigate} from "react-router-dom";
+import {createTokenHeader, retrieveStoredToken} from "../../../slice/tokenSlice";
 
 function Cart() {
 
     let [cartDataList, setCartDataList] = useState([]);
     let [selectedCartList, setSelectedCartList] = useState([]);
     let [memberUid] = useState(localStorage.getItem('memberUid'));
+    let navigate = useNavigate();
     useEffect(() => {
         axios.get(`${API_BASE_URL}/product/cart`, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
             params: {
                 uid: memberUid
             }
@@ -18,6 +24,7 @@ function Cart() {
             setCartDataList(res.data)
             setSelectedCartList(res.data)
         }).catch(err => {
+            navigate("/")
             console.log(err)
         })
     }, []);
@@ -107,8 +114,8 @@ function Cart() {
             <Total total={total} selectedCartList={selectedCartList}/>
 
         </>
-    }else {
-        return<div className="error" style={{
+    } else {
+        return <div className="error" style={{
             padding: '50px 0 !important',
             textAlign: 'center',
             fontSize: '15px',
