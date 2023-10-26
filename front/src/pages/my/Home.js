@@ -15,6 +15,7 @@ import MyCoupon from "./coupon/MyCoupon";
 import MyQna from "./qna/MyQna";
 import MyPoint from "./point/MyPoint";
 import MyOrder from "./order/MyOrder";
+import MyRegister from "./config/MyRegister";
 
 function Home() {
     let [userData, setUserData] = useState({});
@@ -124,11 +125,7 @@ function Home() {
     }
 
 
-    const handleMaskText = (text) => {
-        // Assuming you want to mask from the 4th character onward with asterisks
-        const maskedText = text.substring(0, 3) + '*'.repeat(text.length - 3);
-        return (maskedText);
-    }
+
 
     let [emailFirst, setEmailFirst] = useState()
     let [emailEnd, setEmailEnd] = useState()
@@ -146,6 +143,7 @@ function Home() {
     console.log(email)
     let [emailOption, setEmailOption] = useState('')
 
+    let [changeOption, setChangeOption] = useState('')
     return <>
 
         <div id="my">
@@ -158,88 +156,8 @@ function Home() {
                                      alt="패션, 타운 하나로 끝" className="banner"/></a>
                     {divName === 'info' && <>
                         <article>
-                            <h3>회원정보 설정</h3>
 
-                            <table border="0">
-                                <tr>
-                                    <td>사용자 ID</td>
-                                    <td>{handleMaskText(member.uid)}</td>
-                                </tr>
-                                <tr>
-                                    <td>비밀번호</td>
-                                    <td>
-                                        <button id="btnChangePass">비밀번호 수정</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>이름</td>
-                                    <td>{maskingName(member.name)}</td>
-                                </tr>
-                                <tr>
-                                    <td>생년월일</td>
-                                    <td>1983년 05월 03일</td>
-                                </tr>
-                                <tr>
-                                    <td>E-mail</td>
-                                    <td>
-                                        <input type="text" name="email1" value={email.split("@", 1)}
-                                               onChange={(e)=>{
-                                                   setEmailFirst(e.target.value)
-                                               }}
-                                        />@
-                                            <input type="text" name="email2" value={(email.split("@", 2)[1])}
-                                                   onChange={(e) => {
-                                                       if (emailOption === '직접입력')
-                                                           setEmailEnd(e.target.value)
-                                                   }}
-                                            />
-                                            <select onChange={(e) => {
-                                                setEmailOption(e.target.value)
-                                                if (e.target.value !== '직접입력')
-                                                    setEmailEnd(e.target.value)
-                                                else
-                                                    setEmailEnd('')
-                                            }}>
-                                                <option>직접입력</option>
-                                                <option selected={emailEnd === 'naver.com'}>naver.com</option>
-                                                <option selected={emailEnd === 'daum.net'}>daum.net</option>
-                                                <option selected={emailEnd === 'gmail.com'}>gmail.com</option>
-                                                <option selected={emailEnd === 'nate.com'}>nate.com</option>
-                                                <option selected={emailEnd === 'outlook.com'}>outlook.com</option>
-                                            </select>
-                                            <button id="btnChangeEmail">수정하기</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>휴대폰</td>
-                                    <td>
-                                        <p className="hp">
-                                            <input type="text" name="hp1" value="010"/>-
-                                            <input type="text" name="hp2" value="1234"/>-
-                                            <input type="text" name="hp3" value="1001"/>
-                                            <button id="btnChangeHp">수정하기</button>
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>주소</td>
-                                    <td>
-                                        <input type="text" name="zip" value={member.zip}/>
-                                        <button id="btnFindZip">주소검색</button>
-                                        <p className="address">
-                                            <input type="text" name="addr1" value={member.addr1}/>
-                                            <input type="text" name="addr2" value={member.addr2}/>
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>회원탈퇴</td>
-                                    <td>
-                                        <button id="btnWithdraw">탈퇴하기</button>
-                                    </td>
-                                </tr>
-                            </table>
-                            <button id="btnInfoChange">수정하기</button>
+                            <MyRegister setDivName={setDivName} member={member} userRegisterType='USER'></MyRegister>
                         </article>
                     </>}
                     {divName === 'order' && <>

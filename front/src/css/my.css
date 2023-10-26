@@ -1559,3 +1559,105 @@ footer p > strong {
     margin: 10px auto;
     cursor: pointer;
 }
+
+#my  .register {
+    width: 800px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+#my  .register > nav {
+    border-bottom: 2px solid #ef2a23;
+}
+
+#my  .register > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+#my  .register table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#my  .register table * {
+}
+
+#my  .register table caption {
+    text-align: left;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#my  .register table th {
+    width: 200px;
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+#my  .register table td {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#my  .register table input {
+    padding: 0 8px;
+    height: 31px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+    vertical-align: middle;
+}
+
+#my  .register table label {
+    display: inline-block;
+    width: 60px;
+    font-size: 17px;
+}
+
+#my  .register table .addr input {
+    margin-top: 6px;
+}
+
+#my  .register table .addr th {
+    padding-left: 30px;
+}
+
+#my .register table .essential {
+    color: #ef3f43;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#my  .register div input[type="submit"] {
+    display: block;
+    background: #ef3f43;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;
+}
