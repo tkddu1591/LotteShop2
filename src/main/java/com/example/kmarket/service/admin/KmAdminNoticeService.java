@@ -34,23 +34,6 @@ public class KmAdminNoticeService {
         return selectCsNoticeAll;
     }
 
-    // 중복을 제거하는 람다 함수
-    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
-        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
-        return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
-    }
-
-    // 유형 선택 중복 제거
-    public List<KmAdminNoticeDTO> distinctCate(int start){
-
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNoticeAll(start);
-
-        List<KmAdminNoticeDTO> distinctCate = noticeList.stream()
-                .filter(distinctByKey(KmAdminNoticeDTO::getCate))
-                .collect(Collectors.toList());
-
-        return  distinctCate;
-    }
 
     // 페이징 시작
     public int selectNoticeCountTotal(){
@@ -112,14 +95,6 @@ public class KmAdminNoticeService {
     public KmAdminNoticeDTO selectArticleNotice(int noticeNo){
 
         KmAdminNoticeDTO kmAdminNoticeDTO = kmAdminNoticeMapper.selectArticleNotice(noticeNo);
-
-        return kmAdminNoticeDTO;
-    }
-
-    // cateName, typeName 찾기
-    public List<KmAdminNoticeDTO> findCateName(String cateName){
-
-        List<KmAdminNoticeDTO> kmAdminNoticeDTO = kmAdminNoticeMapper.findCateName(cateName);
 
         return kmAdminNoticeDTO;
     }

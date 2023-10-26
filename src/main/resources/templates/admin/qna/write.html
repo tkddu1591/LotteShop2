@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
+    <meta charset="UTF-8">
+</head>
+<main>
+    <div th:replace="/admin/header.html :: header"></div>
+    <div th:replace="/admin/aside.html :: aside"></div>
+    <section id="admin-cs-view">
+        <nav>
+            <h3>고객문의</h3>
+            <p>
+                HOME > 고객센터 > <strong>고객문의</strong>
+            </p>
+        </nav>
+        <section>
+            <article>
+                <form th:action="@{/admin/qna/write}" method="post">
+                    <input name="qnaNo" type="hidden" th:value="${qnaView.qnaNo}" />
+                    <section>
+                        <table>
+                            <tr>
+                                <td>유형</td>
+                                <td>
+                                    <input name="cateName typeName" th:value="${qnaView.cateName + '-' + qnaView.typeName}" readonly style="border: none;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>제목</td>
+                                <td>
+                                    <input name="title" th:value="${qnaView.title}" readonly style="border: none;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>내용</td>
+                                <td>
+                                    <input name="content" th:value="${qnaView.content}" readonly style="border: none;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>답변</td>
+                                <td><textarea name="answer" rows="10" cols="100" style="background-color: white;"></textarea></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <div style="text-align: right;">
+                        <a th:href="@{/admin/qna/list}" class="btnList">목록</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" th:value="답변등록">
+                    </div>
+                </form>
+            </article>
+        </section>
+    </section>
+</main>
+<div th:replace="/admin/footer.html :: footer"></div>
+</html>

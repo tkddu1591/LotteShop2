@@ -9,14 +9,14 @@
     <div th:replace="/admin/aside.html :: aside"></div>
     <section id="admin-cs-view">
         <nav>
-            <h3>공지사항 작성</h3>
+            <h3>자주묻는질문 작성</h3>
             <p>
-                HOME > 고객센터 > <strong>공지사항</strong>
+                HOME > 고객센터 > <strong>자주묻는질문</strong>
             </p>
         </nav>
         <section>
             <article>
-                <form th:action="@{/admin/notice/write}" method="post">
+                <form th:action="@{/admin/faq/write}" method="post">
                     <section>
                         <table>
                             <tr>
@@ -24,42 +24,29 @@
                                 <td>
                                     <select name="cate" id="searchCate1">
                                         <option selected disabled>1차 유형</option>
-                                        <option th:each="cate1 : ${findCnameAndTname}"
-                                                th:if="${cate1.cateName == '고객서비스' or
-                                                        cate1.cateName == '안전거래' or
-                                                        cate1.cateName == '위해상품' or
-                                                        cate1.cateName == '이벤트당첨'}"
+                                        <option th:each="cate1 : ${findCname}"
+                                                th:if="${cate1.cateName == '쿠폰/이벤트' or
+                                                        cate1.cateName == '주문/결제' or
+                                                        cate1.cateName == '배송' or
+                                                        cate1.cateName == '취소/반품/교환' or
+                                                        cate1.cateName == '여행/숙박/항공' or
+                                                        cate1.cateName == '안전거래'
+                                                        }"
                                                 th:value="${cate1.cate}"
                                                 th:text="${cate1.cateName}">
                                         </option>
                                     </select>
                                     <select name="type" id="searchCate2">
                                         <option selected disabled>2차 유형</option>
-                                        <option th:each="cate2 : ${findCnameAndTname}"
-                                                th:if="${cate2.cateName == '고객서비스'}"
+                                        <option th:each="cate2 : ${findTname}"
                                                 th:value="${cate2.type}"
-                                                th:text="${cate2.typeName + ' - ' + '안내, 주의'}">
-                                        </option>
-                                        <option th:each="cate2 : ${findCnameAndTname}"
-                                                th:if="${cate2.cateName == '안전거래'}"
-                                                th:value="${cate2.type}"
-                                                th:text="${cate2.typeName + ' - ' + '서비스 이용 규칙 위반, 지식재산권침해, 법령 및 정책 위반 상품,  게시물 정책 위반, 직거래/외부거래 유도, 표시광고, 청소년 위해상품/이미지'}">
-                                        </option>
-                                        <option th:each="cate2 : ${findCnameAndTname}"
-                                                th:if="${cate2.cateName == '위해상품'}"
-                                                th:value="${cate2.type}"
-                                                th:text="${cate2.typeName + ' - ' + '위해상품정보'}">
-                                        </option>
-                                        <option th:each="cate2 : ${findCnameAndTname}"
-                                                th:if="${cate2.cateName == '이벤트당첨'}"
-                                                th:value="${cate2.type}"
-                                                th:text="${cate2.typeName + ' - ' + '발표'}">
+                                                th:text="${cate2.typeName}">
                                         </option>
                                     </select>
                                 </td>
                             </tr>
                         </table>
-                    </section>9
+                    </section>
                     <section>
                         <table>
                             <tr>

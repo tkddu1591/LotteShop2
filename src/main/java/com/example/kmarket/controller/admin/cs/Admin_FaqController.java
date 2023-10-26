@@ -76,10 +76,12 @@ public class Admin_FaqController {
     @GetMapping("/admin/faq/write")
     public String write(Model model, String cateName, String typeName){
 
-        List<KmAdminFaqDTO> findCnameAndTname = kmAdminFaqService.findCnameAndTname(cateName, typeName);
+        List<KmAdminFaqDTO> findCname = kmAdminFaqService.findCname(cateName);
+        List<KmAdminFaqDTO> findTname = kmAdminFaqService.findTname(typeName);
         int faqWrite = kmAdminFaqService.insertArticleFaq(KmAdminFaqDTO.builder().build());
 
-        model.addAttribute("findCnameAndTname", findCnameAndTname);
+        model.addAttribute("findCname", findCname);
+        model.addAttribute("findTname", findTname);
         model.addAttribute("faqWrite", faqWrite);
 
         return "/admin/faq/write";
@@ -95,6 +97,7 @@ public class Admin_FaqController {
 
         return "redirect:/admin/faq/write";
     }
+
 
 
 }
