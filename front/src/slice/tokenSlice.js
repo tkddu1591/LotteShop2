@@ -53,4 +53,5 @@ export const logoutActionHandler = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationTime');
     localStorage.removeItem('memberUid');
+    localStorage.removeItem('authority');
 };
