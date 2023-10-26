@@ -16,8 +16,10 @@ import MyQna from "./qna/MyQna";
 import MyPoint from "./point/MyPoint";
 import MyOrder from "./order/MyOrder";
 import MyRegister from "./config/MyRegister";
+import OrderList from "./order/OrderList";
 
 function Home() {
+    let [popup, setPopup] = useState('');
     let [userData, setUserData] = useState({});
     let [userOrder, setUserOrderItems] = useState([])
     let [userPoint, setUserPoint] = useState([])
@@ -25,6 +27,9 @@ function Home() {
     let [member, setMember] = useState({})
     let [userQna, setUserQnA] = useState([])
     let memberUid = localStorage.getItem('memberUid');
+
+    let [reviewWrite, setReviewWrite] = useState(false);
+    let [orderItem, setOrderItem] = useState({});
     let [pageRequestDTO, setPageRequestDTO] = useState({
         pg: 1, size: 10, type: '', memberUid: memberUid
     })
@@ -46,7 +51,7 @@ function Home() {
             }).catch(error => {
             console.log(error);
         })
-    }, [pageRequestDTO]);
+    }, [pageRequestDTO, popup]);
     useEffect(() => {
         changeDTO(setPageRequestDTO, 'type', divName)
         changeDTO(setPageRequestDTO, 'pg', 1)
@@ -82,7 +87,7 @@ function Home() {
                 params: {pg: 1, size: 3, type: 'order', memberUid: memberUid}
             })
                 .then(res => {
-                    setUserOrderItems(res.data.orderItemDTOS)
+                    setUserOrderItems(res.data)
                 }).catch(error => {
                 console.log(error);
             })
@@ -110,8 +115,6 @@ function Home() {
     }, []);
 
 
-    console.log(pageResponseDTO)
-
     function maskingName(name) {
         if (name.length <= 2) {
             return name.replace(name.substring(0, 1), "*");
@@ -123,8 +126,6 @@ function Home() {
             name[name.length - 1]
         );
     }
-
-
 
 
     let [emailFirst, setEmailFirst] = useState()
@@ -140,7 +141,6 @@ function Home() {
         setEmail(emailFirst + '@' + emailEnd)
     }, [emailFirst, emailEnd]);
 
-    console.log(email)
     let [emailOption, setEmailOption] = useState('')
 
     let [changeOption, setChangeOption] = useState('')
@@ -161,7 +161,11 @@ function Home() {
                         </article>
                     </>}
                     {divName === 'order' && <>
-                        <MyOrder setPageRequestDTO={setPageRequestDTO} pageResponseDTO={pageResponseDTO}></MyOrder>
+                        <MyOrder setPageRequestDTO={setPageRequestDTO} pageResponseDTO={pageResponseDTO}
+                                 setPopup={setPopup} popup={popup} setOrderItem={setOrderItem}
+                                 setReviewWrite={setReviewWrite} orderItem={orderItem} reviewWrite={reviewWrite}
+                                 divName={divName} member={member}
+                        ></MyOrder>
                     </>}
                     {divName === 'point' && <>
                         <MyPoint setPageRequestDTO={setPageRequestDTO} pageResponseDTO={pageResponseDTO}></MyPoint>
@@ -174,7 +178,11 @@ function Home() {
                         <MyQna pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageRequestDTO}></MyQna>
                     </>}
                     {divName === 'home' && <>
-                        <Latest userOrder={userOrder} setDivName={setDivName}></Latest>
+                        <MyOrder setPageRequestDTO={setPageRequestDTO} pageResponseDTO={userOrder}
+                                 setPopup={setPopup} popup={popup} setOrderItem={setOrderItem}
+                                 setReviewWrite={setReviewWrite} orderItem={orderItem} reviewWrite={reviewWrite}
+                                 divName={divName} setDivName={setDivName} member={member}
+                        ></MyOrder>
                         <Point userPoint={userPoint} setDivName={setDivName}></Point>
                         <Review userReview={userReview} setDivName={setDivName}></Review>
                         <Qna userQna={userQna} setDivName={setDivName}></Qna>

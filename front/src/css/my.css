@@ -1347,11 +1347,11 @@ footer p > strong {
     position: fixed;
     left: 0;
     top: 0;
-    display: none;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+
 }
 
 .popup.on {display: block;}
@@ -1378,9 +1378,36 @@ footer p > strong {
     float: left;
     font-size: 18px;
     color: white;
-
 }
 .popup > div > nav > button {
+    float: right;
+    width: 30px;
+    height: 30px;
+    background-image: url('/public/images/ico_sprites.png');
+    background-color: transparent;
+    background-position: 227px -25px;
+    border: none;
+    font-size: 0;
+    color: white;
+    cursor: pointer;
+}
+
+#my .btnCancel:hover {
+    background: #9e9e9e;
+    cursor: pointer;
+}
+#my .btnConfirm:hover {
+    background: #0e9d05;
+    cursor: pointer;
+}
+#my .btnQuestion:hover {
+    background: #0e9d05;
+    cursor: pointer;
+}
+#my .btnClose {
+    border: none;
+}
+#my .popup .btnClose:hover {
     float: right;
     width: 30px;
     height: 30px;
@@ -1485,25 +1512,25 @@ footer p > strong {
     text-align: center;
 }
 
-.popup > div > section > form > table {
+.popup > div > section > div > table {
     width: 600px;
     border-top: 2px solid #444;
     border-bottom: 1px solid #aaa;
     border-collapse: collapse;
     margin-bottom: 10px;
 }
-.popup > div > section > form > table label {
+.popup > div > section > div > table label {
     margin-right: 10px;
 }
 
-.popup > div > section > form > table input[type=text] {
+.popup > div > section > div > table input[type=text] {
     width: 100%;
     padding: 4px;
     box-sizing: border-box;
     border: 1px solid #f1f1f1;
     vertical-align: middle;
 }
-.popup > div > section > form > table textarea {
+.popup > div > section > div > table textarea {
     width: 100%;
     height: 160px;
     padding: 4px;
@@ -1512,24 +1539,24 @@ footer p > strong {
     vertical-align: middle;
     resize: none;
 }
-.popup > div > section > form > table th {
+.popup > div > section > div > table th {
     width: 120px;
 }
-.popup > div > section > form > table tr {
+.popup > div > section > div > table tr {
     border-bottom: 1px solid #f1f1f1;
 }
 
-.popup > div > section > form > table tr > td {
+.popup > div > section > div > table tr > td {
     padding: 10px;
     border-left: 1px solid #f1f1f1;
     box-sizing: border-box;
 }
 
-.popup > div > section > form > table tr > td:nth-child(2) {
+.popup > div > section > div > table tr > td:nth-child(2) {
     width: 360px;
 }
 
-.popup > div > section > form > div {
+.popup > div > section > div > div {
     padding: 16px 0;
     text-align: center;
 }
@@ -1660,4 +1687,42 @@ footer p > strong {
     outline: 0;
     border-radius: 2px;
     cursor: pointer;
+}
+.jq-stars {
+    display: inline-block;
+}
+
+.jq-rating-label {
+    font-size: 22px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    font-family: helvetica, arial, verdana;
+}
+
+.jq-star {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.jq-star-svg {
+    padding-left: 3px;
+    width: 100%;
+    height: 100% ;
+}
+
+.jq-star:hover .fs-star-svg path {
+}
+
+.jq-star-svg path {
+    /* stroke: #000; */
+    stroke-linejoin: round;
+}
+
+/* un-used */
+.jq-shadow {
+    -webkit-filter: drop-shadow( -2px -2px 2px #888 );
+    filter: drop-shadow( -2px -2px 2px #888 );
 }

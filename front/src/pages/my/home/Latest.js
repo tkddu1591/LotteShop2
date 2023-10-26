@@ -2,14 +2,16 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import ReviewWrite from "../ReviewWrite";
+import ReviewWrite2 from "../order/ReviewWrite2";
 
-function Latest({userOrder, setDivName}) {
-    let [review, setReview] = useState(false)
+function Latest({userOrder, setDivName, setOrderItem, setReviewWrite, orderItem, reviewWrite}) {
 
-    let [reviewWrite, setReviewWrite] = useState('');
+
     function orderComplete(value) {
         if (value === 4)
             return <td className="status" style={{color: 'green'}}>배송완료</td>
+        else if (value === 5)
+            return <td className="status" style={{color: 'green'}}>수취확인</td>
         else if (value === 1)
             return <td className="status">배송중</td>
         else if (value === 2)
@@ -60,7 +62,8 @@ function Latest({userOrder, setDivName}) {
 
                                 {item.ordComplete === 4 ? <>
                                         <a onClick={() => {
-                                            setReviewWrite(index)
+                                            setOrderItem(item)
+                                            setReviewWrite(true)
                                         }} className="review">상품평</a>
                                         <a className="refund">반품신청</a>
                                         <a className="exchange">교환신청</a>
@@ -85,8 +88,9 @@ function Latest({userOrder, setDivName}) {
                                     </>
                                 }
                             </td>
-                            {reviewWrite === index && item.ordComplete === 4 &&
-                                <ReviewWrite setReviewWrite={setReviewWrite} item={item}></ReviewWrite>}
+                            {orderItem.ordComplete === 4 && reviewWrite&&
+                                <ReviewWrite2 setReviewWrite={setReviewWrite} item={orderItem}></ReviewWrite2>}
+
                         </tr>
                     })}
 

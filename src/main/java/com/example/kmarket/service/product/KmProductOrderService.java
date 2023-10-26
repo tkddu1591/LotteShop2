@@ -4,13 +4,16 @@ import com.example.kmarket.dto.product.KmProductOrderDTO;
 import com.example.kmarket.entity.product.KmProductOrderEntity;
 import com.example.kmarket.mapper.product.KmProductOrderMapper;
 import com.example.kmarket.repository.product.KmProductOrderRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class KmProductOrderService {
     @Autowired
     KmProductOrderRepository kmProductOrderRepository;
@@ -21,7 +24,8 @@ public class KmProductOrderService {
         kmProductOrderDTO.setOrdDate(LocalDateTime.now());
         kmProductOrderRepository.save(kmProductOrderMapper.toEntity(kmProductOrderDTO));
     }
-    public int listOrderNo(){
+
+    public int listOrderNo() {
         return kmProductOrderRepository.findFirstByOrderByOrdNoDesc().getOrdNo();
     }
 
@@ -35,7 +39,7 @@ public class KmProductOrderService {
     }
 
     public int countByUid(String memberUid) {
-        return kmProductOrderRepository.countByOrdUidAndOrdCompleteBetween(memberUid, 0,1);
+        return kmProductOrderRepository.countByOrdUidAndOrdCompleteBetween(memberUid, 0, 1);
     }
 
     public void delete(int ordNo) {
@@ -47,5 +51,12 @@ public class KmProductOrderService {
             kmProductOrderRepository.save(kmProductOrderEntity);
         }
 
+    }
+
+    public void receiveCheck(@RequestBody KmProductOrderDTO orderReceive) {
+        log.info(orderReceive.toString());
+        KmProductOrderEntity orderDTO = kmProductOrderRepository.findById(orderReceive.getOrdNo()).orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
+        orderDTO.setOrdComplete(orderReceive.getOrdComplete());
+        kmProductOrderRepository.save(orderDTO);
     }
 }
