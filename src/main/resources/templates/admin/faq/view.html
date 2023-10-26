@@ -13,9 +13,9 @@
     <div th:replace="/admin/aside.html :: aside"></div>
     <section id="admin-product-register">
         <nav>
-            <h3>공지사항 조회</h3>
+            <h3>자주묻는질문 조회</h3>
             <p>
-                HOME > 고객센터 > <strong>공지사항</strong>
+                HOME > 고객센터 > <strong>자주묻는질문</strong>
             </p>
         </nav>
         <article>
@@ -23,7 +23,7 @@
                 <tr>
                     <td>유형</td>
                     <td>
-                        <p th:text="'[' + ${faqView.cateName} + '] - ' + ${faqView.typeName}"></p>
+                        <p th:text="${faqView.cateName} + ' - ' + ${faqView.typeName}"></p>
                     </td>
                 </tr>
                 <tr>
@@ -36,8 +36,8 @@
                 </tr>
             </table>
             <div style="text-align: right;">
-                <a th:style="'font-size: 20px;'" class="linkBtn" href="#">삭제</a>
-                <a th:style="'font-size: 20px;'" class="linkBtn" href="#">수정</a>
+                <a th:style="'font-size: 20px;'" class="linkBtn" th:href="@{/admin/faq/delete(faqNo=${faqView.faqNo})}">삭제</a>
+                <a th:style="'font-size: 20px;'" class="linkBtn" th:href="@{/admin/faq/modify(faqNo=${faqView.faqNo})}">수정</a>
                 <a th:style="'font-size: 20px;'" class="linkBtn mainBtn" th:href="@{/admin/notice/list}">목록</a>
             </div>
         </article>
