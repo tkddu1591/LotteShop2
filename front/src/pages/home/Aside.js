@@ -89,7 +89,7 @@ function BestProduct({bestList}) {
             return <>
 
                 <div className="dis_price">
-                    <ins>{(item.price)}</ins>
+                    <ins>{(item.price.toLocaleString())}</ins>
                 </div>
             </>
         }

@@ -38,7 +38,7 @@ public class KmProductEntity {
     @Column(nullable = true)
     private int hit;
     @Column(nullable = true)
-    private int score;
+    private Double score;
     @Column(nullable = true)
     private int review;
     private String thumb1;

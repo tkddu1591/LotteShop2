@@ -23,7 +23,7 @@ public class KmProductDTO {
     private int sold;
     private int delivery;
     private int hit;
-    private int score;
+    private Double score;
     private int review;
 
     private MultipartFile fileThumb1;
