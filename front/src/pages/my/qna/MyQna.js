@@ -28,16 +28,16 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                     <li className="prodName"><Link
                         to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + value.prodNo}>{value.prodName}</Link>
                     </li>
-                    {value.answerComplete === 2 ? <li className="question"><span style={{cursor: 'pointer'}}
+                     <li className="question"><span style={{cursor: 'pointer'}}
                                                                                  onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}
-                    >{value.title}</span></li> : <li className="question" style={{color: 'gray'}}>{value.title}</li>}
+                    >{value.title}</span></li>
                 </ul>
             </td>
         } else {
             return <>
-                {value.answerComplete === 2 ? <td className="tit"><span style={{cursor: 'pointer'}}
+                 <td className="tit"><span style={{cursor: 'pointer'}}
                                                                         onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}>{value.title}</span>
-                </td> : <td className="tit" style={{color: 'gray'}}>{value.title}</td>}</>
+                </td> </>
         }
     }
 
@@ -81,30 +81,32 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                                 </td>
 
                             </tr>
-                            {qna.answerComplete === 2 && answerCheck[index] &&
+
+                            { answerCheck[index]&&
                                 <tr className="answerRow" key={index + 'answer'}>
-                                    <td colSpan="6">
+                                    <td colSpan="7">
                                         <div className="question">
                                             <p className="tit">
                                                 {qna.title}
                                                 <span
-                                                    className="date">{qna.rdate.substring(0, 10)} {qna.rdate.substring(11, 20)}</span>
+                                                    className="date">{qna.rdate.substring(0, 10)} {qna.rdate.substring(11, 19)}</span>
                                             </p>
                                             <p className="content">
                                                 {qna.content}
                                             </p>
                                         </div>
+                                        {qna.answerComplete === 2  &&
                                         <div className="answer">
                                             <p className="tit">
                                                 {qna.typeName} 문의 답변입니다.
                                                 <span
-                                                    className="date">{qna.answerDate.substring(0, 10)} {qna.answerDate.substring(11, 20)}</span>
+                                                    className="date">{qna.answerDate.substring(0, 10)} {qna.answerDate.substring(11, 19)}</span>
                                             </p>
                                             <p className="content">
                                                 {qna.answer}
                                             </p>
 
-                                        </div>
+                                        </div>}
                                     </td>
                                 </tr>}
                         </>
@@ -112,7 +114,7 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                 </tbody>
             </table>
 
-            <MyPageNavigation pageResponseDTO={pageResponseDTO}
+            <MyPageNavigation pageResponseDTO={pageResponseDTO} setAnswerCheck={setAnswerCheck}
                               setPageRequestDTO={setPageRequestDTO}></MyPageNavigation>
         </article>
     </>

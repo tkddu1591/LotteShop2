@@ -55,9 +55,6 @@ function QnaPopup({setPopup, item, member}) {
             return <>
                 <option value=''>2차 분류</option>
                 {item.map((value, index) => {
-                    {
-                        console.log(value.type)
-                    }
                     return <option value={value.type} key={value.type}>{value.typeName}</option>
                 })}
             </>
