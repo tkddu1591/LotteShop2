@@ -112,10 +112,18 @@ public class KmAdminFaqService {
         return kmAdminFaqDTO;
     }
 
-    // cateName, typeName 찾기
-    public List<KmAdminFaqDTO> findCnameAndTname(String cateName, String typeName){
+    // cateName 찾기
+    public List<KmAdminFaqDTO> findCname(String cateName){
 
-        List<KmAdminFaqDTO> kmAdminFaqDTO = kmAdminFaqMapper.findCnameAndTname(cateName, typeName);
+        List<KmAdminFaqDTO> kmAdminFaqDTO = kmAdminFaqMapper.findCname(cateName);
+
+        return kmAdminFaqDTO;
+    }
+
+    // typeName 찾기
+    public List<KmAdminFaqDTO> findTname(String typeName){
+
+        List<KmAdminFaqDTO> kmAdminFaqDTO = kmAdminFaqMapper.findTname(typeName);
 
         return kmAdminFaqDTO;
     }

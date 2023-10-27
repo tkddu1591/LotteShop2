@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.function.Supplier;
+
 @Repository
 public interface KmCsQnaRepository extends JpaRepository<KmCsQnaEntity, Integer> {
     Page<KmCsQnaEntity> findByKmCsCateEntity_Cate(String cate, Pageable pageable);
@@ -17,5 +19,7 @@ public interface KmCsQnaRepository extends JpaRepository<KmCsQnaEntity, Integer>
     Page<KmCsQnaEntity> findByWriter(String memberUid, Pageable pageable);
 
     int countByWriterAndAnswerCompleteBetween(String memberUid,int start, int end);
+
+    KmCsQnaEntity findByQnaNo(int qnaNo);
 }
 

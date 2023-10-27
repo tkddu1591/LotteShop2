@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/admin/js/FaqCnameTname.js}"></script>
+</head>
+<main>
+    <div th:replace="/admin/header.html :: header"></div>
+    <div th:replace="/admin/aside.html :: aside"></div>
+    <section id="admin-cs-view">
+        <nav>
+            <h3>자주묻는질문 수정</h3>
+            <p>
+                HOME > 고객센터 > <strong>자주묻는질문</strong>
+            </p>
+        </nav>
+        <section>
+            <article>
+                <form th:action="@{/admin/faq/modify}" method="post">
+                    <input name="faqNo" type="hidden" th:value="${faqView.faqNo}"/>
+                    <section>
+                        <table>
+                            <tr>
+                                <td>유형</td>
+                                <td>
+                                    <select name="cate" id="cateName">
+                                        <option th:value="findCname.cate">[[${faqView.cateName}]]</option>
+                                    </select>
+                                    <select name="type" id="typeName">
+                                        <option th:value="findTname.type">[[${faqView.typeName}]]</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>제목</td>
+                                <td>
+                                    <input name="title" th:value="${faqView.title}" style="width: 300px;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>내용</td>
+                                <td>
+                                    <input type="text" name="content" th:value="${faqView.content}" style="width: 300px; height: 150px;"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                    <div style="text-align: right;">
+                        <a th:href="@{/admin/qna/list}" class="btnList">취소하기</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" value="수정하기">
+                    </div>
+                </form>
+            </article>
+        </section>
+    </section>
+</main>
+<div th:replace="/admin/footer.html :: footer"></div>
+</html>

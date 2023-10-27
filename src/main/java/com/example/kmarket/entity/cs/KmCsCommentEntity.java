@@ -14,7 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 public class KmCsCommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String cno;
+    private int cno;
     private String qnaNo;
     private String answer;
     private String comment;

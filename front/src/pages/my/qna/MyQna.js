@@ -2,6 +2,8 @@ import {Link} from "react-router-dom";
 import {changeDTO} from "../../../store/changeDTO";
 import React, {useState} from "react";
 import MyPageNavigation from "../MyPageNavigation";
+import axios from "axios";
+import {API_BASE_URL} from "../../../App";
 
 function MyQna({pageResponseDTO, setPageRequestDTO}) {
     function answer(value) {
@@ -14,6 +16,9 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
         if (value === 2) {
             return <td className="status"><span className="answered">답변완료</span></td>
         }
+        if (value === 3) {
+            return <td className="status"><span style={{color: 'red'}}>문의취소</span></td>
+        }
     }
 
     function content(value, setAnswerCheck, index) {
@@ -25,14 +30,14 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                     </li>
                     {value.answerComplete === 2 ? <li className="question"><span style={{cursor: 'pointer'}}
                                                                                  onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}
-                    >{value.title}</span></li> : <li className="question">{value.title}</li>}
+                    >{value.title}</span></li> : <li className="question" style={{color: 'gray'}}>{value.title}</li>}
                 </ul>
             </td>
         } else {
             return <>
                 {value.answerComplete === 2 ? <td className="tit"><span style={{cursor: 'pointer'}}
                                                                         onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}>{value.title}</span>
-                </td> : <td className="tit">{value.title}</td>}</>
+                </td> : <td className="tit" style={{color: 'gray'}}>{value.title}</td>}</>
         }
     }
 
@@ -51,7 +56,8 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                         <th style={{width: '100px'}}>문의유형</th>
                         <th style={{width: '200px'}}>제목</th>
                         <th style={{width: '80px'}}>작성일</th>
-                        <th style={{width: '50px'}}>상태</th>
+                        <th style={{width: '55px'}}>상태</th>
+                        <th style={{width: '50px'}}>문의취소</th>
                     </tr>
                     {Array.isArray(pageResponseDTO.qnaDTOS) && pageResponseDTO.qnaDTOS.map((qna, index) => {
                         return <>
@@ -62,6 +68,18 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                                 {content(qna, setAnswerCheck, index)}
                                 <td className="date">{qna.rdate.substring(0, 10)}</td>
                                 {answer(qna.answerComplete)}
+                                <td style={{textAlign: "center"}}>
+                                    <span style={{cursor: "pointer"}}
+                                          onClick={() => {
+                                              axios.delete(API_BASE_URL + '/cs/qna/cancel?qnaNo=' + qna.qnaNo)
+                                                  .then(res => {
+                                                      alert('취소되었습니다.')
+                                                  }).catch(err => {
+                                                  console.log(err)
+                                              })
+                                          }}>취소</span>
+                                </td>
+
                             </tr>
                             {qna.answerComplete === 2 && answerCheck[index] &&
                                 <tr className="answerRow" key={index + 'answer'}>
@@ -85,6 +103,7 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                                             <p className="content">
                                                 {qna.answer}
                                             </p>
+
                                         </div>
                                     </td>
                                 </tr>}
@@ -98,4 +117,5 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
         </article>
     </>
 }
+
 export default MyQna;

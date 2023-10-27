@@ -365,8 +365,8 @@ footer p > strong {
   padding: 10px 20px;
   text-align: center;
   margin-top: -48px;
-  background-color: #E60012;
-  border: 1px solid #ee0316;
+  background-color: #067dfd;
+  border: 1px solid #0063ce;
   border-radius: 2px;
   font-size: 20px;
   color: #fff;
@@ -379,8 +379,8 @@ footer p > strong {
   padding: 10px 20px;
   text-align: center;
   margin-top: 15px;
-  background-color: #E60012;
-  border: 1px solid #ee0316;
+  background-color: #067dfd;
+  border: 1px solid #0063ce;
   border-radius: 2px;
   font-size: 20px;
   color: #fff;
@@ -436,8 +436,8 @@ footer p > strong {
   width: 200px;
   height: 60px;
   margin: 40px auto 0;
-  background-color: #E60012;
-  border: 1px solid #ee0316;
+  background-color: #067dfd;
+  border: 1px solid #0063ce;
   border-radius: 34px;
   font-size: 16px;
   color: #fff;
@@ -583,7 +583,7 @@ footer p > strong {
   text-align: center;
   margin-top: 26px;
 }
-#cs > .notice > .list > article > .page a {
+#cs > .notice > .list > article > .page > a {
   display: inline-block;
   width: 34px;
   height: 34px;
@@ -594,19 +594,19 @@ footer p > strong {
   font-weight: bold;
   vertical-align: bottom;
 }
-#cs > .notice > .list > article > .page  .prev {
+#cs > .notice > .list > article > .page > .prev {
   font-size: 0;
   background-image: url('../images/cs_sprites.png');
   background-position: -706px -652px;
 }
-#cs > .notice > .list > article > .page  .next {
+#cs > .notice > .list > article > .page > .next {
   font-size: 0;
   background-image: url('../images/cs_sprites.png');
   background-position: -628px -652px;
 }
-#cs > .notice > .list > article > .page  .num {}
-#cs > .notice > .list > article > .page  .on {
-  background: #E60012;
+#cs > .notice > .list > article > .page > .num {}
+#cs > .notice > .list > article > .page > .on {
+  background: #006cff;
   border-radius: 17px;
   color: #fff;
 }
@@ -658,8 +658,8 @@ footer p > strong {
   padding: 10px 20px;
   text-align: center;
   margin-top: 15px;
-  background-color: #E60012;
-  border: 1px solid #ee0316;
+  background-color: #067dfd;
+  border: 1px solid #0063ce;
   border-radius: 2px;
   font-size: 20px;
   color: #fff;
@@ -838,7 +838,7 @@ footer p > strong {
   font-family: sans-serif;
   font-size: 18px;
   font-weight: bold;
-  color: #E60012;
+  color: #006cff;
   margin-right: 6px;
 }
 
@@ -869,7 +869,7 @@ footer p > strong {
   font-family: sans-serif;
   font-size: 32px;
   font-weight: bold;
-  color: #E60012;
+  color: #006cff;
   margin-right: 6px;
 }
 
@@ -1027,7 +1027,7 @@ footer p > strong {
 }
 #cs > .qna > .list > article > .page > .num {}
 #cs > .qna > .list > article > .page > .on {
-  background: #E60012;
+  background: #006cff;
   border-radius: 17px;
   color: #fff;
 }

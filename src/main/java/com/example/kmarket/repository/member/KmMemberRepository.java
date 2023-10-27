@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface KmMemberRepository extends JpaRepository<KmMemberEntity, String> {
     KmMemberEntity findByUidAndPass(String uid, String pass);
 
-    Optional<KmMemberEntity> findByUid(String email);
+    Optional<KmMemberEntity> findByUid(String uid);
     boolean existsByUid(String email);
 
     int countByUid(String uid);

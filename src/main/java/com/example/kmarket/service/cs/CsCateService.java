@@ -25,19 +25,15 @@ public class CsCateService {
     private final KmCsTypeRepository typeRepo;
     private final KmCsTypeMapper typeMapper;
 
-    public KmCsCateDTO findByCate(String cate){
+    public KmCsCateDTO findByCate(String cate) {
         KmCsCateEntity entity = cateRepo.findByCate(cate);
         KmCsCateDTO dto = cateMapper.toDTO(entity);
         return dto;
     }
-    public List<KmCsCateEntity> findAll(){
-        List<KmCsCateEntity> cateEntityList = cateRepo.findAll();
-        return cateEntityList;
-    }
 
-    public List<KmCsTypeDTO> cateForType(String cate, int type){
+    public List<KmCsTypeDTO> cateForType(String cate, int type) {
         List<KmCsTypeEntity> cateEntityList = typeRepo.findByCateAndTypeLessThan(cate, type);
-        log.info("ccs CateForType typeName : "+cateEntityList.toString());
+        log.info("ccs CateForType typeName : " + cateEntityList.toString());
         List<KmCsTypeDTO> dtoList
                 = cateEntityList
                 .stream()

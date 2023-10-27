@@ -28,6 +28,7 @@ public class KmAdminQnaDTO {
     private String regip;
     private LocalDateTime rdate;
     private String answer;
+    private LocalDateTime answerDate;
 
     //추가 필드
     private String writerName;

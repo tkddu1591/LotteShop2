@@ -39,6 +39,7 @@ public class KmMemberEntity {
     private String regIp;
     private LocalDateTime wdate;
     private LocalDateTime rdate;
+    private LocalDateTime changeDate;
     private int etc1 =0;
     private int etc2 =0;
     private String etc3;

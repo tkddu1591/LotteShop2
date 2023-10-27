@@ -16,10 +16,11 @@ public class IndexController  {
     private final CsCateService ccs;
 
     @PostMapping(value = {"/cs/index","/index", "/"})
-    public String index(String memberUid, String expirationTime, String token, Model model) {
+    public String index(String memberUid, String expirationTime, String token, Model model, String authority) {
         model.addAttribute("memberUid", memberUid);
         model.addAttribute("expirationTime", expirationTime);
         model.addAttribute("token", token);
+        model.addAttribute("authority", authority);
         return "cs/index";
     }
     @GetMapping(value = {"/index", "/"})

@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @Builder
 @Entity
+@Setter
 @Table(name = "km_cs_qna")
 public class KmCsQnaEntity {
 
@@ -44,6 +45,5 @@ public class KmCsQnaEntity {
     private String answer;
     @CreationTimestamp
     private LocalDateTime rdate;
-
     private LocalDateTime answerDate;
 }

@@ -1,5 +1,6 @@
 package com.example.kmarket.dto.member;
 
+import com.example.kmarket.entity.member.AuthorityEntity;
 import com.example.kmarket.entity.member.KmMemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,7 @@ public class KmMemberResponseDTO {
     private String regIp;
     private LocalDateTime wdate;
     private LocalDateTime rdate;
+    private LocalDateTime changeDate;
     private int etc1 =0;
     private int etc2 =0;
     private String etc3;
@@ -45,6 +47,7 @@ public class KmMemberResponseDTO {
     private int order;
     private int coupon;
     private int qna;
+    private AuthorityEntity authority;
 
     public static KmMemberResponseDTO of(KmMemberEntity member) {
         return KmMemberResponseDTO.builder()
@@ -76,6 +79,8 @@ public class KmMemberResponseDTO {
                 .etc3(member.getEtc3())
                 .etc4(member.getEtc4())
                 .etc5(member.getEtc5())
+                .changeDate(member.getChangeDate())
+                .authority(member.getAuthority())
                 .build();
     }
 

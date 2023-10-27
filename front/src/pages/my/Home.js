@@ -13,23 +13,37 @@ import {changeDTO} from "../../store/changeDTO";
 import MyReview from "./review/MyReview";
 import MyCoupon from "./coupon/MyCoupon";
 import MyQna from "./qna/MyQna";
+import MyPoint from "./point/MyPoint";
+import MyOrder from "./order/MyOrder";
+import MyRegister from "./config/MyRegister";
+import OrderList from "./order/OrderList";
 
 function Home() {
+    let [popup, setPopup] = useState('');
     let [userData, setUserData] = useState({});
     let [userOrder, setUserOrderItems] = useState([])
     let [userPoint, setUserPoint] = useState([])
     let [userReview, setUserReview] = useState([])
+    let [member, setMember] = useState({})
     let [userQna, setUserQnA] = useState([])
     let memberUid = localStorage.getItem('memberUid');
+
+    let [reviewWrite, setReviewWrite] = useState(false);
+    let [orderItem, setOrderItem] = useState({});
     let [pageRequestDTO, setPageRequestDTO] = useState({
         pg: 1, size: 10, type: '', memberUid: memberUid
     })
     let [pageResponseDTO, setPageResponseDTO] = useState({
         dtoList: [], end: 10, start: 1, next: true, prev: true, total: 10, size: 10
     });
-    let [memberDTO, setMemberDTO] = useState({});
     let [divName, setDivName] = useState('home');
     useEffect(() => {
+        if (memberUid !== null && retrieveStoredToken().token != null) {
+            axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
+                .then(response => {
+                    setMember(response.data)
+                }).catch(error => console.log('유저 정보가 없습니다.'))
+        }
         //유저 포인트 들고오기
         axios.get(`${API_BASE_URL}/my/list`, {params: pageRequestDTO})
             .then(res => {
@@ -37,7 +51,7 @@ function Home() {
             }).catch(error => {
             console.log(error);
         })
-    }, [pageRequestDTO]);
+    }, [pageRequestDTO, popup]);
     useEffect(() => {
         changeDTO(setPageRequestDTO, 'type', divName)
         changeDTO(setPageRequestDTO, 'pg', 1)
@@ -45,10 +59,6 @@ function Home() {
     useEffect(() => {
         if (memberUid !== null) {
             if (memberUid !== null && retrieveStoredToken().token != null) {
-                axios.get(`${API_BASE_URL}/member/me`, createTokenHeader(retrieveStoredToken().token))
-                    .then(response => {
-                        setMemberDTO(response.data)
-                    }).catch(error => console.log('유저 정보가 없습니다.'))
 
                 axios.get(`${API_BASE_URL}/my/memberCount`, {
                     headers: {
@@ -77,7 +87,7 @@ function Home() {
                 params: {pg: 1, size: 3, type: 'order', memberUid: memberUid}
             })
                 .then(res => {
-                    setUserOrderItems(res.data.orderItemDTOS)
+                    setUserOrderItems(res.data)
                 }).catch(error => {
                 console.log(error);
             })
@@ -105,14 +115,62 @@ function Home() {
     }, []);
 
 
+    function maskingName(name) {
+        if (name.length <= 2) {
+            return name.replace(name.substring(0, 1), "*");
+        }
+
+        return (
+            name[0] +
+            "*".repeat(name.substring(1, name.length - 1).length) +
+            name[name.length - 1]
+        );
+    }
+
+
+
+    let [emailFirst, setEmailFirst] = useState()
+    let [emailEnd, setEmailEnd] = useState()
+    let [email, setEmail] = useState('')
+    useEffect(() => {
+        if (member.email !== undefined) {
+            setEmailFirst(member.email.split("@", 1)[0])
+            setEmailEnd(member.email.split("@", 2)[1])
+        }
+    }, [member]);
+    useEffect(() => {
+        setEmail(emailFirst + '@' + emailEnd)
+    }, [emailFirst, emailEnd]);
+
+    let [emailOption, setEmailOption] = useState('')
+
+    let [changeOption, setChangeOption] = useState('')
     return <>
+
         <div id="my">
+
             <MyNav setDivName={setDivName} divName={divName} userData={userData}></MyNav>
             <div className={divName}>
                 <Menu divName={divName} setDivName={setDivName}></Menu>
                 {memberUid !== null ? <section>
                     <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/my/my_banner2.png`}
                                      alt="패션, 타운 하나로 끝" className="banner"/></a>
+                    {divName === 'info' && <>
+                        <article>
+
+                            <MyRegister setDivName={setDivName} member={member} userRegisterType='USER'></MyRegister>
+                        </article>
+                    </>}
+                    {divName === 'order' && <>
+                        <MyOrder setPageRequestDTO={setPageRequestDTO} pageResponseDTO={pageResponseDTO}
+                                 setPopup={setPopup} popup={popup} setOrderItem={setOrderItem}
+                                 setReviewWrite={setReviewWrite} orderItem={orderItem} reviewWrite={reviewWrite}
+                                 divName={divName} member={member}
+                        ></MyOrder>
+                    </>}
+                    {divName === 'point' && <>
+                        <MyPoint setPageRequestDTO={setPageRequestDTO} pageResponseDTO={pageResponseDTO}></MyPoint>
+                    </>}
                     {divName === 'coupon' && <>
                         <MyCoupon pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageResponseDTO}
                                   userData={userData}></MyCoupon>
@@ -121,11 +179,15 @@ function Home() {
                         <MyQna pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageRequestDTO}></MyQna>
                     </>}
                     {divName === 'home' && <>
-                        <Latest userOrder={userOrder} setDivName={setDivName}></Latest>
+                        <MyOrder setPageRequestDTO={setPageRequestDTO} pageResponseDTO={userOrder}
+                                 setPopup={setPopup} popup={popup} setOrderItem={setOrderItem}
+                                 setReviewWrite={setReviewWrite} orderItem={orderItem} reviewWrite={reviewWrite}
+                                 divName={divName} setDivName={setDivName} member={member}
+                        ></MyOrder>
                         <Point userPoint={userPoint} setDivName={setDivName}></Point>
                         <Review userReview={userReview} setDivName={setDivName}></Review>
                         <Qna userQna={userQna} setDivName={setDivName}></Qna>
-                        <MyInfo setDivName={setDivName}></MyInfo>
+                        <MyInfo setDivName={setDivName} member={member}></MyInfo>
                     </>
                     }
                     {divName === 'review' && <>
@@ -135,7 +197,8 @@ function Home() {
                 </section> : <section className="error" style={{
                     padding: '50px 0 !important', textAlign: 'center', fontSize: '15px',
                 }}>데이터를 받아오는데 오류가 발생했습니다. 로그인 후 다시 시도해주세요.
-                </section>}
+                </section>
+                }
 
 
             </div>

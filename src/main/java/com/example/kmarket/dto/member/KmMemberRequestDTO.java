@@ -39,6 +39,7 @@ public class KmMemberRequestDTO {
     private String regIp;
     private LocalDateTime wdate;
     private LocalDateTime rdate;
+    private LocalDateTime changeDate;
     private int etc1 = 0;
     private int etc2 = 0;
     private String etc3;
@@ -76,6 +77,7 @@ public class KmMemberRequestDTO {
                 .etc3(etc3)
                 .etc4(etc4)
                 .etc5(etc5)
+                .changeDate(changeDate)
                 .build();
         if (type == 9) {
             kmMemberEntity.setAuthority(AuthorityEntity.ROLE_ADMIN);
