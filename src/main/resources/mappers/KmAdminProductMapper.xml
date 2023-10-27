@@ -15,10 +15,16 @@
 
     <select id="selectProducts" resultType="com.example.kmarket.dto.product.KmProductDTO">
         SELECT * FROM `km_product`
+        ORDER BY `prodNo` DESC
         LIMIT #{start}, 10;
     </select>
 
     <update id="updateProduct"></update>
     <delete id="deleteProduct"></delete>
+
+    <select id="selectSearchedProducts">
+        SELECT * FROM `km_product`
+
+    </select>
 
 </mapper>
