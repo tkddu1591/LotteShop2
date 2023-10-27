@@ -14,12 +14,17 @@
                         <a th:href="@{/cs/notice/list(cate=all)}">전체보기</a>
                     </h1>
                     <ul>
-                        <li>
-                            <a href="#" class="title">
-                                [안내 c2Name] 해외결제 사칭 문자 주의
-                            </a>
-                            <span class="date">rdate</span>
-                        </li>
+                        <th:block th:each="notice : ${noticeList}">
+                            <li>
+                                <a th:href="@{/cs/notice/view(no=${notice.noticeNo})}" class="title">
+                                    [<span th:text="${notice.typeName}"></span>]
+                                    [[${notice.title}]]
+                                </a>
+                                <span class="date"
+                                      th:text="${#temporals.format(notice.rdate, 'yy-MM-dd')}">
+                                </span>
+                            </li>
+                        </th:block>
                     </ul>
                 </section>
 
@@ -72,20 +77,22 @@
                         <a th:href="@{/cs/qna/list(cate=member)}">전체보기</a>
                     </h1>
                     <ul>
-                        <li>
-                            <a th:href="@{/cs/qna/view(bno=1)}" class="title">
-                                [회원] 개인회원과 법인회원에 차이가 있나요?
-                            </a>
-                            <p>
-                            <span class="uid">
-                                <!--자기 자신 & 운영자-->
-                                아이디 보여주기
-                                <!--자기 자신 x-->
-                                아*****기
-                            </span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
+                        <th:block th:each="qna : ${qnaList}">
+                            <li>
+                                <a th:href="@{/cs/qna/view(no=${qna.qnaNo})}" class="title">
+                                    [<span th:text="${qna.typeName}"></span>]
+                                    [[${qna.title}]]
+                                </a>
+                                <p>
+                                    <span class="uid">
+                                        [[${qna.writer}]]
+                                    </span>
+                                    <span class="date"
+                                          th:text="${#temporals.format(qna.rdate, 'yy-MM-dd')}">
+                                    </span>
+                                </p>
+                            </li>
+                        </th:block>
                     </ul>
                     <a th:href="@{/cs/qna/write}" class="ask">
                         문의글 작성 &gt;
@@ -122,21 +129,8 @@
                             </p>
                         </div>
                     </article>
-                    <input type="text" th:value="${memberUid}" id="memberUid"></input>
-                    <input type="text" th:value="${token}" id="token"></input>
-                    <input type="text" th:value="${expirationTime}" id="expirationTime"></input>
-                    <input type="text" th:value="${authority}" id="authority"></input>
                 </section>
             </div>
         </section>
-        <script>
-            console.log('ddd')
-            localStorage.setItem('memberUid',$('#memberUid').val())
-            localStorage.setItem('expirationTime',$('#expirationTime').val())
-            localStorage.setItem('token',$('#token').val())
-            localStorage.setItem('authority',$('#authority').val())
-        </script>
     </th:block>
-
-
 </html>

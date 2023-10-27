@@ -19,82 +19,56 @@
                 <aside>
                     <h2>자주 묻는 질문</h2>
                     <ul>
-                        <li class="${cateDto.getCate() eq 'member' ? 'on' : '' }">
+                        <li th:class="${cateDto.getCate() eq 'member' ? 'on' : '' }">
                             <a th:href="@{/cs/faq/list(cate=member)}">회원</a>
                         </li>
-                        <li class="${cateDto.getCate() eq 'coupon' ? 'on' : '' }">
+                        <li th:class="${cateDto.getCate() eq 'coupon' ? 'on' : '' }">
                             <a th:href="@{/cs/faq/list(cate=coupon)}">쿠폰/이벤트</a>
                         </li>
-                        <li class="${cateDto.getCate() eq 'order' ? 'on' : '' }">
+                        <li th:class="${cateDto.getCate() eq 'order' ? 'on' : '' }">
                             <a th:href="@{/cs/faq/list(cate=order)}">주문/결제</a>
                         </li>
-                        <li class="${cateDto.getCate() eq 'delivery' ? 'on' : '' }">
+                        <li th:class="${cateDto.getCate() eq 'delivery' ? 'on' : '' }">
                             <a th:href="@{/cs/faq/list(cate=delivery)}">배송</a>
                         </li>
-                        <li class="${cateDto.getCate() eq 'cancel' ? 'on' : '' }">
+                        <li th:class="${cateDto.getCate() eq 'cancel' ? 'on' : '' }">
                             <a th:href="@{/cs/faq/list(cate=cancel)}">취소/반품/교환</a>
                         </li>
-                        <li class="${cateDto.getCate() eq 'travel' ? 'on' : '' }">
+                        <li th:class="${cateDto.getCate() eq 'travel' ? 'on' : '' }">
                             <a th:href="@{/cs/faq/list(cate=travel)}">여행/숙박/항공</a>
                         </li>
-                        <li class="${cateDto.getCate() eq 'safe' ? 'on' : '' }">
+                        <li th:class="${cateDto.getCate() eq 'safe' ? 'on' : '' }">
                             <a th:href="@{/cs/faq/list(cate=safe)}">안전거래</a>
                         </li>
                     </ul>
                 </aside>
 
                 <article>
-                    <nav>
-                        <h1>회원 c1Name</h1>
-                        <h2>가장 자주 묻는 [c1Name] 질문입니다.</h2>
-                    </nav>
+                    <th:block>
+                        <nav>
+                            <h1>[[${cateDto.cateName}]]</h1>
+                            <h2>가장 자주 묻는 [<span th:text="${cateDto.cateName}"></span>] 질문입니다.</h2>
+                        </nav>
 
-                    <div>
-                        <h3>가입 typeName</h3>
-                        <ul>
-                            <li>
-                                <a th:href="@{/cs/faq/view}">
-                                    <span>Q.</span>title
-                                </a>
-                            </li>
-                            <li class="more">
-                                <a href="#">더보기</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>탈퇴</h3>
-                        <ul>
-                            <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                            <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                            <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                            <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                            <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                            <li class="more"><a href="#">더보기</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>회원정보</h3>
-                        <ul>
-                            <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                            <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                            <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                            <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                            <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                            <li class="more"><a href="#">더보기</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>로그인</h3>
-                        <ul>
-                            <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                            <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                            <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                            <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                            <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                            <li class="more"><a href="#">더보기</a></li>
-                        </ul>
-                    </div>
+                        <div>
+                            <th:block th:each="typeDTO : ${cateDTOList}">
+                                <h3>[[${typeDTO.typeName}]]</h3>
+                                <ul>
+                                    <th:block th:each="faqDTO : ${faqDTOList}"
+                                              th:if="${typeDTO.type} eq ${faqDTO.type}">
+                                        <li>
+                                            <a th:href="@{/cs/faq/view(no=${faqDTO.faqNo})}">
+                                                <span>Q.</span> [[${faqDTO.title}]]
+                                            </a>
+                                        </li>
+                                    </th:block>
+                                    <li class="more">
+                                        <a href="#">더보기</a>
+                                    </li>
+                                </ul>
+                            </th:block>
+                        </div>
+                    </th:block>
 
                 </article>
             </section>

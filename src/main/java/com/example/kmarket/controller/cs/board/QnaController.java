@@ -56,7 +56,7 @@ public class QnaController {
     }
 
     @PostMapping("/write")
-    public String postWrite(KmCsQnaDTO dto, MultipartFile file) throws Exception {
+    public String postWrite(KmCsQnaDTO dto) {
         dto.setAnswerComplete(0);
         qs.save(dto);
         return "redirect:/cs/qna/list?cate="+dto.getCate();

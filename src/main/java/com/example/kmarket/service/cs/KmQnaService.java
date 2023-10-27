@@ -10,6 +10,7 @@ import com.example.kmarket.entity.cs.KmCsQnaEntity;
 import com.example.kmarket.mapper.cs.KmCsQnaMapper;
 import com.example.kmarket.mapper.cs.MybatisCSMapper;
 import com.example.kmarket.repository.cs.KmCsQnaRepository;
+
 import com.example.kmarket.util.MaskingUid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -128,12 +129,13 @@ public class KmQnaService {
 
     }*/
 
-
-    public void save(KmCsQnaDTO dto) throws Exception {
+    public void save(KmCsQnaDTO dto){
         KmCsQnaEntity entity = kmCsQnaMapper.toEntity(dto);
+  
         if(entity.getKmProductOrderItemEntity().getOrderItemId() == 0) {
             entity.setKmProductOrderItemEntity(null);
         }
+
         log.info("qna service save entity : " + entity);
         log.info(entity.getKmCsCateEntity());
         log.info(entity.getKmCsTypeEntity());
