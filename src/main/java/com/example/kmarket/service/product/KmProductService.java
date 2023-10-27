@@ -8,10 +8,12 @@ import com.example.kmarket.mapper.product.KmProductMapper;
 import com.example.kmarket.repository.product.KmProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class KmProductService {
@@ -177,4 +179,25 @@ public class KmProductService {
                 .build();
     }
 
+    public List<KmProductDTO> findByType(String type) {
+
+        List<KmProductDTO> result = null;
+        if(Objects.equals(type, "hit")){
+            result = kmProductRepository.findTop8ByOrderByHitDesc().stream().map(kmProductMapper::toDTO).toList();
+        }else if(Objects.equals(type, "recomment")){
+            result = kmProductRepository.findTop8ByOrderByReviewDesc().stream().map(kmProductMapper::toDTO).toList();
+        }else if(Objects.equals(type, "new")){
+            result = kmProductRepository.findTop8ByOrderByRdateDesc().stream().map(kmProductMapper::toDTO).toList();
+        }else if(Objects.equals(type, "discount")){
+            result = kmProductRepository.findTop8ByOrderByDiscountDesc().stream().map(kmProductMapper::toDTO).toList();
+        }else if(Objects.equals(type, "best")){
+            result = kmProductRepository.findTop5ByOrderByScoreDesc().stream().map(kmProductMapper::toDTO).toList();
+        }
+
+        return result;
+    }
+
+    public void deleteById(int prodNo) {
+        kmProductRepository.deleteById(prodNo);
+    }
 }

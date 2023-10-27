@@ -16,7 +16,7 @@
                     <ul>
                         <th:block th:each="notice : ${noticeList}">
                             <li>
-                                <a href="#" class="title">
+                                <a th:href="@{/cs/notice/view(no=${notice.noticeNo})}" class="title">
                                     [<span th:text="${notice.typeName}"></span>]
                                     [[${notice.title}]]
                                 </a>
@@ -79,7 +79,7 @@
                     <ul>
                         <th:block th:each="qna : ${qnaList}">
                             <li>
-                                <a th:href="@{/cs/qna/view(no=1)}" class="title">
+                                <a th:href="@{/cs/qna/view(no=${qna.qnaNo})}" class="title">
                                     [<span th:text="${qna.typeName}"></span>]
                                     [[${qna.title}]]
                                 </a>

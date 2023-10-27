@@ -176,7 +176,7 @@ function Home() {
                                   userData={userData}></MyCoupon>
                     </>}
                     {divName === 'qna' && <>
-                        <MyQna pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageRequestDTO}></MyQna>
+                        <MyQna pageResponseDTO={pageResponseDTO} setPageRequestDTO={setPageRequestDTO} setPopup={setPopup}></MyQna>
                     </>}
                     {divName === 'home' && <>
                         <MyOrder setPageRequestDTO={setPageRequestDTO} pageResponseDTO={userOrder}

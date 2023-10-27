@@ -28,4 +28,6 @@ public class KmProductOrderDTO {
     private int ordTotPrice;
     private LocalDateTime ordDate;
     private LocalDateTime ordCompleteDate;
+
+    private String recipComment;
 }

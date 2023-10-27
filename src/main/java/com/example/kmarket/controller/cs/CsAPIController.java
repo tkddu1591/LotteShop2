@@ -35,7 +35,15 @@ public class CsAPIController {
     }
 
     @DeleteMapping("/qna/cancel")
-    public void postCancel(@RequestParam int qnaNo){
+    public void qnaPostCancel(@RequestParam int qnaNo){
         apiService.qnaCancel(qnaNo);
+    }
+    @DeleteMapping("/notice/cancel")
+    public void noticePostCancel(@RequestParam int noticeNo){
+        apiService.noticeCancle(noticeNo);
+    }
+    @DeleteMapping("/faq/cancel")
+    public void faqPostCancel(@RequestParam int faqNo){
+        apiService.faqCancle(faqNo);
     }
 }

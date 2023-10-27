@@ -5,7 +5,7 @@ import MyPageNavigation from "../MyPageNavigation";
 import axios from "axios";
 import {API_BASE_URL} from "../../../App";
 
-function MyQna({pageResponseDTO, setPageRequestDTO}) {
+function MyQna({pageResponseDTO, setPageRequestDTO, setPopup}) {
     function answer(value) {
         if (value === 0) {
             return <td className="status"><span style={{color: 'grey'}}>미확인</span></td>
@@ -28,16 +28,17 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                     <li className="prodName"><Link
                         to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + value.prodNo}>{value.prodName}</Link>
                     </li>
-                    {value.answerComplete === 2 ? <li className="question"><span style={{cursor: 'pointer'}}
-                                                                                 onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}
-                    >{value.title}</span></li> : <li className="question" style={{color: 'gray'}}>{value.title}</li>}
+                    <li className="question"><span style={{cursor: 'pointer'}}
+                                                   onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}
+                    >{value.title}</span></li>
                 </ul>
             </td>
         } else {
             return <>
-                {value.answerComplete === 2 ? <td className="tit"><span style={{cursor: 'pointer'}}
-                                                                        onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}>{value.title}</span>
-                </td> : <td className="tit" style={{color: 'gray'}}>{value.title}</td>}</>
+                <td className="tit"><span style={{cursor: 'pointer'}}
+                                          onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}>{value.title}</span>
+                </td>
+            </>
         }
     }
 
@@ -71,40 +72,44 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                                 <td style={{textAlign: "center"}}>
                                     <span style={{cursor: "pointer"}}
                                           onClick={() => {
-                                              axios.delete(API_BASE_URL + '/cs/qna/cancel?qnaNo=' + qna.qnaNo)
-                                                  .then(res => {
-                                                      alert('취소되었습니다.')
-                                                  }).catch(err => {
-                                                  console.log(err)
-                                              })
+                                              if (window.confirm('취소하시겠습니까?'))
+                                                  axios.delete(API_BASE_URL + '/cs/qna/cancel?qnaNo=' + qna.qnaNo)
+                                                      .then(res => {
+                                                          setPopup(qna.qnaNo)
+                                                          alert('취소되었습니다.')
+                                                      }).catch(err => {
+                                                      console.log(err)
+                                                  })
                                           }}>취소</span>
                                 </td>
 
                             </tr>
-                            {qna.answerComplete === 2 && answerCheck[index] &&
+
+                            {answerCheck[index] &&
                                 <tr className="answerRow" key={index + 'answer'}>
-                                    <td colSpan="6">
+                                    <td colSpan="7">
                                         <div className="question">
                                             <p className="tit">
                                                 {qna.title}
                                                 <span
-                                                    className="date">{qna.rdate.substring(0, 10)} {qna.rdate.substring(11, 20)}</span>
+                                                    className="date">{qna.rdate.substring(0, 10)} {qna.rdate.substring(11, 19)}</span>
                                             </p>
                                             <p className="content">
                                                 {qna.content}
                                             </p>
                                         </div>
-                                        <div className="answer">
-                                            <p className="tit">
-                                                {qna.typeName} 문의 답변입니다.
-                                                <span
-                                                    className="date">{qna.answerDate.substring(0, 10)} {qna.answerDate.substring(11, 20)}</span>
-                                            </p>
-                                            <p className="content">
-                                                {qna.answer}
-                                            </p>
+                                        {qna.answerComplete === 2 &&
+                                            <div className="answer">
+                                                <p className="tit">
+                                                    {qna.typeName} 문의 답변입니다.
+                                                    <span
+                                                        className="date">{qna.answerDate.substring(0, 10)} {qna.answerDate.substring(11, 19)}</span>
+                                                </p>
+                                                <p className="content">
+                                                    {qna.answer}
+                                                </p>
 
-                                        </div>
+                                            </div>}
                                     </td>
                                 </tr>}
                         </>
@@ -112,7 +117,7 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                 </tbody>
             </table>
 
-            <MyPageNavigation pageResponseDTO={pageResponseDTO}
+            <MyPageNavigation pageResponseDTO={pageResponseDTO} setAnswerCheck={setAnswerCheck}
                               setPageRequestDTO={setPageRequestDTO}></MyPageNavigation>
         </article>
     </>

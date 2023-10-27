@@ -60,5 +60,6 @@ public class KmProductEntity {
     private String etc4;
     private String etc5;
 
+
 }
 
