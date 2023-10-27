@@ -13,7 +13,18 @@
         FROM `km_cs_notice` AS a
         LEFT JOIN `km_cs_cate` AS b ON a.`cate` = b.`cate`
         LEFT JOIN `km_cs_type` AS c ON a.`type` = c.`type`
+        ORDER BY `noticeNo` DESC
         LIMIT #{start}, 10
+    </select>
+
+    <!-- cateName 검색 -->
+    <select id="findCname" resultType="com.example.kmarket.dto.admin.KmAdminCsCateDTO">
+        SELECT * FROM `km_cs_cate`
+    </select>
+
+    <!-- typeName 검색 -->
+    <select id="findTname" resultType="com.example.kmarket.dto.admin.KmAdminCsTypeDTO">
+        SELECT * FROM `km_cs_type`  WHERE `cate` = #{cate}
     </select>
 
     <!-- 페이징 -->

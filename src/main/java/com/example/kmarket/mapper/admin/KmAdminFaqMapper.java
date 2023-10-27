@@ -20,8 +20,13 @@ public interface KmAdminFaqMapper {
    // 글 보기
    public KmAdminFaqDTO selectArticleFaq(int faqNo);
 
-   // cateName, typeName 값 찾기
+   // cateName 값 찾기
    public List<KmAdminCsCateDTO> findCname(KmAdminCsCateDTO kmAdminCsCateDTO);
+
+   // typeName 값 찾기
+   public List<KmAdminFaqDTO> selectTname(KmAdminFaqDTO kmAdminFaqDTO);
+   
+   // AJAX typeName 값 찾기
    public List<KmAdminCsTypeDTO> findTname(String cate);
 
    // 글 작성

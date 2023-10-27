@@ -4,30 +4,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:inline="javascript">
-        function filterTable() {
-            var selectedValue = document.getElementById("searchCate1").value;
-            var rows = document.getElementById("noticeTable").getElementsByTagName("tr");
-            for (var i = 0; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName("td");
-                if (cells.length > 0) {
-                    var cellValue = cells[2].textContent || cells[2].innerText;
-                    rows[i].style.display = (cellValue === selectedValue || selectedValue === "유형선택") ? "" : "none";
-                }
-            }
-        }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var allCheckbox = document.querySelector("input[name='all']");
-            allCheckbox.addEventListener('click', function() {
-                var checkboxes = document.getElementsByName('chk');
-                for (var i = 0; i < checkboxes.length; i++) {
-                    checkboxes[i].checked = allCheckbox.checked;
-                }
-            });
-        });
-    </script>
     <div th:replace="/admin/header.html :: header"></div>
 </head>
 <main>
@@ -45,9 +21,9 @@
 
             <form>
                 <div>
-                    <select name="searchCate1" id="searchCate1" onchange="filterTable()">
-                        <option value="" selected disabled hidden>유형선택</option>
-                        <option th:each="dto : ${(distinctCate)}" th:value="${dto.cate}" th:text="${dto.cate}">유형선택</option>
+                    <select>
+                        <option selected disabled hidden>유형선택</option>
+                        <option th:each="dto : ${findCname}" th:value="${dto.cate}" th:text="${dto.cateName}">유형선택</option>
                     </select>
                 </div>
                 <table id="noticeTable" class="listTable">
@@ -63,7 +39,7 @@
                     </tr>
                     </thead>
                     <tbody class="listTbody">
-                    <th:block th:each="dto : ${notices}">
+                    <th:block th:each="dto : ${noticeList}">
                         <tr>
                             <td><input type="checkbox" name="chk" /></td>
                             <td style="text-align: center; width: 10%" th:text="${dto.noticeNo}"></td>

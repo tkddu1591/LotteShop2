@@ -121,6 +121,12 @@ public class KmAdminFaqService {
     }
 
     // typeName 찾기
+    public List<KmAdminFaqDTO> selectTname(KmAdminFaqDTO kmAdminFaqDTO){
+
+        return kmAdminFaqMapper.selectTname(kmAdminFaqDTO);
+    }
+
+    // AJAX typeName 찾기
     public List<KmAdminCsTypeDTO> findTname(String cate){
 
         return kmAdminFaqMapper.findTname(cate);

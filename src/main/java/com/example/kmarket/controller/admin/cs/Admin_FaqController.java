@@ -20,7 +20,7 @@ public class Admin_FaqController {
     private KmAdminFaqService kmAdminFaqService;
 
     @GetMapping("/admin/faq/list")
-    public String list(Model model, String pg){
+    public String list(Model model, String pg, KmAdminCsCateDTO kmAdminCsCateDTO, KmAdminFaqDTO kmAdminFaqDTO){
 
         // 페이징 처리
         // 현재 페이지 번호
@@ -41,15 +41,19 @@ public class Admin_FaqController {
         // 시작 인덱스
         int start = kmAdminFaqService.getStartNum(currentPage);
 
-        // 1,2차 선택 중복 제거
-        List<KmAdminFaqDTO> distinctCate = kmAdminFaqService.distinctCate(start);
-
         // 상품 목록 출력
         List<KmAdminFaqDTO> faqList = kmAdminFaqService.selectCsFaqAll(start);
 
+        // 1차 카테고리 출력
+        List<KmAdminCsCateDTO> findCname = kmAdminFaqService.findCname(kmAdminCsCateDTO);
+
+        // 2차 카테고리 출력
+        List<KmAdminFaqDTO> selectTname = kmAdminFaqService.selectTname(kmAdminFaqDTO);
+
         // 뷰(템플릿)에서 참조하기 위해 모델 참조
         model.addAttribute("faqList", faqList);
-        model.addAttribute("distinctCate", distinctCate);
+        model.addAttribute("findCname", findCname);
+        model.addAttribute("selectTname", selectTname);
 
         model.addAttribute("lastPageNum", lastPageNum);
         model.addAttribute("currentPage", currentPage);

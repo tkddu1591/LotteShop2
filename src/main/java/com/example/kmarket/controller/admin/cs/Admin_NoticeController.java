@@ -1,5 +1,6 @@
 package com.example.kmarket.controller.admin.cs;
 
+import com.example.kmarket.dto.admin.KmAdminCsCateDTO;
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.service.admin.KmAdminNoticeService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class Admin_NoticeController {
     private KmAdminNoticeService kmAdminNoticeService;
 
     @GetMapping("/admin/notice/list")
-    public String list(Model model, String pg){
+    public String list(Model model, String pg, KmAdminCsCateDTO kmAdminCsCateDTO){
 
         // 페이징 처리
         // 현재 페이지 번호
@@ -41,13 +42,15 @@ public class Admin_NoticeController {
         // 시작 인덱스
         int start = kmAdminNoticeService.getStartNum(currentPage);
 
-
         // 상품 목록 출력
         List<KmAdminNoticeDTO> noticeList = kmAdminNoticeService.selectCsNoticeAll(start);
 
+        // 1차 카테고리 출력
+        List<KmAdminCsCateDTO> findCname = kmAdminNoticeService.findCname(kmAdminCsCateDTO);
+
         // 뷰(템플릿)에서 참조하기 위해 모델 참조
         model.addAttribute("noticeList", noticeList);
-
+        model.addAttribute("findCname", findCname);
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("lastPageNum", lastPageNum);
