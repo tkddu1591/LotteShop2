@@ -1,7 +1,5 @@
 package com.example.kmarket.service.admin;
 
-import com.example.kmarket.dto.admin.KmAdminCsCateDTO;
-import com.example.kmarket.dto.admin.KmAdminCsTypeDTO;
 import com.example.kmarket.dto.admin.KmAdminFaqDTO;
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.mapper.admin.KmAdminFaqMapper;
@@ -115,26 +113,31 @@ public class KmAdminFaqService {
     }
 
     // cateName 찾기
-    public List<KmAdminCsCateDTO> findCname(KmAdminCsCateDTO kmAdminCsCateDTO){
+    public List<KmAdminFaqDTO> findCname(String cateName){
 
-        return kmAdminFaqMapper.findCname(kmAdminCsCateDTO);
+        List<KmAdminFaqDTO> kmAdminFaqDTO = kmAdminFaqMapper.findCname(cateName);
+
+        return kmAdminFaqDTO;
     }
 
     // typeName 찾기
-    public List<KmAdminCsTypeDTO> findTname(String cate){
+    public List<KmAdminFaqDTO> findTname(String typeName){
 
-        return kmAdminFaqMapper.findTname(cate);
+        List<KmAdminFaqDTO> kmAdminFaqDTO = kmAdminFaqMapper.findTname(typeName);
+
+        return kmAdminFaqDTO;
+    }
+
+    public List<KmAdminFaqDTO> findCateAndType(String cate, int type){
+
+        List<KmAdminFaqDTO> kmAdminFaqDTO = kmAdminFaqMapper.findCateAndType(cate, type);
+
+        return kmAdminFaqDTO;
     }
 
     // 글 쓰기
     public int insertArticleFaq(KmAdminFaqDTO kmAdminFaqDTO){
 
         return kmAdminFaqMapper.insertArticleFaq(kmAdminFaqDTO);
-    }
-
-    // 글 수정
-    public void updateArticleFaq(KmAdminFaqDTO kmAdminFaqDTO){
-
-        kmAdminFaqMapper.updateArticleFaq(kmAdminFaqDTO);
     }
 }

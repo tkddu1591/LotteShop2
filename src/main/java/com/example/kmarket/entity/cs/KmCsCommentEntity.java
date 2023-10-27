@@ -4,26 +4,21 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "km_cs_file")
-public class KmCsFileEntity {
-
+@Table(name = "km_cs_comment")
+public class KmCsCommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int fno;
+    private int cno;
     private String qnaNo;
-    private String oName;
-    private String sName;
-    private int download;
+    private String answer;
+    private String comment;
 
     @CreationTimestamp
-    private LocalDateTime rdate;
+    private String rdate;
 }

@@ -5,7 +5,6 @@ import com.example.kmarket.entity.cs.KmCsNoticeEntity;
 import com.example.kmarket.mapper.cs.KmCsCateMapper;
 import com.example.kmarket.mapper.cs.KmCsNoticeMapper;
 import com.example.kmarket.mapper.cs.KmCsTypeMapper;
-import com.example.kmarket.mapper.cs.MybatisCSMapper;
 import com.example.kmarket.repository.cs.KmCsCateRepository;
 import com.example.kmarket.repository.cs.KmCsNoticeRepository;
 import com.example.kmarket.repository.cs.KmCsTypeRepository;
@@ -29,8 +28,6 @@ public class KmNoticeService {
     private final KmCsCateRepository kmCsCateRepository;
     private final KmCsCateMapper kmCsCateMapper;
 
-    private final MybatisCSMapper mybatisCsMapper;
-
     public CsPageResponseDTO findByCate(CsPageRequestDTO csPageRequestDTO) {
         // getPageable(뭘 가지고 정렬 할껀지 -> 칼럼명 적어주면 됨)
         Pageable pageable = csPageRequestDTO.getPageable("noticeNo");
@@ -41,7 +38,7 @@ public class KmNoticeService {
         if(csPageRequestDTO.getCate().equals("all")){
             result = kmNoticeRepo.findAll(pageable);
         }else {
-            result = kmNoticeRepo.findByKmCsCateEntity_CateOrderByRdateDesc(pageable, csPageRequestDTO.getCate());
+            result = kmNoticeRepo.findByKmCsCateEntity_Cate(pageable, csPageRequestDTO.getCate());
         }
         // page의 List로 받은 걸 content List로 변경
         List<KmCsNoticeDTO> noticeList
@@ -83,13 +80,4 @@ public class KmNoticeService {
                     .toList();
     }
 
-    public List<KmCsNoticeDTO> indexNoticeList(){
-        List<KmCsNoticeDTO> noticeList = mybatisCsMapper.indexNoticeList();
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!notice List : " + noticeList);
-
-/*        return noticeList.stream()
-                .map(mapper::toDTO)
-                .toList();*/
-        return noticeList;
-    }
 }
