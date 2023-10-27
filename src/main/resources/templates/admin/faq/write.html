@@ -24,7 +24,7 @@
                                 <td>
                                     <select name="cate" id="searchCate1">
                                         <option selected disabled>1차 유형</option>
-                                        <option th:each="cate1 : ${findCname}"
+                                        <option th:each="cate1 : ${faqView}"
                                                 th:if="${cate1.cateName == '쿠폰/이벤트' or
                                                         cate1.cateName == '주문/결제' or
                                                         cate1.cateName == '배송' or
@@ -38,7 +38,7 @@
                                     </select>
                                     <select name="type" id="searchCate2">
                                         <option selected disabled>2차 유형</option>
-                                        <option th:each="cate2 : ${findTname}"
+                                        <option th:each="cate2 : ${faqView}"
                                                 th:value="${cate2.type}"
                                                 th:text="${cate2.typeName}">
                                         </option>
