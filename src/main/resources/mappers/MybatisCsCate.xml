@@ -4,19 +4,54 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.kmarket.mapper.cs.MybatisCSMapper">
-    <select id="findTypeForCate" resultType="com.example.kmarket.entity.cs.KmCsCateEntity">
+    <select id="findByTypeLessThan" resultType="com.example.kmarket.entity.cs.KmCsCateEntity">
         <!-- <![CDATA[ ]]>
             - xml의 특수 문자 예약어를 포함해야 할 때 문제를 해결하기 위한 것
             - sql 쿼리 내에 특수 문자를 자유롭게 사용 할 수 있게됨
             -> ``(백틱), < > 태그형 괄호 등을 읽을 수 있음
         -->
         <![CDATA[
-        SELECT DISTINCT CC.cate, CC.cateName
+            SELECT DISTINCT CC.cate, CC.cateName
             FROM km_cs_type AS CT
             JOIN km_cs_cate AS CC
                 ON CT.cate = CC.cate
             WHERE type < #{type}
-            ORDER BY CC.cateName DESC;
+                ORDER BY CC.cateName DESC;
         ]]>
+    </select>
+    <select id="indexNoticeList" resultType="com.example.kmarket.dto.cs.KmCsNoticeDTO">
+        SELECT * FROM km_cs_notice AS CN
+        JOIN km_cs_cate AS CC
+            ON CC.cate = CN.cate
+        JOIN km_cs_type AS CT
+            ON CT.type = CN.type
+        ORDER BY rdate DESC, noticeNo DESC
+        LIMIT 0, 5;
+    </select>
+    <select id="indexQnaList" resultType="com.example.kmarket.dto.cs.KmCsQnaDTO">
+        SELECT * FROM km_cs_qna AS CQ
+        JOIN km_cs_cate AS CC
+            ON CC.cate = CQ.cate
+        JOIN km_cs_type AS CT
+            ON CT.type = CQ.type
+        ORDER BY rdate DESC, qnaNo DESC
+        LIMIT 0, 5;
+    </select>
+
+    <select id="selectFaqList" resultType="com.example.kmarket.dto.cs.KmCsFaqDTO">
+        SELECT * FROM km_cs_faq AS CF
+        JOIN km_cs_type AS CT
+            ON CF.cate = CT.cate
+            AND CF.type = CT.type
+        WHERE CF.cate = #{cate}
+            ORDER BY CF.type, faqNo DESC
+        LIMIT 0, 10;
+    </select>
+
+    <select id="findTypeForCate" resultType="com.example.kmarket.dto.cs.KmCsTypeDTO">
+        SELECT * FROM km_cs_type AS CT
+        JOIN km_cs_cate AS CC
+            ON CT.cate = CC.cate
+        WHERE type = #{type};
     </select>
 </mapper>

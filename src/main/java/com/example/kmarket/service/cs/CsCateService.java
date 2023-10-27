@@ -6,6 +6,7 @@ import com.example.kmarket.entity.cs.KmCsCateEntity;
 import com.example.kmarket.entity.cs.KmCsTypeEntity;
 import com.example.kmarket.mapper.cs.KmCsCateMapper;
 import com.example.kmarket.mapper.cs.KmCsTypeMapper;
+import com.example.kmarket.mapper.cs.MybatisCSMapper;
 import com.example.kmarket.repository.cs.KmCsCateRepository;
 import com.example.kmarket.repository.cs.KmCsTypeRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,18 +22,15 @@ public class CsCateService {
 
     private final KmCsCateRepository cateRepo;
     private final KmCsCateMapper cateMapper;
-
     private final KmCsTypeRepository typeRepo;
     private final KmCsTypeMapper typeMapper;
+
+    private final MybatisCSMapper mybatisCsMapper;
 
     public KmCsCateDTO findByCate(String cate){
         KmCsCateEntity entity = cateRepo.findByCate(cate);
         KmCsCateDTO dto = cateMapper.toDTO(entity);
         return dto;
-    }
-    public List<KmCsCateEntity> findAll(){
-        List<KmCsCateEntity> cateEntityList = cateRepo.findAll();
-        return cateEntityList;
     }
 
     public List<KmCsTypeDTO> cateForType(String cate, int type){
@@ -46,4 +44,18 @@ public class CsCateService {
 
         return dtoList;
     }
+
+    public List<KmCsCateEntity> findAll(){
+        List<KmCsCateEntity> cateEntityList = cateRepo.findAll();
+        return cateEntityList;
+    }
+
+    public List<KmCsTypeDTO> findByType(int type){
+        List<KmCsTypeEntity> typeEntity = typeRepo.findByType(type);
+
+        return typeEntity.stream()
+                .map(typeMapper::toDTO)
+                .toList();
+    }
+
 }

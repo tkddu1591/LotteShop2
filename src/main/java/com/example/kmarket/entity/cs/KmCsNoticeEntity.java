@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
-@ToString(exclude = {"kmCsCateEntity", "kmCsTypeEntity"})
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
