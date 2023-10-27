@@ -18,15 +18,13 @@ function MyReview({pageResponseDTO, setPageRequestDTO}){
                         <th>작성일</th>
                     </tr>
                     {pageResponseDTO.reviewDtoList&&pageResponseDTO.reviewDtoList.map((item, index) => {
-                        return <>
-                            <tr key={index+item.revNo}>
+                        return <tr key={item.revNo}>
                                 <td className="no">{pageResponseDTO.total-index - pageResponseDTO.pg*10 +10}</td>
                                 <td className="prodName"><Link to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=`+item.prodNo}>{item.prodName}</Link></td>
                                 <td className="content">{item.content}</td>
                                 {ratingCheck(item.rating)}
                                 <td className="date">{item.rdate.substring(0,10)}</td>
                             </tr>
-                        </>
                     })}
                 < /tbody>
             </table>

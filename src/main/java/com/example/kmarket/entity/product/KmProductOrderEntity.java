@@ -3,6 +3,8 @@ package com.example.kmarket.entity.product;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString
 @AllArgsConstructor
@@ -29,6 +31,8 @@ public class KmProductOrderEntity {
     private int ordPayment;
     private int ordComplete;
     private int ordTotPrice;
-    private String ordDate;
+    @Builder.Default
+    private LocalDateTime ordDate = LocalDateTime.now();
+    private LocalDateTime ordCompleteDate ;
 
 }

@@ -40,3 +40,4 @@ out/
 *.yml
 *.gradle
 *.log
+/log/

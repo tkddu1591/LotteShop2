@@ -1,5 +1,7 @@
 package com.example.kmarket.service.admin;
 
+import com.example.kmarket.dto.admin.KmAdminCsCateDTO;
+import com.example.kmarket.dto.admin.KmAdminCsTypeDTO;
 import com.example.kmarket.dto.admin.KmAdminFaqDTO;
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.mapper.admin.KmAdminNoticeMapper;
@@ -34,23 +36,6 @@ public class KmAdminNoticeService {
         return selectCsNoticeAll;
     }
 
-    // 중복을 제거하는 람다 함수
-    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
-        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
-        return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
-    }
-
-    // 유형 선택 중복 제거
-    public List<KmAdminNoticeDTO> distinctCate(int start){
-
-        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeMapper.selectCsNoticeAll(start);
-
-        List<KmAdminNoticeDTO> distinctCate = noticeList.stream()
-                .filter(distinctByKey(KmAdminNoticeDTO::getCate))
-                .collect(Collectors.toList());
-
-        return  distinctCate;
-    }
 
     // 페이징 시작
     public int selectNoticeCountTotal(){
@@ -116,12 +101,16 @@ public class KmAdminNoticeService {
         return kmAdminNoticeDTO;
     }
 
-    // cateName, typeName 찾기
-    public List<KmAdminNoticeDTO> findCateName(String cateName){
+    // cateName 찾기
+    public List<KmAdminCsCateDTO> findCname(KmAdminCsCateDTO kmAdminCsCateDTO){
 
-        List<KmAdminNoticeDTO> kmAdminNoticeDTO = kmAdminNoticeMapper.findCateName(cateName);
+        return kmAdminNoticeMapper.findCname(kmAdminCsCateDTO);
+    }
 
-        return kmAdminNoticeDTO;
+    // typeName 찾기
+    public List<KmAdminCsTypeDTO> findTname(String cate){
+
+        return kmAdminNoticeMapper.findTname(cate);
     }
 
     // 글 쓰기

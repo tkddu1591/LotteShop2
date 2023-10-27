@@ -1,5 +1,7 @@
 package com.example.kmarket.mapper.admin;
 
+import com.example.kmarket.dto.admin.KmAdminCsCateDTO;
+import com.example.kmarket.dto.admin.KmAdminCsTypeDTO;
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,8 +19,9 @@ public interface KmAdminNoticeMapper {
     // 글 보기
     public KmAdminNoticeDTO selectArticleNotice(int noticeNo);
 
-    // cateName 값 찾기
-    public List<KmAdminNoticeDTO> findCateName(String cateName);
+    // cateName, typeName 값 찾기
+    public List<KmAdminCsCateDTO> findCname(KmAdminCsCateDTO kmAdminCsCateDTO);
+    public List<KmAdminCsTypeDTO> findTname(String cate);
 
     // 게시글 작성
     public int insertArticleNotice(KmAdminNoticeDTO kmAdminNoticeDTO);

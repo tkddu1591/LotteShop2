@@ -39,10 +39,16 @@ public class OrderController {
         int lastNo = kmProductOrderService.listOrderNo();
         for(KmProductOrderItemDTO orderProduct : orderProducts) {
             orderProduct.setOrdNo(lastNo);
-            log.info(orderProduct.toString());
         }
         kmProductOrderItemService.save(orderProducts);
     }
+    @DeleteMapping("/order/delete")
+    public void deleteOrder(@RequestParam int ordNo) {
+        kmProductOrderService.delete(ordNo);
+    }
 
-
+    @PostMapping("/order/complete")
+    public void receiveCheck(@RequestBody KmProductOrderDTO orderReceive) {
+        kmProductOrderService.receiveCheck(orderReceive);
+    }
 }

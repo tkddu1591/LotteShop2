@@ -1,5 +1,6 @@
 package com.example.kmarket.entity.product;
 
+import com.example.kmarket.entity.member.KmMemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,9 @@ public class KmProductEntity {
     private String prodName;
     private String descript;
     private String company;
-    private String seller;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller")
+    private KmMemberEntity memberEntity;
     @Column(nullable = true)
     private int price;
     @Column(nullable = true)

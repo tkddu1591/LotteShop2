@@ -5,8 +5,10 @@ import UserRegister from "./UserRegister";
 import RequiredInformation from "./RequiredInformation";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
-function Register({userRegisterType, ip}) {
+function Register({userRegisterType}) {
+    let ip = useSelector((state) => state.ip);
     const {
         watch,
         register,

@@ -25,6 +25,10 @@ public class KmProductReviewService {
     public int countProdNo(int prodNo) {
         return kmProductReviewRepository.countByKmProductEntity_ProdNo(prodNo);
     }
+    public void save(KmProductReviewDTO kmProductReviewDTO) {
+        KmProductReviewEntity kmProductReviewEntity = kmProductReviewMapper.toEntity(kmProductReviewDTO);
+        kmProductReviewRepository.save(kmProductReviewEntity);
+    }
     public PageResponseDTO findByProducts(PageRequestDTO pageRequestDTO) {
 
 

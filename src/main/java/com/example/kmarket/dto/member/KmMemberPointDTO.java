@@ -15,6 +15,7 @@ public class KmMemberPointDTO {
     private int ordNo;
     private int point;
     private LocalDateTime pointDate;
+    private String comment;
 
     //추가 데이터
 /*  <th>날짜</th>

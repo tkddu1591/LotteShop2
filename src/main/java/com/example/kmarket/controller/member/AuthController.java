@@ -22,10 +22,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private TokenProvider tokenProvider;
     @PostMapping("/signup")
     public ResponseEntity<KmMemberResponseDTO> signup(@RequestBody KmMemberRequestDTO requestDto) {
         return ResponseEntity.ok(authService.signup(requestDto));

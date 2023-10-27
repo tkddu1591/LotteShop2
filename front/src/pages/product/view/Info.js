@@ -1,4 +1,4 @@
-import { useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {insertOrderProduct, insertOrderTotal} from "../../../slice/orderSilce";
@@ -195,6 +195,7 @@ function Info({prodDTO, scrollY}) {
                                        {
                                            headers: {
                                                'Content-Type': 'application/json',
+                                               'Authorization': 'Bearer ' + localStorage.getItem('token')
                                            }
                                        })
                                        .then(() => {
@@ -224,7 +225,7 @@ function Info({prodDTO, scrollY}) {
 
                                    }))
                                    navigate("/product/order")
-                               }else{
+                               } else {
                                    alert('로그인 후 시도해주시기 바랍니다.')
                                }
 

@@ -11,6 +11,7 @@ import './pages/home/slider.css';
 import CateRoot from "./pages/product/CateRoot";
 import {deleteBanner} from "./slice/bannerSilce";
 import Order from "./pages/product/order/Order";
+import {insertMyIp} from "./slice/myIpSilce";
 
 export const API_BASE_URL = process.env.REACT_APP_API_ROOT;
 export const HOME_URL = process.env.REACT_APP_HOME_URL;
@@ -38,7 +39,7 @@ function App() {
     useEffect(() => {
         axios.get('https://geolocation-db.com/json/')
             .then((res) => {
-                setIp(res.data.IPv4)
+                dispatch(insertMyIp(res.data.IPv4))
             })
     }, [])
 
@@ -122,7 +123,7 @@ function App() {
                             <SignUp userRegisterType={userRegisterType}></SignUp>
                         </Suspense>}/>
                         <Route path="register" element={<Suspense fallback={fallbackData()}>
-                            <MemberRegister userRegisterType={userRegisterType} ip={ip}></MemberRegister>
+                            <MemberRegister userRegisterType={userRegisterType} ></MemberRegister>
                         </Suspense>}/>
 
 

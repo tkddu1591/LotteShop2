@@ -4,13 +4,14 @@ import React from "react";
 function MyCoupon({pageResponseDTO, userData, setPageRequestDTO}){
     function couponState(value){
         let today = new Date()
+        console.log(today)
         let year = today.getFullYear(); // 년도
         let month = today.getMonth() + 1;  // 월
         let date = today.getDate();  // 날짜
-
         today = year*10000+ month*100+ date
 
         let endDate = parseInt(value.wdate.substring(0,4)) * 10000 + parseInt(value.wdate.substring(5,7)) *100 + parseInt(value.wdate.substring(8,10))
+        console.log(endDate)
         if(value.state===1){
             return <td className="status" style={{color:'green'}}>사용완료</td>
         }else if(today> endDate){

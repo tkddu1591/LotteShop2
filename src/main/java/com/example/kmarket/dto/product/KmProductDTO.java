@@ -15,7 +15,6 @@ public class KmProductDTO {
     private int prodCate2;
     private String prodName;
     private String descript;
-    private String company;
     private String seller;
     private int price;
     private int discount;
@@ -49,7 +48,15 @@ public class KmProductDTO {
     private String etc4;
     private String etc5;
 
-	
+
+    //추가정보
+
+    private String company;
+    private String ceo;
+    private String bizRegNum;
+    private String comRegNum;
+    private String tel;
+    private String fax;
 
 }
 

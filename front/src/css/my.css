@@ -563,9 +563,10 @@ footer p > strong {
     line-height: 18px;
 }
 
-/* my - ordered(전체주문내역) */
-#my > .ordered {}
-#my > .ordered > section > article > .byDate {
+/* my - order(전체주문내역) */
+
+#my > .order {}
+#my > .order > section > article > .byDate {
     width: 100%;
     height: auto;
     margin-top: 16px;
@@ -575,15 +576,15 @@ footer p > strong {
     box-sizing: border-box;
     overflow: hidden;
 }
-#my > .ordered > section > article > .byDate > * {
+#my > .order > section > article > .byDate > * {
     float: left;
 }
 
-#my > .ordered > section > article > .byDate * {
+#my > .order > section > article > .byDate * {
     font-family: '돋움';
     color: #444;
 }
-#my > .ordered > section > article > .byDate > .tit {
+#my > .order > section > article > .byDate > .tit {
     width: 52px;
     height: 11px;
     margin-right: 20px;
@@ -592,18 +593,18 @@ footer p > strong {
     font-size: 0;
 }
 
-#my > .ordered > section > article > .byDate > ul {
+#my > .order > section > article > .byDate > ul {
     background-image: url('/public/images/my/my_sprites.png');
 
 }
-#my > .ordered > section > article > .byDate > ul > li {
+#my > .order > section > article > .byDate > ul > li {
     float: left;
     width: 54px;
     height: 100%;
     box-sizing: border-box;
 }
 
-#my > .ordered > section > article > .byDate > ul a {
+#my > .order > section > article > .byDate > ul a {
     display: block;
     width: 54px;
     height: 27px;
@@ -611,49 +612,49 @@ footer p > strong {
     line-height: 27px;
 }
 
-#my > .ordered > section > article > .byDate > ul a:hover {
+#my > .order > section > article > .byDate > ul a:hover {
     background: url('/public/images/my/my_sprites.png') no-repeat -377px -908px;
     color: rgb(255, 255, 255);
 }
-#my > .ordered > section > article > .byDate > ul a.on {
+#my > .order > section > article > .byDate > ul a.on {
     background: url('/public/images/my/my_sprites.png') no-repeat -377px -908px;
     color: rgb(255, 255, 255);
 }
-#my > .ordered > section > article > .byDate > ul a > em {
+#my > .order > section > article > .byDate > ul a > em {
     font-weight: bold;
     color: #111;
 }
-#my > .ordered > section > article > .byDate > ul a:hover > em {color: #fff;}
-#my > .ordered > section > article > .byDate > ul a.on > em {color: #fff;}
+#my > .order > section > article > .byDate > ul a:hover > em {color: #fff;}
+#my > .order > section > article > .byDate > ul a.on > em {color: #fff;}
 
-#my > .ordered > section > article > .byDate > .date_3ea {
+#my > .order > section > article > .byDate > .date_3ea {
     width: 165px;
     height: 29px;
     background-position: -485px -908px;
 }
-#my > .ordered > section > article > .byDate > .date_5ea {
+#my > .order > section > article > .byDate > .date_5ea {
     width: 273px;
     height: 29px;
     background-position: -377px -937px;
 }
 
-#my > .ordered > section > article > .byDate > p {
+#my > .order > section > article > .byDate > p {
     width: 190px;
     height: 29px;
     background: url('/public/images/my/my_sprites.png') no-repeat -461px -879px;
     padding: 5px;
     box-sizing: border-box;
 }
-#my > .ordered > section > article > .byDate > p > span {
+#my > .order > section > article > .byDate > p > span {
     display: inline-block;
     margin: 0 4px;
 }
-#my > .ordered > section > article > .byDate input[type=date] {
+#my > .order > section > article > .byDate input[type=date] {
     width: 80px;
     border: none;
 }
 
-#my > .ordered > section > article > .byDate > .btnConfirm {
+#my > .order > section > article > .byDate > .btnConfirm {
     width: 69px;
     height: 27px;
     border: none;
@@ -661,57 +662,57 @@ footer p > strong {
     background: url('/public/images/my/my_sprites.png') no-repeat -491px -80px;
 }
 
-#my > .ordered > section > article > table {
+#my > .order > section > article > table {
     width: 100%;
     height: auto;
     border-top: 2px solid #444;
     margin-top: 6px;
     border-collapse: collapse;
 }
-#my > .ordered > section > article > table * {
+#my > .order > section > article > table * {
     font-family: '돋움';
     color: #444;
 }
 
-#my > .ordered > section > article > table th {
+#my > .order > section > article > table th {
     padding: 6px;
     background-color: #a5a7a5;
     box-sizing: border-box;
     color: #fff;
 }
-#my > .ordered > section > article > table td {
+#my > .order > section > article > table td {
     padding: 10px;
     border-left: 1px solid #f1f1f1;
     border-bottom: 1px solid #aaa;
     box-sizing: border-box;
     overflow: hidden;
 }
-#my > .ordered > section > article > table td:first-child {border-left: none;}
+#my > .order > section > article > table td:first-child {border-left: none;}
 
-#my > .ordered > section > article > table .thumb {
+#my > .order > section > article > table .thumb {
     float:left;
 }
-#my > .ordered > section > article > table ul {
+#my > .order > section > article > table ul {
     float:left;
     margin-left: 10px;
     margin-right: 10px;
 
 }
-#my > .ordered > section > article > table ul > li {
+#my > .order > section > article > table ul > li {
     margin: 4px 0;
 }
-#my > .ordered > section > article > table .prodPrice {
+#my > .order > section > article > table .prodPrice {
     margin-top: 6px;
     font-family: '고딕';
     font-size: 16px;
     font-weight: bold;
     color: #222;
 }
-#my > .ordered > section > article > table .prodPrice::after {
+#my > .order > section > article > table .prodPrice::after {
     content: '원';
     font-size: 12px;
 }
-#my > .ordered > section > article > table .confirm > a {
+#my > .order > section > article > table .confirm > a {
     display: block;
     width: 90px;
     height: 19px;
@@ -719,13 +720,13 @@ footer p > strong {
     font-size: 0;
 }
 
-#my > .ordered > section > article > table .receive {
+#my > .order > section > article > table .receive {
     background-position: -369px -179px;
 }
-#my > .ordered > section > article > table .review {
+#my > .order > section > article > table .review {
     background-position: -369px -202px;
 }
-#my > .ordered > section > article > table a.refund {
+#my > .order > section > article > table a.refund {
     margin-top: 2px;
     font-family: '돋움';
     font-size: 11px;
@@ -734,7 +735,7 @@ footer p > strong {
     line-height: 19px;
     background-position: -500px -399px;
 }
-#my > .ordered > section > article > table a.exchange {
+#my > .order > section > article > table a.exchange {
     margin-top: 2px;
     font-family: '돋움';
     font-size: 11px;
@@ -744,12 +745,12 @@ footer p > strong {
     background-position: -500px -399px;
 }
 
-#my > .ordered > section > article > .page {
+#my > .order > section > article > .page {
     margin: 20px 0;
     text-align: center;
 }
 
-#my > .ordered > section > article > .page > a {
+#my > .order > section > article > .page > a {
     display: inline-block;
     width: 19px;
     height: 19px;
@@ -757,17 +758,17 @@ footer p > strong {
     vertical-align: top;
     color: #777;
 }
-#my > .ordered > section > article > .page > a.on {
+#my > .order > section > article > .page > a.on {
     font-weight: bold;
     color: #1179ea;
 }
 
-#my > .ordered > section > article > .page > .prev {
+#my > .order > section > article > .page > .prev {
     background: url('/public/images/my/my_sprites2.png') no-repeat 0 -300px;
     font-size: 0;
 }
 
-#my > .ordered > section > article > .page > .next {
+#my > .order > section > article > .page > .next {
     background: url('/public/images/my/my_sprites2.png') no-repeat -120px -300px;
     font-size: 0;
 }
@@ -1092,7 +1093,23 @@ footer p > strong {
 #my > .review > section > article > table .rating.star4 {background-position: 0 -160px;}
 #my > .review > section > article > table .rating.star5 {background-position: 0 -200px;}
 
+#my h5.rating {
+    width: 17px;
+    height: 20px;
+    font-size: 0px;
+    background-image: url("/public/images/ico_rating_star.png");
+    background-repeat: no-repeat;
+    background-position: 36px 0px;
+    text-indent: 86px;
+}
 
+#my h5.rating.starOff {
+    background-position: 0 -0px;
+}
+
+#my h5.rating.starOn {
+    background-position: 0 -80px;
+}
 #my > .review > section > article > .page {
     margin: 20px 0;
     text-align: center;
@@ -1330,11 +1347,11 @@ footer p > strong {
     position: fixed;
     left: 0;
     top: 0;
-    display: none;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+
 }
 
 .popup.on {display: block;}
@@ -1361,9 +1378,36 @@ footer p > strong {
     float: left;
     font-size: 18px;
     color: white;
-
 }
 .popup > div > nav > button {
+    float: right;
+    width: 30px;
+    height: 30px;
+    background-image: url('/public/images/ico_sprites.png');
+    background-color: transparent;
+    background-position: 227px -25px;
+    border: none;
+    font-size: 0;
+    color: white;
+    cursor: pointer;
+}
+
+#my .btnCancel:hover {
+    background: #9e9e9e;
+    cursor: pointer;
+}
+#my .btnConfirm:hover {
+    background: #0e9d05;
+    cursor: pointer;
+}
+#my .btnQuestion:hover {
+    background: #0e9d05;
+    cursor: pointer;
+}
+#my .btnClose {
+    border: none;
+}
+#my .popup .btnClose:hover {
     float: right;
     width: 30px;
     height: 30px;
@@ -1468,25 +1512,25 @@ footer p > strong {
     text-align: center;
 }
 
-.popup > div > section > form > table {
+.popup > div > section > div > table {
     width: 600px;
     border-top: 2px solid #444;
     border-bottom: 1px solid #aaa;
     border-collapse: collapse;
     margin-bottom: 10px;
 }
-.popup > div > section > form > table label {
+.popup > div > section > div > table label {
     margin-right: 10px;
 }
 
-.popup > div > section > form > table input[type=text] {
+.popup > div > section > div > table input[type=text] {
     width: 100%;
     padding: 4px;
     box-sizing: border-box;
     border: 1px solid #f1f1f1;
     vertical-align: middle;
 }
-.popup > div > section > form > table textarea {
+.popup > div > section > div > table textarea {
     width: 100%;
     height: 160px;
     padding: 4px;
@@ -1495,24 +1539,24 @@ footer p > strong {
     vertical-align: middle;
     resize: none;
 }
-.popup > div > section > form > table th {
+.popup > div > section > div > table th {
     width: 120px;
 }
-.popup > div > section > form > table tr {
+.popup > div > section > div > table tr {
     border-bottom: 1px solid #f1f1f1;
 }
 
-.popup > div > section > form > table tr > td {
+.popup > div > section > div > table tr > td {
     padding: 10px;
     border-left: 1px solid #f1f1f1;
     box-sizing: border-box;
 }
 
-.popup > div > section > form > table tr > td:nth-child(2) {
+.popup > div > section > div > table tr > td:nth-child(2) {
     width: 360px;
 }
 
-.popup > div > section > form > div {
+.popup > div > section > div > div {
     padding: 16px 0;
     text-align: center;
 }
@@ -1541,4 +1585,144 @@ footer p > strong {
     color: white;
     margin: 10px auto;
     cursor: pointer;
+}
+
+#my  .register {
+    width: 800px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+#my  .register > nav {
+    border-bottom: 2px solid #ef2a23;
+}
+
+#my  .register > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+#my  .register table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#my  .register table * {
+}
+
+#my  .register table caption {
+    text-align: left;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+#my  .register table th {
+    width: 200px;
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+#my  .register table td {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#my  .register table input {
+    padding: 0 8px;
+    height: 31px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+    vertical-align: middle;
+}
+
+#my  .register table label {
+    display: inline-block;
+    width: 60px;
+    font-size: 17px;
+}
+
+#my  .register table .addr input {
+    margin-top: 6px;
+}
+
+#my  .register table .addr th {
+    padding-left: 30px;
+}
+
+#my .register table .essential {
+    color: #ef3f43;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#my  .register div input[type="submit"] {
+    display: block;
+    background: #ef3f43;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 72px;
+    margin: 40px auto;
+    border: 0;
+    outline: 0;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.jq-stars {
+    display: inline-block;
+}
+
+.jq-rating-label {
+    font-size: 22px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    font-family: helvetica, arial, verdana;
+}
+
+.jq-star {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.jq-star-svg {
+    padding-left: 3px;
+    width: 100%;
+    height: 100% ;
+}
+
+.jq-star:hover .fs-star-svg path {
+}
+
+.jq-star-svg path {
+    /* stroke: #000; */
+    stroke-linejoin: round;
+}
+
+/* un-used */
+.jq-shadow {
+    -webkit-filter: drop-shadow( -2px -2px 2px #888 );
+    filter: drop-shadow( -2px -2px 2px #888 );
 }

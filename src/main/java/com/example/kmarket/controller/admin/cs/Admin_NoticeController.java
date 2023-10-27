@@ -2,7 +2,6 @@ package com.example.kmarket.controller.admin.cs;
 
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.service.admin.KmAdminNoticeService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,6 @@ public class Admin_NoticeController {
         // 페이징 처리
         // 현재 페이지 번호
         int currentPage = kmAdminNoticeService.getCurrentPage(pg);
-        log.info("currentPage : " + currentPage);
 
         // 전체 게시물 갯수
         int total = kmAdminNoticeService.selectNoticeCountTotal();
@@ -42,17 +40,14 @@ public class Admin_NoticeController {
 
         // 시작 인덱스
         int start = kmAdminNoticeService.getStartNum(currentPage);
-        log.info("start : " + start);
 
-        // 1,2차 선택 중복 제거
-        List<KmAdminNoticeDTO> distinctCate = kmAdminNoticeService.distinctCate(start);
 
         // 상품 목록 출력
-        List<KmAdminNoticeDTO> notices = kmAdminNoticeService.selectCsNoticeAll(start);
+        List<KmAdminNoticeDTO> noticeList = kmAdminNoticeService.selectCsNoticeAll(start);
 
         // 뷰(템플릿)에서 참조하기 위해 모델 참조
-        model.addAttribute("notices", notices);
-        model.addAttribute("distinctCate", distinctCate);
+        model.addAttribute("noticeList", noticeList);
+
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("lastPageNum", lastPageNum);
@@ -66,22 +61,19 @@ public class Admin_NoticeController {
     @GetMapping("/admin/notice/view")
     public String view(Model model, int noticeNo){
 
-        log.info("noticeNo : " + noticeNo);
         KmAdminNoticeDTO noticeView = kmAdminNoticeService.selectArticleNotice(noticeNo);
         model.addAttribute("noticeView", noticeView);
-        log.info("noticeView : " + noticeView);
-
 
         return "admin/notice/view";
     }
 
     @GetMapping("/admin/notice/write")
-    public String write(Model model, String cateName){
+    public String write(Model model, int noticeNo){
 
-        List<KmAdminNoticeDTO> findCateName = kmAdminNoticeService.findCateName(cateName);
+        KmAdminNoticeDTO noticeView = kmAdminNoticeService.selectArticleNotice(noticeNo);
         int noticeWrite = kmAdminNoticeService.insertArticleNotice(KmAdminNoticeDTO.builder().build());
 
-        model.addAttribute("CnameTname", findCateName);
+        model.addAttribute("noticeView", noticeView);
         model.addAttribute("noticeWrite", noticeWrite);
 
 
@@ -91,35 +83,33 @@ public class Admin_NoticeController {
     @PostMapping("/admin/notice/write")
     public String write(Model model, KmAdminNoticeDTO kmAdminNoticeDTO){
 
-        log.info("kmAdminNoticeDTO : " + kmAdminNoticeDTO);
         kmAdminNoticeService.insertArticleNotice(kmAdminNoticeDTO);
 
         return "redirect:/admin/notice/list";
     }
 
     @GetMapping("/admin/notice/modify")
-    public String update(Model model, int noticeNo, String cateName){
+    public String modify(Model model, int noticeNo){
 
-        KmAdminNoticeDTO kmAdminNoticeDTO = kmAdminNoticeService.selectArticleNotice(noticeNo);
-        List<KmAdminNoticeDTO> findCateName = kmAdminNoticeService.findCateName(cateName);
+        KmAdminNoticeDTO noticeView = kmAdminNoticeService.selectArticleNotice(noticeNo);
 
-        model.addAttribute("kmAdminNoticeDTO", kmAdminNoticeDTO);
-        model.addAttribute("findCateName", findCateName);
+        model.addAttribute("noticeView", noticeView);
 
         return "/admin/notice/modify";
     }
 
     @PostMapping("/admin/notice/modify")
-    public String update(Model model, KmAdminNoticeDTO kmAdminNoticeDTO){
+    public String modify(KmAdminNoticeDTO kmAdminNoticeDTO){
 
         kmAdminNoticeService.updateArticleNotice(kmAdminNoticeDTO);
 
-        return "redirect:/admin/notice/list";
+        return "redirect:/admin/notice/modify";
     }
 
     @DeleteMapping("/admin/notice/delete/{noticeNo}")
-    @Transactional
     public void delete(@PathVariable("noticeNo") int noticeNo){
+
+        log.info(kmAdminNoticeService);
 
         kmAdminNoticeService.deleteArticleNotice(noticeNo);
     }
