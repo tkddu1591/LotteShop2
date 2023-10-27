@@ -81,7 +81,7 @@ public class Admin_QnaController {
     }
 
     @PostMapping("/admin/qna/write")
-    public String writeSubmit(KmAdminQnaDTO kmAdminQnaDTO) {
+    public String write(KmAdminQnaDTO kmAdminQnaDTO) {
 
         log.info(kmAdminQnaDTO);
         kmAdminQnaService.updateAnswerQna(kmAdminQnaDTO);
