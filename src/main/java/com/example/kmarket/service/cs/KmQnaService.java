@@ -5,41 +5,39 @@ import com.example.kmarket.dto.PageResponseDTO;
 import com.example.kmarket.dto.cs.KmCsQnaDTO;
 import com.example.kmarket.dto.cs.CsPageRequestDTO;
 import com.example.kmarket.dto.cs.CsPageResponseDTO;
-import com.example.kmarket.dto.member.KmMemberPointDTO;
 import com.example.kmarket.entity.cs.KmCsCateEntity;
 import com.example.kmarket.entity.cs.KmCsQnaEntity;
-import com.example.kmarket.entity.member.KmMemberPointEntity;
 import com.example.kmarket.mapper.cs.KmCsQnaMapper;
 import com.example.kmarket.mapper.cs.MybatisCSMapper;
 import com.example.kmarket.repository.cs.KmCsQnaRepository;
 
 import com.example.kmarket.util.MaskingUid;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Log4j2
-
 public class KmQnaService {
 
     private final KmCsQnaRepository kmCsQnaRepository;
     private final KmCsQnaMapper kmCsQnaMapper;
-    private final Util util;
+
     private final MybatisCSMapper mybatisCsMapper;
+    private final MaskingUid maskingUid;
 
     private final MaskingUid maskingUid;
 
     public CsPageResponseDTO findByCate(CsPageRequestDTO csPageRequestDTO) {
         Pageable pageable = csPageRequestDTO.getPageable("qnaNo");
         Page<KmCsQnaEntity> result
-            = kmCsQnaRepository.findByKmCsCateEntity_Cate(csPageRequestDTO.getCate(), pageable);
+            = kmCsQnaRepository.findByKmCsCateEntity_CateOrderByRdateDesc(csPageRequestDTO.getCate(), pageable);
 
         List<KmCsQnaDTO> qnaList
                 = result.getContent()
@@ -50,7 +48,7 @@ public class KmQnaService {
 
         for(KmCsQnaDTO qna : qnaList) {
             // TODO 나중에 여기서 Uid 오솔라이즈 잡아서 처리 해주는 로직 달기
-            qna.setWriter(util.maskingUid(qna.getWriter()));
+            qna.setWriter(maskingUid.maskingUid(qna.getWriter()));
         }
         log.info(qnaList.toString());
 
@@ -61,15 +59,15 @@ public class KmQnaService {
                 .build();
     }
 
+    // cate로 type 가져오기(type이 90이상은 notice라서 제외)
     public List<KmCsCateEntity> findByTypeLessThan(int type){
         log.info("!!!!!!!!!!!!!!!!!!!!!!" + type);
         List<KmCsCateEntity> cateList
-                = mybatisCsMapper.findTypeForCate(type);
+                = mybatisCsMapper.findByTypeLessThan(type);
 //        log.info("@@@@@@@@@@@@@@@@@"+cateList.toString());
 
         return cateList;
     }
-
 
     public List<KmCsQnaDTO> indexQnaList(){
         List<KmCsQnaDTO> qnaList = mybatisCsMapper.indexQnaList();
@@ -135,11 +133,23 @@ public class KmQnaService {
 
     public void save(KmCsQnaDTO dto){
         KmCsQnaEntity entity = kmCsQnaMapper.toEntity(dto);
+  
+        if(entity.getKmProductOrderItemEntity().getOrderItemId() == 0) {
+            entity.setKmProductOrderItemEntity(null);
+        }
 
         log.info("qna service save entity : " + entity);
         log.info(entity.getKmCsCateEntity());
         log.info(entity.getKmCsTypeEntity());
         kmCsQnaRepository.save(entity);
+    }
+
+    public KmCsQnaDTO findById(int qnaNo){
+        KmCsQnaEntity entity = kmCsQnaRepository.findById(qnaNo).get();
+        KmCsQnaDTO dto = kmCsQnaMapper.toDTO(entity);
+        dto.setWriter(maskingUid.maskingUid(dto.getWriter()));
+
+        return dto;
     }
 
     public PageResponseDTO findByWriter(PageRequestDTO pageRequestDTO){

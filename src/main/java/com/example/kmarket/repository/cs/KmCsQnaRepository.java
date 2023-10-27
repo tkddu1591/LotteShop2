@@ -16,6 +16,8 @@ public interface KmCsQnaRepository extends JpaRepository<KmCsQnaEntity, Integer>
     Page<KmCsQnaEntity> findByKmCsCateEntity_CateOrderByRdateDesc(String cate, Pageable pageable);
 
     Page<KmCsQnaEntity> findByKmCsCateEntity_Cate(String cate, Pageable pageable);
+    Page<KmCsQnaEntity> findByKmCsCateEntity_CateOrderByRdateDesc(String cate, Pageable pageable);
+
 
 
 

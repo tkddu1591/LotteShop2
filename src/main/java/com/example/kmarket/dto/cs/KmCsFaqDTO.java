@@ -21,6 +21,8 @@ public class KmCsFaqDTO {
 	private int hit;
 	private LocalDateTime rdate;
 
-
+	//추가 필드
+	private String cateName;
+	private String typeName;
 	
 }

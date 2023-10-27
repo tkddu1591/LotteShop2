@@ -25,7 +25,7 @@ public class KmCsQnaDTO {
 	private int answerComplete;
 	private LocalDateTime rdate;
 	private String answer;
-	private String orderItemId;
+	private int orderItemId;
 	private LocalDateTime answerDate;
 
 	//추가 필드
@@ -33,6 +33,6 @@ public class KmCsQnaDTO {
 	private String cateName;
 	private String typeName;
 	private String prodName;
-	private String prodNo;
+	private int prodNo;
 
 }

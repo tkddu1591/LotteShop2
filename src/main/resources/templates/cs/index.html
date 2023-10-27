@@ -129,21 +129,8 @@
                             </p>
                         </div>
                     </article>
-                    <input type="text" th:value="${memberUid}" id="memberUid"></input>
-                    <input type="text" th:value="${token}" id="token"></input>
-                    <input type="text" th:value="${expirationTime}" id="expirationTime"></input>
-                    <input type="text" th:value="${authority}" id="authority"></input>
                 </section>
             </div>
         </section>
-        <script>
-            console.log('ddd')
-            localStorage.setItem('memberUid',$('#memberUid').val())
-            localStorage.setItem('expirationTime',$('#expirationTime').val())
-            localStorage.setItem('token',$('#token').val())
-            localStorage.setItem('authority',$('#authority').val())
-        </script>
     </th:block>
-
-
 </html>
