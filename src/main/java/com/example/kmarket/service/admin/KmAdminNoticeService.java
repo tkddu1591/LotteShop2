@@ -1,5 +1,7 @@
 package com.example.kmarket.service.admin;
 
+import com.example.kmarket.dto.admin.KmAdminCsCateDTO;
+import com.example.kmarket.dto.admin.KmAdminCsTypeDTO;
 import com.example.kmarket.dto.admin.KmAdminFaqDTO;
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.mapper.admin.KmAdminNoticeMapper;
@@ -97,6 +99,18 @@ public class KmAdminNoticeService {
         KmAdminNoticeDTO kmAdminNoticeDTO = kmAdminNoticeMapper.selectArticleNotice(noticeNo);
 
         return kmAdminNoticeDTO;
+    }
+
+    // cateName 찾기
+    public List<KmAdminCsCateDTO> findCname(KmAdminCsCateDTO kmAdminCsCateDTO){
+
+        return kmAdminNoticeMapper.findCname(kmAdminCsCateDTO);
+    }
+
+    // typeName 찾기
+    public List<KmAdminCsTypeDTO> findTname(String cate){
+
+        return kmAdminNoticeMapper.findTname(cate);
     }
 
     // 글 쓰기
