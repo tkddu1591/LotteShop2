@@ -32,7 +32,7 @@ public class ListController {
         // 상품 목록 출력
         List<KmProductDTO> products = kmAdminProductService.selectProducts(start);
 
-        // 뷰(템플릿)에서 참조하기 위해 모델 참조
+        // 뷰(템플릿)에서 참조하기 위해 모델 참조. (페이징)
         model.addAttribute("products", products);
         model.addAttribute("lastPageNum", lastPageNum);
         model.addAttribute("pageGroupStart", result[0]);
@@ -41,6 +41,11 @@ public class ListController {
 
         return "/admin/product/list";
     }
+
+
+
+
+
 
 
 }
