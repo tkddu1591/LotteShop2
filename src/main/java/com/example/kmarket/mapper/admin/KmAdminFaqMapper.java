@@ -35,4 +35,7 @@ public interface KmAdminFaqMapper {
    // 글 수정
    public void updateArticleFaq(KmAdminFaqDTO kmAdminFaqDTO);
 
+   // 글 삭제
+   public void deleteArticleFaq(int faqNo);
+
 }

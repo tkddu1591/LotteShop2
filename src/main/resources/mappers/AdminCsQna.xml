@@ -54,8 +54,9 @@
     </insert>
 
     <!-- 게시글 삭제 -->
-    <delete id="deleteArticleQna" parameterType="int">
-        DELETE `km_cs_qna` WHERE `qnaNO` = #{qnaNo}
+    <delete id="deleteArticleQna">
+        UPDATE `km_cs_qna` SET `answerComplete` = 3
+        WHERE `qnaNo` = #{qnaNo}
     </delete>
 
 </mapper>

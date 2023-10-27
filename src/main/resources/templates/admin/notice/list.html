@@ -1,9 +1,9 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/admin/js/checkall.js}"></script>
     <div th:replace="/admin/header.html :: header"></div>
 </head>
 <main>
@@ -48,9 +48,9 @@
                             <td style="text-align: center; width: 10%" th:text="${dto.hit}"></td>
                             <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                             <td style="text-align: center; width: 10%">
-                                <a th:href="@{/admin/notice/write}" class="noticeDelete">[삭제]</a>
+                                <a th:href="@{/admin/notice/delete(noticeNo=${dto.noticeNo})}" >[삭제]</a>
                                 <br />
-                                <a th:href="@{/write}" class="noticeUpdate">[수정]</a>
+                                <a th:href="@{/admin/notice/modify(noticeNo=${dto.noticeNo})}" >[수정]</a>
                             </td>
                         </tr>
                     </th:block>

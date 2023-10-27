@@ -24,30 +24,27 @@
         <section>
             <form action="#" method="post">
                 <div>
-                    <div>
-                        <select>
-                            <option value="" selected disabled>1차 선택</option>
-                            <option th:each="dto : ${findCname}" th:value="${dto.cate}" th:text="${dto.cateName}"></option>
-                        </select>
-                        <select>
-                            <option value="" selected disabled>2차 선택</option>
-                            <option th:each="dto : ${selectTname}" th:value="${dto.type}" th:text="${dto.typeName}"></option>
-                        </select>
-                    </div>
-
+                    <select>
+                        <option value="" selected disabled>1차 선택</option>
+                        <option th:each="dto : ${findCname}" th:value="${dto.cate}" th:text="${dto.cateName}"></option>
+                    </select>
+                    <select>
+                        <option value="" selected disabled>2차 선택</option>
+                        <option th:each="dto : ${selectTname}" th:value="${dto.type}" th:text="${dto.typeName}"></option>
+                    </select>
                 </div>
                 <table class="listTable">
                     <thead>
-                    <tr>
-                        <th><input type="checkbox" name="all"/></th>
-                        <th>번호</th>
-                        <th>1차유형</th>
-                        <th>2차유형</th>
-                        <th>제목</th>
-                        <th>조회</th>
-                        <th>날짜</th>
-                        <th>관리</th>
-                    </tr>
+                        <tr>
+                            <th><input type="checkbox" name="all"/></th>
+                            <th>번호</th>
+                            <th>1차유형</th>
+                            <th>2차유형</th>
+                            <th>제목</th>
+                            <th>조회</th>
+                            <th>날짜</th>
+                            <th>관리</th>
+                        </tr>
                     </thead>
                     <tbody class="listTbody">
                     <tr th:each="dto : ${faqList}">
@@ -59,16 +56,16 @@
                         <td style="text-align: center; width: 10%" th:text="${dto.hit}"></td>
                         <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                         <td style="text-align: center; width: 15%" >
-                            <a th:href="@{/admin/cs/faq/delete}" class="noticeDelete">[삭제]</a>
+                            <a th:href="@{/admin/faq/delete(faqNo=${dto.faqNo})}" >[삭제]</a>
                             <br/>
-                            <a th:href="@{/admin/cs/faq/update}" class="noticeUpdate">[수정]</a>
+                            <a th:href="@{/admin/faq/modify(faqNo=${dto.faqNo})}" >[수정]</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
                 <div style="display: flex; justify-content: space-between; margin-top: 20px;">
                     <div>
-                        <a th:href="@{/admin/faq/delete}">선택삭제</a>
+                        <input type="submit" value="선택삭제" class="deleteAll" />
                     </div>
                     <div>
                         <a th:href="@{/admin/faq/write}">작성하기</a>

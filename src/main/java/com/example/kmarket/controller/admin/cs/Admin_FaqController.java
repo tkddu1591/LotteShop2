@@ -44,6 +44,8 @@ public class Admin_FaqController {
         // 상품 목록 출력
         List<KmAdminFaqDTO> faqList = kmAdminFaqService.selectCsFaqAll(start);
 
+        log.info("faqList : " + faqList);
+
         // 1차 카테고리 출력
         List<KmAdminCsCateDTO> findCname = kmAdminFaqService.findCname(kmAdminCsCateDTO);
 
@@ -75,11 +77,8 @@ public class Admin_FaqController {
     }
 
     @GetMapping("/admin/faq/write")
-    public String write(Model model, int faqNo){
+    public String write(){
 
-        KmAdminFaqDTO faqView = kmAdminFaqService.selectArticleFaq(faqNo);
-
-        model.addAttribute("faqView", faqView);
 
         return "/admin/faq/write";
     }
@@ -87,11 +86,9 @@ public class Admin_FaqController {
     @PostMapping("/admin/faq/write")
     public String write(KmAdminFaqDTO kmAdminFaqDTO){
 
-        log.info("kmAdminFaqDTO", kmAdminFaqDTO);
-
         kmAdminFaqService.insertArticleFaq(kmAdminFaqDTO);
 
-        return "redirect:/admin/faq/write";
+        return "redirect:/admin/faq/list";
     }
 
     @GetMapping("/admin/faq/modify")
@@ -106,16 +103,17 @@ public class Admin_FaqController {
     @PostMapping("/admin/faq/modify")
     public String modify(KmAdminFaqDTO kmAdminFaqDTO){
 
-        log.info(kmAdminFaqDTO);
-
         kmAdminFaqService.updateArticleFaq(kmAdminFaqDTO);
 
-
-        return  "redirect:/admin/faq/modify";
+        return  "redirect:/admin/faq/view?faqNo="+kmAdminFaqDTO.getFaqNo();
     }
 
+    @GetMapping("/admin/faq/delete")
+    public String delete(@RequestParam int faqNo){
 
+        kmAdminFaqService.deleteArticleFaq(faqNo);
 
-
+        return "redirect:/admin/faq/list";
+    }
 
 }

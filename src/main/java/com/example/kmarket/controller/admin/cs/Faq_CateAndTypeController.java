@@ -28,7 +28,6 @@ public class Faq_CateAndTypeController {
     @GetMapping("/admin/faq/type/{cateValue}")
     public List<KmAdminCsTypeDTO> getCsType(@PathVariable("cateValue") String cateValue){
 
-        log.info("cateValue : " + cateValue);
         List<KmAdminCsTypeDTO> findTname = kmAdminFaqService.findTname(cateValue);
 
         return findTname;

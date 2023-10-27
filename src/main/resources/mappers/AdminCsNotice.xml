@@ -22,7 +22,7 @@
         SELECT * FROM `km_cs_cate`
     </select>
 
-    <!-- typeName 검색 -->
+    <!-- AJAX typeName 검색 -->
     <select id="findTname" resultType="com.example.kmarket.dto.admin.KmAdminCsTypeDTO">
         SELECT * FROM `km_cs_type`  WHERE `cate` = #{cate}
     </select>
@@ -59,7 +59,7 @@
     </update>
 
     <!-- 게시글 삭제 -->
-    <delete id="deleteArticleNotice" parameterType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
+    <delete id="deleteArticleNotice">
         DELETE FROM `km_cs_notice` WHERE `noticeNo` = #{noticeNO}
     </delete>
 

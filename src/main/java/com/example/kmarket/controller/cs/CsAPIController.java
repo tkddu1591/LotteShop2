@@ -4,7 +4,6 @@ import com.example.kmarket.dto.cs.KmCsCateDTO;
 import com.example.kmarket.dto.cs.KmCsFaqDTO;
 import com.example.kmarket.dto.cs.KmCsQnaDTO;
 import com.example.kmarket.dto.cs.KmCsTypeDTO;
-import com.example.kmarket.service.cs.CsCateService;
 import com.example.kmarket.service.cs.CsAPIService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,4 +44,5 @@ public class CsAPIController {
     public List<KmCsFaqDTO> qnaList(@RequestParam int type) {
         return apiService.faqList(type);
     }
+
 }

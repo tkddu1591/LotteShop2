@@ -143,4 +143,10 @@ public class KmAdminFaqService {
 
         kmAdminFaqMapper.updateArticleFaq(kmAdminFaqDTO);
     }
+
+    // 글 삭제
+    public void deleteArticleFaq(int faqNo){
+
+        kmAdminFaqMapper.deleteArticleFaq(faqNo);
+    }
 }
