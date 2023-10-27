@@ -22,9 +22,12 @@
     <update id="updateProduct"></update>
     <delete id="deleteProduct"></delete>
 
-    <select id="selectSearchedProducts">
-        SELECT * FROM `km_product`
+<!--    <select id="selectSearchedProducts">-->
+<!--        SELECT * FROM `km_product` WHERE `prodName`LIKE '%%';-->
+<!--        SELECT * FROM `km_product` WHERE `prodNo`LIKE '%%';-->
+<!--        SELECT * FROM `km_product` WHERE `company`LIKE '%%';-->
+<!--        SELECT * FROM `km_product` WHERE `seller`LIKE '%%';-->
 
-    </select>
+<!--    </select>-->
 
 </mapper>
