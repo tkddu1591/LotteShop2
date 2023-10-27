@@ -26,10 +26,12 @@ public class KmCsFaqEntity {
 	private KmCsTypeEntity kmCsTypeEntity;
 	private String title;
 	private String content;
-	private int relatedFaq;
+	@Builder.Default
+	private int relatedFaq = 0;
 	private String writer;
 	private String regip;
-	private int hit;
+	@Builder.Default
+	private int hit = 0;
 	@CreationTimestamp
 	private LocalDateTime rdate;
 

@@ -19,6 +19,7 @@
                 ORDER BY CC.cateName DESC;
         ]]>
     </select>
+
     <select id="indexNoticeList" resultType="com.example.kmarket.dto.cs.KmCsNoticeDTO">
         SELECT * FROM km_cs_notice AS CN
         JOIN km_cs_cate AS CC
@@ -48,10 +49,18 @@
         LIMIT 0, 10;
     </select>
 
+    <select id="findByTypeForCate" resultType="com.example.kmarket.dto.cs.KmCsTypeDTO">
+        SELECT * FROM km_cs_type AS CT
+        JOIN km_cs_cate AS CC
+            ON CT.cate = CC.cate
+        WHERE CT.cate = #{cate};
+    </select>
+
     <select id="findTypeForCate" resultType="com.example.kmarket.dto.cs.KmCsTypeDTO">
         SELECT * FROM km_cs_type AS CT
         JOIN km_cs_cate AS CC
             ON CT.cate = CC.cate
         WHERE type = #{type};
     </select>
+
 </mapper>
