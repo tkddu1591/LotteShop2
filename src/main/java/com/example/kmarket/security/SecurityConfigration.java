@@ -61,7 +61,7 @@ public class SecurityConfigration {
                 //인가권한설정 (back에서는 DB에 접속하는 기능을 제한함)
                 .authorizeHttpRequests(authorizeHttpRequest -> authorizeHttpRequest
                         /*.requestMatchers("/product/cart").authenticated()//인가설정*/
-                        .requestMatchers("/product/cart").hasAnyRole("USER")//인가설정
+                        /*.requestMatchers("/product/cart").hasAnyRole("USER")//인가설정*/
                         .requestMatchers("/").permitAll()//인가설정
                         .requestMatchers("/**").permitAll())
                 //tokenProvider 적용

@@ -1,7 +1,6 @@
 package com.example.kmarket.controller.cs;
 
 import com.example.kmarket.dto.cs.KmCsCateDTO;
-import com.example.kmarket.dto.cs.KmCsFaqDTO;
 import com.example.kmarket.dto.cs.KmCsQnaDTO;
 import com.example.kmarket.dto.cs.KmCsTypeDTO;
 import com.example.kmarket.service.cs.CsCateService;
@@ -38,11 +37,5 @@ public class CsAPIController {
     @DeleteMapping("/qna/cancel")
     public void postCancel(@RequestParam int qnaNo){
         apiService.qnaCancel(qnaNo);
-    }
-
-
-    @GetMapping("/faq/listByType")
-    public List<KmCsFaqDTO> qnaList(@RequestParam int type) {
-        return apiService.faqList(type);
     }
 }
