@@ -33,6 +33,7 @@ public class CsCateService {
         return dto;
     }
 
+    // faq에서 cate에 따라 type 선택 하는 로직 -> ajax에서 사용
     public List<KmCsTypeDTO> cateForType(String cate, int type){
         List<KmCsTypeEntity> cateEntityList = typeRepo.findByCateAndTypeLessThan(cate, type);
         log.info("ccs CateForType typeName : "+cateEntityList.toString());
@@ -50,12 +51,13 @@ public class CsCateService {
         return cateEntityList;
     }
 
-    public List<KmCsTypeDTO> findByType(int type){
-        List<KmCsTypeEntity> typeEntity = typeRepo.findByType(type);
+    // faq에서 cate별로 type을 출력하는 List
+    public List<KmCsTypeDTO> findByTypeForCate(String cate){
+        List<KmCsTypeDTO> typeDTO
+                = mybatisCsMapper.findByTypeForCate(cate);
+        log.info("@@@@@ CCS findByTypeForCate typeDTO : "+typeDTO);
 
-        return typeEntity.stream()
-                .map(typeMapper::toDTO)
-                .toList();
+        return typeDTO;
     }
 
 }

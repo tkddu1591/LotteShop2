@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 @Log4j2
 public class FaqController {
-    private final KmFaqService kfs;
+    private final KmFaqService fs;
     private final CsCateService ccs;
 
     @GetMapping("/list")
@@ -26,30 +26,34 @@ public class FaqController {
         KmCsCateDTO cateDTO = ccs.findByCate(cate);
         model.addAttribute("cateDto", cateDTO);
 
-        List<KmCsFaqDTO> faqDTOList = kfs.selectFaqList(cate);
+        List<KmCsFaqDTO> faqDTOList = fs.selectFaqList(cate);
         log.info("faqDTOList : " + faqDTOList);
 
-        /*
-        List<KmCsTypeDTO> typeDTO = ccs.findByType(type);
-        log.info("typeDTO : "+ typeDTO);
-        for(KmCsTypeDTO types : typeDTO) {
+        List<KmCsTypeDTO> cateDTOList = ccs.findByTypeForCate(cate);
+        log.info("cateDTOList : "+ cateDTOList);
+
+        for(KmCsTypeDTO cates : cateDTOList) {
             List<KmCsFaqDTO> faqBoard = new ArrayList<>();
             for(KmCsFaqDTO board : faqDTOList) {
-                if(types.getType() == board.getType()) {
+                if(cates.getType() == board.getType()) {
                     faqBoard.add(board);
                 }
             }
-            types.setFaqDTO(faqBoard);
+            cates.setFaqDTO(faqBoard);
+            log.info("cates : " + cates);
         }
 
-        model.addAttribute("typeDTO", typeDTO);*/
+        model.addAttribute("cateDTOList", cateDTOList);
         model.addAttribute("faqDTOList", faqDTOList);
 
         return "cs/faq/list";
     }
 
     @GetMapping("/view")
-    public String view() {
+    public String view(Model model, int no) {
+        KmCsFaqDTO dto = fs.findById(no);
+        model.addAttribute("faq", dto);
+
         return "cs/faq/view";
     }
 

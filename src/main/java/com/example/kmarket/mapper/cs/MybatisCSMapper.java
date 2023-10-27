@@ -3,6 +3,7 @@ package com.example.kmarket.mapper.cs;
 import com.example.kmarket.dto.cs.KmCsFaqDTO;
 import com.example.kmarket.dto.cs.KmCsNoticeDTO;
 import com.example.kmarket.dto.cs.KmCsQnaDTO;
+import com.example.kmarket.dto.cs.KmCsTypeDTO;
 import com.example.kmarket.entity.cs.*;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,7 +16,7 @@ public interface MybatisCSMapper {
     List<KmCsNoticeDTO> indexNoticeList();
     List<KmCsQnaDTO> indexQnaList();
 
-    KmCsTypeEntity findTypeForCate(int type);
-
     List<KmCsFaqDTO> selectFaqList(String cate);
+    List<KmCsTypeDTO> findByTypeForCate(String cate);
+
 }

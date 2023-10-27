@@ -51,19 +51,20 @@
                         </nav>
 
                         <div>
-                            <th:block th:each="faqDTO : ${faqDTOList}">
-                                <h3>[[${faqDTO.typeName}]]</h3>
+                            <th:block th:each="typeDTO : ${cateDTOList}">
+                                <h3>[[${typeDTO.typeName}]]</h3>
                                 <ul>
-                                    <th:block >
+                                    <th:block th:each="faqDTO : ${faqDTOList}"
+                                              th:if="${typeDTO.type} eq ${faqDTO.type}">
                                         <li>
-                                            <a th:href="@{/cs/faq/view(no=faq.faqNo)}">
+                                            <a th:href="@{/cs/faq/view(no=${faqDTO.faqNo})}">
                                                 <span>Q.</span> [[${faqDTO.title}]]
                                             </a>
                                         </li>
-                                        <li class="more">
-                                            <a href="#">더보기</a>
-                                        </li>
                                     </th:block>
+                                    <li class="more">
+                                        <a href="#">더보기</a>
+                                    </li>
                                 </ul>
                             </th:block>
                         </div>
