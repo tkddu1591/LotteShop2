@@ -25,9 +25,9 @@
     <!-- VIEW 게시글 보기 -->
     <select id="selectArticleFaq" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
         SELECT
-            a.*,
-            b.`cateName` AS `cateName`,
-            c.`typeName` AS `typeName`
+        a.*,
+        b.`cateName` AS `cateName`,
+        c.`typeName` AS `typeName`
         FROM `km_cs_faq` AS a
         LEFT JOIN `km_cs_cate` AS b ON a.`cate` = b.`cate`
         LEFT JOIN `km_cs_type` AS c ON a.`type` = c.`type`
@@ -35,19 +35,19 @@
     </select>
 
     <!-- cateName 검색 -->
-    <select id="findCname" resultType="com.example.kmarket.dto.admin.KmAdminCsCateDTO">
+    <select id="findCname" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
         SELECT * FROM `km_cs_cate`
     </select>
 
-    <!-- typeName 검색 -->
-    <select id="findTname" resultType="com.example.kmarket.dto.admin.KmAdminCsTypeDTO">
-        SELECT * FROM `km_cs_type`  WHERE `cate` = #{cate}
+    <!-- cateName 검색 -->
+    <select id="findTname" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
+        SELECT * FROM `km_cs_type`
     </select>
 
     <select id="findCateAndType" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
         SELECT
-            a.cate,
-            b.`typeName`
+        a.cate,
+        b.`typeName`
         FROM `km_cs_cate` AS a
         LEFT JOIN `km_cs_type` AS b ON a.`cate` = b.`cate`
     </select>
@@ -63,12 +63,7 @@
             NOW(),
             #{title}
         );
-    </insert>
 
-    <!-- 게시글 수정 -->
-    <update id="updateArticleFaq">
-        UPDATE `km_cs_faq` SET `cate` = #{cate}, `type` = #{type}, `title` = #{title}, `content` = #{content}
-        WHERE `faqNo` = #{faqNo}
-    </update>
+    </insert>
 
 </mapper>
