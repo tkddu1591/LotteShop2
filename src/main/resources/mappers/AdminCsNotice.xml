@@ -34,6 +34,16 @@
         WHERE a.`noticeNo` = #{noticeNo}
     </select>
 
+    <!-- cateName 검색 -->
+    <select id="findCname" resultType="com.example.kmarket.dto.admin.KmAdminCsCateDTO">
+        SELECT * FROM `km_cs_cate`
+    </select>
+
+    <!-- typeName 검색 -->
+    <select id="findTname" resultType="com.example.kmarket.dto.admin.KmAdminCsTypeDTO">
+        SELECT * FROM `km_cs_type`  WHERE `cate` = #{cate}
+    </select>
+
     <!-- resultType은 select문만 필요함 -->
     <!-- 게시글 작성 -->
     <insert id="insertArticleNotice" parameterType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
@@ -42,8 +52,8 @@
     </insert>
 
     <!-- 게시글 수정 -->
-    <update id="updateArticleNotice" parameterType="com.example.kmarket.dto.admin.KmAdminNoticeDTO">
-        UPDATE `km_cs_notice` SET `cate` = #{cate}, `title` = #{title}, `content` = #{content}
+    <update id="updateArticleNotice">
+        UPDATE `km_cs_notice` SET `cate` = #{cate}, `type` = #{type}, `title` = #{title}, `content` = #{content}
         WHERE `noticeNo` = #{noticeNo}
     </update>
 

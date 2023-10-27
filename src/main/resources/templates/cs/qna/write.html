@@ -1,4 +1,11 @@
-<th:block th:insert="~{/cs/inc/header.html}"/>
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cs/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
 <section id="cs">
     <div class="qna">
         <nav>
@@ -39,7 +46,8 @@
             </aside>
 
             <article>
-                <form th:action="@{/cs/qna/write}" method="post">
+                <form id="writeForm" th:action="@{/cs/qna/write}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="writer" id="writer">
                     <table>
                         <tr>
                             <td>문의유형</td>
@@ -69,9 +77,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>첨부파일</td>
-                            <td>
-                                <input type="file" name="file"/>
+                            <td calss="form-group fileUpload">
+                                <label>첨부파일</label>
+                                <td>
+                                    <input type="file" name="file" multiple/>
+                                </td>
+                            </td>
+                            <td class="uploadResult">
+                                <td>
+
+                                </td>
                             </td>
                         </tr>
                     </table>
@@ -84,5 +99,72 @@
         </section>
     </div>
 </section>
+    <script>
+        let memberUid = window.localStorage.getItem('memberUid');
+        console.log(memberUid);
+        $('#writer').val(memberUid);
+        console.log($('#writer').val());
+
+
+/*
+
+        $(function(){
+            let writeForm = $('#writeForm');
+            // 정규식으로 특정 확장자 업로드 못하게 막기
+            let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+            let maxSize = 1024 * 1024 * 10; // 최대 업로드 10MB
+            const url = "/cs/files";
+
+            function checkExtension(fileName, fileSize){
+                if(fileSize >= maxSize){
+                    alert("최대 10MB까지 업로드 가능합니다.");
+                    return false
+                }
+
+                if(regex.test(fileName)){
+                    alert("해당 확장자는 업로드 할 수 없습니다.");
+                    return false
+                }
+                return true
+            }
+
+            $("input[type=file]").change(function(){
+                let formData = new formData();
+                let inputFile = $("input[name=file]");
+                let files = inputFile[0].files;
+
+                for(let i = 0; i < files.length; i++){
+                    if(!checkExtension(files[i].name, files[i].size)){
+                        return false
+                    }
+                    formData.append("uploadFile", files[i]);
+                }
+
+                $.ajax({
+                    url : url,
+                    type : "POST",
+                    contentType : false,    // 인코딩 타입 적용 x
+                    processData : false,    // 쿼리스트링 생성 x
+                    data: formData,
+                    dataType : "json",
+                    success: function(result){
+                        console.log(result);
+
+
+                        // showUploadResult(result);
+                    }
+                });
+            });
+
+
+            $('.btnSubmit').click(function(e){
+                e.preventDefault();
+                console.log("submit clicked");
+            });
+        });
+*/
+
+    </script>
 <script src="/cs/js/writeType.js"></script>
-<th:block th:insert="~{/cs/inc/footer.html}"/>
+</th:block>
+</html>

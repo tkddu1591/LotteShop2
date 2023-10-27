@@ -6,15 +6,14 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
+@Setter
 @ToString(exclude = {"kmCsCateEntity", "kmCsTypeEntity", "kmCsQnaEntity"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Setter
 @Table(name = "km_cs_qna")
 public class KmCsQnaEntity {
 
@@ -42,8 +41,9 @@ public class KmCsQnaEntity {
     @Builder.Default
     private int answerComplete = 0;
     private String regip;
-    private String answer;
+    private String answer; // 댓글 내용을 이걸로 잡음..
     @CreationTimestamp
     private LocalDateTime rdate;
+
     private LocalDateTime answerDate;
 }
