@@ -1,9 +1,33 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
-    <script th:src="@{/admin/js/checkall.js}"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:inline="javascript">
+        function filterTable() {
+            var selectedValue = document.getElementById("searchCate1").value;
+            var rows = document.getElementById("noticeTable").getElementsByTagName("tr");
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName("td");
+                if (cells.length > 0) {
+                    var cellValue = cells[2].textContent || cells[2].innerText;
+                    rows[i].style.display = (cellValue === selectedValue || selectedValue === "유형선택") ? "" : "none";
+                }
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var allCheckbox = document.querySelector("input[name='all']");
+            allCheckbox.addEventListener('click', function() {
+                var checkboxes = document.getElementsByName('chk');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = allCheckbox.checked;
+                }
+            });
+        });
+    </script>
     <div th:replace="/admin/header.html :: header"></div>
 </head>
 <main>
@@ -23,7 +47,7 @@
                 <div>
                     <select name="searchCate1" id="searchCate1" onchange="filterTable()">
                         <option value="" selected disabled hidden>유형선택</option>
-                        <option th:each="dto : ${(noticeList)}" th:value="${dto.cate}" th:text="${dto.cateName}">유형선택</option>
+                        <option th:each="dto : ${(distinctCate)}" th:value="${dto.cate}" th:text="${dto.cate}">유형선택</option>
                     </select>
                 </div>
                 <table id="noticeTable" class="listTable">
@@ -39,7 +63,7 @@
                     </tr>
                     </thead>
                     <tbody class="listTbody">
-                    <th:block th:each="dto : ${noticeList}">
+                    <th:block th:each="dto : ${notices}">
                         <tr>
                             <td><input type="checkbox" name="chk" /></td>
                             <td style="text-align: center; width: 10%" th:text="${dto.noticeNo}"></td>
@@ -48,9 +72,9 @@
                             <td style="text-align: center; width: 10%" th:text="${dto.hit}"></td>
                             <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                             <td style="text-align: center; width: 10%">
-                                <a th:href="@{/admin/notice/delete(noticeNo=${dto.noticeNo})}" class="noticeDelete">[삭제]</a>
+                                <a th:href="@{/admin/notice/write}" class="noticeDelete">[삭제]</a>
                                 <br />
-                                <a th:href="@{/admin/notice/modify(noticeNo=${dto.noticeNo})}" class="noticeUpdate">[수정]</a>
+                                <a th:href="@{/write}" class="noticeUpdate">[수정]</a>
                             </td>
                         </tr>
                     </th:block>
@@ -58,7 +82,7 @@
                 </table>
                 <div style="display: flex; justify-content: space-between; margin-top: 20px;">
                     <div>
-                        <input type="submit" th:value="선택삭제" class="deleteAll" />
+                        <input type="submit" value="선택삭제" class="deleteAll" />
                     </div>
                     <div>
                         <a th:href="@{/admin/notice/write}" class="writeBtn">작성하기</a>

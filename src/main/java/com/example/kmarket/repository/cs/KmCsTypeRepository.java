@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface KmCsTypeRepository extends JpaRepository<KmCsTypeEntity, Integer> {
-    KmCsTypeEntity findByTypeAndCate(int type, String cate);
+    List<KmCsTypeEntity> findByCate(String cate);
 
     List<KmCsTypeEntity> findByCateAndTypeLessThan(String cate, int type);
-
-    List<KmCsTypeEntity> findByType(int type);
 }

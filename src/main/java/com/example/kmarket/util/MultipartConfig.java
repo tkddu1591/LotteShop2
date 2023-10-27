@@ -23,8 +23,7 @@ public class MultipartConfig {
     // https://kindloveit.tistory.com/112
     @Bean
     public MultipartResolver multipartResolver() {
-        StandardServletMultipartResolver multipartResolver
-                = new StandardServletMultipartResolver();
+        StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
         return multipartResolver;
     }
 

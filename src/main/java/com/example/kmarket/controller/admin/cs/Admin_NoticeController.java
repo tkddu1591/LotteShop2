@@ -2,6 +2,7 @@ package com.example.kmarket.controller.admin.cs;
 
 import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
 import com.example.kmarket.service.admin.KmAdminNoticeService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +90,7 @@ public class Admin_NoticeController {
     }
 
     @GetMapping("/admin/notice/modify")
-    public String modify(Model model, int noticeNo){
+    public String update(Model model, int noticeNo){
 
         KmAdminNoticeDTO noticeView = kmAdminNoticeService.selectArticleNotice(noticeNo);
 
@@ -99,17 +100,16 @@ public class Admin_NoticeController {
     }
 
     @PostMapping("/admin/notice/modify")
-    public String modify(KmAdminNoticeDTO kmAdminNoticeDTO){
+    public String update(Model model, KmAdminNoticeDTO kmAdminNoticeDTO){
 
         kmAdminNoticeService.updateArticleNotice(kmAdminNoticeDTO);
 
-        return "redirect:/admin/notice/modify";
+        return "redirect:/admin/notice/list";
     }
 
     @DeleteMapping("/admin/notice/delete/{noticeNo}")
+    @Transactional
     public void delete(@PathVariable("noticeNo") int noticeNo){
-
-        log.info(kmAdminNoticeService);
 
         kmAdminNoticeService.deleteArticleNotice(noticeNo);
     }

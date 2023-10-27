@@ -4,14 +4,14 @@ function SellerData({setPopup, item}) {
 
     function levelCheck(value) {
         if (value === 6) {
-            return <img style={{marginTop:'10px', marginLeft:'5px'}} src={`${process.env.REACT_APP_HOME_URL}/images/ico_power_dealer.gif`}/>
+            return <td><img  src={`${process.env.REACT_APP_HOME_URL}/images/ico_power_dealer.gif`} alt="파워"/></td>
         } else if (value === 7) {
-            return <img style={{marginTop:'10px', marginLeft:'5px'}} src={`${process.env.REACT_APP_HOME_URL}/images/ico_great_seller.gif`}/>
+            return <td><img  src={`${process.env.REACT_APP_HOME_URL}/images/ico_great_seller.gif`} alt="그레이트"/></td>
         } else if (value === 8) {
-            return <div style={{height:'30px', position:"absolute"}}>
-                <img style={{ marginLeft:'10px', position:'relative', top:'10px'}} src={`${process.env.REACT_APP_HOME_URL}/images/ico_great_seller.gif`}/>
-                <img style={{ marginLeft:'5px' , position:'relative', top:'8px'}} src={`${process.env.REACT_APP_HOME_URL}/images/ico_power_dealer.gif`}/>
-            </div>
+            return <td>
+                <img src={`${process.env.REACT_APP_HOME_URL}/images/ico_great_seller.gif`} alt="파워"/>
+                <img src={`${process.env.REACT_APP_HOME_URL}/images/ico_power_dealer.gif`} alt="그레이트"/>
+            </td>
         } else {
 
             return <td className="level">일반판매자</td>
@@ -73,7 +73,7 @@ function SellerData({setPopup, item}) {
                     </p>
 
                     <div>
-                        <button class="btnPositive btnQuestion"
+                        <button className="btnPositive btnQuestion"
                                 style={{fontFamily: '함초롱바탕', width: '100px', height: '30px'}}
                                 onClick={() => {
                                     setPopup('qna')

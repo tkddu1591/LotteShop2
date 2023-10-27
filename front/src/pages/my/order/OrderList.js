@@ -37,7 +37,6 @@ function OrderList({
         }
     }
 
-    console.log(pageResponseDTO)
 
     return <>
         <table border="0">
@@ -74,40 +73,24 @@ function OrderList({
                         {orderComplete(item.ordComplete)}
                         <td className="confirm">
 
-                            {(item.ordComplete === 4 || item.ordComplete === 5) ? <>
+                            {(item.ordComplete === 5) ? <>
                                     <a onClick={() => {
                                         setOrderItem(item)
                                         setPopup('review')
                                     }} className="review">상품평</a>
-                                    <a className="refund">반품신청</a>
-                                    <a className="exchange">교환신청</a>
                                     <a className="exchange">재주문</a>
                                 </> :
                                 item.ordComplete !== 3 && <>
                                     {item.ordComplete !== 5 && item.ordComplete !== 2 &&
                                         <a className="receive" onClick={() => {
                                             /* eslint-disable no-restricted-globals */
-                                            if (confirm('수취확인처리 하시겠습니까?')) {
-                                                console.log(popup)
-                                                setPopup('receive')
-                                                setOrderItem(item)
-                                            }
+                                            setPopup('receive')
+                                            setOrderItem(item)
                                         }}>수취확인</a>}
-                                    <a className="exchange" onClick={() => {
-                                        /* eslint-disable no-restricted-globals */
-                                        if (confirm('주문을 취소하시겠습니까?')) {
-                                            axios.delete(`${process.env.REACT_APP_API_ROOT}/product/order/delete`, {
-                                                params: {ordNo: item.ordNo}
-                                            }).then(
-                                                res => {
-                                                    setPopup('orderCancel')
-                                                    alert('주문이 취소되었습니다.')
-                                                }
-                                            ).catch(err => {
-                                                console.log(err)
-                                            })
-                                        }
-                                    }}>주문취소</a>
+                                    <a className="refund" onClick={() => {
+                                        setOrderItem(item)
+                                        setPopup('qna')
+                                    }} >문의하기</a>
                                 </>
                             }
                         </td>

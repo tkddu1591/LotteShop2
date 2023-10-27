@@ -1,10 +1,4 @@
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{cs/fragments/layout}"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-
-<th:block layout:fragment="content">
+<th:block th:insert="~{/cs/inc/header.html}"/>
     <section id="cs">
         <div class="qna">
             <nav>
@@ -53,19 +47,13 @@
                         <th:block th:each="qna : ${csPageResponseDTO.qnaList}">
                         <tr>
                             <td>
-                                <a th:href="@{/cs/qna/view(no=${qna.qnaNo})}">
+                                <a th:href="@{/cs/qna/view}">
                                     [<span th:text="${qna.typeName}"></span>]
                                     [[${qna.title}]]
                                 </a>
                             </td>
                             <td>
                                 [[${qna.writer}]]
-                            </td>
-                            <td>
-                                <!-- answerComplete 여부에 따라서 미확인 / 답변완료 -->
-                                <span>
-                                    미확인
-                                </span>
                             </td>
                             <td>
                                 <span class="date"
@@ -98,4 +86,4 @@
             </section>
         </div>
     </section>
-</th:block>
+<th:block th:insert="~{/cs/inc/footer.html}"/>
