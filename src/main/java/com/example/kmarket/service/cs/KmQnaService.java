@@ -32,8 +32,6 @@ public class KmQnaService {
     private final MybatisCSMapper mybatisCsMapper;
     private final MaskingUid maskingUid;
 
-    private final MaskingUid maskingUid;
-
     public CsPageResponseDTO findByCate(CsPageRequestDTO csPageRequestDTO) {
         Pageable pageable = csPageRequestDTO.getPageable("qnaNo");
         Page<KmCsQnaEntity> result
