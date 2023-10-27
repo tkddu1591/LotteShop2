@@ -1,23 +1,20 @@
 package com.example.kmarket.controller.cs.board;
 
-import com.example.kmarket.dto.cs.*;
 import com.example.kmarket.service.cs.CsCateService;
-import com.example.kmarket.service.cs.KmFaqService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.kmarket.dto.cs.CsPageRequestDTO;
 
 @RequestMapping("/cs/faq/*")
 @RequiredArgsConstructor
 @Controller
 @Log4j2
 public class FaqController {
+
     private final KmFaqService fs;
     private final CsCateService ccs;
 
@@ -45,7 +42,6 @@ public class FaqController {
 
         model.addAttribute("cateDTOList", cateDTOList);
         model.addAttribute("faqDTOList", faqDTOList);
-
         return "cs/faq/list";
     }
 

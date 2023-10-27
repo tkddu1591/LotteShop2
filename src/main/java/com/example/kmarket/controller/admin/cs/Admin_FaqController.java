@@ -1,14 +1,17 @@
 package com.example.kmarket.controller.admin.cs;
 
-import com.example.kmarket.dto.admin.KmAdminCsCateDTO;
-import com.example.kmarket.dto.admin.KmAdminCsTypeDTO;
+import com.example.kmarket.dto.PageRequestDTO;
+import com.example.kmarket.dto.PageResponseDTO;
 import com.example.kmarket.dto.admin.KmAdminFaqDTO;
+import com.example.kmarket.dto.admin.KmAdminNoticeDTO;
+import com.example.kmarket.mapper.admin.KmAdminFaqMapper;
 import com.example.kmarket.service.admin.KmAdminFaqService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -71,46 +74,29 @@ public class Admin_FaqController {
     }
 
     @GetMapping("/admin/faq/write")
-    public String write(Model model, int faqNo){
+    public String write(Model model, String cateName, String typeName){
 
-        KmAdminFaqDTO faqView = kmAdminFaqService.selectArticleFaq(faqNo);
+        List<KmAdminFaqDTO> findCname = kmAdminFaqService.findCname(cateName);
+        List<KmAdminFaqDTO> findTname = kmAdminFaqService.findTname(typeName);
+        int faqWrite = kmAdminFaqService.insertArticleFaq(KmAdminFaqDTO.builder().build());
 
-        model.addAttribute("faqView", faqView);
+        model.addAttribute("findCname", findCname);
+        model.addAttribute("findTname", findTname);
+        model.addAttribute("faqWrite", faqWrite);
 
         return "/admin/faq/write";
     }
 
     @PostMapping("/admin/faq/write")
-    public String write(KmAdminFaqDTO kmAdminFaqDTO){
+    public String write(Model model, KmAdminFaqDTO kmAdminFaqDTO){
 
         log.info("kmAdminFaqDTO", kmAdminFaqDTO);
+
 
         kmAdminFaqService.insertArticleFaq(kmAdminFaqDTO);
 
         return "redirect:/admin/faq/write";
     }
-
-    @GetMapping("/admin/faq/modify")
-    public String modify(Model model, int faqNo){
-
-        KmAdminFaqDTO faqView = kmAdminFaqService.selectArticleFaq(faqNo);
-
-        model.addAttribute("faqView", faqView);
-
-        return "/admin/faq/modify";
-    }
-    @PostMapping("/admin/faq/modify")
-    public String modify(KmAdminFaqDTO kmAdminFaqDTO){
-
-        log.info(kmAdminFaqDTO);
-
-        kmAdminFaqService.updateArticleFaq(kmAdminFaqDTO);
-
-
-        return  "redirect:/admin/faq/modify";
-    }
-
-
 
 
 

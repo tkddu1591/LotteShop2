@@ -3,9 +3,12 @@ package com.example.kmarket.util;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
 @Log4j2
-public class MaskingUid {
+public class Util {
 
     public String maskingUid(String writer) {
         StringBuilder maskingUid = new StringBuilder(writer);

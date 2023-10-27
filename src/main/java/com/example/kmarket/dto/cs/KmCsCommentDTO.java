@@ -4,20 +4,17 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class KmCsFileDTO {
+public class KmCsCommentDTO {
 
-    private int fno;
+    private int cno;
     private String qnaNo;
-    private String oName;
-    private String sName;
-    private int download;
-    private LocalDateTime rdate;
+    private String answer;
+    private String comment;
+    private String rdate;
 }
