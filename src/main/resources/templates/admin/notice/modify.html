@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/admin/js/FaqCnameTname.js}"></script>
+</head>
+<main>
+    <div th:replace="/admin/header.html :: header"></div>
+    <div th:replace="/admin/aside.html :: aside"></div>
+    <section id="admin-cs-view">
+        <nav>
+            <h3>공지사항 수정</h3>
+            <p>
+                HOME > 고객센터 > <strong>공지사항</strong>
+            </p>
+        </nav>
+        <section>
+            <article>
+                <form th:action="@{/admin/notice/modify}" method="post">
+                    <input type="hidden" name="noticeNo" th:value="${noticeView.noticeNo}">
+                    <section>
+                        <table>
+                            <tr>
+                                <td>유형</td>
+                                <td>
+                                    <select name="cate" id="cateName">
+                                        <option th:value="noticeView.cate">[[${noticeView.cateName}]]</option>
+                                    </select>
+                                    <select name="type" id="typeName">
+                                        <option th:value="noticeView.type">[[${noticeView.typeName}]]</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>제목</td>
+                                <td>
+                                    <input name="title" th:value="${noticeView.title}" style="width: 300px;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>내용</td>
+                                <td>
+                                    <input name="content" th:value="${noticeView.content}" style="width: 300px; height: 150px;"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                    <div style="text-align: right">
+                        <input type="button" value="취소하기" class="csRegister" th:onclick="|window.location.href='/admin/notice/list'|">
+                        <input type="submit" value="등록하기" class="csRegister">
+                    </div>
+                </form>
+            </article>
+        </section>
+    </section>
+</main>
+<div th:replace="/admin/footer.html :: footer"></div>
+</html>

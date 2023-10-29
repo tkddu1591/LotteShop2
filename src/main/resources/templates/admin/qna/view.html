@@ -48,7 +48,7 @@
                 </tr>
             </table>
             <div style="text-align: right;">
-                <a th:style="'font-size: 20px;'" class="linkBtn" href="#">삭제</a>
+                <a th:style="'font-size: 20px;'" class="linkBtn" th:href="@{/admin/qna/delete(qnaNo=${qnaView.qnaNo})}">삭제</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a th:style="'font-size: 20px;'" class="linkBtn" th:href="@{/admin/qna/write(qnaNo=${qnaView.qnaNo})}">답변작성</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

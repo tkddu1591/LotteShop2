@@ -1,5 +1,7 @@
 package com.example.kmarket.service.admin;
 
+import com.example.kmarket.dto.admin.KmAdminCsCateDTO;
+import com.example.kmarket.dto.admin.KmAdminFaqDTO;
 import com.example.kmarket.dto.admin.KmAdminQnaDTO;
 import com.example.kmarket.mapper.admin.KmAdminQnaMapper;
 import lombok.RequiredArgsConstructor;
@@ -110,6 +112,18 @@ public class KmAdminQnaService {
         KmAdminQnaDTO kmAdminQnaDTO = kmAdminQnaMapper.selectArticleQna(qnaNo);
 
         return kmAdminQnaDTO;
+    }
+
+    // cateName 찾기
+    public List<KmAdminCsCateDTO> findCname(KmAdminCsCateDTO kmAdminCsCateDTO){
+
+        return kmAdminQnaMapper.findCname(kmAdminCsCateDTO);
+    }
+
+    // typeName 찾기
+    public List<KmAdminQnaDTO> selectTname(KmAdminQnaDTO kmAdminQnaDTO){
+
+        return kmAdminQnaMapper.selectTname(kmAdminQnaDTO);
     }
 
     // 답변 쓰기

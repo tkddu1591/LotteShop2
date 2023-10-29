@@ -29,6 +29,7 @@ public class CsAPIService {
 
     private final KmCsFaqRepository faqRepository;
     private final KmCsFaqMapper faqMapper;
+
     private final KmCsNoticeRepository noticeRepository;
     private final KmCsNoticeMapper noticeMapper;
     public List<KmCsTypeDTO> TypefindByCate(String cate) {
@@ -52,13 +53,5 @@ public class CsAPIService {
 
     public List<KmCsFaqDTO> faqList(int type) {
         return faqRepository.findTop10ByKmCsTypeEntity_TypeOrderByFaqNoDesc(type).stream().map(faqMapper::toDTO).toList();
-    }
-
-    public void noticeCancle(int noticeNo) {
-        noticeRepository.deleteById(noticeNo);
-    }
-
-    public void faqCancle(int faqNo) {
-        faqRepository.deleteById(faqNo);
     }
 }
