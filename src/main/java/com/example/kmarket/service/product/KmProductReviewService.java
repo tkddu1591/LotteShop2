@@ -3,8 +3,11 @@ package com.example.kmarket.service.product;
 import com.example.kmarket.dto.product.KmProductReviewDTO;
 import com.example.kmarket.dto.PageRequestDTO;
 import com.example.kmarket.dto.PageResponseDTO;
+import com.example.kmarket.entity.product.KmProductEntity;
 import com.example.kmarket.entity.product.KmProductReviewEntity;
+import com.example.kmarket.mapper.product.KmProductMapper;
 import com.example.kmarket.mapper.product.KmProductReviewMapper;
+import com.example.kmarket.repository.product.KmProductRepository;
 import com.example.kmarket.repository.product.KmProductReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,13 +24,21 @@ public class KmProductReviewService {
     @Autowired
     private KmProductReviewMapper kmProductReviewMapper;
 
+    @Autowired
+    private KmProductRepository kmProductRepository;
+    @Autowired
+    private KmProductMapper kmProductMapper;
 
     public int countProdNo(int prodNo) {
         return kmProductReviewRepository.countByKmProductEntity_ProdNo(prodNo);
     }
     public void save(KmProductReviewDTO kmProductReviewDTO) {
         KmProductReviewEntity kmProductReviewEntity = kmProductReviewMapper.toEntity(kmProductReviewDTO);
+        KmProductEntity kmProductEntity= kmProductRepository.findByProdNo(kmProductReviewDTO.getProdNo());
+        kmProductEntity.setReview(kmProductEntity.getReview()+1);
+        kmProductEntity.setScore(kmProductReviewRepository.averageByRatingKmProductEntity_ProdNo(kmProductReviewDTO.getProdNo()));
         kmProductReviewRepository.save(kmProductReviewEntity);
+        kmProductRepository.save(kmProductEntity);
     }
     public PageResponseDTO findByProducts(PageRequestDTO pageRequestDTO) {
 
