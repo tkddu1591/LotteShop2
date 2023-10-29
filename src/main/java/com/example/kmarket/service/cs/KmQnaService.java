@@ -14,12 +14,18 @@ import com.example.kmarket.repository.cs.KmCsQnaRepository;
 import com.example.kmarket.util.MaskingUid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +51,6 @@ public class KmQnaService {
         int total = (int) result.getTotalElements();
 
         for(KmCsQnaDTO qna : qnaList) {
-            // TODO 나중에 여기서 Uid 오솔라이즈 잡아서 처리 해주는 로직 달기
             qna.setWriter(maskingUid.maskingUid(qna.getWriter()));
         }
         log.info(qnaList.toString());
@@ -80,62 +85,73 @@ public class KmQnaService {
         return qnaList;
     }
 
+    @Value("${spring.servlet.multipart.location}")
+    private String filePath;
 
-    /*public KmCsFileDTO fileUpload(MultipartFile[] uploadFiles){
+    public List<String> fileUpload(KmCsQnaDTO dto) {
+//        filePath += dto.getCate() + "/" + dto.getType() + "/";
+        // 파일 첨부 경로(절대 경로 잡는거임)
+        String path = new File(filePath).getAbsolutePath();
+        log.info("qna fileUpload path : " + path);
 
-        String uploadFolder = "C:\\Temp";
 
-        File uploadPath = new File(uploadFolder, getFolder());
-        log.info("upload path : "+uploadPath);
+        // 첨부파일 리스트화
+        List<MultipartFile> files = Arrays.asList(
+                dto.getMFile1()
+/*                dto.getFile1(),
+                dto.getFile2(),
+                dto.getFile3(),
+                dto.getFile4()*/
+        );
+        log.info("files : " + files);
 
-        if(!uploadPath.exists()) {
-            uploadPath.mkdirs();
-        }
+        // 저장된 파일명 리스트 초기화
+        List<String> saveNames = new ArrayList<>();
 
-        for(MultipartFile file : uploadFiles) {
-            log.info("===============================");
-            log.info("Upload File Name : " + file.getOriginalFilename());
-            log.info("Upload File Size : " + file.getSize());
+        for (MultipartFile file : files) {
+            log.info("여기는 들어오니?");
+            // 파일명 변경
+            String oName = file.getOriginalFilename();
+            String ext = oName.substring(oName.lastIndexOf("."));
+            String sName = UUID.randomUUID().toString() + ext;
+            log.info("qna fileUpload oName : " + oName);
+            saveNames.add(sName);
+            saveNames.add(oName);
 
-            String uploadFileName = file.getOriginalFilename();
-
-            uploadFileName = uploadFileName
-                    .substring(uploadFileName.lastIndexOf("\\") + 1);
-            log.info("upload File Name : " + uploadFileName);
-
-            UUID uuid = UUID.randomUUID();
-            uploadFileName = uuid.toString() + "_" + uploadFileName;
-            log.info("uuid File Name : " + uploadFileName);
-
-            File saveFile = new File(uploadPath, uploadFileName);
-
-            try{
-                file.transferTo(saveFile);
-            }catch (Exception e) {
-                log.error(e.getMessage());
+            try {
+                // 저장할 폴더 이름, 저장할 파일 명
+                File f = new File(path, sName);
+                if(!f.exists()){
+                    f.mkdirs();
+                }
+                file.transferTo(f);
+            } catch (IOException e) {
+                log.error("qna fileUpload error :  " + e.getMessage());
             }
         }
-
-        return null;
+        return saveNames;
     }
 
-    private String getFolder() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        String str = formatter.format(date);
-
-        // File.separator - UNIX에서는 `:`, windows에서는 `;`
-        return str.replace("-", File.separator);
-
-    }*/
-
     public void save(KmCsQnaDTO dto){
+
+        log.info("========================================");
+        log.info("save dto : " + dto);
+        if (dto.getMFile1() != null
+                && !dto.getMFile1().isEmpty()) {
+            List<String> saveNames = fileUpload(dto);
+            log.info("saveNames : " + saveNames);
+
+            dto.setFile1(saveNames.get(0));
+            dto.setFile2(saveNames.get(1));
+            dto.setFile3(saveNames.get(2));
+            dto.setFile4(saveNames.get(3));
+        }
+
         KmCsQnaEntity entity = kmCsQnaMapper.toEntity(dto);
-  
+
         if(entity.getKmProductOrderItemEntity().getOrderItemId() == 0) {
             entity.setKmProductOrderItemEntity(null);
         }
-
         log.info("qna service save entity : " + entity);
         log.info(entity.getKmCsCateEntity());
         log.info(entity.getKmCsTypeEntity());

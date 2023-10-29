@@ -7,6 +7,7 @@ import com.example.kmarket.entity.cs.KmCsQnaEntity;
 import com.example.kmarket.service.cs.CsCateService;
 import com.example.kmarket.service.cs.KmQnaService;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpRequest;
@@ -56,8 +57,9 @@ public class QnaController {
     }
 
     @PostMapping("/write")
-    public String postWrite(KmCsQnaDTO dto) {
+    public String postWrite(KmCsQnaDTO dto, HttpServletRequest request) {
         dto.setAnswerComplete(0);
+        dto.setRegip(request.getRemoteAddr());
         qs.save(dto);
         return "redirect:/cs/qna/list?cate="+dto.getCate();
     }
