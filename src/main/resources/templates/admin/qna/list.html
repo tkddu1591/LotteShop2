@@ -109,8 +109,8 @@
                                             <span th:if="${dto.answerComplete == 0}">미확인</span>
                                             <span th:if="${dto.answerComplete == 1}">검토중</span>
                                             <span th:if="${dto.answerComplete == 2}" style="color: blue;">답변완료</span>
+                                            <span th:if="${dto.answerComplete == 3}" style="color: red;">삭제됨</span>
                                         </a>
-                                            <span th:if="${dto.answerComplete == 3}" th:remove="tag"></span>
                                     </td>
                                     <td style="text-align: center; width: 10%" >
                                         <a th:href="@{/admin/qna/delete(qnaNo=${dto.qnaNo})}" >[삭제]</a>
