@@ -15,7 +15,7 @@ public interface KmProductReviewRepository extends JpaRepository<KmProductReview
     public int countByKmProductEntity_ProdNo(int prodNo);
 
     @Query("SELECT AVG(r) FROM KmProductEntity p JOIN p.score r WHERE p.prodNo = :prodNo")
-    Double averageByRatingKmProductEntity_ProdNo(int prodNo);
+    int averageByRatingKmProductEntity_ProdNo(int prodNo);
 
     Page<KmProductReviewEntity> findByUid(String uid, Pageable pageable);
 }

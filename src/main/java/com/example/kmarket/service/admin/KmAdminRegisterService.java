@@ -21,7 +21,7 @@ import java.util.UUID;
 public class KmAdminRegisterService {
 
     @Autowired
-    KmAdminRegisterMapper  kmAdminRegisterMapper;
+    KmAdminRegisterMapper kmAdminRegisterMapper;
 
     public int insertProduct(KmProductDTO dto) {
 
@@ -40,13 +40,15 @@ public class KmAdminRegisterService {
         return kmAdminRegisterMapper.selectProduct(prodNo);
     }
 
-    public List<KmProductDTO> selectProducts(){
+    public List<KmProductDTO> selectProducts() {
         return kmAdminRegisterMapper.selectProducts();
     }
-    public int updateProduct(KmProductDTO dto){
+
+    public int updateProduct(KmProductDTO dto) {
         return kmAdminRegisterMapper.updateProduct(dto);
     }
-    public int deleteProduct(int prodNo){
+
+    public int deleteProduct(int prodNo) {
         return kmAdminRegisterMapper.deleteProduct(prodNo);
 
     }
@@ -71,19 +73,19 @@ public class KmAdminRegisterService {
 
         List<String> saveNames = new ArrayList<>();
 
-        for (MultipartFile file:files) {
+        for (MultipartFile file : files) {
             // 파일명 변경
             String oName = file.getOriginalFilename();
             String ext = oName.substring(oName.lastIndexOf("."));
             String sName = UUID.randomUUID().toString() + ext;
             log.info("fileUpload...4 : " + oName);
-            saveNames.add(sName);
+            saveNames.add(dto.getProdCate1() + "/" + dto.getProdCate2() + "/" + sName);
 
             try {
                 log.info("fileUpload...5");
                 // 업로드 파일에 saveFile이라는 껍데기 입힘
                 File f = new File(path, sName);
-                if(!f.exists()){
+                if (!f.exists()) {
                     f.mkdirs();
                 }
 

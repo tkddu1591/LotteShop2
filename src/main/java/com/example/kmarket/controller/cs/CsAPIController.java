@@ -39,11 +39,11 @@ public class CsAPIController {
     }
     @DeleteMapping("/notice/cancel")
     public void noticePostCancel(@RequestParam int noticeNo){
-        apiService.noticeCancle(noticeNo);
+        apiService.noticeCancel(noticeNo);
     }
     @DeleteMapping("/faq/cancel")
     public void faqPostCancel(@RequestParam int faqNo){
-        apiService.faqCancle(faqNo);
+        apiService.faqCancel(faqNo);
     }
 
 }

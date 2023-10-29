@@ -56,7 +56,8 @@ function OrderList({
                                 setPopup('orderItemDetail')
                                 setOrderItem(item)
                             }} className="thumb"><img
-                                src="https://via.placeholder.com/80x80"
+                                src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${item.thumb1}`}
+                                style={{cursor: 'pointer', width: '80px', height: '80px'}}
                                 alt={item.thumb1}/></a>
                             <ul>
                                 <li className="company" style={{cursor: 'pointer'}} onClick={() => {

@@ -51,6 +51,24 @@ function Home() {
             }).catch(error => {
             console.log(error);
         })
+        //유저 오더 들고오기
+        axios.get(`${API_BASE_URL}/my/list`, {
+            params: {pg: 1, size: 3, type: 'order', memberUid: memberUid}
+        })
+            .then(res => {
+                setUserOrderItems(res.data)
+            }).catch(error => {
+            console.log(error);
+        })
+        //유저 리뷰 들고오기
+        axios.get(`${API_BASE_URL}/my/list`, {
+            params: {pg: 1, size: 5, type: 'review', memberUid: memberUid}
+        })
+            .then(res => {
+                setUserReview(res.data.reviewDtoList)
+            }).catch(error => {
+            console.log(error);
+        })
     }, [pageRequestDTO, popup]);
     useEffect(() => {
         changeDTO(setPageRequestDTO, 'type', divName)

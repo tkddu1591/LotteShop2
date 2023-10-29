@@ -54,4 +54,12 @@ public class CsAPIService {
     public List<KmCsFaqDTO> faqList(int type) {
         return faqRepository.findTop10ByKmCsTypeEntity_TypeOrderByFaqNoDesc(type).stream().map(faqMapper::toDTO).toList();
     }
+
+    public void noticeCancel(int noticeNo) {
+        noticeRepository.deleteByNoticeNo(noticeNo);
+    }
+
+    public void faqCancel(int faqNo) {
+        faqRepository.deleteByFaqNo(faqNo);
+    }
 }

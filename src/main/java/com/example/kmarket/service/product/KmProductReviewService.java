@@ -36,7 +36,6 @@ public class KmProductReviewService {
         KmProductReviewEntity kmProductReviewEntity = kmProductReviewMapper.toEntity(kmProductReviewDTO);
         KmProductEntity kmProductEntity= kmProductRepository.findByProdNo(kmProductReviewDTO.getProdNo());
         kmProductEntity.setReview(kmProductEntity.getReview()+1);
-        kmProductEntity.setScore(kmProductReviewRepository.averageByRatingKmProductEntity_ProdNo(kmProductReviewDTO.getProdNo()));
         kmProductReviewRepository.save(kmProductReviewEntity);
         kmProductRepository.save(kmProductEntity);
     }
