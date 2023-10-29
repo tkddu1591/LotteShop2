@@ -5,10 +5,13 @@ import com.example.kmarket.dto.PageResponseDTO;
 import com.example.kmarket.dto.product.KmProductOrderDTO;
 import com.example.kmarket.dto.product.KmProductOrderItemDTO;
 import com.example.kmarket.dto.product.KmProductReviewDTO;
+import com.example.kmarket.entity.product.KmProductEntity;
 import com.example.kmarket.entity.product.KmProductOrderItemEntity;
 import com.example.kmarket.entity.product.KmProductReviewEntity;
 import com.example.kmarket.mapper.product.KmProdcutOrderItemMapper;
+import com.example.kmarket.mapper.product.KmProductMapper;
 import com.example.kmarket.repository.product.KmProductOrderItemRepository;
+import com.example.kmarket.repository.product.KmProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,13 +27,21 @@ public class KmProductOrderItemService {
     @Autowired
     private KmProdcutOrderItemMapper kmProdcutOrderItemMapper;
 
+    @Autowired
+    private KmProductRepository kmProductRepository;
+    @Autowired
+    private KmProductMapper kmProductMapper;
     public List<KmProductOrderItemDTO> saveOrderItem(int ordNo){
         return kmProductOrderItemRepository.findByKmProductOrderEntity_OrdNo(ordNo).stream().map(kmProdcutOrderItemMapper::toDTO).toList();
     }
 
     public void save(List<KmProductOrderItemDTO> orderEnd) {
         for(KmProductOrderItemDTO order : orderEnd){
+            KmProductEntity kmProductEntity= kmProductRepository.findByProdNo(order.getProdNo());
+            kmProductEntity.setSold(kmProductEntity.getSold()+order.getCount());
+            kmProductEntity.setStock(kmProductEntity.getStock()-order.getCount());
             kmProductOrderItemRepository.save(kmProdcutOrderItemMapper.toEntity(order));
+            kmProductRepository.save(kmProductEntity);
         }
     }
 

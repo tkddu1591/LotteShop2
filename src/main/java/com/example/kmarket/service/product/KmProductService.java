@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class KmProductService {
@@ -21,8 +22,13 @@ public class KmProductService {
     private KmProductMapper kmProductMapper;
 
 
-    public KmProductDTO findById(int prodNo) {
-        return kmProductMapper.toDTO(kmProductRepository.findById(prodNo).get());
+    public KmProductDTO viewProd(int prodNo) {
+        KmProductEntity kmProductEntity = kmProductRepository.findById(prodNo).get();
+        //hit 1 상승
+        kmProductEntity.setHit(kmProductEntity.getHit()+1);
+        kmProductRepository.save(kmProductEntity);
+
+        return kmProductMapper.toDTO(kmProductEntity);
     }
 
     public PageResponseDTO findByProducts(PageRequestDTO pageRequestDTO) {
@@ -177,4 +183,25 @@ public class KmProductService {
                 .build();
     }
 
+    public List<KmProductDTO> findByType(String type) {
+
+        List<KmProductDTO> result = null;
+        if(Objects.equals(type, "hit")){
+            result = kmProductRepository.findTop8ByOrderByHitDesc().stream().map(kmProductMapper::toDTO).toList();
+        }else if(Objects.equals(type, "recomment")){
+            result = kmProductRepository.findTop8ByOrderByReviewDesc().stream().map(kmProductMapper::toDTO).toList();
+        }else if(Objects.equals(type, "new")){
+            result = kmProductRepository.findTop8ByOrderByRdateDesc().stream().map(kmProductMapper::toDTO).toList();
+        }else if(Objects.equals(type, "discount")){
+            result = kmProductRepository.findTop8ByOrderByDiscountDesc().stream().map(kmProductMapper::toDTO).toList();
+        }else if(Objects.equals(type, "best")){
+            result = kmProductRepository.findTop5ByOrderByScoreDesc().stream().map(kmProductMapper::toDTO).toList();
+        }
+
+        return result;
+    }
+
+    public void deleteById(int prodNo) {
+        kmProductRepository.deleteById(prodNo);
+    }
 }

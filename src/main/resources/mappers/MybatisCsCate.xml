@@ -45,14 +45,11 @@
             ON CF.cate = CT.cate
             AND CF.type = CT.type
         WHERE CF.cate = #{cate}
-            ORDER BY CF.type, faqNo DESC
-        LIMIT 0, 10;
+            ORDER BY CF.type, faqNo DESC;
     </select>
 
     <select id="findByTypeForCate" resultType="com.example.kmarket.dto.cs.KmCsTypeDTO">
         SELECT * FROM km_cs_type AS CT
-        JOIN km_cs_cate AS CC
-            ON CT.cate = CC.cate
         WHERE CT.cate = #{cate};
     </select>
 

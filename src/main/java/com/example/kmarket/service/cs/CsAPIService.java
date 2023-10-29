@@ -54,5 +54,4 @@ public class CsAPIService {
     public List<KmCsFaqDTO> faqList(int type) {
         return faqRepository.findTop10ByKmCsTypeEntity_TypeOrderByFaqNoDesc(type).stream().map(faqMapper::toDTO).toList();
     }
-
 }

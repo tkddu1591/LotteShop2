@@ -1,7 +1,7 @@
 import './css/App.css';
 import './css/Product.css'
 import './css/Member.css'
-import './css/my.css'
+import './css/My.css'
 import React, {lazy, memo, Suspense, useEffect, useState,} from "react";
 import {Outlet, Route, Routes} from "react-router-dom";
 import axios from "axios";
@@ -78,6 +78,7 @@ function App() {
     let [userRegisterType, setUserRegisterType] = useState('');
     return (
         <>
+
             <Routes>
                 {
                     /*여기에 배포 레포지토리 정의 해줌 index.js의 BrowserRouter의 base와 매칭 LotteON 등*/}

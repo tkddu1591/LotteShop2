@@ -35,4 +35,6 @@ public class KmProductOrderEntity {
     private LocalDateTime ordDate = LocalDateTime.now();
     private LocalDateTime ordCompleteDate ;
 
+    private String recipComment;
+
 }
