@@ -3,11 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head>
-    <div th:replace="/admin/header.html :: header"></div>
+<head th:replace="~{admin/header :: header}">
 </head>
     <main>
-    <div th:replace="/admin/aside.html :: aside"></div>
+    <div th:replace="~{admin/aside :: aside}"></div>
         <section id="admin-index">
             <nav>
                 <h3>관리자 메인</h3>
@@ -251,7 +250,7 @@
             </div>
         </section>
     </main>
-    <div th:replace="/admin/footer.html :: footer"></div>
+    <div th:replace="~{/admin/footer :: footer}"></div>
 </div>
 </body>
 </html>

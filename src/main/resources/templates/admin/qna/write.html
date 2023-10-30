@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{/admin/header :: header}">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
     <meta charset="UTF-8">
 </head>
 <main>
-    <div th:replace="/admin/header.html :: header"></div>
-    <div th:replace="/admin/aside.html :: aside"></div>
+    <div th:replace="~{/admin/aside :: aside}"></div>
     <section id="admin-cs-view">
         <nav>
             <h3>고객문의</h3>
@@ -54,5 +53,5 @@
         </section>
     </section>
 </main>
-<div th:replace="/admin/footer.html :: footer"></div>
+    <div th:replace="~{/admin/footer :: footer}"></div>
 </html>

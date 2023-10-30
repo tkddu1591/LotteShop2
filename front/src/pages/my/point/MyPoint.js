@@ -34,7 +34,7 @@ function MyPoint({pageResponseDTO, setPageRequestDTO}){
                             return <tr key={item.pointNo}>
                                 <td className="date">{item.ordDate.substring(0, 10)}</td>
                                 {divisionCheck(item.pointDate)}
-                                <td className="ordNo">2022121001</td>
+                                <td className="ordNo">{item.ordNo}</td>
                                 <td className="point">{item.point} P</td>
                                 <td className="desc">{item.comment ? item.comment : item.ordNo + '번 주문에 사용'}</td>
                                 <td className="expire">{item.pointDate ? item.pointDate.substring(0, 10) : '-'}</td>
