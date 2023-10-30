@@ -64,13 +64,13 @@ public class KmAdminRegisterService {
 
     }
 
-    @Value("${spring.servlet.multipart.location}")
+    @Value("${thumb.dir}")
     private String filePath;
 
     public List<String> fileUpload(KmProductDTO dto) {
-        filePath += dto.getProdCate1() + "/" + dto.getProdCate2() + "/";
+        String filePathCopy = filePath +dto.getProdCate1() + "/" + dto.getProdCate2() + "/";
         // 파일 첨부 경로
-        String path = new File(filePath).getAbsolutePath();
+        String path = new File(filePathCopy).getAbsolutePath();
         log.info("fileUpload...3 : " + path);
 
 
@@ -99,7 +99,7 @@ public class KmAdminRegisterService {
                 if (!f.exists()) {
                     f.mkdirs();
                 }
-
+                log.info(f);
                 file.transferTo(f); // 저장할 폴더 이름, 저장할 파일 이름
 
                 log.info("fileUpload...6");

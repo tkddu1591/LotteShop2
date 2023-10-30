@@ -89,11 +89,11 @@ public class KmQnaService {
     private String filePath;
 
     public List<String> fileUpload(KmCsQnaDTO dto) {
+        String filePathCopy = filePath +dto.getCate() + "/" + dto.getType() + "/";
         log.info("++++++++++++++++++++++++++++++++++++++++++++++++");
         log.info("dto : " + dto);
-//        filePath += dto.getCate() + "/" + dto.getType() + "/";
         // 파일 첨부 경로(절대 경로 잡는거임)
-        String path = new File(filePath).getAbsolutePath();
+        String path = new File(filePathCopy).getAbsolutePath();
         log.info("qna fileUpload path : " + path);
 
 
