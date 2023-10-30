@@ -151,7 +151,7 @@
 
                         <tr th:each="product : ${products}">
                             <td><input type="checkbox" name="chk" th:value="${product.prodNo}"/></td>
-                            <td><img th:src="@{'/thumb/'+${product.thumb1}}" class="thumb"></td>
+                            <td><img th:src="@{'/thumb/'+${product.thumb}}" class="thumb"></td>
                             <td>[[${product.prodNo}]]</td>
                             <td>[[${product.prodName}]]</td>
                             <td>[[${#numbers.formatInteger(product.price, 3, 'COMMA')}]]</td>
