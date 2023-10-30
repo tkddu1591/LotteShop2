@@ -21,7 +21,7 @@
                 <a th:href="@{/admin/index}" class="logo"><img src="../images/admin_logo.png" alt="admin_logo"/></a>
                 <p>
                     <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
+                    <a th:href="@{/}">HOME |</a>
                     <a href="#">로그아웃 |</a>
                     <a href="#">고객센터</a>
                 </p>
@@ -34,8 +34,8 @@
                     <li>
                         <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
                         <ol>
-                            <li><a href="#">기본환경설정</a></li>
-                            <li><a href="#">배너관리</a></li>
+                            <li><a th:href="@{/admin/config/info}">기본환경정보</a></li>
+                            <li><a th:href="@{/admin/config/banner}">배너관리</a></li>
                         </ol>
                     </li>
                     <li>
@@ -57,8 +57,8 @@
                     <li>
                         <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                         <ol>
-                            <li><a href="#">상품현황</a></li>
-                            <li><a href="#">상품등록</a></li>
+                            <li><a th:href="@{/admin/product/list}">상품현황</a></li>
+                            <li><a th:href="@{/admin/product/register}">상품등록</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ol>
                     </li>
@@ -74,8 +74,9 @@
                     <li>
                         <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
                         <ol>
-                            <li><a href="#">게시판현황</a></li>
-                            <li><a href="#">고객문의</a></li>
+                            <li><a th:href="@{/admin/notice/list}">공지사항</a></li>
+                            <li><a th:href="@{/admin/faq/list}">자주묻는질문</a></li>
+                            <li><a th:href="@{/admin/qna/list}">문의하기</a></li>
                         </ol>
                     </li>
                 </ul>

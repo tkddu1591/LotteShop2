@@ -13,6 +13,38 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../css/admin.css">
+
+    <script>
+        // 전체 체크박스
+        $(function() {
+            $('#selectAll').change(function(){
+                const isChecked = $(this).is(':checked');
+                if (isChecked) {
+                    $('input[name=chk]').prop('checked', true);
+                } else {
+                    $('input[name=chk]').prop('checked', false);
+                }
+            });
+
+            $('input[name=chk]').change(function() {
+                const chk = $('input[name=chk]');
+                let cnt = 0;
+                // 배열 길이 구하기
+                for (let i = 0; i < chk.length; i++) {
+                    if (chk[i].checked) {
+                        cnt++;
+                    }
+                }
+                if (!$(this).is(':checked')) {
+                    $('#selectAll').prop('checked', false);
+                } else if (cnt == chk.length) {
+                    $('#selectAll').prop('checked', true);
+                }
+            });
+        });
+        // 전체 체크박스 끝
+    </script>
+
 </head>
 <body>
     <div id="admin-wrapper">
@@ -34,8 +66,8 @@
                     <li>
                         <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
                         <ol>
-                            <li><a href="#">기본환경설정</a></li>
-                            <li><a href="#">배너관리</a></li>
+                            <li><a th:href="@{/admin/config/info}">기본환경정보</a></li>
+                            <li><a th:href="@{/admin/config/banner}">배너관리</a></li>
                         </ol>
                     </li>
                     <li>
@@ -58,7 +90,7 @@
                         <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                         <ol>
                             <li><a href="#">상품현황</a></li>
-                            <li><a href="#">상품등록</a></li>
+                            <li><a th:href="@{/admin/product/register}">상품등록</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ol>
                     </li>
@@ -74,8 +106,9 @@
                     <li>
                         <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
                         <ol>
-                            <li><a href="#">게시판현황</a></li>
-                            <li><a href="#">고객문의</a></li>
+                            <li><a th:href="@{/admin/notice/list}">공지사항</a></li>
+                            <li><a th:href="@{/admin/faq/list}">자주묻는질문</a></li>
+                            <li><a th:href="@{/admin/qna/list}">문의하기</a></li>
                         </ol>
                     </li>
                 </ul>
@@ -90,17 +123,20 @@
                 <!-- 상품목록 컨텐츠 시작 -->                                
                 <section>
                     <div>
-                        <select name="search">
-                            <option value="search1">상품명</option>
-                            <option value="search1">상품코드</option>
-                            <option value="search1">제조사</option>
-                            <option value="search1">판매자</option>                                    
-                        </select>
-                        <input type="text" name="search">
+                        <form th:action="@{/admin/product/list}" method="get">
+                            <select name="searchCate">
+                                <option value="prodName">상품명</option>
+                                <option value="prodNo">상품코드</option>
+                                <option value="company">제조사</option>
+                                <option value="seller">판매자</option>
+                            </select>
+                            <input type="text" name="search">
+                            <input type="submit" class="list-search" value="검색" />
+                        </form>
                     </div>
                     <table>
                         <tr>
-                            <th><input type="checkbox" name="all"/></th>
+                            <th><input type="checkbox" name="all" id="selectAll"/></th>
                             <th>이미지</th>
                             <th>상품코드</th>
                             <th>상품명</th>
@@ -114,8 +150,8 @@
                         </tr>
 
                         <tr th:each="product : ${products}">
-                            <td><input type="checkbox" name="상품코드"/></td>
-                            <td><img src="../images/sample_thumb.jpg" class="thumb"></td>
+                            <td><input type="checkbox" name="chk" th:value="${product.prodNo}"/></td>
+                            <td><img th:src="@{'/thumb/'+${product.thumb}}" class="thumb"></td>
                             <td>[[${product.prodNo}]]</td>
                             <td>[[${product.prodName}]]</td>
                             <td>[[${#numbers.formatInteger(product.price, 3, 'COMMA')}]]</td>
