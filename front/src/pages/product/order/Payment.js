@@ -26,12 +26,12 @@ function Payment({orderEnd, changeOrderEnd}) {
                     <label><input type="radio" name="payment" value="type3" readOnly
                                   checked={orderEnd.ordPayment === 3} onClick={() => {
                         changeOrderEnd('ordPayment', 3);
-                        changeOrderEnd('ordComplete', 0);
+                        changeOrderEnd('ordComplete', 2);
                     }}/>실시간 계좌이체</label>
                     <label><input type="radio" name="payment" value="type4" readOnly
                                   checked={orderEnd.ordPayment === 4} onClick={() => {
                         changeOrderEnd('ordPayment', 4);
-                        changeOrderEnd('ordComplete', 0);
+                        changeOrderEnd('ordComplete', 2);
                     }}/>무통장 입금</label>
                 </p>
             </div>

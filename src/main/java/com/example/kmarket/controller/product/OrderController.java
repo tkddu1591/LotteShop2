@@ -3,6 +3,7 @@ package com.example.kmarket.controller.product;
 import com.example.kmarket.dto.product.KmProductOrderDTO;
 import com.example.kmarket.dto.product.KmProductOrderItemDTO;
 import com.example.kmarket.mapper.product.KmProdcutOrderItemMapper;
+import com.example.kmarket.service.member.KmMemberPointService;
 import com.example.kmarket.service.product.KmProductOrderItemService;
 import com.example.kmarket.service.product.KmProductOrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,8 @@ public class OrderController {
     KmProductOrderItemService kmProductOrderItemService;
     @Autowired
     KmProdcutOrderItemMapper kmProdcutOrderItemMapper;
+    @Autowired
+    KmMemberPointService kmMemberPointService;
     @PostMapping("/order/total")
     public void saveOrderTotal(@RequestBody KmProductOrderDTO orderEnd) {
         log.info(orderEnd.toString());
@@ -41,6 +44,7 @@ public class OrderController {
             orderProduct.setOrdNo(lastNo);
         }
         kmProductOrderItemService.save(orderProducts);
+        kmProductOrderService.newSave();
     }
     @DeleteMapping("/order/delete")
     public void deleteOrder(@RequestParam int ordNo) {

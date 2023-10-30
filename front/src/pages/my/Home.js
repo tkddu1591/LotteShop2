@@ -67,6 +67,18 @@ function Home() {
             }).catch(error => {
             console.log(error);
         })
+
+        //유저 QnA 들고오기
+        axios.get(`${API_BASE_URL}/my/list`, {
+            params: {
+                pg: 1, size: 5, type: 'qna', memberUid: memberUid
+            }
+        })
+            .then(res => {
+                setUserQnA(res.data.qnaDTOS)
+            }).catch(error => {
+            console.log(error);
+        })
     }, [pageRequestDTO, popup, memberUid]);
     useEffect(() => {
         changeDTO(setPageRequestDTO, 'type', divName)
@@ -113,17 +125,6 @@ function Home() {
             })
                 .then(res => {
                     setUserReview(res.data.reviewDtoList)
-                }).catch(error => {
-                console.log(error);
-            })
-            //유저 QnA 들고오기
-            axios.get(`${API_BASE_URL}/my/list`, {
-                params: {
-                    pg: 1, size: 5, type: 'qna', memberUid: memberUid
-                }
-            })
-                .then(res => {
-                    setUserQnA(res.data.qnaDTOS)
                 }).catch(error => {
                 console.log(error);
             })

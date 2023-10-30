@@ -4,6 +4,8 @@ import PopReceive from "./PopReceive";
 import ReviewWrite2 from "./ReviewWrite2";
 import SellerData from "./SellerData";
 import QnaPopup from "./QnaPopup";
+import axios from "axios";
+import {API_BASE_URL} from "../../../App";
 
 function OrderList({
                        pageResponseDTO,
@@ -27,8 +29,6 @@ function OrderList({
         else
             return <td className="status" style={{color: 'red'}}>주문취소</td>
     }
-
-
 
 
     return <>
@@ -87,6 +87,18 @@ function OrderList({
                                         setOrderItem(item)
                                         setPopup('qna')
                                     }}>문의하기</a>
+                                    {item.ordComplete === 2 && <>
+                                        <a className="refund" onClick={() => {
+                                            if(window.confirm('주문 취소 하시겠습니까?')){
+                                            axios.delete(`${API_BASE_URL}/product/order/delete`,{params:{ordNo: item.ordNo}})
+                                                .then(() => {
+                                                    alert('주문이 취소되었습니다.')
+                                                    setPopup(item.ordNo)
+                                                }).catch((error) => {
+                                                    console.log(error)
+                                            })}
+                                        }}>주문취소</a>
+                                    </>}
                                 </>
                             }
                         </td>
@@ -144,7 +156,8 @@ function OrderItemDetail({setPopup, item}) {
                                         주문번호 : <span className="ordNo">{item.ordNo}</span>
                                     </td>
                                     <td>
-                                        <img src="https://via.placeholder.com/80x80" alt=""/>
+                                        <img src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${item.thumb1}`}
+                                             style={{width: '80px'}} alt=""/>
                                         <ul>
                                             <li className="company">{item.company}</li>
                                             <li className="prodName">{item.prodName}</li>

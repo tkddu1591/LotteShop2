@@ -31,9 +31,9 @@ function Discount({setUsePoint, member, usePoint, changeOrderEnd, newOrderTotal}
                            onClick={() => {
                                if (usePoint < 5000) {
                                    alert('포인트 5,000점 이상부터 사용가능합니다.')
+                                   changeOrderEnd('usedPoint', usePoint)
+                                   changeOrderEnd('ordTotPrice"', newOrderTotal.totalOrderPrice - usePoint)
                                }
-                               changeOrderEnd('usedPoint', usePoint)
-                               changeOrderEnd('ordTotPrice"', newOrderTotal.totalOrderPrice - usePoint)
                            }}/>
                 </label>
                 <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>

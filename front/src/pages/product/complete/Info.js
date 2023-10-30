@@ -26,8 +26,8 @@ function Info({completeList, completeTotal}) {
                                     <div>
                                         <h2><a onClick={() => {
                                             navigate("/product/view?prodNo=" + item.prodNo)
-                                        }} style={{cursor: 'pointer'}}>상품명</a></h2>
-                                        <p>상품설명</p>
+                                        }} style={{cursor: 'pointer'}}>{item.prodName}</a></h2>
+                                        <p>{item.descript}</p>
                                     </div>
                                 </article>
                             </td>

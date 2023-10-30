@@ -86,7 +86,7 @@ function View() {
             console.log(error);
         })
 
-    }, [pageRequestDTO]);
+    }, [pageRequestDTO, prodDTO]);
     const changeProdDTO = (key, value) => {
         setProdDTO((ProdDTO) => {
             let newProdDTO = {...prodDTO};
