@@ -57,9 +57,11 @@ public class QnaController {
     }
 
     @PostMapping("/write")
-    public String postWrite(KmCsQnaDTO dto, HttpServletRequest request) {
+    public String postWrite(KmCsQnaDTO dto, MultipartFile mfile1,
+                            HttpServletRequest request) {
         dto.setAnswerComplete(0);
         dto.setRegip(request.getRemoteAddr());
+        dto.setMFile1(mfile1);
         qs.save(dto);
         return "redirect:/cs/qna/list?cate="+dto.getCate();
     }
