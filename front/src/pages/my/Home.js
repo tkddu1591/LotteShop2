@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {API_BASE_URL} from "../../App";
 import Menu from "./Menu";
-import Latest from "./home/Latest";
 import Point from "./home/Point";
 import Review from "./home/Review";
 import Qna from "./home/Qna";
@@ -16,7 +15,6 @@ import MyQna from "./qna/MyQna";
 import MyPoint from "./point/MyPoint";
 import MyOrder from "./order/MyOrder";
 import MyRegister from "./config/MyRegister";
-import OrderList from "./order/OrderList";
 
 function Home() {
     let [popup, setPopup] = useState('');
@@ -69,14 +67,14 @@ function Home() {
             }).catch(error => {
             console.log(error);
         })
-    }, [pageRequestDTO, popup]);
+    }, [pageRequestDTO, popup, memberUid]);
     useEffect(() => {
         changeDTO(setPageRequestDTO, 'type', divName)
         changeDTO(setPageRequestDTO, 'pg', 1)
     }, [divName]);
     useEffect(() => {
         if (memberUid !== null) {
-            if (memberUid !== null && retrieveStoredToken().token != null) {
+            if (retrieveStoredToken().token !== null) {
 
                 axios.get(`${API_BASE_URL}/my/memberCount`, {
                     headers: {
@@ -130,39 +128,8 @@ function Home() {
                 console.log(error);
             })
         }
-    }, []);
+    }, [memberUid]);
 
-
-    function maskingName(name) {
-        if (name.length <= 2) {
-            return name.replace(name.substring(0, 1), "*");
-        }
-
-        return (
-            name[0] +
-            "*".repeat(name.substring(1, name.length - 1).length) +
-            name[name.length - 1]
-        );
-    }
-
-
-
-    let [emailFirst, setEmailFirst] = useState()
-    let [emailEnd, setEmailEnd] = useState()
-    let [email, setEmail] = useState('')
-    useEffect(() => {
-        if (member.email !== undefined) {
-            setEmailFirst(member.email.split("@", 1)[0])
-            setEmailEnd(member.email.split("@", 2)[1])
-        }
-    }, [member]);
-    useEffect(() => {
-        setEmail(emailFirst + '@' + emailEnd)
-    }, [emailFirst, emailEnd]);
-
-    let [emailOption, setEmailOption] = useState('')
-
-    let [changeOption, setChangeOption] = useState('')
     return <>
 
         <div id="my">
@@ -171,7 +138,7 @@ function Home() {
             <div className={divName}>
                 <Menu divName={divName} setDivName={setDivName}></Menu>
                 {memberUid !== null ? <section>
-                    <a href="#"><img src={`${process.env.REACT_APP_HOME_URL}/images/my/my_banner2.png`}
+                    <a href={process.env.REACT_APP_HOME_URL}><img src={`${process.env.REACT_APP_HOME_URL}/images/my/my_banner2.png`}
                                      alt="패션, 타운 하나로 끝" className="banner"/></a>
                     {divName === 'info' && <>
                         <article>

@@ -3,6 +3,8 @@ package com.example.kmarket.dto.product;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+
 
 @Data
 @ToString
@@ -41,7 +43,7 @@ public class KmProductDTO {
     private String bizType;
     private String origin;
     private String ip;
-    private String rdate;
+    private LocalDateTime rdate;
     private int etc1;
     private int etc2;
     private String etc3;

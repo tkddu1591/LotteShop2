@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import {API_BASE_URL, HOME_URL} from "../../App";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {changeDTO} from "../../store/changeDTO";
 
 function Aside() {
 
@@ -50,7 +49,6 @@ function Aside() {
     }, []);
 
 
-    console.log(bestList)
     return (
         <aside>
             <ul className="category">

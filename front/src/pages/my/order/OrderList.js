@@ -1,5 +1,4 @@
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 import React from "react";
 import PopReceive from "./PopReceive";
 import ReviewWrite2 from "./ReviewWrite2";
@@ -14,7 +13,6 @@ function OrderList({
                        popup,
                        member
                    }) {
-    let navigate = useNavigate();
 
     function orderComplete(value) {
         if (value === 4)
@@ -31,11 +29,6 @@ function OrderList({
     }
 
 
-    function confirmApply(value) {
-        if (value === 3) {
-            return
-        }
-    }
 
 
     return <>

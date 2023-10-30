@@ -18,7 +18,8 @@ function Review({pageResponseDTO}) {
         }
     }
 
-    if (reviewDtoList === undefined) {
+    console.log(reviewDtoList)
+    if (reviewDtoList===null || reviewDtoList.length === 0) {
         return <div className="empty">
             <div>상품 리뷰가 없습니다.</div>
         </div>

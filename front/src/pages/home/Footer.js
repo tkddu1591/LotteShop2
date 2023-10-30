@@ -1,11 +1,12 @@
 import React from "react";
+import {API_BASE_URL} from "../../App";
 
 function Footer() {
     return (
         <footer>
             <ul>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <li><a href="#">회사소개</a></li>
+                <li><a href={`${API_BASE_URL}/company/index`}>회사소개</a></li>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <li><a href="#">서비스이용약관</a></li>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
