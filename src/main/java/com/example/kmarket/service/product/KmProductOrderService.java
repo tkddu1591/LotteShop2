@@ -15,6 +15,7 @@ import com.example.kmarket.repository.product.KmProductOrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
@@ -44,23 +45,10 @@ public class KmProductOrderService {
         kmMemberEntity.setPoint(kmProductOrderDTO.getSavePoint()-kmProductOrderDTO.getUsedPoint()+kmMemberEntity.getPoint());
         kmMemberRepository.save(kmMemberEntity);
         KmMemberPointDTO kmMemberPointDTO = new KmMemberPointDTO();
-        if(kmProductOrderDTO.getSavePoint() != 0) {
-            kmMemberPointDTO.setPoint(kmProductOrderDTO.getSavePoint());
-            kmMemberPointDTO.setUid(kmProductOrderDTO.getOrdUid());
-            kmMemberPointDTO.setPointDate(LocalDateTime.now());
-            kmMemberPointDTO.setComment("상품 구매 확정 포인트 지급");
-            kmMemberPointDTO.setOrdNo(kmProductOrderDTO.getOrdNo());
-            kmMemberPointRepository.save(kmMemberPointMapper.toEntity(kmMemberPointDTO));
-        }
-        if(kmProductOrderDTO.getUsedPoint() == 0) {
-            kmMemberPointDTO.setPoint(-kmProductOrderDTO.getUsedPoint());
-            kmMemberPointDTO.setUid(kmProductOrderDTO.getOrdUid());
-            kmMemberPointDTO.setPointDate(LocalDateTime.now());
-            kmMemberPointDTO.setOrdNo(kmProductOrderDTO.getOrdNo());
-            kmMemberPointRepository.save(kmMemberPointMapper.toEntity(kmMemberPointDTO));
-        }
 
         kmProductOrderRepository.save(kmProductOrderMapper.toEntity(kmProductOrderDTO));
+
+
     }
 
     public int listOrderNo() {
@@ -96,5 +84,30 @@ public class KmProductOrderService {
         orderDTO.setOrdComplete(orderReceive.getOrdComplete());
         orderDTO.setOrdCompleteDate(LocalDateTime.now());
         kmProductOrderRepository.save(orderDTO);
+    }
+
+    public void newSave() {
+        KmProductOrderEntity kmProductOrderEntity = kmProductOrderRepository.findFirstByOrderByOrdNoDesc();
+        KmProductOrderDTO kmProductOrderDTO = kmProductOrderMapper.toDTO(kmProductOrderEntity);
+        KmMemberPointDTO kmMemberPointDTO = new KmMemberPointDTO();
+        if(kmProductOrderDTO.getSavePoint() != 0) {
+            kmMemberPointDTO.setPoint(kmProductOrderDTO.getSavePoint());
+            kmMemberPointDTO.setUid(kmProductOrderDTO.getOrdUid());
+            kmMemberPointDTO.setPointDate(LocalDateTime.now());
+            kmMemberPointDTO.setComment("상품 구매 확정 포인트 지급");
+            kmMemberPointDTO.setOrdNo(kmProductOrderDTO.getOrdNo());
+            log.error(kmMemberPointDTO.toString());
+            kmMemberPointRepository.save(kmMemberPointMapper.toEntity(kmMemberPointDTO));
+        }
+        if(kmProductOrderDTO.getUsedPoint() != 0) {
+            kmMemberPointDTO.setPoint(-kmProductOrderDTO.getUsedPoint());
+            kmMemberPointDTO.setUid(kmProductOrderDTO.getOrdUid());
+            kmMemberPointDTO.setPointDate(LocalDateTime.now());
+            kmMemberPointDTO.setComment("상품 구매 포인트 사용");
+            kmMemberPointDTO.setOrdNo(kmProductOrderDTO.getOrdNo());
+            log.error(kmMemberPointDTO.toString());
+            kmMemberPointRepository.save(kmMemberPointMapper.toEntity(kmMemberPointDTO));
+        }
+
     }
 }

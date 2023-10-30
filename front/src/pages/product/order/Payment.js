@@ -11,10 +11,12 @@ function Payment({orderEnd, changeOrderEnd}) {
                     <label><input type="radio" name="payment" value="type1" readOnly
                                   checked={orderEnd.ordPayment === 1} onClick={() => {
                         changeOrderEnd('ordPayment', 1);
+                        changeOrderEnd('ordComplete', 1);
                     }}/>신용카드 결제</label>
                     <label><input type="radio" name="payment" value="type2" readOnly
                                   checked={orderEnd.ordPayment === 2} onClick={() => {
                         changeOrderEnd('ordPayment', 2);
+                        changeOrderEnd('ordComplete', 1);
                     }}/>체크카드 결제</label>
                 </p>
             </div>
@@ -24,10 +26,12 @@ function Payment({orderEnd, changeOrderEnd}) {
                     <label><input type="radio" name="payment" value="type3" readOnly
                                   checked={orderEnd.ordPayment === 3} onClick={() => {
                         changeOrderEnd('ordPayment', 3);
+                        changeOrderEnd('ordComplete', 2);
                     }}/>실시간 계좌이체</label>
                     <label><input type="radio" name="payment" value="type4" readOnly
                                   checked={orderEnd.ordPayment === 4} onClick={() => {
                         changeOrderEnd('ordPayment', 4);
+                        changeOrderEnd('ordComplete', 2);
                     }}/>무통장 입금</label>
                 </p>
             </div>
@@ -37,11 +41,13 @@ function Payment({orderEnd, changeOrderEnd}) {
                     <label><input type="radio" name="payment" value="type5" readOnly
                                   checked={orderEnd.ordPayment === 5} onClick={() => {
                         changeOrderEnd('ordPayment', 5);
+                        changeOrderEnd('ordComplete', 1);
                     }}/>휴대폰결제</label>
                     <label>
                         <input type="radio" name="payment" value="type6" readOnly
                                checked={orderEnd.ordPayment === 6} onClick={() => {
                             changeOrderEnd('ordPayment', 6);
+                            changeOrderEnd('ordComplete', 1);
                         }}/>카카오페이
                         <img src="../images/ico_kakaopay.gif" alt="카카오페이"/>
                     </label>

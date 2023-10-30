@@ -4,6 +4,8 @@ import com.example.kmarket.entity.member.KmMemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString
 @AllArgsConstructor
@@ -51,7 +53,7 @@ public class KmProductEntity {
     private String bizType;
     private String origin;
     private String ip;
-    private String rdate;
+    private LocalDateTime rdate;
     @Column(nullable = true)
     private int etc1;
     @Column(nullable = true)

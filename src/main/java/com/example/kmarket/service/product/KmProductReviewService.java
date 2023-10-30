@@ -9,6 +9,7 @@ import com.example.kmarket.mapper.product.KmProductMapper;
 import com.example.kmarket.mapper.product.KmProductReviewMapper;
 import com.example.kmarket.repository.product.KmProductRepository;
 import com.example.kmarket.repository.product.KmProductReviewRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class KmProductReviewService {
     @Autowired
     private KmProductReviewRepository kmProductReviewRepository;
@@ -36,8 +38,11 @@ public class KmProductReviewService {
         KmProductReviewEntity kmProductReviewEntity = kmProductReviewMapper.toEntity(kmProductReviewDTO);
         KmProductEntity kmProductEntity= kmProductRepository.findByProdNo(kmProductReviewDTO.getProdNo());
         kmProductEntity.setReview(kmProductEntity.getReview()+1);
+        kmProductEntity.setScore(kmProductReviewRepository.averageByRatingKmProductEntity_ProdNo(kmProductEntity.getProdNo()));
+        log.info(String.valueOf(kmProductReviewRepository.averageByRatingKmProductEntity_ProdNo(kmProductEntity.getProdNo())));
         kmProductReviewRepository.save(kmProductReviewEntity);
         kmProductRepository.save(kmProductEntity);
+
     }
     public PageResponseDTO findByProducts(PageRequestDTO pageRequestDTO) {
 

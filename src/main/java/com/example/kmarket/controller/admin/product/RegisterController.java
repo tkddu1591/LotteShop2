@@ -12,22 +12,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegisterController {
 
-  @Autowired
-  private KmAdminRegisterService kmAdminRegisterService;
+    @Autowired
+    private KmAdminRegisterService kmAdminRegisterService;
 
 
-  @GetMapping ("/admin/product/register")
-    public String register(){
-      return "admin/product/register";
+    @GetMapping("/admin/product/register")
+    public String register() {
+        return "admin/product/register";
 
     }
 
     @PostMapping("/admin/product/register")
-    public String register(KmProductDTO dto){
+    public String register(KmProductDTO dto) {
 
-      kmAdminRegisterService.insertProduct(dto);
+        log.info(dto.toString());
+        kmAdminRegisterService.insertProduct(dto);
 
-      return "redirect:/admin/product/register";
+        return "redirect:/admin/product/register";
 
     }
 

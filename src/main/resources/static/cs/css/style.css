@@ -1005,7 +1005,7 @@ footer p > strong {
   text-align: center;
   margin-top: 26px;
 }
-#cs > .qna > .list > article > .page > a {
+#cs > .qna > .list > article > .page a {
   display: inline-block;
   width: 34px;
   height: 34px;
@@ -1016,18 +1016,18 @@ footer p > strong {
   font-weight: bold;
   vertical-align: bottom;
 }
-#cs > .qna > .list > article > .page > .prev {
+#cs > .qna > .list > article > .page .prev {
   font-size: 0;
   background-image: url('../images/cs_sprites.png');
   background-position: -706px -652px;
 }
-#cs > .qna > .list > article > .page > .next {
+#cs > .qna > .list > article > .page .next {
   font-size: 0;
   background-image: url('../images/cs_sprites.png');
   background-position: -628px -652px;
 }
-#cs > .qna > .list > article > .page > .num {}
-#cs > .qna > .list > article > .page > .on {
+#cs > .qna > .list > article > .page .num {}
+#cs > .qna > .list > article > .page .on {
   background: #E60012;
   border-radius: 17px;
   color: #fff;
