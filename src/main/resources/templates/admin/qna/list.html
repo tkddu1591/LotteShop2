@@ -4,54 +4,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
     <script th:src="@{/admin/js/checkall.js}"></script>
-    <script th:inline="javascript">
-        function filterTable() {
-            var selectedValueCate = document.getElementById("searchCate1").value;
-            var selectedValueType = document.getElementById("searchCate2").value;
-            var rows = document.getElementById("noticeTable").getElementsByTagName("tr");
-
-            for (var i = 0; i < rows.length; i++) {
-                var cellsCate = rows[i].getElementsByTagName("td")[1];
-                var cellsType = rows[i].getElementsByTagName("td")[2];
-
-                if (cellsCate && cellsType) {
-                    var cellValueCate = cellsCate.textContent || cellsCate.innerText;
-                    var cellValueType = cellsType.textContent || cellsType.innerText;
-
-                    if (cellValueCate === selectedValueCate && cellValueType === selectedValueType) {
-                        rows[i].style.display = "";
-                    } else {
-                        rows[i].style.display = "none";
-                    }
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var allCheckbox = document.querySelector("input[name='all']");
-            allCheckbox.addEventListener('click', function() {
-                var checkboxes = document.getElementsByName('chk');
-                for (var i = 0; i < checkboxes.length; i++) {
-                    checkboxes[i].checked = allCheckbox.checked;
-                }
-            });
-
-            var searchCate1 = document.getElementById("searchCate1");
-            var searchCate2 = document.getElementById("searchCate2");
-
-            searchCate1.addEventListener("change", function() {
-                filterTable();
-            });
-
-            searchCate2.addEventListener("change", function() {
-                filterTable();
-            });
-        });
-    </script>
-
-    <div th:replace="/admin/header.html :: header"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/admin/js/listCnameTname.js}"></script>
 </head>
     <main>
+        <div th:replace="/admin/header.html :: header"></div>
         <div th:replace="/admin/aside.html :: aside"></div>
         <section id="admin-product-list">
             <nav>
@@ -67,17 +24,11 @@
                 <form action="#" method="post">
                     <div>
                         <div>
-                            <select name="searchCate1" id="searchCate1" onchange="filterTable()">
-                                <option value="">1차선택</option>
-                                <th:block th:each="dto, iterStat : ${qnaList}">
-                                    <option th:value="${dto.cate}" th:text="${dto.cateName}">1차선택</option>
-                                </th:block>
+                            <select name="cate" id="cateName">
+                                <option th:value="findCname.cate">1차 선택</option>
                             </select>
-                            <select name="searchCate2" id="searchCate2" onchange="filterTable()">
-                                <option value="">2차선택</option>
-                                <th:block th:each="dto, iterStat : ${qnaList}">
-                                    <option th:value="${dto.type}" th:text="${dto.typeName}">2차선택
-                                </th:block>
+                            <select name="type" id="typeName">
+                                <option th:value="findTname.type">2차 선택</option>
                             </select>
                         </div>
                     </div>
