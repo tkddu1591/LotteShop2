@@ -3,10 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
     <script th:src="@{/admin/js/checkall.js}"></script>
-<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/admin/js/listCnameTname.js}"></script>
 </head>
 <body>
 <div th:replace="/admin/header.html :: header"></div>
@@ -24,13 +26,11 @@
         <section>
             <form action="#" method="post">
                 <div>
-                    <select>
-                        <option value="" selected disabled>1차 선택</option>
-                        <option th:each="dto : ${findCname}" th:value="${dto.cate}" th:text="${dto.cateName}"></option>
+                    <select name="cate" id="cateName">
+                        <option th:value="findCname.cate">1차 선택</option>
                     </select>
-                    <select>
-                        <option value="" selected disabled>2차 선택</option>
-                        <option th:each="dto : ${selectTname}" th:value="${dto.type}" th:text="${dto.typeName}"></option>
+                    <select name="type" id="typeName">
+                        <option th:value="findTname.type">2차 선택</option>
                     </select>
                 </div>
                 <table class="listTable">

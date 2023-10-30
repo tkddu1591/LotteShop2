@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-10-27T09:48:51+0900",
+    date = "2023-10-30T10:50:44+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.8 (Oracle Corporation)"
 )
 @Component
@@ -34,6 +34,12 @@ public class KmProdcutOrderItemMapperImpl implements KmProdcutOrderItemMapper {
         kmProductOrderItemDTO.ordCompleteDate( articleEntityKmProductOrderEntityOrdCompleteDate( articleEntity ) );
         kmProductOrderItemDTO.ordDate( articleEntityKmProductOrderEntityOrdDate( articleEntity ) );
         kmProductOrderItemDTO.ordComplete( articleEntityKmProductOrderEntityOrdComplete( articleEntity ) );
+        kmProductOrderItemDTO.recipComment( articleEntityKmProductOrderEntityRecipComment( articleEntity ) );
+        kmProductOrderItemDTO.recipName( articleEntityKmProductOrderEntityRecipName( articleEntity ) );
+        kmProductOrderItemDTO.recipAddr1( articleEntityKmProductOrderEntityRecipAddr1( articleEntity ) );
+        kmProductOrderItemDTO.recipHp( articleEntityKmProductOrderEntityRecipHp( articleEntity ) );
+        kmProductOrderItemDTO.recipAddr2( articleEntityKmProductOrderEntityRecipAddr2( articleEntity ) );
+        kmProductOrderItemDTO.recipZip( articleEntityKmProductOrderEntityRecipZip( articleEntity ) );
         kmProductOrderItemDTO.prodNo( articleEntityKmProductEntityProdNo( articleEntity ) );
         kmProductOrderItemDTO.thumb1( articleEntityKmProductEntityThumb1( articleEntity ) );
         kmProductOrderItemDTO.prodName( articleEntityKmProductEntityProdName( articleEntity ) );
@@ -130,6 +136,96 @@ public class KmProdcutOrderItemMapperImpl implements KmProdcutOrderItemMapper {
         }
         int ordComplete = kmProductOrderEntity.getOrdComplete();
         return ordComplete;
+    }
+
+    private String articleEntityKmProductOrderEntityRecipComment(KmProductOrderItemEntity kmProductOrderItemEntity) {
+        if ( kmProductOrderItemEntity == null ) {
+            return null;
+        }
+        KmProductOrderEntity kmProductOrderEntity = kmProductOrderItemEntity.getKmProductOrderEntity();
+        if ( kmProductOrderEntity == null ) {
+            return null;
+        }
+        String recipComment = kmProductOrderEntity.getRecipComment();
+        if ( recipComment == null ) {
+            return null;
+        }
+        return recipComment;
+    }
+
+    private String articleEntityKmProductOrderEntityRecipName(KmProductOrderItemEntity kmProductOrderItemEntity) {
+        if ( kmProductOrderItemEntity == null ) {
+            return null;
+        }
+        KmProductOrderEntity kmProductOrderEntity = kmProductOrderItemEntity.getKmProductOrderEntity();
+        if ( kmProductOrderEntity == null ) {
+            return null;
+        }
+        String recipName = kmProductOrderEntity.getRecipName();
+        if ( recipName == null ) {
+            return null;
+        }
+        return recipName;
+    }
+
+    private String articleEntityKmProductOrderEntityRecipAddr1(KmProductOrderItemEntity kmProductOrderItemEntity) {
+        if ( kmProductOrderItemEntity == null ) {
+            return null;
+        }
+        KmProductOrderEntity kmProductOrderEntity = kmProductOrderItemEntity.getKmProductOrderEntity();
+        if ( kmProductOrderEntity == null ) {
+            return null;
+        }
+        String recipAddr1 = kmProductOrderEntity.getRecipAddr1();
+        if ( recipAddr1 == null ) {
+            return null;
+        }
+        return recipAddr1;
+    }
+
+    private String articleEntityKmProductOrderEntityRecipHp(KmProductOrderItemEntity kmProductOrderItemEntity) {
+        if ( kmProductOrderItemEntity == null ) {
+            return null;
+        }
+        KmProductOrderEntity kmProductOrderEntity = kmProductOrderItemEntity.getKmProductOrderEntity();
+        if ( kmProductOrderEntity == null ) {
+            return null;
+        }
+        String recipHp = kmProductOrderEntity.getRecipHp();
+        if ( recipHp == null ) {
+            return null;
+        }
+        return recipHp;
+    }
+
+    private String articleEntityKmProductOrderEntityRecipAddr2(KmProductOrderItemEntity kmProductOrderItemEntity) {
+        if ( kmProductOrderItemEntity == null ) {
+            return null;
+        }
+        KmProductOrderEntity kmProductOrderEntity = kmProductOrderItemEntity.getKmProductOrderEntity();
+        if ( kmProductOrderEntity == null ) {
+            return null;
+        }
+        String recipAddr2 = kmProductOrderEntity.getRecipAddr2();
+        if ( recipAddr2 == null ) {
+            return null;
+        }
+        return recipAddr2;
+    }
+
+    private String articleEntityKmProductOrderEntityRecipZip(KmProductOrderItemEntity kmProductOrderItemEntity) {
+        if ( kmProductOrderItemEntity == null ) {
+            return null;
+        }
+        KmProductOrderEntity kmProductOrderEntity = kmProductOrderItemEntity.getKmProductOrderEntity();
+        if ( kmProductOrderEntity == null ) {
+            return null;
+        }
+        String recipZip = kmProductOrderEntity.getRecipZip();
+        if ( recipZip == null ) {
+            return null;
+        }
+        return recipZip;
     }
 
     private int articleEntityKmProductEntityProdNo(KmProductOrderItemEntity kmProductOrderItemEntity) {
@@ -349,6 +445,12 @@ public class KmProdcutOrderItemMapperImpl implements KmProdcutOrderItemMapper {
         kmProductOrderEntity.ordCompleteDate( kmProductOrderItemDTO.getOrdCompleteDate() );
         kmProductOrderEntity.ordDate( kmProductOrderItemDTO.getOrdDate() );
         kmProductOrderEntity.ordComplete( kmProductOrderItemDTO.getOrdComplete() );
+        kmProductOrderEntity.recipComment( kmProductOrderItemDTO.getRecipComment() );
+        kmProductOrderEntity.recipName( kmProductOrderItemDTO.getRecipName() );
+        kmProductOrderEntity.recipAddr1( kmProductOrderItemDTO.getRecipAddr1() );
+        kmProductOrderEntity.recipHp( kmProductOrderItemDTO.getRecipHp() );
+        kmProductOrderEntity.recipAddr2( kmProductOrderItemDTO.getRecipAddr2() );
+        kmProductOrderEntity.recipZip( kmProductOrderItemDTO.getRecipZip() );
 
         return kmProductOrderEntity.build();
     }
