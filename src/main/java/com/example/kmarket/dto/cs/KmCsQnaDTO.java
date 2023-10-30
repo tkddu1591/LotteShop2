@@ -1,6 +1,7 @@
 package com.example.kmarket.dto.cs;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +21,10 @@ public class KmCsQnaDTO {
 	private String file2;
 	private String file3;
 	private String file4;
+/*	private MultipartFile file1;
+	private MultipartFile file2;
+	private MultipartFile file3;
+	private MultipartFile file4;*/
 	private String writer;
 	private String regip;
 	private int answerComplete;
@@ -27,6 +32,8 @@ public class KmCsQnaDTO {
 	private String answer;
 	private int orderItemId;
 	private LocalDateTime answerDate;
+
+	private MultipartFile mFile1;
 
 	//추가 필드
 	private String writerName;

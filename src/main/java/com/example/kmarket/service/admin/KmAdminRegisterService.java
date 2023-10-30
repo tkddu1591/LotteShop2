@@ -2,6 +2,8 @@ package com.example.kmarket.service.admin;
 
 import com.example.kmarket.dto.product.KmProductDTO;
 import com.example.kmarket.mapper.admin.KmAdminRegisterMapper;
+import com.example.kmarket.mapper.product.KmProductMapper;
+import com.example.kmarket.repository.product.KmProductRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,18 +25,26 @@ public class KmAdminRegisterService {
 
     @Autowired
     KmAdminRegisterMapper kmAdminRegisterMapper;
+    @Autowired
+    KmProductMapper kmProductMapper;
+    @Autowired
+    KmProductRepository kmProductRepository;
 
-    public int insertProduct(KmProductDTO dto) {
+    public void insertProduct(KmProductDTO dto) {
 
         // 파일 업로드
         List<String> saveNames = fileUpload(dto);
-
+        dto.setScore(0);
+        if (dto.getSeller() == null)
+            dto.setSeller("seller2");
         dto.setThumb1(saveNames.get(0));
         dto.setThumb2(saveNames.get(1));
         dto.setThumb3(saveNames.get(2));
         dto.setDetail(saveNames.get(3));
+        dto.setRdate(LocalDateTime.now());
+        log.info(dto.toString());
 
-        return kmAdminRegisterMapper.insertProduct(dto);
+        kmProductRepository.save(kmProductMapper.toEntity(dto));
     }
 
     public KmProductDTO selectProduct(int prodNo) {
@@ -53,13 +64,13 @@ public class KmAdminRegisterService {
 
     }
 
-    @Value("${spring.servlet.multipart.location}")
+    @Value("${thumb.dir}")
     private String filePath;
 
     public List<String> fileUpload(KmProductDTO dto) {
-        filePath += dto.getProdCate1() + "/" + dto.getProdCate2() + "/";
+        String filePathCopy = filePath +dto.getProdCate1() + "/" + dto.getProdCate2() + "/";
         // 파일 첨부 경로
-        String path = new File(filePath).getAbsolutePath();
+        String path = new File(filePathCopy).getAbsolutePath();
         log.info("fileUpload...3 : " + path);
 
 
@@ -88,7 +99,7 @@ public class KmAdminRegisterService {
                 if (!f.exists()) {
                     f.mkdirs();
                 }
-
+                log.info(f);
                 file.transferTo(f); // 저장할 폴더 이름, 저장할 파일 이름
 
                 log.info("fileUpload...6");

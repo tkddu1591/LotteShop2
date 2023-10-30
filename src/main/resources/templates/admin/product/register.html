@@ -16,8 +16,9 @@
 
     <script>
 
-        $(function (){
 
+        $(function (){
+            $('#seller').val(localStorage.getItem('memberUid'))
             const prodCate1 = $('#prodCate1');
             const prodCate2 = $('#prodCate2');
 
@@ -138,7 +139,8 @@
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
                     <form th:action="@{/admin/product/register}" method="post" enctype="multipart/form-data">
-
+                        <input type="hidden" id="seller" name="seller"/>
+                        <input type="hidden"  name="score" value="0"/>
                         <!-- 상품분류 -->
                         <section>
                             <h4>상품분류</h4>

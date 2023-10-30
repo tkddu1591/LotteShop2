@@ -36,7 +36,7 @@ public class PageRequestDTO {
     @Builder.Default
     private Boolean isNum =false;
     @Builder.Default
-    private Boolean isProdName =false;
+    private Boolean isProdName =true;
     @Builder.Default
     private Boolean isDescript =false;
     private String memberUid;

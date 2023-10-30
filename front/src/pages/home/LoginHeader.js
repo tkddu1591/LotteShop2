@@ -26,6 +26,7 @@ function LoginHeader() {
                                navigate(0)
                            }}>로그아웃</a>
                         <Link to={`${process.env.REACT_APP_HOME_URL}/my/home`}>마이페이지</Link>
+                        {localStorage.getItem('authority')==='ROLE_ADMIN'&&<Link to={`${process.env.REACT_APP_API_ROOT}/admin/index`}>관리자 페이지</Link>}
                         <a onClick={() => {
                             navigate(process.env.PUBLIC_URL + "/product/cart")
                         }}

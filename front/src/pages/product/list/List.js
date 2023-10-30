@@ -11,8 +11,7 @@ import {changeDTO} from "../../../store/changeDTO";
 function List() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const newCate = searchParams.get('cate');
-    const [cate, setCate] = useState(newCate);
+
     const newSearch = searchParams.get('search');
     const [search, setSearch] = useState(newSearch);
     const newType = searchParams.get('type');
@@ -20,6 +19,8 @@ function List() {
     const [num1, setNum1] = useState(0);
     const [num2, setNum2] = useState(0);
     const [detailSearch, setDetailSearch] = useState(newSearch);
+    const newCate = searchParams.get('cate');
+    const [cate, setCate] = useState(newCate);
     const [check, setCheck] = useState({
         numCheck: false,
         prodName: true,
@@ -27,13 +28,15 @@ function List() {
     });
 
     let [pageRequestDTO, setPageRequestDTO] = useState({
-        pg: 1, size: 10, cate: cate, search: search, type: type
+        pg: 1, size: 10, cate: newCate, search: search, type: type
     })
     let [pageResponseDTO, setPageResponseDTO] = useState({
         cate: parseInt(cate), dtoList: [], end: 10, start: 1, next: true, prev: true, total: 10, size: 10
     });
-
+    console.log(cate);
+    console.log(newCate);
     useEffect(() => {
+
         console.log(pageRequestDTO);
         axios.get(`${API_BASE_URL}/product/list`, {
             params: pageRequestDTO
@@ -73,13 +76,6 @@ function List() {
         setType(newType);
     }
     useEffect(() => {
-        setPageRequestDTO({
-            pg: 1,
-            size: 10,
-            cate: newCate,
-        })
-    }, [cate]);
-    useEffect(() => {
     }, [search]);
     useEffect(() => {
         setPageRequestDTO({
@@ -88,6 +84,13 @@ function List() {
             type: newType,
         })
     }, [type]);
+    useEffect(() => {
+        setPageRequestDTO({
+            pg: 1,
+            size: 10,
+            cate: newCate,
+        })
+    }, [cate]);
 
     function resetPageRequest() {
         let min, max

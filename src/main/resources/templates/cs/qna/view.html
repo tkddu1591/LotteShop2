@@ -58,6 +58,12 @@
                               th:text="${#temporals.format(qna.rdate, 'yy-MM-dd')}">
                         </span>
                     </p>
+                    <th:block th:if="${qna.file1 != null}">
+                        <a class="filedown"
+                           th:href="@{/cs/qna/download(qnaNo=${qna.qnaNo})}">
+                            첨부된 파일 : <span th:text="${qna.file2}"></span>
+                        </a>
+                    </th:block>
                 </nav>
 
                 <div class="content">

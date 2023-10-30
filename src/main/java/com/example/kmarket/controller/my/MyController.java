@@ -29,7 +29,6 @@ public class MyController {
     private final KmQnaService qnaService;
     private final KmProductReviewService reviewService;
     private final KmProductOrderItemService productOrderItemService;
-    private final KmProductOrderService productOrderService;
     private final KmMemberPointService memberPointService;
     private final KmCouponService couponService;
     private final KmMemberService memberService;
