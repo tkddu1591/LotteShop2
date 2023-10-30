@@ -128,7 +128,7 @@ function OrderItemDetail({setPopup, item}) {
         const maskedText = item.toString().substring(0, 3) + '*'.repeat(item.length - 3);
         return (maskedText);
     }
-    console.log(item)
+    let navigate = useNavigate();
     return <>
         <div id="popOrder" className="popup">
             <div>
@@ -157,7 +157,11 @@ function OrderItemDetail({setPopup, item}) {
                                     </td>
                                     <td>
                                         <img src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${item.thumb1}`}
-                                             style={{width: '80px'}} alt=""/>
+                                             style={{width: '80px', cursor:"pointer"}}
+                                             onClick={()=>{
+                                                 navigate("/product/view?prodNo="+item.prodNo)
+                                             }}
+                                             alt=""/>
                                         <ul>
                                             <li className="company">{item.company}</li>
                                             <li className="prodName">{item.prodName}</li>
