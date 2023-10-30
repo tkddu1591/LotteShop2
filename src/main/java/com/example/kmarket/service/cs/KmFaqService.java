@@ -38,7 +38,7 @@ public class KmFaqService {
     public KmCsFaqDTO findById(int faqNo){
         KmCsFaqEntity entity = kmFaqRepo.findById(faqNo).get();
         KmCsFaqDTO dto = mapper.toDTO(entity);
-        log.info("findById dto: " + dto);
+        log.info("viewProd dto: " + dto);
 
         return dto;
     }

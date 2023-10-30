@@ -24,5 +24,6 @@ public class KmCsFaqDTO {
 	//추가 필드
 	private String cateName;
 	private String typeName;
+	private int index;
 	
 }

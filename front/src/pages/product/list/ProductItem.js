@@ -1,4 +1,4 @@
-import { useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../../App";
 import {changeCategoryNo} from "../../../slice/cateSilce";
 import {useDispatch} from "react-redux";
@@ -41,11 +41,12 @@ function ProductItem({pageResponseDTO}) {
                         return <tr key={item.prodNo}>
                             <td><a onClick={() => {
                                 dispatch(changeCategoryNo(item.prodCate2))
-                                navigate("/product/view?prodNo="+item.prodNo)
+                                navigate("/product/view?prodNo=" + item.prodNo)
                             }}
                                    style={{cursor: 'pointer', userSelect: 'none'}}
-                                   className="thumb"><img src="https://via.placeholder.com/120x120"
-                                                          alt="상품이미지"/></a>
+                                   className="thumb"><img
+                                src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${item.thumb2}`}
+                                alt="item1"/></a>
                             </td>
 
                             <td>

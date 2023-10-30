@@ -45,7 +45,7 @@ function divisionCheck(item) {
     if (item === null) {
         return <td className="type" style={{color: 'red'}}>사용</td>
     } else if (item && (parseInt(item.substring(0, 10).replaceAll('-', ''))
-        <= parseInt(changeDate(today).replaceAll('-', '')))) {
+        < parseInt(changeDate(today).replaceAll('-', '')))) {
         return <td className="type" style={{color: 'red'}}>기간만료</td>
     } else
         return <td className="type" style={{color: 'green'}}>적립</td>

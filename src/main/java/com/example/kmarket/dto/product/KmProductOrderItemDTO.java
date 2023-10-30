@@ -1,6 +1,7 @@
 package com.example.kmarket.dto.product;
 
 import lombok.*;
+import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
 
@@ -36,4 +37,10 @@ public class KmProductOrderItemDTO {
     private String fax;
     private String email;
     private int level;
+    private String recipComment;
+    private String recipName;
+    private String recipAddr1;
+    private String recipHp;
+    private String recipAddr2;
+    private String recipZip;
 }

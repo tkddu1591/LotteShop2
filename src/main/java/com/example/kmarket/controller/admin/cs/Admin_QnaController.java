@@ -90,12 +90,12 @@ public class Admin_QnaController {
         return "redirect:/admin/qna/write";
     }
 
-    @DeleteMapping("/admin/faq/delete/{qnaNo}")
-    @Transactional
-    public void delete(@PathVariable("qnaNo") int qnaNo){
+    @GetMapping("/admin/qna/delete")
+    public String delete(@RequestParam int qnaNo){
 
-        log.info(kmAdminQnaService);
         kmAdminQnaService.deleteArticleQna(qnaNo);
+
+        return "redirect:/admin/qna/list";
 
     }
 

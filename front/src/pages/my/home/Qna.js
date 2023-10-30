@@ -1,7 +1,6 @@
 import React from "react";
 
 function Qna({userQna, setDivName}) {
-    console.log(userQna)
     return <article className="qna">
         <h3>문의내역</h3>
         <a onClick={() => {

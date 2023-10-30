@@ -27,8 +27,7 @@ function OrderProducts({orderProducts}) {
                             <article>
                                 <a onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}
                                    style={{cursor:'pointer'}}
-                                ><img
-                                    src="https://via.placeholder.com/80x80" alt={item.prodName}/></a>
+                                ><img src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${item.thumb1}`} style={{width:'80px', height:'80px'}} alt=""/></a>
                                 <div>
                                     <h2><a onClick={()=>{navigate(process.env.PUBLIC_URL + "/product/view?prodNo=" + item.prodNo)}}
                                            style={{cursor:'pointer'}}>{item.prodName}</a></h2>

@@ -1,4 +1,10 @@
-<th:block th:insert="~{/cs/inc/header.html}"/>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cs/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
     <section id="cs">
         <div class="qna">
             <nav>
@@ -47,13 +53,20 @@
                         <th:block th:each="qna : ${csPageResponseDTO.qnaList}">
                         <tr>
                             <td>
-                                <a th:href="@{/cs/qna/view}">
+                                <a th:href="@{/cs/qna/view(no=${qna.qnaNo})}">
                                     [<span th:text="${qna.typeName}"></span>]
                                     [[${qna.title}]]
                                 </a>
                             </td>
                             <td>
                                 [[${qna.writer}]]
+                            </td>
+                            <td>
+                                <!-- answer 여부에 따라서 미확인 / 답변완료 -->
+                                <span th:if="${qna.answer} == null" th:text="미확인" style="color: #797979">
+                                </span>
+                                <span th:unless="${qna.answer} == null" th:text="답변완료" style="color: #E60012">
+                                </span>
                             </td>
                             <td>
                                 <span class="date"
@@ -65,16 +78,26 @@
                     </table>
 
                     <div class="page">
-                        <a href="#"
-                           class="prev">&laquo;</a>
-                        <a href="#"
-                           class="prev">이전</a>
-                        <a href="#"
-                           class="num on">1</a>
-                        <a href="#"
-                           class="next">다음</a>
-                        <a href="#"
-                           class="next">&raquo;</a>
+                        <span th:if="${csPageResponseDTO.prev}" class="prev">
+                            <a th:href="@{/cs/qna/list(cate=${csPageResponseDTO.cate}, pg=1)}"
+                               class="prev">&laquo;</a>
+                            <a th:href="@{/cs/qna/list(cate=${csPageResponseDTO.cate}, pg=${csPageResponseDTO.start - 1})}"
+                               class="prev">이전</a>
+                        </span>
+
+                        <span th:each="num : ${#numbers.sequence(csPageResponseDTO.start, csPageResponseDTO.end)}"
+                              class="num">
+                            <a th:href="@{/cs/qna/list(cate=${csPageResponseDTO.cate}, pg=${num})}"
+                               th:class="${csPageResponseDTO.pg eq num ? 'on' : 'off'}">
+                                [[${num}]]</a>
+                        </span>
+
+                        <span th:if="${csPageResponseDTO.next}" class="next">
+                            <a th:href="@{/cs/qna/list(cate=${csPageResponseDTO.cate}, pg=${csPageResponseDTO.end + 1})}"
+                            >다음</a>
+                            <a th:href="@{/cs/qna/list(cate=${csPageResponseDTO.cate}, pg=${csPageResponseDTO.last})}"
+                            >&raquo;</a>
+                        </span>
                     </div>
 
                     <!-- 일반 유저가 로그인 할 시 show-->
@@ -86,4 +109,4 @@
             </section>
         </div>
     </section>
-<th:block th:insert="~{/cs/inc/footer.html}"/>
+</th:block>

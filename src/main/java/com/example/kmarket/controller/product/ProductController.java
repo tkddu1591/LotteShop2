@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 @RequestMapping("/product")
@@ -27,12 +29,24 @@ public class ProductController {
     }
     @GetMapping("/view")
     public KmProductDTO view(int prodNo){
-        return kmProductService.findById(prodNo);
+        return kmProductService.viewProd(prodNo);
     }
     @GetMapping("/view/review")
     public PageResponseDTO viewReview(PageRequestDTO pageResponseDTO){
         return kmProductReviewService.findByProducts(pageResponseDTO);
     }
+    @GetMapping("/indexList")
+    public List<KmProductDTO> indexList(@RequestParam String type){
+        return kmProductService.findByType(type);
+    }
+/*
+    @DeleteMapping("/delete")
+    public void deleteProduct(@RequestParam int prodNo){
+        kmProductService.deleteById(prodNo);
+    }*/
 
-
+    @GetMapping("/delete")
+    public void deleteProduct(@RequestParam int prodNo){
+        kmProductService.deleteById(prodNo);
+    }
 }

@@ -5,7 +5,7 @@ import MyPageNavigation from "../MyPageNavigation";
 import axios from "axios";
 import {API_BASE_URL} from "../../../App";
 
-function MyQna({pageResponseDTO, setPageRequestDTO}) {
+function MyQna({pageResponseDTO, setPageRequestDTO, setPopup}) {
     function answer(value) {
         if (value === 0) {
             return <td className="status"><span style={{color: 'grey'}}>미확인</span></td>
@@ -28,16 +28,17 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                     <li className="prodName"><Link
                         to={`${process.env.REACT_APP_HOME_URL}/product/view?prodNo=` + value.prodNo}>{value.prodName}</Link>
                     </li>
-                     <li className="question"><span style={{cursor: 'pointer'}}
-                                                                                 onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}
+                    <li className="question"><span style={{cursor: 'pointer'}}
+                                                   onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}
                     >{value.title}</span></li>
                 </ul>
             </td>
         } else {
             return <>
-                 <td className="tit"><span style={{cursor: 'pointer'}}
-                                                                        onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}>{value.title}</span>
-                </td> </>
+                <td className="tit"><span style={{cursor: 'pointer'}}
+                                          onClick={() => changeDTO(setAnswerCheck, index, !answerCheck[index])}>{value.title}</span>
+                </td>
+            </>
         }
     }
 
@@ -71,18 +72,20 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                                 <td style={{textAlign: "center"}}>
                                     <span style={{cursor: "pointer"}}
                                           onClick={() => {
-                                              axios.delete(API_BASE_URL + '/cs/qna/cancel?qnaNo=' + qna.qnaNo)
-                                                  .then(res => {
-                                                      alert('취소되었습니다.')
-                                                  }).catch(err => {
-                                                  console.log(err)
-                                              })
+                                              if (window.confirm('취소하시겠습니까?'))
+                                                  axios.delete(API_BASE_URL + '/cs/qna/cancel?qnaNo=' + qna.qnaNo)
+                                                      .then(res => {
+                                                          setPopup(qna.qnaNo)
+                                                          alert('취소되었습니다.')
+                                                      }).catch(err => {
+                                                      console.log(err)
+                                                  })
                                           }}>취소</span>
                                 </td>
 
                             </tr>
 
-                            { answerCheck[index]&&
+                            {answerCheck[index] &&
                                 <tr className="answerRow" key={index + 'answer'}>
                                     <td colSpan="7">
                                         <div className="question">
@@ -95,18 +98,18 @@ function MyQna({pageResponseDTO, setPageRequestDTO}) {
                                                 {qna.content}
                                             </p>
                                         </div>
-                                        {qna.answerComplete === 2  &&
-                                        <div className="answer">
-                                            <p className="tit">
-                                                {qna.typeName} 문의 답변입니다.
-                                                <span
-                                                    className="date">{qna.answerDate.substring(0, 10)} {qna.answerDate.substring(11, 19)}</span>
-                                            </p>
-                                            <p className="content">
-                                                {qna.answer}
-                                            </p>
+                                        {qna.answerComplete === 2 &&
+                                            <div className="answer">
+                                                <p className="tit">
+                                                    {qna.typeName} 문의 답변입니다.
+                                                    <span
+                                                        className="date">{qna.answerDate.substring(0, 10)} {qna.answerDate.substring(11, 19)}</span>
+                                                </p>
+                                                <p className="content">
+                                                    {qna.answer}
+                                                </p>
 
-                                        </div>}
+                                            </div>}
                                     </td>
                                 </tr>}
                         </>
