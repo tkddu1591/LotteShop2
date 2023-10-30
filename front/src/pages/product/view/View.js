@@ -121,7 +121,7 @@ function View() {
             <Info prodDTO={prodDTO} scrollY={divYPosition} changeProdDTO={changeProdDTO}></Info>
 
 
-            <Detail></Detail>
+            <Detail prodDTO={prodDTO}></Detail>
             <Notice prodDTO={prodDTO}></Notice>
 
             <article className="review">
@@ -141,14 +141,12 @@ function View() {
     }
 }
 
-function Detail() {
+function Detail({prodDTO}) {
     return <article className="detail">
         <nav>
             <h1>상품정보</h1>
         </nav>
-        <img src="https://via.placeholder.com/860x460" alt="상세페이지1"/>
-        <img src="https://via.placeholder.com/860x460" alt="상세페이지2"/>
-        <img src="https://via.placeholder.com/860x460" alt="상세페이지3"/>
+        <img src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${prodDTO.detail}`} style={{width:'860px', height:'460px', objectFit:'fill'}} alt="detail"/>
     </article>
 }
 

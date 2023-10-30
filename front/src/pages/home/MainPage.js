@@ -15,9 +15,9 @@ function MainPage() {
     let category = ['hit','recomment', 'new', 'discount', 'best'];
 
     const images = ([
-        "https://via.placeholder.com/985x447",
-        "https://via.placeholder.com/985x447",
-        "https://via.placeholder.com/985x447",
+        process.env.REACT_APP_HOME_URL+'/images/banner/5908972.jpg'
+        ,process.env.REACT_APP_HOME_URL+'/images/banner/5908972.jpg'
+        ,process.env.REACT_APP_HOME_URL+'/images/banner/5908972.jpg'
     ])
 
     useEffect(() => {
@@ -116,7 +116,7 @@ function ProductItem({item}) {
             <article>
                 <Link style={{cursor: "pointer"}} to={`${HOME_URL}/product/view?prodNo=${item.prodNo}`}>
                     <div className="thumb">
-                        <img src="https://via.placeholder.com/230x230" alt="t1"/>
+                        <img src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${item.thumb1}`} style={{width:"230px", height:'230px'}} alt="item1"/>
                     </div>
                     <h2>{item.prodName}</h2>
                     <p>{item.descript}</p>
@@ -135,7 +135,7 @@ function SliderItem({images}) {
             return (
                 <li key={index}>
                     <a href="#"
-                    ><img src={image} alt="item1"
+                    ><img src={image} alt="item1" style={{width:'985px', height:'447px'}}
                     /></a>
                 </li>
             )

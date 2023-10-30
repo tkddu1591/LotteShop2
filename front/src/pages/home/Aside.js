@@ -89,7 +89,7 @@ function BestProduct({bestList}) {
             return <>
 
                 <div className="dis_price">
-                    <ins>{(item.price)}</ins>
+                    <ins>{(item.price.toLocaleString())}</ins>
                 </div>
             </>
         }
@@ -102,7 +102,7 @@ function BestProduct({bestList}) {
                     <Link style={{cursor: "pointer"}} to={`${HOME_URL}/product/view?prodNo=${item.prodNo}`}>
                         <div className="thumb">
                             <i>{index + 1}</i>
-                            <img src="https://via.placeholder.com/230" alt="item1"/>
+                            <img src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${item.thumb1}`} alt="item1"/>
                         </div>
                         <article>
                             <h2>{item.prodName}</h2>

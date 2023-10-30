@@ -30,7 +30,7 @@ public interface KmAdminNoticeMapper {
     public void updateArticleNotice(KmAdminNoticeDTO kmAdminNoticeDTO);
 
     // 게시글 삭제
-    public int deleteAriticleNotice(int noticeNo);
+    public void deleteArticleNotice(int noticeNo);
 
 
 }

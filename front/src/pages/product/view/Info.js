@@ -115,7 +115,7 @@ function Info({prodDTO, scrollY}) {
     return <>
         <article className="info">
             <div className="image">
-                <img src="https://via.placeholder.com/460x460" alt="상품이미지"/>
+                <img src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${prodDTO.thumb3}`} style={{width:'460px', height:'460px', objectFit:'fill'}} alt="item3"/>
             </div>
             <div className="summary">
                 <nav>

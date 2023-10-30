@@ -29,7 +29,7 @@ public class ProductController {
     }
     @GetMapping("/view")
     public KmProductDTO view(int prodNo){
-        return kmProductService.findById(prodNo);
+        return kmProductService.viewProd(prodNo);
     }
     @GetMapping("/view/review")
     public PageResponseDTO viewReview(PageRequestDTO pageResponseDTO){

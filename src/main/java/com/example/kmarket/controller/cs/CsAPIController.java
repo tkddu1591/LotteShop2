@@ -3,7 +3,6 @@ package com.example.kmarket.controller.cs;
 import com.example.kmarket.dto.cs.KmCsCateDTO;
 import com.example.kmarket.dto.cs.KmCsQnaDTO;
 import com.example.kmarket.dto.cs.KmCsTypeDTO;
-import com.example.kmarket.service.cs.CsCateService;
 import com.example.kmarket.service.cs.CsAPIService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +39,11 @@ public class CsAPIController {
     }
     @DeleteMapping("/notice/cancel")
     public void noticePostCancel(@RequestParam int noticeNo){
-        apiService.noticeCancle(noticeNo);
+        apiService.noticeCancel(noticeNo);
     }
     @DeleteMapping("/faq/cancel")
     public void faqPostCancel(@RequestParam int faqNo){
-        apiService.faqCancle(faqNo);
+        apiService.faqCancel(faqNo);
     }
+
 }

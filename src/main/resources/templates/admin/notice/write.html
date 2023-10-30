@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/admin/js/NoticeCnameTname.js}"></script>
 </head>
 <main>
     <div th:replace="/admin/header.html :: header"></div>
@@ -22,17 +24,11 @@
                             <tr>
                                 <td>유형</td>
                                 <td>
-                                    <select name="cate" id="searchCate1">
-                                        <option selected disabled>유형 선택</option>
-                                        <option th:each="cate1 : ${CnameTname}"
-                                                th:if="${cate1.cateName == '전체' or
-                                                        cate1.cateName == '고객서비스' or
-                                                        cate1.cateName == '안전거래' or
-                                                        cate1.cateName == '위해상품' or
-                                                        cate1.cateName == '이벤트당첨'}"
-                                                th:value="${cate1.cate}"
-                                                th:text="${cate1.cateName}">
-                                        </option>
+                                    <select name="cate" id="cateName">
+                                        <option th:value="findCname.cate">1차 유형</option>
+                                    </select>
+                                    <select name="type" id="typeName">
+                                        <option th:value="findTname.type">2차 유형</option>
                                     </select>
                                 </td>
                             </tr>
