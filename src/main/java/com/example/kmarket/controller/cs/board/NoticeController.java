@@ -43,10 +43,4 @@ public class NoticeController {
 
         return "cs/notice/view";
     }
-
-    @PostMapping("/write")
-    public String write(KmCsNoticeDTO dto) {
-
-        return "redirect:list";
-    }
 }

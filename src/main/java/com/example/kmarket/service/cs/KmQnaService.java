@@ -85,10 +85,12 @@ public class KmQnaService {
         return qnaList;
     }
 
-    @Value("${spring.servlet.multipart.location}")
+    @Value("${file.dir}")
     private String filePath;
 
     public List<String> fileUpload(KmCsQnaDTO dto) {
+        log.info("++++++++++++++++++++++++++++++++++++++++++++++++");
+        log.info("dto : " + dto);
 //        filePath += dto.getCate() + "/" + dto.getType() + "/";
         // 파일 첨부 경로(절대 경로 잡는거임)
         String path = new File(filePath).getAbsolutePath();
@@ -119,12 +121,14 @@ public class KmQnaService {
             saveNames.add(oName);
 
             try {
+                log.info("try 안에 있는 구문");
                 // 저장할 폴더 이름, 저장할 파일 명
                 File f = new File(path, sName);
                 if(!f.exists()){
                     f.mkdirs();
                 }
                 file.transferTo(f);
+                log.info("transferTo 완료");
             } catch (IOException e) {
                 log.error("qna fileUpload error :  " + e.getMessage());
             }
@@ -141,12 +145,11 @@ public class KmQnaService {
             List<String> saveNames = fileUpload(dto);
             log.info("saveNames : " + saveNames);
 
-            dto.setFile1(saveNames.get(0));
-            dto.setFile2(saveNames.get(1));
-            dto.setFile3(saveNames.get(2));
-            dto.setFile4(saveNames.get(3));
+            if(saveNames.size() >= 2){
+                dto.setFile1(saveNames.get(0));
+                dto.setFile2(saveNames.get(1));
+            }
         }
-
         KmCsQnaEntity entity = kmCsQnaMapper.toEntity(dto);
 
         if(entity.getKmProductOrderItemEntity().getOrderItemId() == 0) {
