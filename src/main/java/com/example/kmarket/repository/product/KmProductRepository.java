@@ -60,4 +60,6 @@ public interface KmProductRepository extends JpaRepository<KmProductEntity, Inte
     List<KmProductEntity> findTop8ByOrderByDiscountDesc();
 
     List<KmProductEntity> findTop5ByOrderByScoreDesc();
+
+    KmProductEntity findByProdNo(int prodNo);
 }

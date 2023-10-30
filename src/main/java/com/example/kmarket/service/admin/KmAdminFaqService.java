@@ -121,6 +121,12 @@ public class KmAdminFaqService {
     }
 
     // typeName 찾기
+    public List<KmAdminFaqDTO> selectTname(KmAdminFaqDTO kmAdminFaqDTO){
+
+        return kmAdminFaqMapper.selectTname(kmAdminFaqDTO);
+    }
+
+    // AJAX typeName 찾기
     public List<KmAdminCsTypeDTO> findTname(String cate){
 
         return kmAdminFaqMapper.findTname(cate);
@@ -136,5 +142,11 @@ public class KmAdminFaqService {
     public void updateArticleFaq(KmAdminFaqDTO kmAdminFaqDTO){
 
         kmAdminFaqMapper.updateArticleFaq(kmAdminFaqDTO);
+    }
+
+    // 글 삭제
+    public void deleteArticleFaq(int faqNo){
+
+        kmAdminFaqMapper.deleteArticleFaq(faqNo);
     }
 }

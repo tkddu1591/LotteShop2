@@ -30,21 +30,24 @@ public class FaqController {
         List<KmCsFaqDTO> faqDTOList = fs.selectFaqList(cate);
         log.info("faqDTOList : " + faqDTOList);
 
-        List<KmCsTypeDTO> cateDTOList = ccs.findByTypeForCate(cate);
-        log.info("cateDTOList : "+ cateDTOList);
+        List<KmCsTypeDTO> typeDTOList = ccs.findByTypeForCate(cate);
+        log.info("typeDTOList : "+ typeDTOList);
 
-        for(KmCsTypeDTO cates : cateDTOList) {
+        for(KmCsTypeDTO typeDTO : typeDTOList) {
             List<KmCsFaqDTO> faqBoard = new ArrayList<>();
+            int i = 0;
             for(KmCsFaqDTO board : faqDTOList) {
-                if(cates.getType() == board.getType()) {
+                if(typeDTO.getType() == board.getType()) {
+                    board.setIndex(i);
+                    i++;
                     faqBoard.add(board);
                 }
             }
-            cates.setFaqDTO(faqBoard);
-            log.info("cates : " + cates);
+            typeDTO.setFaqDTO(faqBoard);
+            log.info("typeDTO : " + typeDTO);
         }
 
-        model.addAttribute("cateDTOList", cateDTOList);
+        model.addAttribute("typeDTOList", typeDTOList);
         model.addAttribute("faqDTOList", faqDTOList);
         return "cs/faq/list";
     }

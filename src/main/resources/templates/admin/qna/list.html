@@ -92,22 +92,28 @@
                                 <th>작성자</th>
                                 <th>작성일</th>
                                 <th>상태</th>
+                                <th>관리</th>
                             </tr>
                         </thead>
                         <tbody class="listTbody">
                                 <tr th:each="dto : ${qnaList}">
                                     <td><input type="checkbox" name="chk"/></td>
                                     <td style="text-align: center; width: 5%" th:text="${dto.qnaNo}"></td>
-                                    <td style="text-align: center; width: 10%" th:text="${dto.cateName}"></td>
-                                    <td style="text-align: center; width: 10%" th:text="${dto.typeName}"></td>
-                                    <td style="text-align: center; width: 30%" ><a th:href="@{/admin/qna/view(qnaNo=${dto.qnaNo})}"><span th:text="${dto.title}"></span></a></td>
+                                    <td style="text-align: center; width: 15%" th:text="${dto.cateName}"></td>
+                                    <td style="text-align: center; width: 15%" th:text="${dto.typeName}"></td>
+                                    <td style="text-align: center; width: 20%" ><a th:href="@{/admin/qna/view(qnaNo=${dto.qnaNo})}"><span th:text="${dto.title}"></span></a></td>
                                     <td style="text-align: center; width: 10%" th:text="${dto.writer}"></td>
-                                    <td style="text-align: center; width: 20%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                    <td style="text-align: center; width: 15%" >
+                                    <td style="text-align: center; width: 15%" th:text="${#temporals.format(dto.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td style="text-align: center; width: 10%" >
                                         <a th:if="${dto.answerComplete}">
+                                            <span th:if="${dto.answerComplete == 0}">미확인</span>
                                             <span th:if="${dto.answerComplete == 1}">검토중</span>
                                             <span th:if="${dto.answerComplete == 2}" style="color: blue;">답변완료</span>
+                                            <span th:if="${dto.answerComplete == 3}" style="color: red;">삭제됨</span>
                                         </a>
+                                    </td>
+                                    <td style="text-align: center; width: 10%" >
+                                        <a th:href="@{/admin/qna/delete(qnaNo=${dto.qnaNo})}" >[삭제]</a>
                                     </td>
                                 </tr>
                         </tbody>

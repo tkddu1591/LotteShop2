@@ -107,7 +107,7 @@ public class KmAdminNoticeService {
         return kmAdminNoticeMapper.findCname(kmAdminCsCateDTO);
     }
 
-    // typeName 찾기
+    // AJAX typeName 찾기
     public List<KmAdminCsTypeDTO> findTname(String cate){
 
         return kmAdminNoticeMapper.findTname(cate);
@@ -116,7 +116,6 @@ public class KmAdminNoticeService {
     // 글 쓰기
     public int insertArticleNotice(KmAdminNoticeDTO kmAdminNoticeDTO){
 
-        log.info("kmAdminNoticeDTO : " + kmAdminNoticeDTO);
         return kmAdminNoticeMapper.insertArticleNotice(kmAdminNoticeDTO);
 
     }
@@ -128,9 +127,9 @@ public class KmAdminNoticeService {
     }
 
     // 글 삭제
-    public int deleteArticleNotice(int noticeNo){
+    public void deleteArticleNotice(int noticeNo){
 
-        return kmAdminNoticeMapper.deleteAriticleNotice(noticeNo);
+        kmAdminNoticeMapper.deleteArticleNotice(noticeNo);
     }
 
 }

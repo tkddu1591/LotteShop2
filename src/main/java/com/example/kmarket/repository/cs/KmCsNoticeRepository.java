@@ -12,5 +12,7 @@ public interface KmCsNoticeRepository extends JpaRepository<KmCsNoticeEntity, In
     public Page<KmCsNoticeEntity> findAll(Pageable pageable);
 
     public Page<KmCsNoticeEntity> findByKmCsCateEntity_CateOrderByRdateDesc(Pageable pageable, String cate);
+
+    void deleteByNoticeNo(int noticeNo);
 }
 

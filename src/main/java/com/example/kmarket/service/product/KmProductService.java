@@ -8,7 +8,6 @@ import com.example.kmarket.mapper.product.KmProductMapper;
 import com.example.kmarket.repository.product.KmProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +22,13 @@ public class KmProductService {
     private KmProductMapper kmProductMapper;
 
 
-    public KmProductDTO findById(int prodNo) {
-        return kmProductMapper.toDTO(kmProductRepository.findById(prodNo).get());
+    public KmProductDTO viewProd(int prodNo) {
+        KmProductEntity kmProductEntity = kmProductRepository.findById(prodNo).get();
+        //hit 1 상승
+        kmProductEntity.setHit(kmProductEntity.getHit()+1);
+        kmProductRepository.save(kmProductEntity);
+
+        return kmProductMapper.toDTO(kmProductEntity);
     }
 
     public PageResponseDTO findByProducts(PageRequestDTO pageRequestDTO) {

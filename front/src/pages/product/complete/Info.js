@@ -19,10 +19,10 @@ function Info({completeList, completeTotal}) {
                         return <tr key={index + item.prodNo}>
                             <td>
                                 <article>
-                                    <img src="https://via.placeholder.com/80x80" alt=""
+                                    <img src={`${process.env.REACT_APP_HOME_URL}/images/thumbs/${item.thumb1}`}
                                          onClick={() => {
                                              navigate("/product/view?prodNo=" + item.prodNo)
-                                         }} style={{cursor: 'pointer'}}/>
+                                         }} style={{cursor: 'pointer', width:'80px', height:'80px'}}/>
                                     <div>
                                         <h2><a onClick={() => {
                                             navigate("/product/view?prodNo=" + item.prodNo)

@@ -7,12 +7,13 @@
     <!-- 게시글 10개씩 출력 -->
     <select id="selectCsFaqAll" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
         SELECT
-            a.*,
-            b.`cateName` AS `cateName`,
-            c.`typeName` AS `typeName`
+        a.*,
+        b.`cateName` AS `cateName`,
+        c.`typeName` AS `typeName`
         FROM `km_cs_faq` AS a
         LEFT JOIN `km_cs_cate` AS b ON a.`cate` = b.`cate`
         LEFT JOIN `km_cs_type` AS c ON a.`type` = c.`type`
+        ORDER BY `faqNo` DESC
         LIMIT #{start}, 10
     </select>
 
@@ -35,13 +36,18 @@
     </select>
 
     <!-- cateName 검색 -->
-    <select id="findCname" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
+    <select id="findCname" resultType="com.example.kmarket.dto.admin.KmAdminCsCateDTO">
         SELECT * FROM `km_cs_cate`
     </select>
 
-    <!-- cateName 검색 -->
-    <select id="findTname" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
+    <!-- typeName 검색 -->
+    <select id="selectTname" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
         SELECT * FROM `km_cs_type`
+    </select>
+
+    <!-- AJAX typeName 검색 -->
+    <select id="findTname" resultType="com.example.kmarket.dto.admin.KmAdminCsTypeDTO">
+        SELECT * FROM `km_cs_type`  WHERE `cate` = #{cate}
     </select>
 
     <select id="findCateAndType" resultType="com.example.kmarket.dto.admin.KmAdminFaqDTO">
@@ -56,14 +62,12 @@
     <!-- 게시글 작성 -->
     <insert id="insertArticleFaq">
         INSERT INTO `km_cs_faq` (`cate`, `type`, `content`, `rdate`, `title`)
-        VALUES (
-            #{cate},
-            (SELECT COALESCE(`type`, 0) FROM `km_cs_type` WHERE `type` = #{type}),
-            #{content},
-            NOW(),
-            #{title}
-        );
-
+                        VALUES ( #{cate}, #{type}, #{content}, NOW(), #{title})
     </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="deleteArticleFaq">
+        DELETE FROM `km_cs_faq` WHERE `faqNo` = #{faqNo}
+    </update>
 
 </mapper>

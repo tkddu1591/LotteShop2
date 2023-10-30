@@ -43,9 +43,9 @@
                 </tr>
             </table>
             <div style="text-align: right;">
-                <a th:style="'font-size: 20px;'" href="#">삭제</a>
+                <a th:style="'font-size: 20px;'" th:href="@{/admin/notice/delete(noticeNo=${noticeView.noticeNo})}">삭제</a>
                 <a th:style="'font-size: 20px;'" th:href="@{/admin/notice/modify(noticeNo=${noticeView.noticeNo})}">수정</a>
-                <a th:style="'font-size: 20px;'" th:href="@{/admin/notice/list}">목록</a>
+                <a th:style="'font-size: 20px;'" th:href="@{/admin/notice/list(notice)}">목록</a>
             </div>
         </article>
     </section>

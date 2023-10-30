@@ -1,8 +1,16 @@
 package com.example.kmarket.service.product;
 
+import com.example.kmarket.dto.member.KmMemberDTO;
+import com.example.kmarket.dto.member.KmMemberPointDTO;
 import com.example.kmarket.dto.product.KmProductOrderDTO;
+import com.example.kmarket.entity.member.KmMemberEntity;
+import com.example.kmarket.entity.member.KmMemberPointEntity;
 import com.example.kmarket.entity.product.KmProductOrderEntity;
+import com.example.kmarket.mapper.member.KmMemberMapper;
+import com.example.kmarket.mapper.member.KmMemberPointMapper;
 import com.example.kmarket.mapper.product.KmProductOrderMapper;
+import com.example.kmarket.repository.member.KmMemberPointRepository;
+import com.example.kmarket.repository.member.KmMemberRepository;
 import com.example.kmarket.repository.product.KmProductOrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +28,38 @@ public class KmProductOrderService {
     @Autowired
     KmProductOrderMapper kmProductOrderMapper;
 
+    @Autowired
+    KmMemberRepository kmMemberRepository;
+    @Autowired
+    KmMemberMapper kmMemberMapper;
+
+    @Autowired
+    KmMemberPointRepository kmMemberPointRepository;
+    @Autowired
+    KmMemberPointMapper kmMemberPointMapper;
     public void save(KmProductOrderDTO kmProductOrderDTO) {
         kmProductOrderDTO.setOrdDate(LocalDateTime.now());
+        //멤버 포인트 변환
+        KmMemberEntity kmMemberEntity = kmMemberRepository.findByUid(kmProductOrderDTO.getOrdUid()).orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));;
+        kmMemberEntity.setPoint(kmProductOrderDTO.getSavePoint()-kmProductOrderDTO.getUsedPoint()+kmMemberEntity.getPoint());
+        kmMemberRepository.save(kmMemberEntity);
+        KmMemberPointDTO kmMemberPointDTO = new KmMemberPointDTO();
+        if(kmProductOrderDTO.getSavePoint() != 0) {
+            kmMemberPointDTO.setPoint(kmProductOrderDTO.getSavePoint());
+            kmMemberPointDTO.setUid(kmProductOrderDTO.getOrdUid());
+            kmMemberPointDTO.setPointDate(LocalDateTime.now());
+            kmMemberPointDTO.setComment("상품 구매 확정 포인트 지급");
+            kmMemberPointDTO.setOrdNo(kmProductOrderDTO.getOrdNo());
+            kmMemberPointRepository.save(kmMemberPointMapper.toEntity(kmMemberPointDTO));
+        }
+        if(kmProductOrderDTO.getUsedPoint() == 0) {
+            kmMemberPointDTO.setPoint(-kmProductOrderDTO.getUsedPoint());
+            kmMemberPointDTO.setUid(kmProductOrderDTO.getOrdUid());
+            kmMemberPointDTO.setPointDate(LocalDateTime.now());
+            kmMemberPointDTO.setOrdNo(kmProductOrderDTO.getOrdNo());
+            kmMemberPointRepository.save(kmMemberPointMapper.toEntity(kmMemberPointDTO));
+        }
+
         kmProductOrderRepository.save(kmProductOrderMapper.toEntity(kmProductOrderDTO));
     }
 
@@ -54,9 +92,9 @@ public class KmProductOrderService {
     }
 
     public void receiveCheck(@RequestBody KmProductOrderDTO orderReceive) {
-        log.info(orderReceive.toString());
         KmProductOrderEntity orderDTO = kmProductOrderRepository.findById(orderReceive.getOrdNo()).orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
         orderDTO.setOrdComplete(orderReceive.getOrdComplete());
+        orderDTO.setOrdCompleteDate(LocalDateTime.now());
         kmProductOrderRepository.save(orderDTO);
     }
 }
