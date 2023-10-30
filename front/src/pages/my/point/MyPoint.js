@@ -1,13 +1,7 @@
-import {changeDTO} from "../../../store/changeDTO";
 import MyPageNavigation from "../MyPageNavigation";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {
     divisionCheck,
-    addDays,
-    addMonth,
-    changeDate,
-    changeDateMonth,
-    changeDateMonth2,
 } from "../../../store/dateChange";
 import DateSelect from "../DateSelect";
 
